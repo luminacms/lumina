@@ -20,23 +20,23 @@ class VotesController extends BaseController
     /**
      * @var Vote
      */
-    protected $repository;
+    protected $vote;
 
-    public function __construct(Vote $repository)
+    public function __construct(Vote $vote)
     {
-        $this->repository = $repository;
+        $this->vote = $vote;
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Prettus\vote\Exceptions\voteException
      */
     public function index(Request $request)
     {
         if($request->expectsJson()) {
 
-            $votes = $this->repository->paginate($request->get('limit', 15));
+            $votes = $this->vote->filter($request)->paginate($request->get('limit', 15));
             return $this->toCollection($votes, VoteResource::class);
         }
         return view('vote::backend.votes.index');
@@ -74,7 +74,7 @@ class VotesController extends BaseController
     {
         try {
             DB::transaction(function () use($request){
-                $vote = $this->repository->create($request->all());
+                $vote = $this->vote->create($request->all());
                 if($request->exists(['model', 'model_id'])){
                     // 关联报名
                     $_model = urldecode($request->get('model'));
@@ -100,7 +100,7 @@ class VotesController extends BaseController
      */
     public function show($id)
     {
-        $vote = $this->repository->find($id);
+        $vote = $this->vote->find($id);
         // $this->authorize('view', $vote);
         return view('vote::backend.votes.show', compact('vote'));
     }
@@ -114,7 +114,7 @@ class VotesController extends BaseController
      */
     public function edit($id)
     {
-        $vote = $this->repository->find($id);
+        $vote = $this->vote->find($id);
         // $this->authorize('update', $vote);
 
         return view('vote::backend.votes.edit', compact('vote'));
@@ -133,10 +133,10 @@ class VotesController extends BaseController
     public function update(VoteRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->vote->find($id);
             // $this->authorize('update', $model);
 
-            $this->repository->find($id)->fill($request->all())->save();
+            $this->vote->find($id)->fill($request->all())->save();
 
             flash('更新操作成功', 'success');
             return redirect()->back();
@@ -155,9 +155,9 @@ class VotesController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->vote->find($id);
         // $this->authorize('delete', $model);
-        $this->repository->delet($id);
+        $this->vote->delet($id);
 
         return $this->toResponse([], '删除成功');
     }

@@ -34,8 +34,16 @@ class Vote extends BaseModel
     public $table = 'vote__votes';
     protected $fillable = [
         'title', 'type', 'notice_webhook', 'notice_interval', 'last_noticed_at', 'start_at', 'end_at', 'description', 'rule', 'count',
-        'create_by','rule_times', 'content','topics', 'addon_fields'];
+        'create_by','rule_times', 'content','topics', 'addon_fields','uid'];
     public $dates = ['start_at', 'end_at', 'last_noticed_at'];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->uid = $model->uid ?? self::getRandom('uid', 32);
+        });
+    }
 
     /**
      * @return array

@@ -1,4 +1,6 @@
 {
     "Core": true,
-    "Doc": true
+    "Doc": true,
+    "Vote": true,
+    "Game": true
 }

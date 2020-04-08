@@ -18,6 +18,7 @@ Route::group(['prefix' =>'vote', 'as' => 'vote.'], function () {
     Route::get('{vote}/option', 'VotesController@option')->name('option'); // 获取
 
     // 接口
+    Route::post('/submit', 'VotesController@autoSubmit'); // 自动处理表单
     Route::post('/{vote}', 'VotesController@store')->name('form'); // 提交报名
     Route::get('/{vote}/result', 'VotesController@result')->middleware('auth'); // 获取已报名信息
     Route::post('{vote}/submit', 'VotesController@submit')->name('submit'); // 提交投票

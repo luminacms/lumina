@@ -1,15 +1,21 @@
 {
     "name": "Vote",
     "alias": "vote",
-    "description": "投票系统",
+    "description": "表单引擎",
     "keywords": [],
     "active": 1,
     "order": 200,
     "providers": [
-        "Modules\\Vote\\Providers\\VoteServiceProvider",
-        "Modules\\Vote\\Providers\\AuthServiceProvider"
+        "Modules\\Vote\\Providers\\VoteServiceProvider"
     ],
     "aliases": {},
     "files": [],
-    "requires": []
+    "requires": [],
+    "menus": [
+        {"sort": 50,"name": "vote", "icon": "fa-wpforms", "label": "表单引擎", "children": [
+            {"name": "vote_votes", "icon": "", "label": "表单管理", "route": "backend.vote.votes.index"},
+            {"name": "vote_vote_data", "icon": "", "label": "线索库"},
+            {"name": "vote_vote_state", "icon": "", "label": "数据统计"}
+        ]}
+    ]
 }

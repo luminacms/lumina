@@ -3,9 +3,10 @@
 
 namespace Modules\Vote\Http\Controllers;
 
-
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Modules\Core\Http\Controllers\BaseController;
 use Modules\Vote\Http\Requests\VoteDataRequest;
@@ -22,18 +23,20 @@ class VotesController extends BaseController
 {
 
     protected $vote;
+    protected $model;
+
     public function __construct(Vote $vote, Request $request)
     {
         $this->middleware('auth')->only('my');
-
+        $this->vote = $vote;
         $vote = $request->route('vote');
         if($vote) {
             // $vid = !is_numeric($vote)?current(Hashids::connection('vote')->decode($vote)):$vote;
-            $this->vote = Vote::find($vote);
-            if(!$request->wantsJson() && $this->vote) {
-                $this->vote->addCount();
+            $this->model = Vote::find($vote);
+            if(!$request->wantsJson() && $this->model) {
+                $this->model->addCount();
             }
-            View::share('vote', $this->vote);
+            View::share('vote', $this->model);
         }
     }
 
@@ -46,17 +49,17 @@ class VotesController extends BaseController
         if($request->wantsJson()) {
             $request->validate(['sid' =>'required']);
 
-            $options = VoteOption::where('vote_id', $this->vote->id);
+            $options = VoteOption::where('vote_id', $this->model->id);
             if($subject_id = $request->get('subject_id')) {
                 $options->where('subject_id', $subject_id);
             }
             $vote = $options->paginate($request->get('limit', 15));
             return $this->toCollection($vote, VoteOptionResource::class);
         }
-        if($this->vote->type == Vote::TYPE_QUIZ) {
+        if($this->model->type == Vote::TYPE_QUIZ) {
 
         }
-        return view('vote::'.$this->vote->type.'.default.index');
+        return view('vote::'.$this->model->type.'.default.index');
     }
 
     /**
@@ -65,24 +68,24 @@ class VotesController extends BaseController
      */
     public function store(VoteDataRequest $request)
     {
-        if(!$this->vote) abort(404);
+        if(!$this->model) abort(404);
 
         // 检查是否在投放期
-        $request->checkTimeValidate($this->vote, $request);
+        $request->checkTimeValidate($this->model, $request);
 
         if(!auth()->guest()) {
             // 授权模式只允许提交一次
-            $_existData = $this->vote->voteData()->where('create_by', auth()->user()->user_id)->first();
+            $_existData = $this->model->voteData()->where('create_by', auth()->user()->user_id)->first();
             if($_existData) {
                 if($_existData['score'] > $request['score']) {
                     unset($request['score']);
                 }
                 $r = $_existData->fill($request->all())->save();
             }else{
-                $r = $this->vote->voteData()->create($request->all());
+                $r = $this->model->voteData()->create($request->all());
             }
         }else{
-            $r = $this->vote->voteData()->create($request->all());
+            $r = $this->model->voteData()->create($request->all());
         }
 
         if($request->wantsJson() || $request->ajax()){
@@ -143,13 +146,13 @@ class VotesController extends BaseController
      */
     public function rank(VoteRequest $request)
     {
-        if(!$this->vote) abort(404);
-        if($this->vote->type == Vote::TYPE_DEFAULT) {
+        if(!$this->model) abort(404);
+        if($this->model->type == Vote::TYPE_DEFAULT) {
             return $this->toCollection(VoteData::getRank(
-                $this->vote->id, $request->get('limit', 15), $request->get('sortedBy', 'desc'), $request->exists('hasmobile')
+                $this->model->id, $request->get('limit', 15), $request->get('sortedBy', 'desc'), $request->exists('hasmobile')
             ), VoteDataResource::class);
         }else{
-            $rank = VoteOption::getRank($this->vote->id, $request->get('sid'));
+            $rank = VoteOption::getRank($this->model->id, $request->get('sid'));
             return view('vote::vote.default.rank', compact('rank'));
         }
     }
@@ -164,9 +167,9 @@ class VotesController extends BaseController
      */
     public function result(Request $request)
     {
-        if(!$this->vote) abort(404);
+        if(!$this->model) abort(404);
 
-        $data = $this->vote->voteData()->where('create_by', \auth()->user()->user_id)->first();
+        $data = $this->model->voteData()->where('create_by', \auth()->user()->user_id)->first();
 
         return $this->toResource($data, VoteDataResource::class);
     }
@@ -189,7 +192,7 @@ class VotesController extends BaseController
         ]);
 
         VoteOption::create([
-            'vote_id' => $this->vote->id,
+            'vote_id' => $this->model->id,
             'status' => VoteOption::STATUS_PENDING,
             'thumb' => $request->get('thumb'),
             'name' => $request->get('name'),
@@ -199,6 +202,31 @@ class VotesController extends BaseController
 
         flash('报名成功', 'success');
         return redirect()->back();
+    }
+
+    /**
+     * auto form submit
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function autoSubmit(Request $request)
+    {
+        $request->validate(['uid' => 'required']);
+
+        try{
+            $_uid = md5($request->get('uid'));
+            $vote = $this->vote->firstOrCreate(['uid' => $_uid], [
+                'title' => '【Auto】#'.$_uid,
+                'type' => Vote::TYPE_DEFAULT
+            ]);
+
+            $r = $vote->voteData()->create($request->all());
+
+            return $this->toResponse($r, 'ok');
+        }catch(Exception $e) {
+            return $this->toException($e);
+        }
     }
 
 }

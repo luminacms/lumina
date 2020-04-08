@@ -42,6 +42,7 @@ class Form extends Component
             <input name="_token" type="hidden" value="{{csrf_token()}}"></input>
             {{$slot}}
         </form>
+        <script>layui.use('form', function(){})</script>
         blade;
     }
 }

@@ -8,7 +8,7 @@
 <div class="layui-form-item">
 	<label for="permission">Permission</label>
 	<div class="layui-input-block">
-        @foreach(\Modules\Core\Models\Permission::where('type', 'module')->get() as $_module)
+        @foreach(\Modules\Core\Models\Permission::where('guard_name', 'org')->get() as $_module)
             <input type="checkbox" name="permisson[]"
                 title="{{ $_module->label }}"
                 value="{{ $_module->name }}"

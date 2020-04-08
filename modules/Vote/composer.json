@@ -1,6 +1,8 @@
 {
-    "name": "lumina/vote",
-    "description": "",
+    "name": "wdcms/vote-module",
+    "type": "laravel-module",
+    "description": "wdcms表单引擎",
+    "keywords": ["wdcms","laravel","vote"],
     "authors": [
         {
             "name": "Jory",
@@ -23,8 +25,6 @@
         }
     },
     "require": {
-        "php": "^7.2.0",
-        "yansongda/pay": "^2.7",
-        "vinkla/hashids": "^6.0"
+        "php": "^7.2.0"
     }
 }

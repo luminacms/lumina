@@ -1,68 +1,21 @@
-<div class="layui-form-item">
-	{!! form()->label("标题", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-block">
-		{!! form()->text("title", null, ["class"=>"layui-input","lay-verify"=>"required"]) !!}
-	</div>
-</div>
 
-<div class="layui-form-item">
-	{!! form()->label("类型", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-block">
-		{!! form()->select("type", Modules\Vote\Models\Vote::getTypes(), null, ["class"=>"layui-form-select","lay-verify"=>"required"]) !!}
-	</div>
-</div>
+<x-input name="title" required :value="$vote->title ?? ''"/>
 
-<div class="layui-form-item">
-	{!! form()->label("报名时间", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-inline">
-		{!! form()->datetime("start_at", null, ["class"=>"layui-form-input","lay-verify"=>"required"]) !!}
-	</div>
-	<div class="layui-form-mid">-</div>
-	<div class="layui-input-inline">
-		{!! form()->datetime("end_at", null, ["class"=>"layui-form-input","lay-verify"=>"required"]) !!}
-	</div>
-</div>
+<x-input.select name="type" required :options="Modules\Vote\Models\Vote::getTypes()" :value="$vote->type ?? ''"/>
 
-<div class="layui-form-item">
-	{!! form()->label("投票/答题规则", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-inline">
-		{!! form()->select("rule", Modules\Vote\Models\Vote::getRules(), null, ['class' => 'layui-select']) !!}
-	</div>
-	<div class="layui-input-inline">
-		{!! form()->number("rule_times", null, ['class' => 'layui-input', 'placeholder' => '一天可以投几次']) !!}
-	</div>
-</div>
+<x-input.dateTimeRange name="start_at;end_at" :value="($vote->title ? $vote->start_at.';'.$vote->end_at:'')" />
 
-<div class="layui-form-item layui-form-text">
-	{!! form()->label("活动规则", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-block">
-		{!! form()->mide("content", null, ['class' => 'layui-textarea']) !!}
-	</div>
-</div>
+<x-input.select name="rule" label="投票/答题规则" required :options="Modules\Vote\Models\Vote::getRules()" :value="$vote->rule ?? ''"/>
 
-<div class="layui-form-item">
-	{!! form()->label("附加字段", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-block">
-		{!! form()->text("addon_fields", null, ["class"=>"layui-input","lay-verify"=>"required"]) !!}
-	</div>
-</div>
+<x-input type="number" name="rule_times" label="一天可以投几次" required :value="$vote->title ?? ''"/>
 
+<x-input.meditor name="content" label="活动规则" :value="$vote->content ?? ''"/>
 
-<div class="layui-form-item">
-	{!! form()->label("通知地址", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-block">
-		{!! form()->text("notice_webhook", null, ["class"=>"layui-input"]) !!}
-	</div>
-</div>
+<x-input name="addon_fields" label="附加字段" :value="$vote->addon_fields ?? ''"/>
 
-<div class="layui-form-item">
-	{!! form()->label("通知频率", null, ["class"=>"layui-form-label"]) !!}
-	<div class="layui-input-inline">
-		{!! form()->number("notice_interval", null, ["class"=>"layui-input"]) !!}
-	</div>
-	<div class="layui-form-mid">单位（小时）</div>
-</div>
+<x-input name="notice_webhook" label="通知地址" :value="$vote->notice_webhook ?? ''"/>
 
+<x-input name="notice_interval" label="通知频率" :value="$vote->notice_interval ?? ''"/>
 
 <div class="layui-form-item layui-layout-admin">
     <div class="layui-input-block">
@@ -72,11 +25,3 @@
 		</div>
     </div>
 </div>
-
-@push('script')
-	<script>
-		layui.use('form', function(){
-			var form = layui.form
-		})
-	</script>
-@endpush

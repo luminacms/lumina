@@ -126,8 +126,8 @@ if(!function_exists('markdown_converter')) {
         $environment->addBlockRenderer('Modules\Doc\Extentions\Markdown\Element\HttpMethodBlock', new Modules\Doc\Extentions\Markdown\Renderer\HttpMethodRenderer());
 
         // 代码高亮
-        $environment->addBlockRenderer(League\CommonMark\Block\Element\FencedCode::class, new Spatie\CommonMarkHighlighter\FencedCodeRenderer());
-        $environment->addBlockRenderer(League\CommonMark\Block\Element\IndentedCode::class, new Spatie\CommonMarkHighlighter\IndentedCodeRenderer());
+        $environment->addBlockRenderer(League\CommonMark\Block\Element\FencedCode::class, new Modules\Doc\Extentions\Markdown\Renderer\FencedCodeRenderer());
+        $environment->addBlockRenderer(League\CommonMark\Block\Element\IndentedCode::class, new Modules\Doc\Extentions\Markdown\Renderer\IndentedCodeRenderer());
 
         $converter = new League\CommonMark\CommonMarkConverter([], $environment);
 

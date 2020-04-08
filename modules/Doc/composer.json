@@ -17,6 +17,11 @@
             }
         }
     },
+    "require": {
+        "php": "^7.2",
+        "league/commonmark": "^1.0",
+        "scrivo/highlight.php": "^9.15.6.1"
+    },
     "autoload": {
         "psr-4": {
             "Modules\\Doc\\": ""
