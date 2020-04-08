@@ -1,0 +1,30 @@
+{
+    "name": "lumina/vote",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Vote\\Providers\\VoteServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Vote\\": ""
+        }
+    },
+    "require": {
+        "php": "^7.2.0",
+        "yansongda/pay": "^2.7",
+        "vinkla/hashids": "^6.0"
+    }
+}

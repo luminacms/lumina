@@ -1,0 +1,25 @@
+{
+    "name": "lumina/mall",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Mall\\Providers\\MallServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Mall\\": ""
+        }
+    }
+}

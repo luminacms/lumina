@@ -1,0 +1,15 @@
+{
+    "name": "Vote",
+    "alias": "vote",
+    "description": "投票系统",
+    "keywords": [],
+    "active": 1,
+    "order": 200,
+    "providers": [
+        "Modules\\Vote\\Providers\\VoteServiceProvider",
+        "Modules\\Vote\\Providers\\AuthServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

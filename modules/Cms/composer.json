@@ -1,0 +1,33 @@
+{
+    "name": "lumina/cms",
+    "description": "",
+    "keywords": [
+        "lumina",
+        "laravel",
+        "西门",
+        "西门CMS"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "module-dir": "modules",
+        "laravel": {
+            "providers": [
+                "Modules\\Cms\\Providers\\CmsServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Cms\\": ""
+        }
+    }
+}

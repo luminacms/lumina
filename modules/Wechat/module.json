@@ -1,0 +1,14 @@
+{
+    "name": "Wechat",
+    "alias": "wechat",
+    "description": "微信开放平台",
+    "keywords": [],
+    "active": 1,
+    "order": 300,
+    "providers": [
+        "Modules\\Wechat\\Providers\\WechatServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

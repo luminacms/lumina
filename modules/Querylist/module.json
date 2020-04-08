@@ -1,0 +1,20 @@
+{
+    "name": "Querylist",
+    "alias": "querylist",
+    "description": "采集引擎",
+    "keywords": [],
+    "active": 1,
+    "order": 50,
+    "providers": [
+        "Modules\\Querylist\\Providers\\QuerylistServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"sort": 50,"name": "qather", "icon": "fa-android", "label": "采集引擎", "children": [
+            {"name": "qather_rule", "icon": "", "label": "规则管理", "route": "querylist.ql-rules.index"},
+            {"name": "qather_post", "icon": "", "label": "内容管理", "route": "querylist.ql-posts.index"}
+        ]}
+    ]
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d26e4c2445367120df66fa0ee12b0352",
+    "content-hash": "d7f57228f25740f5fb0c6c8c646f4b8a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6351,6 +6351,43 @@
             "time": "2020-03-13T01:23:26+00:00"
         },
         {
+            "name": "wdcms/game-module",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitee.com/wdcms/game",
+                "reference": "f92b58e104cc0a994b20519e686c1ba21de03d2c"
+            },
+            "type": "laravel-module",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Game\\Providers\\GameServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Game\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Jory",
+                    "email": "jorycn@163.com"
+                }
+            ],
+            "description": "wdcms 游戏引擎",
+            "keywords": [
+                "game",
+                "laravel",
+                "wdcms"
+            ],
+            "time": "2020-04-07T05:49:41+00:00"
+        },
+        {
             "name": "xbhub/laravel-filter",
             "version": "2.0.0",
             "source": {
@@ -8752,5 +8789,6 @@
     "platform": {
         "php": "^7.2.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

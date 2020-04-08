@@ -1,0 +1,25 @@
+{
+    "name": "Game",
+    "alias": "game",
+    "description": "移动营销引擎",
+    "keywords": [],
+    "active": 1,
+    "order": 50,
+    "providers": [
+        "Modules\\Game\\Providers\\GameServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"sort": 20,"name": "mp", "icon": "fa-html5", "label": "营销引擎", "children": [
+            {"name": "cms_category", "icon": "", "label": "活动管理", "route": "game.games.index"},
+            {"name": "cms_post", "icon": "", "label": "报名组件", "route": "backend.vote.votes.index"},
+            {"name": "cms_page", "icon": "", "label": "抽奖组件", "route": ""},
+            {"name": "cms_page", "icon": "", "label": "开放平台", "children":  [
+                {"name": "cms_page", "icon": "", "label": "微信组件", "route": "backend.wechat.index"},
+                {"name": "cms_page", "icon": "", "label": "头条组件", "route": ""}
+            ]}
+        ]}
+    ]
+}

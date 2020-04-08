@@ -1,0 +1,25 @@
+{
+    "name": "xbhub/lottery",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Lottery\\Providers\\LotteryServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Lottery\\": ""
+        }
+    }
+}

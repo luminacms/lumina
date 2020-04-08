@@ -1,0 +1,28 @@
+{
+    "name": "nwidart/wechat",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Wechat\\Providers\\WechatServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "require": {
+        "overtrue/laravel-wechat": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Wechat\\": ""
+        }
+    }
+}

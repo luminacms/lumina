@@ -27,6 +27,7 @@
         "rap2hpoutre/laravel-log-viewer": "^1.4",
         "spatie/laravel-permission": "^3.11",
         "tymon/jwt-auth": "^1.0",
+        "wdcms/game-module": "dev-master",
         "xbhub/laravel-filter": "^2.0",
         "xbhub/laravel-socialite": "^2.0",
         "xbhub/laravel-xgee": "^7.1"

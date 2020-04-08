@@ -1,0 +1,20 @@
+{
+    "name": "Payment",
+    "alias": "payment",
+    "description": "支付引擎",
+    "keywords": [],
+    "active": 1,
+    "order": 10,
+    "providers": [
+        "Modules\\Payment\\Providers\\PaymentServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"sort": 21,"name": "payment", "icon": "fa-rmb", "label": "支付引擎", "children": [
+            {"name": "payment_transaction", "icon": "", "label": "交易管理", "route": "payment.transaction.index"},
+            {"name": "payment_logs", "icon": "", "label": "支付日志", "route": "payment.logs.index"}
+        ]}
+    ]
+}

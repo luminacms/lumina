@@ -1,0 +1,26 @@
+{
+    "name": "lumina/payment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Payment\\Providers\\PaymentServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Payment\\": ""
+        }
+    },
+    "require": {
+        "php": "^7.2.0",
+        "yansongda/pay": "^2.8"
+    }
+}

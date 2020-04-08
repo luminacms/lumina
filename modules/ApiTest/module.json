@@ -1,0 +1,13 @@
+{
+    "name": "ApiTest",
+    "alias": "apitest",
+    "description": "ApiTest",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\ApiTest\\Providers\\ApiTestServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Lottery",
+    "alias": "lottery",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Lottery\\Providers\\LotteryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,21 @@
+{
+    "name": "Vod",
+    "alias": "vod",
+    "description": "点播模块",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Vod\\Providers\\VodServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"sort": 50,"name": "vod", "icon": "fa-video-camera", "label": "点播引擎", "children": [
+            {"name": "vod_course", "icon": "", "label": "专栏管理", "route": "vod.courses.index"},
+            {"name": "vod_lesson", "icon": "", "label": "课节管理", "route": "vod.lessons.index"},
+            {"name": "vod_order", "icon": "", "label": "订单管理", "route": "vod.vod-orders.index"}
+        ]}
+    ]
+}

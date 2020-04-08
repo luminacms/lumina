@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*::-webkit-media-controls-panel {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+/* Old shadow dom for play button */
+
+*::-webkit-media-controls-play-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works! */
+
+*::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+video .media-controls-container {
+    display: none;
+}
+
+.text2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#wrapper,
+.poster {
+    width: 100%;
+    height: 422px;
+    img{
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.poster {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+
+    .start {
+        background: url("https://sxmgcm.cn/2019/07/bowu/start1.png") no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 190px;
+        left: 350px;
+        display: inline-block;
+        width: 62px;
+        height: 62px;
+    }
+}
+
+
+body,
+html {
+    padding-bottom: 70px;
+    background: #e4e5e6;
+}
+
+.videoInfo {
+    .desc {
+        background: white;
+        padding: 10px 0;
+
+        .tt {
+            font-size: 30px;
+            // font-weight: bold;
+            padding: 0 44px;
+        }
+
+        .text {
+            padding: 0 44px;
+            color: #aaa;
+            font-size: 26px;
+        }
+    }
+}
+
+.take {
+    padding: 10px 44px;
+    color: #aaa;
+    background: white;
+}
+
+// tab
+.infoC {
+    padding: 20px 0;
+    min-height: 70vw;
+    p{padding: 20px;}
+    img{
+        width: 100%;
+    }
+}
+
+.ml {
+    .ml_value {
+        padding-left: 30px;
+    }
+
+    .ml_value::before {
+        width: 5px;
+        height: 25px;
+        background: red;
+        content: '';
+        position: absolute;
+        left: 40px;
+        top: 33px;
+    }
+
+    .list {
+        padding: 0 44px;
+
+        .left,
+        .right {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .right {
+            width: 15%;
+            text-align: right;
+        }
+
+        .icon {
+            background: url('https://sxmgcm.cn/2019/07/bowu/video.png') no-repeat;
+            width: 50px;
+            height: 30px;
+        }
+
+        .mid {
+            display: inline-block;
+            width: 75%;
+
+            .tt {
+                height: 68px;
+                // font-weight: bold;
+                font-size: 28px;
+                vertical-align: top;
+                line-height: 1.2;
+            }
+
+            .timer {
+                padding-top: 10px;
+                color: #aaa;
+            }
+        }
+
+        .seeBtn {
+            display: inline-block;
+            border: 2px solid green;
+            border-radius: 25px;
+            height: 40px;
+            width: 100px;
+            color: green;
+            text-align: center;
+        }
+    }
+}
+
+.tj {
+    .tj_value {
+        padding-left: 30px;
+    }
+
+    .tj_value::before {
+        width: 5px;
+        height: 25px;
+        background: red;
+        content: '';
+        position: absolute;
+        left: 40px;
+        top: 33px;
+    }
+
+    .list {
+        padding: 0 44px;
+
+        .mainImg {
+            width: 30%;
+            display: inline-block;
+
+            img {
+                width: 200px;
+                height: 150px;
+            }
+        }
+
+        .desc {
+            width: 70%;
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 20px;
+
+            .tt {
+                min-height: 56px;
+                font-size: 26px;
+            }
+
+            .price {
+                padding-top: 20px;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.van-tabs__content {
+    background: white;
+}
+
+// 收藏
+
+// 视频control
+.chimee-flex-component {
+    svg {
+        vertical-align: middle;
+        display: inline-block;
+    }
+}
+
+chimee-control-state {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.chimee-flex-component {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+//顾佳平
+.van-skeleton__content {
+    div:nth-child(1) {
+        height: 400px;
+    }
+
+    div:nth-child(4) {
+        height: 800px;
+    }
+}

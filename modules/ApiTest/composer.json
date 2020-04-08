@@ -1,0 +1,25 @@
+{
+    "name": "xbhub/apitest",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ApiTest\\Providers\\ApiTestServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ApiTest\\": ""
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "xbhub/toutiao",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Toutiao\\Providers\\ToutiaoServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Toutiao\\": ""
+        }
+    }
+}
