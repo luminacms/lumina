@@ -1,0 +1,32 @@
+{
+    "name": "lumina/core",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": ""
+        },
+        "files": [
+            "helpers.php"
+        ]
+    },
+    "require": {
+        "php": "^7.2.0",
+        "maatwebsite/excel": "^3.1",
+        "graham-campbell/markdown": "^11.0",
+        "league/commonmark-ext-table": "^2.0"
+    }
+}

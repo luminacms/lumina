@@ -1,0 +1,15 @@
+{
+    "name": "Core",
+    "alias": "core",
+    "label": "系统",
+    "description": "核心模块",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+    ],
+    "aliases": {},
+    "files": [
+    ],
+    "requires": [],
+    "menus": []
+}

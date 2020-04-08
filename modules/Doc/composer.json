@@ -1,0 +1,25 @@
+{
+    "name": "lumina/doc",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Doc\\Providers\\DocServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Doc\\": ""
+        }
+    }
+}

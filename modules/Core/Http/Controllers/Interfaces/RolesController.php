@@ -1,0 +1,66 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jory
+ * Date: 2019/4/3
+ * Time: 18:21
+ */
+
+namespace Modules\Core\Http\Controllers\Interfaces;
+
+
+use Illuminate\Http\Request;
+use Modules\Core\Http\Controllers\BaseController;
+use Modules\Core\Models\Role;
+use Modules\Core\Models\User;
+
+class RolesController extends BaseController
+{
+
+    protected $repository;
+
+    /**
+     * UsersController constructor.
+     * @param UserRepository $repository
+     */
+    public function __construct(Role $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function attach(Request $request)
+    {
+        $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
+
+        try{
+            $role = $this->repository->find($request->get('role_id'));
+            foreach (explode(',', $request->get('user_ids')) as $_user_id) {
+                $_user = User::find($_user_id);
+                $_user->assignRole($role);
+            }
+            return $this->toResponse([], 'success');
+        }catch (\Exception $e){
+            return $this->toException($e);
+        }
+    }
+
+    public function detach(Request $request)
+    {
+        $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
+
+        try{
+            $role = $this->repository->find($request->get('role_id'));
+            foreach (explode(',', $request->get('user_ids')) as $_user_id) {
+                $_user = User::find($_user_id);
+                $_user->removeRole($role);
+            }
+            return $this->toResponse([], 'success');
+        }catch (\Exception $e){
+            return $this->toException($e);
+        }
+    }
+}
