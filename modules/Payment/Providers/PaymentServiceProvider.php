@@ -2,9 +2,12 @@
 
 namespace Modules\Payment\Providers;
 
+use Yansongda\Pay\Pay;
+use Yansongda\Pay\Events;
+use Yansongda\Pay\Events\PayStarting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Yansongda\Pay\Pay;
+use Modules\Payment\Listeners\PayStartingListener;
 
 // use Modules\Payment\Events;
 
@@ -18,7 +21,6 @@ class PaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerTranslations();
-        $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -32,7 +34,7 @@ class PaymentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-        $this->app->register(EventServiceProvider::class);
+        $this->registerConfig();
 
         $_paymentConfig = config('payment');
         $this->app->singleton('pay.alipay', function () use($_paymentConfig){
@@ -57,6 +59,8 @@ class PaymentServiceProvider extends ServiceProvider
                 'cert_key' => ''
             ]);
         });
+
+        // $this->app->register(EventServiceProvider::class);
     }
 
     /**

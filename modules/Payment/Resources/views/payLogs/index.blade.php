@@ -1,10 +1,11 @@
 @extends('core::layouts.master')
 
 @section('content')
-    <x-submenu :items="
-        [
+    @include('core::includes.layout.submenu', [
+        'items' => [
             ['name' => '列表管理', 'uri' => route('payment.logs.index')]
-       ]" />
+        ]
+    ])
 
     <table class="layui-hide" id="data_paylog_table" lay-filter="data_paylog_table"></table>
 @endsection
@@ -49,7 +50,7 @@
                     return true;
                 }
 
-                if((obj.event == 'delete' || obj.event == 'update') && checked.data.length >0 ) {
+                if(obj.event == 'delete' || obj.event == 'update') {
                     if(checked.data.length !== 1) {
                         layer.msg('请选择一条数据!');
                         return false;
@@ -57,7 +58,7 @@
 
                     if(obj.event === 'delete') {
                         layer.confirm('真的删除行么', function(index){
-                            parent.layui.admin.request.post('{{ url("/payLogs/_id_") }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
+                            parent.layui.admin.request.post('{{ url("/payLogs/:id") }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('删除成功');
                                 table.reload('data_paylog_table')
                             })
@@ -65,7 +66,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ url("/payLogs/_id_/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTabsPage('{{ url("/payLogs/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

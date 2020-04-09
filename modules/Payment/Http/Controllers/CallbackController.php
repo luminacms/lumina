@@ -23,15 +23,14 @@ class CallbackController extends BaseController
     {
         $alipay = Pay::$driver();
 
-        Log::info(json_encode($alipay));
         try{
             $data = $alipay->verify(); // 是的，验签就这么简单！
 
+            Log::info(json_encode($data));
             // 目前只开放支付宝
-            $tran_ailipay_status = ['TRADE_CLOSED' => PayTransaction::STATUS_CLOSED, 'TRADE_SUCCESS' => PayTransaction::STATUS_SUCCESS];
-            if(isset($tran_ailipay_status[$data['trade_status']])) {
+            if($driver == 'alipay') {
                 // 付款成功
-                PayTransaction::updateTransaction($data['out_trade_no'], $tran_ailipay_status[$data['trade_status']], [
+                PayTransaction::updateTransaction($data['out_trade_no'], $data['trade_status'], [
                     'transaction_code' => $data['trade_no'] ?? '',
                     'total_fee' => $data['total_amount'] ?? '',
                     'mch_id' => $data['seller_id'] ?? '',

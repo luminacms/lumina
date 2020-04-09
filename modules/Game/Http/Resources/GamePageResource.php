@@ -17,8 +17,7 @@ class GamePageResource extends BaseResource
             'count' => $this->count,
             'mode' => $this->mode,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'votes' => $this->getVoteCount(),
+            'created_at' => $this->created_at
         ];
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+use Modules\Payment\Models\PayTransaction;
+
 return [
     'name' => 'Payment',
     'model_notice_action' => 'PaymentUpdate', // 支付状态变更通知模块
@@ -6,12 +9,18 @@ return [
         // optional，默认 warning；日志路径为：sys_get_temp_dir().'/logs/yansongda.pay.log'
         'log' => [
             'file' => storage_path('logs/alipay.log'),
-            //  'level' => 'debug'
+             'level' => 'debug'
             //  'type' => 'single', // optional, 可选 daily.
             //  'max_file' => 30,
         ],
         // optional，设置此参数，将进入沙箱模式
         // 'mode' => 'dev',
+        'statusMap' => [
+            'WAIT_BUYER_PAY' => PayTransaction::STATUS_NOPAY,
+            'TRADE_CLOSED' => PayTransaction::STATUS_CLOSED,
+            'TRADE_SUCCESS' => PayTransaction::STATUS_SUCCESS,
+            'TRADE_FINISHED' => PayTransaction::STATUS_FINISHED,
+        ]
     ],
     'wechat' => [
         // 客户端证书路径，退款、红包等需要用到。请填写绝对路径，linux 请确保权限问题。pem 格式。
@@ -29,6 +38,16 @@ return [
         // 'dev' 时为沙箱模式
         // 'hk' 时为东南亚节点
         // 'mode' => 'dev',
+        'statusMap' => [
+            // TODO: wechat status map
+            'SUCCESS' => PayTransaction::STATUS_SUCCESS,
+            'REFUND' => PayTransaction::STATUS_REFUND,
+            'NOTPAY' => PayTransaction::STATUS_NOPAY,
+            'CLOSED' => PayTransaction::STATUS_CLOSED,
+            'REVOKED' => PayTransaction::STATUS_REVOKED, //已撤销
+            'USERPAYING' => PayTransaction::STATUS_NOPAY, //用户支付中（付款码支付）
+            'PAYERROR' => PayTransaction::STATUS_PAYERROR //支付失败(其他原因，如银行返回失败)
+        ]
     ],
     'options' => [
         ['group' => '通用配置','name' => 'PAYMENT_EXPIRED_TIME', 'label' => '订单失效时间（单位秒）', 'default' => '900'],

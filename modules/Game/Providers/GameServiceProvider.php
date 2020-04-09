@@ -19,6 +19,10 @@ class GameServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->publishes([
+            __DIR__.'/../Resources/js' => public_path('assets/game'),
+        ], 'public');
     }
 
     /**
@@ -42,9 +46,9 @@ class GameServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('game.php'),
-        ], 'config');
+        // $this->publishes([
+        //     __DIR__.'/../Config/config.php' => config_path('game.php'),
+        // ], 'config');
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'game'
         );
@@ -61,9 +65,9 @@ class GameServiceProvider extends ServiceProvider
 
         $sourcePath = __DIR__.'/../Resources/views';
 
-        $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+        // $this->publishes([
+        //     $sourcePath => $viewPath
+        // ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/game';

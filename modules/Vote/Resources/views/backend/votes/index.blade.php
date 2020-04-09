@@ -83,7 +83,7 @@
                     return true;
                 }else if(obj.event == 'goVoteDemo') {
                     var tempwindow=parent.window.open('_blank');
-                    tempwindow.location.href = '{{ route("vote.index", "_id_") }}'.replace('_id_', obj.data.hash_id)
+                    tempwindow.location.href = '{{ route("vote.index", "_id_") }}'.replace('_id_', obj.data.uid)
                     return true;
                 }
             })

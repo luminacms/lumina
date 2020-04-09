@@ -1,0 +1,13 @@
+{
+  "name": "Deyou_vote",
+  "label": "表单",
+  "type": 0,
+  "description": "表单组件",
+  "version": "1.1.2",
+  "private": false,
+  "tags": [
+    20
+  ],
+  "size": 17681,
+  "built": true
+}

@@ -3,12 +3,13 @@
 namespace Modules\Payment\Models;
 
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Modules\Core\Models\BaseModel;
-use Modules\Core\Traits\HasCreateBy;
 use Modules\Core\Traits\HasOrg;
-use Modules\Payment\Exceptions\TransactionNotFound;
 use Modules\Payment\Facades\Pay;
+use Modules\Core\Models\BaseModel;
+use Illuminate\Support\Facades\Log;
+use Modules\Core\Traits\HasCreateBy;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Payment\Exceptions\TransactionNotFound;
 
 /**
  * Class PayTransaction.
@@ -17,7 +18,7 @@ use Modules\Payment\Facades\Pay;
  */
 class PayTransaction extends BaseModel
 {
-    use HasOrg, HasCreateBy;
+    use HasCreateBy;
 
     protected $table = 'payment__transactions';
 
@@ -70,6 +71,7 @@ class PayTransaction extends BaseModel
                 $model->transaction_id = self::getRandomByTime('transaction_id');
             }
             $model->create_ip = request()->ip();
+            $model->oid = $model->oid ?? \request('oid', request()->header('oid'));
         });
         static::updated(function($model) {
             try{
@@ -78,6 +80,10 @@ class PayTransaction extends BaseModel
             }catch (Exception $e) {
                 Log::error($e->getMessage());
             }
+        });
+        static::addGlobalScope('oid', function (Builder $builder){
+            $_oid = \request('oid', request()->header('oid')) ?? session('__org.oid');
+            $builder->where('oid', $_oid ?? '-1'); //option使用默认组织，其他默认不存在
         });
     }
 
@@ -136,16 +142,38 @@ class PayTransaction extends BaseModel
         if(!$trans) {
             throw new TransactionNotFound('#'.$transaction_id.'['.$status.']'.json_encode($data));
         }
-        $trans->update(array_merge($data, ['status' => $status]));
+        $_status_map = config('payment')[$trans['pay_driver']]['statusMap'] ?? [];
+        return $trans->update(array_merge($data, ['status' => $_status_map[$status] ?? $status ]));
     }
 
+    /**
+     * 更新交易信息
+     *
+     * @return void
+     */
     public function syncTransation()
     {
-        $_driver = $this->pay_driver;
-        $_gateway = $this->pay_gateway;
-        $sync = Pay::$_driver()->$_gateway();
-        $find = $sync->find(['out_trade_no' => $this->transaction_id]);
+        try{
+            $_driver = $this->pay_driver;
+            $sync = Pay::$_driver();
+    
+            $find = $sync->find(['out_trade_no' => $this->transaction_id]);
+    
+            if($find['trade_status'] == 'TRADE_SUCCESS') {
+                return self::updateTransaction($this->transaction_id, $find['trade_status'], [
+                    'transaction_code' => $find['trade_no'] ?? '',
+                    'total_fee' => $find['total_amount'] ?? '',
+                    'mch_id' => $find['seller_id'] ?? '',
+                    'payment_at' => $find['gmt_payment'],
+                    'pay_channel' => $find['fund_bill_list'] ?? '',
+                    'buyer_id' => $find['buyer_logon_id']??''
+                ]);
+            }
 
-        Log::debug($find);
+            return true;
+        }catch(Exception $e){
+            abort(500, $e);
+            return false;
+        }
     }
 }

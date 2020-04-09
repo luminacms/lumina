@@ -12,7 +12,7 @@ class HandleTransaction extends BaseJob
     public function handle()
     {
         // 关闭过期订单
-        Log::info('transaction close at:'.now());
+        // Log::info('transaction close at:'.now());
         PayTransaction::withoutGlobalScopes(['oid'])->where('expired_at', '<', now())->whereIn('status', [
             PayTransaction::STATUS_NOPAY
         ])->each(function($item){

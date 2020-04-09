@@ -32,7 +32,7 @@ class VotesController extends BaseController
         $vote = $request->route('vote');
         if($vote) {
             // $vid = !is_numeric($vote)?current(Hashids::connection('vote')->decode($vote)):$vote;
-            $this->model = Vote::find($vote);
+            $this->model = Vote::where('uid', $vote)->first();
             if(!$request->wantsJson() && $this->model) {
                 $this->model->addCount();
             }

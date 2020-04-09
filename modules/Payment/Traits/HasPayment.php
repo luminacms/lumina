@@ -13,6 +13,7 @@ use Modules\Payment\Facades\Pay;
 use Modules\Payment\Models\PayTransaction;
 
 /**
+ * Class RevisionableTrait
  * @package Venturecraft\Revisionable
  */
 trait HasPayment
@@ -34,12 +35,14 @@ trait HasPayment
         $driver_proxy_map = ['ttpay' => 'alipay'];
         $_driver = isset($driver_proxy_map[$driver])?$driver_proxy_map[$driver]:$driver;
         $_appid = option('PAYMENT_'.strtoupper($_driver).'_APPID');
+
         if(!$_appid) {
             // 验证支付是否已配置
             throw new DriverNotConfig($_driver);
         }
-//        try{
-            $transaction = PayTransaction::create([
+    //    try{
+            $transaction = new PayTransaction();
+            $res = $transaction->fill([
                 'title' => $title,
                 'app_id' => $_appid,
                 'model_type' => self::getMorphClass(),
@@ -49,9 +52,9 @@ trait HasPayment
                 'model_order_id' => $order_id,
                 'pre_total_fee' => $total_amount,
                 'expired_at' => now()->addSeconds(intval(option('PAYMENT_EXPIRED_TIME')))
-            ]);
+            ])->save();
 
-            if($transaction) {
+            if($res && isset($transaction['transaction_id'])) {
                 switch ($driver) {
                     case PayTransaction::DRIVER_TTPAY:
                         return $this->_makeToutiaoOrder($transaction);
@@ -65,10 +68,13 @@ trait HasPayment
                         ]);
                         break;
                 }
+            }else{
+                Log::error('下单失败: '.$transaction);
             }
-//        }catch (Exception $e){
-//            throw new TransactionMakeFialed('order_id:'.$order_id.';model_type:'.self::getMorphClass());
-//        }
+    //    }catch (Exception $e){
+    //        abort($e);
+    //        throw new TransactionMakeFialed('order_id:'.$order_id.';model_type:'.self::getMorphClass());
+    //    }
     }
 
     /**

@@ -27,7 +27,7 @@ class VoteResource extends BaseResource
             'id' => $this->id,
             'title' =>$this->title,
             'type' => $this->type,
-            'hash_id' =>$this->hash_id,
+            'uid' =>$this->uid,
             'typeLabel' => Vote::getTypes()[$this->type],
             'vote_data' => $this->voteData->count(),
             'vote_data_valid' => $this->voteData()->distinct('mobile')->count('mobile'),

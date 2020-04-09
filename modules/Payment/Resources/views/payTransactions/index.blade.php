@@ -1,11 +1,12 @@
 @extends('core::layouts.master')
 
 @section('content')
-    <x-submenu :items="
-        [
+    @include('core::includes.layout.submenu', [
+        'items' => [
             ['name' => '列表管理', 'uri' => route('payment.transaction.index')],
             ['name' => '文档', 'uri' => route('core.doc', ['path'=>urlencode(module_path('payment').'/docs.md')]), 'right'=>true],
-       ]" />
+        ]
+    ])
 
     <table class="layui-hide" id="data_paytransaction_table" lay-filter="data_paytransaction_table"></table>
 @endsection
@@ -58,7 +59,7 @@
                     return true;
                 }
 
-                if((obj.event == 'delete' || obj.event == 'update') && checked.data.length >0 ) {
+                if(obj.event == 'delete' || obj.event == 'update') {
                     if(checked.data.length !== 1) {
                         layer.msg('请选择一条数据!');
                         return false;
@@ -66,7 +67,7 @@
 
                     if(obj.event === 'delete') {
                         layer.confirm('真的删除行么', function(index){
-                            parent.layui.admin.request.post('{{ url("/payTransactions/_id_") }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
+                            parent.layui.admin.request.post('{{ url("/payTransactions/:id") }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('删除成功');
                                 table.reload('data_paytransaction_table')
                             })
@@ -74,7 +75,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ url("/payTransactions/_id_/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTabsPage('{{ url("/payTransactions/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

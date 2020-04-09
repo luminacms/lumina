@@ -82,7 +82,7 @@
           var data = respond.data
           this.info = data
           var info = null
-          var content = this.info.diy_content
+          var content = this.info.diyconent
           try {
             info = JSON.parse(content)
           } catch (error) {

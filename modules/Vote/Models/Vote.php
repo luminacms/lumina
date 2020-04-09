@@ -41,7 +41,7 @@ class Vote extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->uid = $model->uid ?? self::getRandom('uid', 32);
+            $model->uid = $model->uid ?? self::getRandom('uid', 30, true);
         });
     }
 

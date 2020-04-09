@@ -20,7 +20,7 @@ class PayTransactionsController extends BaseController
      */
     protected $repository;
 
-    public function __construct(PayTransaction $repository)
+    public function __construct(PayTransactionRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -48,7 +48,7 @@ class PayTransactionsController extends BaseController
      */
     public function show($id)
     {
-        $payTransaction = $this->repository->with('createBy_id_,user_id,name,nickname,mobile')->find($id);
+        $payTransaction = $this->repository->with('createBy:id,user_id,name,nickname,mobile')->find($id);
         // $this->authorize('view', $payTransaction);
         return $this->toTable($payTransaction);
     }
@@ -73,11 +73,13 @@ class PayTransactionsController extends BaseController
 
     public function sync($id)
     {
-        $trans = $this->repository->find($id);
+        $trans = $this->repository->findOrFail($id);
         if($trans) {
             $trans->syncTransation();
         }
 
-        return $this->toResponse([]);
+        return $trans->syncTransation()
+                ? $this->toResponse([], '交易更新成功')
+                : $this->toError(-1, '更新失败，请稍后重试');
     }
 }
