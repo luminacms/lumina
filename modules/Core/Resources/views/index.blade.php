@@ -20,7 +20,7 @@
 {{--                </li>--}}
             </ul>
             <ul class="layui-nav layui-layout-right" lay-filter="lumina-layout-right">
-                @if(auth()->user()->hasRole('SUPER'))
+                @if(!auth()->guest() && auth()->user()->isSuper())
                 <li class="layui-nav-item hidden lg:inline-block">
                     <a>{{ auth()->org()->name??''  }}</a>
                     <dl class="layui-nav-child">

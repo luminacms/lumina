@@ -2,14 +2,30 @@
 
 namespace Modules\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Modules\Core\Models\User;
 use Illuminate\Filesystem\Filesystem;
 use Modules\Core\Models\Organization;
+use Modules\Core\Http\Resources\UserResource;
 
 class CoreController extends BaseController
 {
+
+    /**
+     * index
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index(Request $request)
+    {
+        if($request->expectsJson()) {
+            $users = User::filter($request)->where('id', '>', 20)->paginate($request->get('limit', 15));
+            return $this->toCollection($users, UserResource::class);
+        }
+        return view('index');
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View

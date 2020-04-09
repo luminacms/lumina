@@ -76,6 +76,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('interface')
             ->as('interface.')
+            // ->middleware('interface')
             ->namespace($this->moduleNamespace.'\Interfaces')
             ->group(__DIR__ . '/../Routes/interface.php');
     }

@@ -31,6 +31,11 @@
             @{{# } }}
         @{{# } }}
 
+        @{{# if(d.votes.length>0){  }}
+            @{{# layui.each(d.votes, function(index, item){ }}
+            <a lay-href="{{ route('backend.vote.data.index') }}?vote_id=@{{ item.vote_id }}" class="cursor-pointer mr-1" lay-text="报名#@{{ item.vote_id }}" title="关联报名#@{{ item.vote_id }}"><span class="layui-badge layui-bg-black">@{{ item.count }}</span></a>
+            @{{# }); }}
+        @{{# } }}
         @{{ d.title }}
     </script>
     <script type="text/html" id="game_status">
@@ -84,7 +89,7 @@
                     return true;
                 }
 
-                if(obj.event == 'delete' || obj.event == 'update') {
+                if(_.indexOf(['delete', 'update', 'connectVote'], obj.event) > -1 && checked.data.length >0 ) {
                     if(checked.data.length !== 1) {
                         layer.msg('请选择一条数据!');
                         return false;

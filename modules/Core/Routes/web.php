@@ -9,7 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'index');
+Route::get('/', 'CoreController@index');
 Route::view('/home', 'home');
 
 // 授权

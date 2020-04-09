@@ -394,9 +394,6 @@
         }
         let component = await cLoader.load(this.nodeInfo)
         let type = this.nodeInfo.type
-
-        console.log(this.nodeInfo)
-
         // 如果有label（用户设置 || getbasenode设置 || 这里设置）保留，否则从component配置对象获取，否则用id
         that.$set(that.info, 'label', that.info.label ? that.info.label : that.info.id.replace(type, component.label || type))
         // stack 模式 显式设置为false才是false

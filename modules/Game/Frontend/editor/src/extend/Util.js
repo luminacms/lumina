@@ -60,7 +60,7 @@ function loadJs (url = '') {
 
 function getBaseNode (node) {
   if (!node.id) return
-//   useComponent(node.id)
+  useComponent(node.id)
   var info = {
     id: node.name,
     type: node.name,

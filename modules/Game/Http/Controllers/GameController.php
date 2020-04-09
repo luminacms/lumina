@@ -8,11 +8,14 @@
 
 namespace Modules\Game\Http\Controllers;
 
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Modules\Game\Models\Game;
 use Modules\Game\Models\GamePage;
+use Illuminate\Support\Facades\Log;
 use Modules\Core\Http\Controllers\BaseController;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Modules\Game\Models\Repositories\GamePageRepository;
 
 class GameController extends BaseController
 {
@@ -50,7 +53,7 @@ class GameController extends BaseController
             return $view->make('gamePath::'.$subpage, compact('game'));
 
         }else{
-            $game = $this->gamePage->where(['uid' => $uid])->first();
+            $game = $this->gamePage->findWhere(['uid' => $uid])->first();
 
             $tpl = $game->mode == GamePage::MODE_SOURCE ? 'game' : 'game_diy';
             return view('game::'.$tpl, compact('game'));

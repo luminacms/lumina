@@ -302,7 +302,6 @@
             onlyMine: this.searchType == 2
           }
         }).then(({data}) => {
-            console.log(data)
           this.comLists = data.data && data.data || []
         })
       },
