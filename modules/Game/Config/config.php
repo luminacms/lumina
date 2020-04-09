@@ -56,7 +56,7 @@ return [
             [
                 'id' => 6,
                 'name' => 'image',
-                'path' => asset('assets/game/plugins/image/0.1.1/index.js'),
+                'path' => asset('assets/game/plugins/image/0.1.7/index.js'),
                 'version' => '0.1.7',
                 'visibilitylevel' => 1,
                 'status' => '1',
