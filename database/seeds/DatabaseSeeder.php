@@ -18,19 +18,16 @@ class DatabaseSeeder extends Seeder
         $this->genOrgazation();
         $this->genRole();
 
-        $super = ['jorycn@163.com', '674548546@qq.com'];
-        foreach($super as $_suer) {
-            $_user = User::firstOrCreate(['email' => $_suer], [
-                'name' => 'Jory',
-                'email' => $_suer,
-                'password' => Hash::make('123456')
-            ]);
-            $_user->assignRole(1);
-            $_user->organizations()->attach(1);
-        }
+        $_user = User::firstOrCreate(['email' => 'jorycn@163.com'], [
+            'name' => 'Jory',
+            'user_id' => 'jory',
+            'password' => Hash::make('123456')
+        ]);
+        $_user->assignRole(1);
+        $_user->organizations()->attach(1);
 
         // 只在开发模式下测试数据用
-        if(app()->isLocal()) {
+        if(app()->isLocal() === true) {
             $this->call(DemoSeed::class);
         }
     }
