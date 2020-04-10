@@ -41,6 +41,16 @@ class RegisterController extends BaseController
         $this->middleware('guest');
     }
 
+        /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('core::auth.register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
