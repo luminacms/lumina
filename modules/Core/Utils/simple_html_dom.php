@@ -1984,7 +1984,7 @@ class simple_html_dom
 			$n->clear(); $n = null;
 		}
 
-		// This add next line is documented in the sourceforge repository.
+		// This add next line is documented in the sourceforge model.
 		// 2977248 as a fix for ongoing memory leaks that occur even with the
 		// use of clear.
 		if (isset($this->children)) {

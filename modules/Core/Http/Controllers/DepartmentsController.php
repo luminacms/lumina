@@ -19,21 +19,21 @@ class DepartmentsController extends BaseController
     /**
      * @var Departments
      */
-    protected $repository;
+    protected $model;
 
     /**
      * DepartmentsController constructor.
-     * @param DepartmentRepository $repository
+     * @param DepartmentRepository $model
      */
-    public function __construct(Department $repository)
+    public function __construct(Department $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @param DepartmentsRepository $repository
+     * @param DepartmentsRepository $model
      * @return \Illuminate\Http\Response
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
@@ -63,7 +63,7 @@ class DepartmentsController extends BaseController
     public function store(DepartmentsRequest $request)
     {
         try {
-            $department = $this->repository->create($request->all());
+            $department = $this->model->create($request->all());
 
             return redirect()->back()->with('message', '新增操作成功');
         } catch (ValidationException $e) {
@@ -80,7 +80,7 @@ class DepartmentsController extends BaseController
      */
     public function show($id)
     {
-        $department = $this->repository->find($id);
+        $department = $this->model->find($id);
         // $this->authorize('view', $department);
         return view('core::departments.show', compact('department'));
     }
@@ -94,7 +94,7 @@ class DepartmentsController extends BaseController
      */
     public function edit($id)
     {
-        $department = $this->repository->find($id);
+        $department = $this->model->find($id);
         // $this->authorize('update', $department);
 
         return view('core::departments.edit', compact('department'));
@@ -113,7 +113,7 @@ class DepartmentsController extends BaseController
     public function update(DepartmentsRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             if(!$model->isDirty()) {
@@ -141,9 +141,9 @@ class DepartmentsController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->model->find($id);
         // $this->authorize('delete', $model);
-        $this->repository->delet($id);
+        $this->model->delet($id);
         return redirect()->back()->with('message', 'Departments deleted.');
     }
 }

@@ -19,11 +19,11 @@ class RolesController extends BaseController
     /**
      * @var Role
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(Role $repository)
+    public function __construct(Role $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -34,7 +34,7 @@ class RolesController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $roles = $this->repository->paginate($request->get('limit', 15));
+            $roles = $this->model->paginate($request->get('limit', 15));
             return $this->toCollection($roles, RoleResource::class);
         }
         return view('core::roles.index');
@@ -61,7 +61,7 @@ class RolesController extends BaseController
     public function store(RoleRequest $request)
     {
         try {
-            $role = $this->repository->create($request->all());
+            $role = $this->model->create($request->all());
 
             flash('新增操作成功', 'success');
             return redirect()->back();
@@ -79,7 +79,7 @@ class RolesController extends BaseController
      */
     public function show($id)
     {
-        $role = $this->repository->find($id);
+        $role = $this->model->find($id);
         // $this->authorize('view', $role);
         return $this->toTable($role);
     }
@@ -93,7 +93,7 @@ class RolesController extends BaseController
      */
     public function edit($id)
     {
-        $role = $this->repository->find($id);
+        $role = $this->model->find($id);
         // $this->authorize('update', $role);
 
         return view('core::roles.edit', compact('role'));
@@ -112,7 +112,7 @@ class RolesController extends BaseController
     public function update(RoleRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all())->save();
@@ -134,7 +134,7 @@ class RolesController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->model->find($id);
         // $this->authorize('delete', $model);
         $model->delete($id);
 

@@ -11,7 +11,7 @@ return [
             [
                 'id' => 1,
                 'name' => 'pageContainer',
-                'path' => asset('assets/game/plugins/pageContainer/1.0.2/index.js'),
+                'path' => url('assets/game/plugins/pageContainer/1.0.2/index.js'),
                 'version' => '1.0.2',
                 'desc' => '页面容器组件',
                 'visibilitylevel' => 1,
@@ -19,7 +19,7 @@ return [
             ],
             [
                 'id' => 2,
-                'name' => 'truck/emptyContainer',
+                'name' => 'emptyContainer',
                 'path' => asset('assets/game/plugins/emptyContainer/1.0.2/index.js'),
                 'version' => '1.0.2',
                 'desc' => '空容器节点',
@@ -56,7 +56,7 @@ return [
             [
                 'id' => 6,
                 'name' => 'image',
-                'path' => asset('assets/game/plugins/image/0.1.1/index.js'),
+                'path' => asset('assets/game/plugins/image/0.1.7/index.js'),
                 'version' => '0.1.7',
                 'visibilitylevel' => 1,
                 'status' => '1',

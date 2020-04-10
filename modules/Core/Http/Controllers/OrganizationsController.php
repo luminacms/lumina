@@ -19,11 +19,11 @@ class OrganizationsController extends BaseController
     /**
      * @var Organization
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(Organization $repository)
+    public function __construct(Organization $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -34,7 +34,7 @@ class OrganizationsController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $organizations = $this->repository->paginate($request->get('limit', 15));
+            $organizations = $this->model->paginate($request->get('limit', 15));
             return $this->toCollection($organizations, OrganizationResource::class);
         }
         return view('core::organizations.index');
@@ -61,11 +61,11 @@ class OrganizationsController extends BaseController
     public function store(OrganizationRequest $request)
     {
         try {
-            $organization = $this->repository->create($request->all());
+            $organization = $this->model->create($request->all());
 
             $organization->syncPermissions(array_values($request->get('permisson')));
 
-            auth()->org()->switchTo(auth()->org());
+            // auth()->org()->switchTo(auth()->org());
 
             flash('新增操作成功', 'success');
             return redirect()->back();
@@ -83,7 +83,7 @@ class OrganizationsController extends BaseController
      */
     public function show($id)
     {
-        $organization = $this->repository->with(['roles:label,name'])->find($id);
+        $organization = $this->model->with(['roles:label,name'])->find($id);
         // $this->authorize('view', $organization);
         return $this->toTable($organization);
     }
@@ -97,7 +97,7 @@ class OrganizationsController extends BaseController
      */
     public function edit($id)
     {
-        $organization = $this->repository->find($id);
+        $organization = $this->model->find($id);
 
         // $this->authorize('update', $organization);
 
@@ -117,7 +117,7 @@ class OrganizationsController extends BaseController
     public function update(OrganizationRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all())->save();
@@ -142,7 +142,7 @@ class OrganizationsController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id)->delete();
+        $model = $this->model->find($id)->delete();
         // $this->authorize('delete', $model);
 
         return $this->toResponse([], '删除成功');

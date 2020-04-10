@@ -121,7 +121,7 @@
 
                             <div class="layui-form-item">
                                 <label class="user-login-icon fa fa-user" for="xb-user-login-username"></label>
-                                <input type="text" name="email" class="layui-input" lay-verify="required|email" placeholder="邮箱">
+                                <input type="text" name="email" class="layui-input" lay-verify="required|email" placeholder="邮箱" value="{{ old('email') }}">
                             </div>
                             <div class="layui-form-item">
                                 <label class="user-login-icon fa fa-lock" for="xb-user-login-password"></label>

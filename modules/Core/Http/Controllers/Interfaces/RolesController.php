@@ -17,15 +17,15 @@ use Modules\Core\Models\User;
 class RolesController extends BaseController
 {
 
-    protected $repository;
+    protected $model;
 
     /**
      * UsersController constructor.
-     * @param UserRepository $repository
+     * @param UserRepository $model
      */
-    public function __construct(Role $repository)
+    public function __construct(Role $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -37,7 +37,7 @@ class RolesController extends BaseController
         $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
 
         try{
-            $role = $this->repository->find($request->get('role_id'));
+            $role = $this->model->find($request->get('role_id'));
             foreach (explode(',', $request->get('user_ids')) as $_user_id) {
                 $_user = User::find($_user_id);
                 $_user->assignRole($role);
@@ -53,7 +53,7 @@ class RolesController extends BaseController
         $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
 
         try{
-            $role = $this->repository->find($request->get('role_id'));
+            $role = $this->model->find($request->get('role_id'));
             foreach (explode(',', $request->get('user_ids')) as $_user_id) {
                 $_user = User::find($_user_id);
                 $_user->removeRole($role);

@@ -18,15 +18,15 @@ use Modules\Core\Models\User;
 class UsersController extends BaseController
 {
 
-    protected $repository;
+    protected $model;
 
     /**
      * UsersController constructor.
-     * @param UserRepository $repository
+     * @param UserRepository $model
      */
-    public function __construct(User $repository)
+    public function __construct(User $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -36,7 +36,7 @@ class UsersController extends BaseController
      */
     public function index(Request $request)
     {
-        $users = $this->repository->paginate(\request('limit', 15));
+        $users = $this->model->paginate(\request('limit', 15));
 
         return $this->toCollection($users, UserResource::class);
     }

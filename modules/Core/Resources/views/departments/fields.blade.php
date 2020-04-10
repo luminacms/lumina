@@ -1,5 +1,4 @@
 
-<x-input.select label="组织" name="oid" :optionHtml="\Modules\Core\Models\Organization::getOptionsHtml($department->oid??'')" required :value="$department->oid??''" />
 <x-input label="部门名称" name="name" required :value="$department->name??''"></x-input>
 <x-input.select label="父级栏目" name="parentid" :optionHtml="\Modules\Core\Models\Department::getOptionsHtml($department->parentid??'')" :value="$department->parentid??''" />
 

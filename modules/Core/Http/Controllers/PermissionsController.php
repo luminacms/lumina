@@ -18,11 +18,11 @@ class PermissionsController extends BaseController
     /**
      * @var Permission
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(Permission $repository)
+    public function __construct(Permission $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -59,7 +59,7 @@ class PermissionsController extends BaseController
     public function store(PermissionRequest $request)
     {
         try {
-            $permission = $this->repository->create($request->all());
+            $permission = $this->model->create($request->all());
 
             flash('新增操作成功', 'success');
             return redirect()->back();
@@ -77,7 +77,7 @@ class PermissionsController extends BaseController
      */
     public function show($id)
     {
-        $permission = $this->repository->find($id);
+        $permission = $this->model->find($id);
         // $this->authorize('view', $permission);
         return $this->toTable($permission);
     }
@@ -91,7 +91,7 @@ class PermissionsController extends BaseController
      */
     public function edit($id)
     {
-        $permission = $this->repository->find($id);
+        $permission = $this->model->find($id);
         // $this->authorize('update', $permission);
 
         return view('core::permissions.edit', compact('permission'));
@@ -110,7 +110,7 @@ class PermissionsController extends BaseController
     public function update(PermissionRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all())->save();
@@ -132,7 +132,7 @@ class PermissionsController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->model->find($id);
         // $this->authorize('delete', $model);
         $model->delete();
 

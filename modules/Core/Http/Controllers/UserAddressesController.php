@@ -19,11 +19,11 @@ class UserAddressesController extends BaseController
     /**
      * @var UserAddress
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(UserAddress $repository)
+    public function __construct(UserAddress $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -34,7 +34,7 @@ class UserAddressesController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $userAddresses = $this->repository->paginate($request->get('limit', 15));
+            $userAddresses = $this->model->paginate($request->get('limit', 15));
             return $this->toCollection($userAddresses, UserAddressesResource::class);
         }
         return view('core::userAddresses.index');
@@ -61,7 +61,7 @@ class UserAddressesController extends BaseController
     public function store(UserAddressRequest $request)
     {
         try {
-            $userAddress = $this->repository->create($request->all());
+            $userAddress = $this->model->create($request->all());
 
             return redirect()->back()->with('message', '新增操作成功');
         } catch (ValidationException $e) {
@@ -78,7 +78,7 @@ class UserAddressesController extends BaseController
      */
     public function show($id)
     {
-        $userAddress = $this->repository->find($id);
+        $userAddress = $this->model->find($id);
         // $this->authorize('view', $userAddress);
         return $this->toTable($userAddress);
     }
@@ -92,7 +92,7 @@ class UserAddressesController extends BaseController
      */
     public function edit($id)
     {
-        $userAddress = $this->repository->find($id);
+        $userAddress = $this->model->find($id);
         // $this->authorize('update', $userAddress);
 
         return view('core::userAddresses.edit', compact('userAddress'));
@@ -111,7 +111,7 @@ class UserAddressesController extends BaseController
     public function update(UserAddressRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all())->save();
@@ -132,9 +132,9 @@ class UserAddressesController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->model->find($id);
         // $this->authorize('delete', $model);
-        $this->repository->delet($id);
+        $this->model->delet($id);
         return redirect()->back()->with('message', 'UserAddress deleted.');
     }
 }

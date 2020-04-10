@@ -1,5 +1,26 @@
 <?php
 
+function test_resource($data = []){
+    return [
+        'data' => $data,
+        'code' => 1,
+        'msg' => 'success'
+    ];
+}
+Route::get('game/editor/tags/list', function(){
+    return response()->json(test_resource());
+});
+Route::post('game/editor/resources/list', function(){
+    return response()->json(test_resource());
+});
+Route::post('game/editor/pages/publiclist', function(){
+    return response()->json(test_resource());
+});
+Route::post('game/component/useone', function(){
+    return response()->json(test_resource(['id' => 11]));
+});
+
+
 Route::post('game/editor/pages/detail', 'GamePageController@detail');
 
 // Route::group(['middleware' => 'interface'], function(){

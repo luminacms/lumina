@@ -19,11 +19,11 @@ class UserSocialitesController extends BaseController
     /**
      * @var UserSocialite
      */
-    protected $repository;
+    protected $model;
 
-    public function __construct(UserSocialite $repository)
+    public function __construct(UserSocialite $model)
     {
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
     /**
@@ -34,7 +34,7 @@ class UserSocialitesController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $userSocialites = $this->repository->paginate($request->get('limit', 15));
+            $userSocialites = $this->model->paginate($request->get('limit', 15));
             return $this->toCollection($userSocialites, UserSocialiteResource::class);
         }
         return view('core::userSocialites.index');
@@ -61,7 +61,7 @@ class UserSocialitesController extends BaseController
     public function store(UserSocialiteRequest $request)
     {
         try {
-            $userSocialite = $this->repository->create($request->all());
+            $userSocialite = $this->model->create($request->all());
 
             flash('新增操作成功', 'success');
             return redirect()->back();
@@ -79,7 +79,7 @@ class UserSocialitesController extends BaseController
      */
     public function show($id)
     {
-        $userSocialite = $this->repository->find($id);
+        $userSocialite = $this->model->find($id);
         // $this->authorize('view', $userSocialite);
         return $this->toTable($userSocialite);
     }
@@ -93,7 +93,7 @@ class UserSocialitesController extends BaseController
      */
     public function edit($id)
     {
-        $userSocialite = $this->repository->find($id);
+        $userSocialite = $this->model->find($id);
         // $this->authorize('update', $userSocialite);
 
         return view('core::userSocialites.edit', compact('userSocialite'));
@@ -112,7 +112,7 @@ class UserSocialitesController extends BaseController
     public function update(UserSocialiteRequest $request, $id)
     {
         try {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all())->save();
@@ -134,7 +134,7 @@ class UserSocialitesController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->repository->find($id);
+        $model = $this->model->find($id);
         // $this->authorize('delete', $model);
         $model->delete($id);
 
