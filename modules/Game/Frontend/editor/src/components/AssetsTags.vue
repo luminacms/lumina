@@ -73,8 +73,8 @@
       }
     },
     mounted () {
-      this.initHistoryTags()
-      this.getAssetsTags()
+    //   this.initHistoryTags()
+    //   this.getAssetsTags()
     },
     methods: {
       onclick (tag) {

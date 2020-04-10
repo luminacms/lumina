@@ -139,8 +139,8 @@
             bindEvent: function() {
                 var me = this
                 // 监控内容变化。做持久化
-                this.$watch('nodeInfo', (diy_content) => {
-                    this.doSave(diy_content)
+                this.$watch('nodeInfo', (diyconent) => {
+                    this.doSave(diyconent)
                 }, {
                     deep: true
                 })
@@ -173,9 +173,9 @@
                     }
                 })
                 // 绑定替换页面模板信息
-                this.ema.bind('selectPageTemplate', (diy_content) => {
-                    if (diy_content) {
-                        Object.assign(this.nodeInfo, cloneDeep(diy_content))
+                this.ema.bind('selectPageTemplate', (diyconent) => {
+                    if (diyconent) {
+                        Object.assign(this.nodeInfo, cloneDeep(diyconent))
                     }
                 })
                 // 保存页面
@@ -194,6 +194,7 @@
                     if (selectNode.leaf) return this.$alert('不能为当前选中节点添加子组件')
                     if (selectNode.childLimit && selectNode.child && selectNode.child.length >= selectNode.childLimit) return this.$alert(`当前选中节点最多可添加${selectNode.childLimit}个子组件，已达限额`)
                     var nodeInfo = getBaseNode(menu)
+
                     // 如果给page容器添加孩子元素。孩子元素需要占满全屏
                     if ((/pageContainer$/i).test(selectNode.type)) {
                         nodeInfo.forceStyle = {
@@ -218,11 +219,11 @@
                             title: 'psd上传'
                         },
                         methods: {
-                            changeNode: function(diy_content, psdString) {
+                            changeNode: function(diyconent, psdString) {
                                 console.log('changeNode')
                                 var node = null
                                 try {
-                                    node = JSON.parse(diy_content)
+                                    node = JSON.parse(diyconent)
                                 } catch (error) {
                                     console.log('error', error)
                                 }
@@ -245,8 +246,8 @@
                 // 复制事件
                 window.Clipboard = Clipboard
                 new Clipboard(this.$refs['clipboard'])
-                this.ema.bind('clipboard.copy', (diy_content, msg) => {
-                    this.clipboarddiy_content = String(diy_content)
+                this.ema.bind('clipboard.copy', (diyconent, msg) => {
+                    this.clipboardContent = String(diyconent)
                     window.setTimeout(() => {
                         this.$refs['clipboard'].click()
                         this.$message({
@@ -384,7 +385,7 @@
                     this.pageInfo = data.data
                     var info = null
                     try {
-                        info = JSON.parse(this.pageInfo.diy_content) || emptyPage
+                        info = JSON.parse(this.pageInfo.diyContent) || emptyPage
                     } catch (error) {}
                     this.$store.dispatch('setPageType', this.pageInfo.type)
                     if (info.canvas && info.canvas.width) this.$store.dispatch('SettingChange', {
@@ -400,20 +401,20 @@
              * 持久化数据并更新操作历史数据
              * @augments String content 内容
              */
-            doSave: function(diy_content, immediately) {
+            doSave: function(diyContent, immediately) {
                 var me = this
                 if (this.timer) {
                     window.clearTimeout(this.timer)
                 }
                 if (immediately) {
-                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
+                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diyContent))
                 } else {
                     this.timer = window.setTimeout(() => {
-                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
-                        console.log('newChage', diy_content)
+                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diyContent))
+                        console.log('newChage', diyContent)
                         // 被回退或者前进操作的时候不添加历史记录
                         if (!me.lock) {
-                            HistoryCache.add(content) // 历史记录本身来处理数据的序列化和反序列化
+                            HistoryCache.add(diyContent) // 历史记录本身来处理数据的序列化和反序列化
                         }
                         this.lock = false
                     }, 500)
@@ -425,7 +426,7 @@
             savePage() {
                 if (this.demoMode) return this.$alert('您处在demo模式下，不能保存数据哦')
                 var info = Object.assign({}, this.pageInfo)
-                info.diy_content = window.localStorage.getItem(this.STORAGE_KEY)
+                info.diyconent = window.localStorage.getItem(this.STORAGE_KEY)
                 console.log(info)
                 Server({
                     url: 'editor/pages/save',
@@ -458,7 +459,7 @@
                 }, (src) => {
                     console.log('screenshot', src)
                     var info = Object.assign({}, this.pageInfo)
-                    info.diy_content = window.localStorage.getItem(this.STORAGE_KEY)
+                    info.diyconent = window.localStorage.getItem(this.STORAGE_KEY)
                     info.image = src
                     Server({
                         url: 'editor/pages/save',
@@ -483,7 +484,7 @@
                         type: this.pageInfo.type,
                         id: this.pageInfo.id,
                         projectId: this.pageInfo.projectId,
-                        diy_content: window.localStorage.getItem(this.STORAGE_KEY)
+                        diyconent: window.localStorage.getItem(this.STORAGE_KEY)
                     }
                 }).then(({
                     data

@@ -8,6 +8,7 @@
   <meta name="full-screen" content="yes"/>
   <meta name="x5-fullscreen" content="true"/>
   <meta name="format-detection" content="telephone=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <style>
    html,body{padding:0;margin:0;background-color:#262626;}.pre-loading-wrapper{position:relative;margin:200px auto 0;width:50px;height:50px}.pre-loading-wrapper .loading-item{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:50%;opacity:.6;background-color:#fc8700;-webkit-animation:loading-bounce 2s infinite ease-in-out;animation:loading-bounce 2s infinite ease-in-out}.pre-loading-wrapper .loading-item-2{-webkit-animation-delay:-1s;animation-delay:-1s}@-webkit-keyframes loading-bounce{0%,100%{-webkit-transform:scale(0);transform:scale(0)}50%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes loading-bounce{0%,100%{-webkit-transform:scale(0);transform:scale(0)}50%{-webkit-transform:scale(1);transform:scale(1)}}
   </style>

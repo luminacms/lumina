@@ -64,7 +64,7 @@
                     return true;
                 }
 
-                if(_.indexOf(['delete', 'update', 'connectVote'], obj.event) > -1) {
+                if(obj.event == 'delete' || obj.event == 'update') {
                     if(checked.data.length !== 1) {
                         layer.msg('请选择一条数据!');
                         return false;

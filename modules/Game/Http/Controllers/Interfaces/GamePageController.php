@@ -11,15 +11,15 @@ namespace Modules\Game\Http\Controllers\Interfaces;
 use Illuminate\Http\Request;
 use Modules\Core\Http\Controllers\BaseController;
 use Modules\Game\Models\GamePage;
-use Modules\Game\Models\Repositories\GamePageRepository;
+use Modules\Game\Models\Repositories\GamePagegamePage;
 
 class GamePageController extends BaseController
 {
-    protected $repository;
+    protected $gamePage;
 
-    public function __construct(GamePage $repository)
+    public function __construct(GamePage $gamePage)
     {
-        $this->repository = $repository;
+        $this->gamePage = $gamePage;
     }
 
     /**
@@ -30,7 +30,7 @@ class GamePageController extends BaseController
      */
     public function changeStatus($id, Request $request)
     {
-        $game = $this->repository->find($id)->update(['status' => $request->get('status')]);
+        $game = $this->gamePage->find($id)->update(['status' => $request->get('status')]);
         return $this->toResponse($game);
     }
 
@@ -45,8 +45,8 @@ class GamePageController extends BaseController
     {
         $request->validate(['uid' => 'required']);
 
-        $model = $this->repository->where(['uid' => $request->get('uid')])->first();
-        $neibor = $this->repository->orderBy('created_at', 'desc')->where(['mode' => $model->mode, 'game_id' => $model->game_id])->get();
+        $model = $this->gamePage->where(['uid' => $request->get('uid')])->first();
+        $neibor = $this->gamePage->orderBy('created_at', 'desc')->where(['mode' => $model->mode, 'game_id' => $model->game_id])->get();
 
         return $this->toResponse($neibor);
     }
@@ -61,7 +61,7 @@ class GamePageController extends BaseController
     {
         $request->validate(['uid' => 'required']);
 
-        $model = $this->repository->updateOrCreate(['uid' => $request->get('uid')], $request->all());
+        $model = $this->gamePage->updateOrCreate(['uid' => $request->get('uid')], $request->all());
         return $this->toResponse($model, 'success');
     }
 
@@ -76,12 +76,44 @@ class GamePageController extends BaseController
     {
         $request->validate(['uid' => 'required']);
 
-        $model = $this->repository->findWhere(['uid' => $request->get('uid')])->first();
+        $model = $this->gamePage->where(['uid' => $request->get('uid')])->first();
         return $this->toResponse($model, 'success');
+    }
+
+    public function searchByName()
+    {
+        return response()->json([
+            'data' => config('game.diy.components'),
+            'code' => 1,
+            'msg' => 'success'
+        ]);
     }
 
     public function componentFind()
     {
-        return [];
+        return response()->json([
+            'data' => [],
+            'code' => 1,
+            'msg' => 'success'
+        ]);
+    }
+
+    /**
+     * save gamePage
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function save(Request $request)
+    {
+        $page = GamePage::find($request->get('id'));
+        $page->fill($request->all());
+        $page->save();
+
+        return response()->json([
+            'data' => $page,
+            'code' => 1,
+            'msg' => 'success'
+        ]);
     }
 }

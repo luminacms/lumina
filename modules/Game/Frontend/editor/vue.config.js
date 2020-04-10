@@ -11,8 +11,8 @@ switch (process.env.PAGE) {
     page = {
       entry: 'src/client.js',
       template: 'src/client.tpl',
-      outputDir: process.env.NODE_ENV === 'production' ? resolve('../../../../public/dist/game') : `dist/${config.VIEW_NAME || 'view'}`,
-      publicPath: process.env.NODE_ENV === 'production' ? 'dist/game' : '/',
+      outputDir: process.env.NODE_ENV === 'production' ? resolve('../../Resources/js') : `dist/${config.VIEW_NAME || 'view'}`,
+      publicPath: process.env.NODE_ENV === 'production' ? 'assets/game' : '/',
       filename: process.env.NODE_ENV === 'production' ? resolve('../../Resources/views/game_diy.blade.php') : 'index.html',
       assetsDir: process.env.NODE_ENV === 'production' ? 'client' : 'static',
       port: 8566,
@@ -23,8 +23,8 @@ switch (process.env.PAGE) {
     page = {
       entry: 'src/editor.js',
       template: 'src/editor.tpl',
-      outputDir: process.env.NODE_ENV === 'production' ? resolve('../../../../public/dist/game') : `dist/${config.EDITOR_NAME || 'editor'}`,
-      publicPath: process.env.NODE_ENV === 'production' ? 'dist/game' : '/',
+      outputDir: process.env.NODE_ENV === 'production' ? resolve('../../Resources/js') : `dist/${config.EDITOR_NAME || 'editor'}`,
+      publicPath: process.env.NODE_ENV === 'production' ? 'assets/game' : '/',
       filename: process.env.NODE_ENV === 'production' ? resolve('../../Resources/views/diyide.blade.php') : 'index.html',
       assetsDir: process.env.NODE_ENV === 'production' ? 'editor' : 'static',
       title: config.EDITOR_TITLE,

@@ -14,7 +14,6 @@ class GameResource extends BaseResource
             'share_pic' => $this->share_pic,
             'create_by' => $this->createBy->name,
             'oauth' => $this->oauth,
-            'votes' => $this->getVoteCount(),
             'count' => $this->pages()->sum('count'),
             'status' => $this->status,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),

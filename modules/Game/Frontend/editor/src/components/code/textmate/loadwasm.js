@@ -19,7 +19,7 @@ export function fetchOnigasm () {
       }
     }
 
-    var onigasmPath = process.env.NODE_ENV == 'production' ? '/dist/game/onigasm.wasm' : './onigasm.wasm'
+    var onigasmPath = process.env.NODE_ENV == 'production' ? '/assets/game/onigasm.wasm' : './onigasm.wasm'
     request.open('GET', onigasmPath, true)
     request.responseType = 'arraybuffer'
     request.send()
