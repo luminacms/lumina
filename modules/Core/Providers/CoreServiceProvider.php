@@ -27,7 +27,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->registerComponents();
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         if ($this->app->runningInConsole()) {
             // migrate中的自定义字段
