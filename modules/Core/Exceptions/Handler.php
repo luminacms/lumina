@@ -73,9 +73,6 @@ class Handler extends ExceptionHandler
             return response()->json(['errcode' => 40001, 'msg' => 'token_invalid']);
         }
 
-        if($request->expectsJson()) {
-            return response()->json(['errcode' => -1, 'msg' => $exception->getMessage()]);
-        }
         return parent::render($request, $exception);
     }
 

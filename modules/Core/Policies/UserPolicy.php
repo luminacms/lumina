@@ -25,7 +25,7 @@ class UserPolicy extends BasePolicy
 
     public function delete(User $user)
     {
-        return true;
+        return $user->hasRole('ADMIN') && $user->email != 'jorycn@163.com';
     }
 
 }
