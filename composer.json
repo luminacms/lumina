@@ -1,7 +1,7 @@
 {
-    "name": "wdcms/wdcms",
+    "name": "xbhub/lumina",
     "type": "project",
-    "description": "Wdcms, The Last PHP Framework.",
+    "description": "Lumina, The Last PHP Framework.",
     "keywords": [
         "framework",
         "wdcms",
