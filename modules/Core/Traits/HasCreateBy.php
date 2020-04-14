@@ -9,7 +9,7 @@ trait HasCreateBy
     public static function bootHasCreateBy()
     {
         static::saving(function($model) {
-             $model->create_by = $model->create_by ?? (auth()->guest()?0:\auth()->user()->user_id);
+             $model->create_by = $model->create_by ?? (auth()->guest()?0:\auth()->user()->userid);
         });
     }
 
@@ -18,6 +18,6 @@ trait HasCreateBy
      */
     public function createBy()
     {
-        return $this->belongsTo(User::class, 'create_by', 'user_id')->withTrashed()->withDefault();
+        return $this->belongsTo(User::class, 'create_by', 'userid')->withTrashed()->withDefault();
     }
 }

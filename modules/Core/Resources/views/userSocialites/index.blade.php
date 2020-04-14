@@ -37,7 +37,7 @@
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"user_id","title":"UserId"},
+                    {"field":"userid","title":"UserId"},
                     {"field":"driver","title":"driver",templet: '#tpl_driver'},
                     {"field":"nickname","title":"nickname",width:150},
                     {"field":"avatar","title":"avatar",templet: '<div><img src="@{{ d.avatar }}" width="30"/></div>',width:90},

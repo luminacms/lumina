@@ -28,6 +28,6 @@ class Department extends BaseModel
      */
     public function users()
     {
-        return $this->belongsToMany('Modules\Core\Models\User', 'core_department_user','department_id', 'user_id');
+        return $this->belongsToMany('Modules\Core\Models\User', 'core_department_user','department_id', 'userid');
     }
 }

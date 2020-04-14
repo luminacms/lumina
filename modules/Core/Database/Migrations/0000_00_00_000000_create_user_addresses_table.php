@@ -18,7 +18,7 @@ class CreateUserAddressesTable extends Migration
 		Schema::create('core_user_addresses', function(Blueprint $table) {
             $table->increments('id');
 
-            $table->char('user_id', 64);
+            $table->char('userid', 64);
             $table->string('province');
             $table->string('city');
             $table->string('district');

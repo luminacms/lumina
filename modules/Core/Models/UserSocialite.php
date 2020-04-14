@@ -23,7 +23,7 @@ class UserSocialite extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['driver', 'user_id', 'openid','token','nickname','avatar','gender','country','province','city', 'anonymous_openid','oid'];
+    protected $fillable = ['driver', 'userid', 'openid','token','nickname','avatar','gender','country','province','city', 'anonymous_openid','oid'];
 
     /**
      * social drivers
@@ -69,7 +69,7 @@ class UserSocialite extends BaseModel
      */
     public function user()
     {
-        return $this->belongsTo('Modules\Core\Models\User', 'user_id', 'user_id');
+        return $this->belongsTo('Modules\Core\Models\User', 'userid', 'userid');
     }
 
     /**
@@ -83,7 +83,7 @@ class UserSocialite extends BaseModel
     public function saveOne($userId, $driver, $id)
     {
         return $this->create([
-            'user_id' => $userId,
+            'userid' => $userId,
             'driver' => $driver,
             'openid' => $id
         ]);

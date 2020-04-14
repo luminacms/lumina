@@ -82,7 +82,7 @@ class VodOrdersController extends BaseController
      */
     public function show($id)
     {
-        $vodOrder = $this->repository->with('createBy:user_id,id,name,nickname')->find($id);
+        $vodOrder = $this->repository->with('createBy:userid,id,name,nickname')->find($id);
         // $this->authorize('view', $vodOrder);
         return $this->toTable($vodOrder);
     }

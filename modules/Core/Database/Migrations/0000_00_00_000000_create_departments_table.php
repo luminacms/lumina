@@ -30,7 +30,7 @@ class CreateDepartmentsTable extends Migration
         Schema::create('core_department_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('department_id');
-            $table->char('user_id', 64);
+            $table->char('userid', 64);
         });
 
         DB::statement("ALTER TABLE core_departments COMMENT='部门表'");

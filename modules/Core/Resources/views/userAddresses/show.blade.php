@@ -7,7 +7,7 @@
             <table class="layui-table">
                 <tbody>
 				<tr><td width=150>{{ __("field.id") }}</td><td>{!! $useraddress->id !!}</td></tr>
-				<tr><td width=150>{{ __("field.user_id") }}</td><td>{!! $useraddress->user_id !!}</td></tr>
+				<tr><td width=150>{{ __("field.userid") }}</td><td>{!! $useraddress->userid !!}</td></tr>
 				<tr><td width=150>{{ __("field.province") }}</td><td>{!! $useraddress->province !!}</td></tr>
 				<tr><td width=150>{{ __("field.city") }}</td><td>{!! $useraddress->city !!}</td></tr>
 				<tr><td width=150>{{ __("field.district") }}</td><td>{!! $useraddress->district !!}</td></tr>

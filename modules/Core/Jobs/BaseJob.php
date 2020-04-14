@@ -33,7 +33,7 @@ class BaseJob implements ShouldQueue
      */
     public function failed($exception)
     {
-//        $user = \Modules\Core\Models\User::where('user_id', '014718403021411458')->first();
+//        $user = \Modules\Core\Models\User::where('userid', '014718403021411458')->first();
 //        $user->notify(new \App\Notifications\JobFaild('failed', [
 //            'message' => 'OA任务执行失败：'.static::class.'，异常：'.$exception->getMessage()
 //        ]));

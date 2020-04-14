@@ -91,7 +91,7 @@
             <div class="fa lumina-tabs-control fa-angle-double-right" lumina-event="rightPage"></div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="lay_lumina_tabs">
                 <ul class="layui-tab-title" id="lumina_tabs">
-                    <li lay-id="core/dashboard'" lay-attr="{{ route('core.dashboard', auth()->oid()) }}" class="layui-this"><i class="fa fa-home"></i></li>
+                    <li lay-id="core/home'" lay-attr="{{ route('core.dashboard', auth()->oid()) }}" class="layui-this"><i class="fa fa-home"></i></li>
                 </ul>
             </div>
         </div>

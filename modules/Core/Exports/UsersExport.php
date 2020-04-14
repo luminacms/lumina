@@ -5,7 +5,7 @@ namespace Modules\Core\Exports;
 use Modules\Core\Models\User;
 
 //$field = [
-//    'user_id' => 'USERID',
+//    'userid' => 'USERID',
 //    'name' => '姓名',
 //    'mobile' => '电话',
 //];

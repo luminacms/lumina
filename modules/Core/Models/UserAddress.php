@@ -15,6 +15,6 @@ class UserAddress extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'province', 'city', 'district', 'address', 'zip', 'contact_name', 'contact_phone', 'lastused_at'];
+    protected $fillable = ['userid', 'province', 'city', 'district', 'address', 'zip', 'contact_name', 'contact_phone', 'lastused_at'];
 
 }

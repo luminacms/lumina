@@ -21,7 +21,7 @@ class OrderController extends BaseController
     public function countTrans()
     {
         $count = PayTransaction::where([
-            ['create_by', \auth()->user()->user_id],
+            ['create_by', \auth()->user()->userid],
             ['status', PayTransaction::STATUS_SUCCESS]
         ])->count();
         return $this->toResponse(['count' => $count]);

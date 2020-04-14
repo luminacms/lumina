@@ -122,7 +122,7 @@ trait HasPayment
             'currency'=> 'CNY',
             'subject'=> $transaction['title'] ?? '-',
             'body'=> $transaction['title'] ?? '-',   //商户订单详情
-            'uid'=> auth()->user()->user_id,
+            'uid'=> auth()->user()->userid,
             'trade_time'=> Carbon::parse($transaction['created_at'])->timestamp,
             'valid_time'=> option('PAYMENT_EXPIRED_TIME'), // 订单失效时间，单位：秒
             'notify_url'=> url('/callback/payment/alipay/notify/'.$transaction['oid']),

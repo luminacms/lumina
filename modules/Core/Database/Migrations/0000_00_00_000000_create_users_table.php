@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('core_users', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->char('user_id', 64)->unique()->index();
+            $table->char('userid', 64)->unique()->index();
 
             $table->string('username')->nullable();
             $table->string('name')->nullable();
@@ -51,7 +51,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('core_group_user', function(Blueprint $table) {
-            $table->char('user_id', 64)->index();
+            $table->char('userid', 64)->index();
             $table->string('model_type')->index();
             $table->integer('group_id')->unsigned()->index();
         });
@@ -59,7 +59,7 @@ class CreateUsersTable extends Migration
         Schema::create('core_user_socialites', function(Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->char('user_id', 64);
+            $table->char('userid', 64);
 
             $table->string('driver');
             $table->string('openid');

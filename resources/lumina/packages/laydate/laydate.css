@@ -1,10 +1,10 @@
 /**
- 
+
  @Name: laydata
  @Author: 贤心
- 
+
  **/
- 
+
 
 html #layuicss-laydate{display: none; position: absolute; width: 1989px;}
 
@@ -120,7 +120,7 @@ html #layuicss-laydate{display: none; position: absolute; width: 1989px;}
 .laydate-day-mark::after{background-color: #5FB878;}
 .layui-laydate-content td.layui-this .laydate-day-mark::after{display: none;}
 .layui-laydate-footer span[lay-type="date"]{color: #5FB878;}
-.layui-laydate .layui-this{background-color: #009688 !important; color: #fff !important;}
+.layui-laydate .layui-this{background-color: #17a2b8 !important; color: #fff !important;}
 .layui-laydate .laydate-disabled,
 .layui-laydate .laydate-disabled:hover{background:none !important; color: #d2d2d2 !important; cursor: not-allowed !important; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;}
 
@@ -128,7 +128,7 @@ html #layuicss-laydate{display: none; position: absolute; width: 1989px;}
 .laydate-theme-molv{border: none;}
 .laydate-theme-molv.layui-laydate-range{width: 548px}
 .laydate-theme-molv .layui-laydate-main{width: 274px;}
-.laydate-theme-molv .layui-laydate-header{border: none; background-color: #009688;}
+.laydate-theme-molv .layui-laydate-header{border: none; background-color: #17a2b8;}
 .laydate-theme-molv .layui-laydate-header i,
 .laydate-theme-molv .layui-laydate-header span{color: #f6f6f6;}
 .laydate-theme-molv .layui-laydate-header i:hover,
@@ -143,7 +143,7 @@ html #layuicss-laydate{display: none; position: absolute; width: 1989px;}
 .laydate-theme-grid .laydate-year-list>li,
 .laydate-theme-grid .laydate-month-list>li{border: 1px solid #e2e2e2;}
 .laydate-theme-grid .laydate-selected,
-.laydate-theme-grid .laydate-selected:hover{background-color: #f2f2f2 !important; color: #009688 !important;}
+.laydate-theme-grid .laydate-selected:hover{background-color: #f2f2f2 !important; color: #17a2b8 !important;}
 .laydate-theme-grid .laydate-selected.laydate-day-prev,
 .laydate-theme-grid .laydate-selected.laydate-day-next{color: #d2d2d2 !important;}
 .laydate-theme-grid .laydate-year-list,

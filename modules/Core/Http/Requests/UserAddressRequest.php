@@ -17,7 +17,7 @@ class UserAddressRequest extends BaseRequest
             case 'POST':
                 {
                     return [
-                        'user_id' => 'required',
+                        'userid' => 'required',
                         'province' => 'required',
                         'city' => 'required',
                         'district' => 'required',

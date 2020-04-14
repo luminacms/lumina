@@ -9,7 +9,7 @@ $factory->define(User::class, function (Faker $faker) {
     $org = \Modules\Core\Models\Organization::where('oid', '<>', 1)->get();
     return [
         'name' => $faker->name,
-        'user_id' => Str::random(8),
+        'userid' => Str::random(8),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'mobile' => $faker->phoneNumber,
@@ -24,7 +24,7 @@ $factory->define(UserAddress::class, function (Faker $faker) {
         'province'      => $faker->state,
         'city'          => $faker->city,
         'district'      => Str::random(8),
-        'user_id'       => $user->random(1)->first()->id,
+        'userid'       => $user->random(1)->first()->id,
         'address'       => sprintf('第%d街道第%d号', $faker->randomNumber(2), $faker->randomNumber(3)),
         'zip'           => $faker->randomNumber(8),
         'contact_name'  => $faker->name,

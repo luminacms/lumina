@@ -1,5 +1,5 @@
 <x-input name="driver" :value="$role->driver??''"/>
-<x-input name="user_id" :value="$role->user_id??''"/>
+<x-input name="userid" :value="$role->userid??''"/>
 <x-input name="oid" :value="$role->oid??''"/>
 <x-input name="openid" :value="$role->openid??''"/>
 <x-input name="anonymous_openid" :value="$role->anonymous_openid??''"/>

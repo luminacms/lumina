@@ -95,7 +95,7 @@ class UsersController extends BaseController
         $user = $this->model->with([
             'organizations:name,oid',
             'departments:name,level',
-            'address:user_id,province,city,address,contact_name,contact_phone'
+            'address:userid,province,city,address,contact_name,contact_phone'
         ])->find($id);
 
         // $this->authorize('view', $user);
@@ -174,7 +174,7 @@ class UsersController extends BaseController
     {
         $user = auth()->user();
         if($request->isMethod('post')) {
-            $model = $this->model->where('user_id', $user->user_id)->first();
+            $model = $this->model->where('userid', $user->userid)->first();
             $model->fill($request->except('password'))->save();
             flash('保存成功', 'success');
         }
@@ -191,7 +191,7 @@ class UsersController extends BaseController
         $user = auth()->user();
         if($request->isMethod('post')) {
             $request->validate(['password' => 'required', 'oldpasswd' => 'required', 'password_confirmation' => 'required']);
-            $userModel = $this->model->where('user_id', $user->user_id)->first();
+            $userModel = $this->model->where('userid', $user->userid)->first();
             $pass = true;
             $message = '';
 

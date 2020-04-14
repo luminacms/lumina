@@ -116,7 +116,7 @@ class OpenController extends BaseController
                     $finder = User::create();
                     $socialiteUser->create([
                         'driver' => 'wechat',
-                        'user_id' => $finder->id,
+                        'userid' => $finder->id,
                         'openid' => $res['openid']
                     ]);
                 }

@@ -4,7 +4,7 @@
         <thead>
             <tr>
 				<th>{{ __('main.id') }}</th>
-				<th>{{ __('main.user_id') }}</th>
+				<th>{{ __('main.userid') }}</th>
 				<th>{{ __('main.province') }}</th>
 				<th>{{ __('main.city') }}</th>
 				<th>{{ __('main.district') }}</th>
@@ -22,7 +22,7 @@
         @foreach($userAddresses as $item)
             <tr>
 				<td>{{ $item->id ?? "" }}</td>
-				<td>{{ $item->user_id ?? "" }}</td>
+				<td>{{ $item->userid ?? "" }}</td>
 				<td>{{ $item->province ?? "" }}</td>
 				<td>{{ $item->city ?? "" }}</td>
 				<td>{{ $item->district ?? "" }}</td>

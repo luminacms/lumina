@@ -14,7 +14,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">UserID</label>
                     <div class="layui-input-inline">
-                        <input type="text" disabled autocomplete="off" class="layui-input" value="{{ Auth::user()->user_id }}">
+                        <input type="text" disabled autocomplete="off" class="layui-input" value="{{ Auth::user()->userid }}">
                     </div>
                 </div>
                 <div class="layui-form-item">

@@ -51,6 +51,6 @@ class PostPolicy extends Policy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->user_id === $post->create_by && $user->hasRole('ADMIN');
+        return $user->userid === $post->create_by && $user->hasRole('ADMIN');
     }
 }

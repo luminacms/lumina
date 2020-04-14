@@ -25,7 +25,7 @@ return [
     'address'                   => '地址',
     'company'                   => '公司名称',
     'score'                     => '分数',
-    'user_id'                   => 'UserId',
+    'userid'                   => 'UserId',
     'username'                  => '用户名',
     'avatar'                    => '头像',
     'login_times'               => '登陆次数',

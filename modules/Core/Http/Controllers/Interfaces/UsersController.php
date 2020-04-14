@@ -48,7 +48,7 @@ class UsersController extends BaseController
     {
         $request->validate(['ids' =>'required']);
         $field = [
-            'user_id' => 'USERID',
+            'userid' => 'USERID',
             'name' => '姓名',
             'mobile' => '电话',
             'created_at' =>'入职时间'

@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script src="<?php echo e(config('core.lumina_js_cdn')) ?>/lumina.js"></script>
     <script>
-        window.userinfo = {!! json_encode(Auth::guest()?[]:Auth::user()->only(['user_id','name','email','mobile','last_login_at'])) !!}
+        window.userinfo = {!! json_encode(Auth::guest()?[]:Auth::user()->only(['userid','name','email','mobile','last_login_at'])) !!}
         layui.config({base: "<?php echo e(config('core.lumina_js_cdn')) ?>/"}).extend({
             admin: 'modules/admin'
         }).use(['admin']);

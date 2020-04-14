@@ -26,8 +26,8 @@ class DepartmentFilter extends Filter
      */
     public function filter(Builder $builder, $value)
     {
-        return $builder->leftjoin('core_department_user', 'core_users.user_id','=','core_department_user.user_id')
-            ->select('core_department_user.department_id','core_department_user.user_id','core_users.*')
+        return $builder->leftjoin('core_department_user', 'core_users.userid','=','core_department_user.userid')
+            ->select('core_department_user.department_id','core_department_user.userid','core_users.*')
             ->where('core_department_user.department_id', $value);
     }
 }

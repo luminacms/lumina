@@ -21,7 +21,7 @@ $factory->define(\Modules\Mall\Models\ProductSpu::class, function (Faker $faker)
         'category_id' => $cate->random(1)->first()->id,
         'description' => $faker->realText(500),
         'price_fee' => $faker->randomNumber(4),
-        'create_by' => User::first()->user_id
+        'create_by' => User::first()->userid
     ];
 });
 
@@ -42,6 +42,6 @@ $factory->define(PayTransaction::class, function (Faker $faker) {
         'transaction_code' => Str::random(32),
         'payment_at' => now()->addMinutes(rand(5, 10)),
         'create_ip' => '0.0.0.0',
-        'create_by' => User::first()->user_id
+        'create_by' => User::first()->userid
     ];
 });

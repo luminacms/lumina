@@ -30,10 +30,16 @@ class CoreController extends BaseController
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function home($oid)
+    public function home($oid = '')
     {
+        if(!$oid) {
+            if($_auth_oid = auth()->oid()){
+                return redirect()->route('dashboard', $_auth_oid);
+            }
+            flash('暂无权限，请确定你在该组织中且是管理员身份', 'error');
+            return redirect('/');
+        }
         $org = Organization::where('oid', $oid)->first();
-
         if(!auth()->oid() || auth()->oid() != $oid) {
             // 组织发生变更
             $user = auth()->user();

@@ -112,6 +112,9 @@
         <div class="max-w-sm m-8">
             <div class="user-login user-display-show" id="xb-user-login">
 
+                @if (Route::has('register'))
+                <div class="mb-6"><a href="{{ route('register') }}"><< 注册</a></div>
+                @endif
                 <div class="user-login-main">
                     <div class="user-login-box user-login-header">
                         <h2>后台管理</h2>
@@ -143,11 +146,10 @@
 
                             <div class="layui-form-item" style="margin-bottom: 20px;">
                                 <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-                                {{--                    <a href="forget.html" class="user-jump-change lumina-link" style="margin-top: 7px;">忘记密码？</a>--}}
+                                <a href="{{ route('password.request') }}" class="float-right mt-4">忘记密码？</a>
                             </div>
                             <div class="layui-form-item">
                                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="xb-user-login-submit" type="submit">登 入</button>
-{{--                                <a href="{{ route('ologin', 'github') }}">Github登陆</a>--}}
                             </div>
 
                         </x-form>

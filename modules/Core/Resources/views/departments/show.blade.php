@@ -4,7 +4,7 @@
     <div class="row" style="padding-left: 20px">
         <table class="table table-hover table-bordered">
             <tbody>
-				<tr><td>{{ __("field.id") }}</td><td>{!! $user->user_id !!}</td></tr>
+				<tr><td>{{ __("field.id") }}</td><td>{!! $user->userid !!}</td></tr>
 				<tr><td>{{ __("field.name") }}</td><td>{!! $user->name !!}</td></tr>
 				<tr><td>{{ __("field.email") }}</td><td>{!! $user->email !!}</td></tr>
 				<tr><td>{{ __("field.email_verified_at") }}</td><td>{!! $user->email_verified_at !!}</td></tr>

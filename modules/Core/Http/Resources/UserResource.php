@@ -8,7 +8,7 @@ class UserResource extends BaseResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'userid' => $this->userid,
             'name' => !empty($this->name)?$this->name:(!empty($this->username)?$this->username:$this->nickname),
             'avatar' => $this->avatar,
             'email' => $this->email,

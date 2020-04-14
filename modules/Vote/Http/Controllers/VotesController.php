@@ -75,7 +75,7 @@ class VotesController extends BaseController
 
         if(!auth()->guest()) {
             // 授权模式只允许提交一次
-            $_existData = $this->model->voteData()->where('create_by', auth()->user()->user_id)->first();
+            $_existData = $this->model->voteData()->where('create_by', auth()->user()->userid)->first();
             if($_existData) {
                 if($_existData['score'] > $request['score']) {
                     unset($request['score']);
@@ -169,7 +169,7 @@ class VotesController extends BaseController
     {
         if(!$this->model) abort(404);
 
-        $data = $this->model->voteData()->where('create_by', \auth()->user()->user_id)->first();
+        $data = $this->model->voteData()->where('create_by', \auth()->user()->userid)->first();
 
         return $this->toResource($data, VoteDataResource::class);
     }

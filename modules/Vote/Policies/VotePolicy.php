@@ -52,7 +52,7 @@ class VotePolicy extends BasePolicy
      */
     public function delete(User $user, Vote $vote)
     {
-        return $user->user_id == $vote->create_by;
+        return $user->userid == $vote->create_by;
     }
 
 }

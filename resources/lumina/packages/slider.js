@@ -92,7 +92,7 @@ layui.define('jquery', function (exports) {
             ,
         disabled: false //滑块禁用，默认关闭
             ,
-        theme: '#009688' //主题颜色
+        theme: '#17a2b8' //主题颜色
     };
 
     //滑块渲染

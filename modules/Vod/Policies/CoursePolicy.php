@@ -52,6 +52,6 @@ class CoursePolicy extends BasePolicy
      */
     public function delete(User $user, Course $course)
     {
-        return $course->create_by == $user->user_id && $course->lesson->count()==0;
+        return $course->create_by == $user->userid && $course->lesson->count()==0;
     }
 }

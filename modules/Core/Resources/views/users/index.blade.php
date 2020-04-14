@@ -165,7 +165,7 @@
                         var ids = data.map(function (item) {
                             return item.id;
                         });
-                        admin.request.post('{{ url('/interface/core/roles/detach') }}', {'role_id': role_id, 'user_ids': ids.join(',')}, function(res){
+                        admin.request.post('{{ url('/interface/core/roles/detach') }}', {'role_id': role_id, 'userids': ids.join(',')}, function(res){
                             table.reload("user_role_table")
                         })
 
@@ -181,7 +181,7 @@
                                 var ids = res.map(function (item) {
                                     return item.id;
                                 });
-                                admin.request.post('{{ url('/interface/core/roles/attach') }}', {'role_id': role_id, 'user_ids': ids.join(',')}, function(res){
+                                admin.request.post('{{ url('/interface/core/roles/attach') }}', {'role_id': role_id, 'userids': ids.join(',')}, function(res){
                                     table.reload("user_role_table")
                                 })
                             }

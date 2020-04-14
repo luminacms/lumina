@@ -20,7 +20,7 @@ class Group extends BaseModel
 
     public function users()
     {
-        return $this->morphToMany('Modules\Core\Models\User', 'model', 'group_user', 'user_id', 'group_id');
+        return $this->morphToMany('Modules\Core\Models\User', 'model', 'group_user', 'userid', 'group_id');
     }
 
 }

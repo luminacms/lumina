@@ -48,7 +48,7 @@ class PayTransactionsController extends BaseController
      */
     public function show($id)
     {
-        $payTransaction = $this->repository->with('createBy:id,user_id,name,nickname,mobile')->find($id);
+        $payTransaction = $this->repository->with('createBy:id,userid,name,nickname,mobile')->find($id);
         // $this->authorize('view', $payTransaction);
         return $this->toTable($payTransaction);
     }

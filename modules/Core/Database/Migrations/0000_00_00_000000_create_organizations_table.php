@@ -31,7 +31,7 @@ class CreateOrganizationsTable extends Migration
         Schema::create('core_organzation_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('organzation_id', 32);
-            $table->char('user_id', 64);
+            $table->char('userid', 64);
         });
 
         DB::statement("ALTER TABLE core_organizations COMMENT='组织表'");

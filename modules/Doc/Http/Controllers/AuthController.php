@@ -61,11 +61,11 @@ class AuthController extends BaseController
         $info = json_decode($response2, true);
 
         // 系统登录
-        $member = Member::where('user_id', $info['user_id'])->first();
+        $member = Member::where('userid', $info['userid'])->first();
         if(!$member) {
             $member = new Member();
         }
-        $member->user_id = $info['user_id'];
+        $member->userid = $info['userid'];
         $member->nickname = $info['name'];
         $member->account = $info['mobile'];
         $member->email = $info['email'];

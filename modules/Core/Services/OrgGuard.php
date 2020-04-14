@@ -62,8 +62,8 @@ class OrgGuard extends SessionGuard
 
             // oid参数不存在，管理员取任意oid，普通管理员取自身所在组织
             $user = $this->user();
-            $_oid = $user->hasRole('SUPER')?Organization::first()->oid:$user->organizations[0]->oid;
-            if($_oid){
+            $_oid = $user->hasRole('SUPER')?Organization::first()->oid:($user->organizations[0]->oid ?? -1);
+            if($_oid && $_oid != -1){
                 $org = Organization::where('oid', $_oid)->first();
                 $this->session->put([$this->getOrgName() => $org]);
                 return true;

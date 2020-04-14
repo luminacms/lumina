@@ -31,16 +31,16 @@ class Logs extends ModelBase
     /**
      * 添加一条日志
      * @param string $content 日志内容
-     * @param int $user_id 用户ID
+     * @param int $userid 用户ID
      * @param string|null $original_data
      * @param string|null $present_data
      * @return bool
      *
      */
-    public static function addLogs($content,$user_id,$original_data = null,$present_data = null)
+    public static function addLogs($content,$userid,$original_data = null,$present_data = null)
     {
         $logs = new Logs();
-        $logs->create_by = $user_id;
+        $logs->create_by = $userid;
         $logs->content = $content;
         $logs->original_data = $original_data;
         $logs->present_data = $present_data;

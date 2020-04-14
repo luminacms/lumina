@@ -15,28 +15,20 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailConstruct;
 use Laravel\Passport\HasApiTokens;
 
 class User extends BaseModel implements
     JWTSubject,
     AuthenticatableContract,
     AuthorizableContract,
-    CanResetPasswordContract
+    CanResetPasswordContract,
+    MustVerifyEmailConstruct
 {
     use HasApiTokens, Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail,
         Notifiable, SoftDeletes, HasRoles;
 
     protected $guard_name = 'web';
-
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 
     const STATUS = ['ENABLED', 'DISABLED'];
 
@@ -48,7 +40,7 @@ class User extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'email', 'password', 'mobile','mobile_verified_at','create_ip_at',
+        'userid', 'name', 'email', 'password', 'mobile','mobile_verified_at','create_ip_at',
         'last_login_at','last_login_ip_at','login_times','status','nickname','avatar', 'username', 'is_admin', 'level'
     ];
     public $fieldSearchable = [
@@ -66,8 +58,8 @@ class User extends BaseModel implements
 
     public function scopeOrg($query)
     {
-        return $query->leftjoin('core_organzation_user', 'core_users.user_id','=','core_organzation_user.user_id')
-        ->select('core_organzation_user.organzation_id','core_organzation_user.user_id','core_users.*')
+        return $query->leftjoin('core_organzation_user', 'core_users.userid','=','core_organzation_user.userid')
+        ->select('core_organzation_user.organzation_id','core_organzation_user.userid','core_users.*')
         ->where('core_organzation_user.organzation_id', auth()->guard('org')->oid());
     }
 
@@ -95,10 +87,20 @@ class User extends BaseModel implements
         parent::boot();
         static::creating(function ($model) {
             $model->create_ip_at = $model->create_ip_at ?? request()->ip();
-            $model->user_id = $model->user_id ?? self::getRandom('user_id', 8, true);
+            $model->userid = $model->userid ?? self::getRandom('userid', 8, true);
         });
     }
 
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 
     /**
      * 获取用户姓名
@@ -125,27 +127,27 @@ class User extends BaseModel implements
 
     public function socialite()
     {
-        return $this->hasMany('Modules\Core\Models\UserSocialite', 'user_id', 'id');
+        return $this->hasMany('Modules\Core\Models\UserSocialite', 'userid', 'id');
     }
 
     public function groups()
     {
-        return $this->morphedByMany('Modules\Core\Models\Group', 'model', 'group_user', 'user_id', 'group_id');
+        return $this->morphedByMany('Modules\Core\Models\Group', 'model', 'group_user', 'userid', 'group_id');
     }
 
     public function departments()
     {
-        return $this->belongsToMany('Modules\Core\Models\Department', 'core_department_user', 'user_id', 'department_id', 'user_id');
+        return $this->belongsToMany('Modules\Core\Models\Department', 'core_department_user', 'userid', 'department_id', 'userid');
     }
 
     public function organizations()
     {
-        return $this->belongsToMany('Modules\Core\Models\Organization', 'core_organzation_user', 'user_id', 'organzation_id', 'user_id', 'oid');
+        return $this->belongsToMany('Modules\Core\Models\Organization', 'core_organzation_user', 'userid', 'organzation_id', 'userid', 'oid');
     }
 
     public function address()
     {
-        return $this->hasMany('Modules\Core\Models\UserAddress', 'user_id', 'id');
+        return $this->hasMany('Modules\Core\Models\UserAddress', 'userid', 'id');
     }
 
     /**
@@ -184,7 +186,7 @@ class User extends BaseModel implements
         if (!$user) {
             $user = self::create($userData);
             $socialiteUser->create(array_merge($userData, [
-                'user_id' => $user->user_id,
+                'userid' => $user->userid,
                 'token' => isset($usinfo['token'])?$usinfo['token']:'',
                 'driver' => $driver,
                 'openid' => $openid,
@@ -227,9 +229,9 @@ class User extends BaseModel implements
         ];
     }
 
-    public static function logLogin($user_id = '')
+    public static function logLogin($userid = '')
     {
-        if($user_id || !auth()->guest()) {
+        if($userid || !auth()->guest()) {
             $model = self::find(Auth::user()->id);
             if($model) {
                 $model->update([

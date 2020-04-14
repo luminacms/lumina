@@ -34,12 +34,12 @@ class RolesController extends BaseController
      */
     public function attach(Request $request)
     {
-        $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
+        $request->validate(['role_id'=>'required', 'userids' =>'required']);
 
         try{
             $role = $this->model->find($request->get('role_id'));
-            foreach (explode(',', $request->get('user_ids')) as $_user_id) {
-                $_user = User::find($_user_id);
+            foreach (explode(',', $request->get('userids')) as $_userid) {
+                $_user = User::find($_userid);
                 $_user->assignRole($role);
             }
             return $this->toResponse([], 'success');
@@ -50,12 +50,12 @@ class RolesController extends BaseController
 
     public function detach(Request $request)
     {
-        $request->validate(['role_id'=>'required', 'user_ids' =>'required']);
+        $request->validate(['role_id'=>'required', 'userids' =>'required']);
 
         try{
             $role = $this->model->find($request->get('role_id'));
-            foreach (explode(',', $request->get('user_ids')) as $_user_id) {
-                $_user = User::find($_user_id);
+            foreach (explode(',', $request->get('userids')) as $_userid) {
+                $_user = User::find($_userid);
                 $_user->removeRole($role);
             }
             return $this->toResponse([], 'success');

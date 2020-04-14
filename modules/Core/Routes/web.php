@@ -10,7 +10,7 @@
 |
 */
 Route::get('/', 'CoreController@index');
-Route::view('/home', 'home');
+Route::view('home', 'home');
 
 // 授权
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -50,10 +50,10 @@ Route::get('/chart/dataset', 'ChartController@dataset')->name('chart.dataset');
 
 Route::view('/demo/{demo}', 'demo.index');
 
-Route::get('/dashboard/{oid}', 'CoreController@home')->name('dashboard')->middleware(['auth:org']);
+Route::get('/home/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org', 'verified']);
 Route::group(['prefix' =>'backend', 'as' => 'core.', 'middleware' => ['auth:org']], function(){
 
-    Route::get('/dashboard', 'CoreController@dashboard')->name('dashboard');
+    Route::get('/home', 'CoreController@dashboard')->name('dashboard');
 
     // 消息管理
     Route::get('/notification', 'NotificationController@index')->name('notification.index');
