@@ -73,7 +73,7 @@
       getComponentShot: function () {
         this.loading = true
         this.ema.fire('screenshot', document.querySelector(`[el="${this.elID}"]`), {}, (url) => {
-          console.log('componentShot', url)
+          //console.log('componentShot', url)
           this.form.image = url
           this.loading = false
         }, false)

@@ -51,28 +51,3 @@ function startApp () {
   }
 }
 startApp()
-
-function trackPVTime (from) {
-  if (trackPVTime.called) return
-  console.log(from)
-  var end = Date.now()
-  var start = window.loadingStartTime
-  var route = window.location.pathname.match(new RegExp(`(?:/${config.VIEW_NAME || 'view'})?/(\\w+)`))
-  if (route && route[1]) {
-    window.localStorage.setItem('ML_VIEW_TIME', route[1] + '|' + ((end - start) / 1000 | 0))
-  }
-  trackPVTime.called = 1
-}
-
-function sendPVTime () {
-  if (process.env.NODE_ENV !== 'production') return
-  var ML_VIEW_TIME = (window.localStorage.getItem('ML_VIEW_TIME') || '').split('|')
-  if (ML_VIEW_TIME && ML_VIEW_TIME.length == 2) {
-    ESlog.track({
-      app_id: 'tview',
-      page_id: ML_VIEW_TIME[0],
-      action: 'PV_TIME',
-      duration: +ML_VIEW_TIME[1] || 0,
-    }, 'no-fp')
-  }
-}

@@ -84,7 +84,7 @@
       window.viewImg = (imgs, index) => {
         this.$refs.imgViewer.open(imgs, index)
       }
-      console.log('app mounted')
+      //console.log('app mounted')
     },
     mounted: function () {
     },

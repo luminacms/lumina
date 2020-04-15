@@ -49,9 +49,9 @@
        */
       // function walkall (data) {
       //   for (const key in data) {
-      //     // console.log(key)
+      //     // //console.log(key)
       //     if (data.hasOwnProperty(key)) {
-      //       // console.log('own', key)
+      //       // //console.log('own', key)
       //       // if (/^__/g.test(key)) {
       //       //   // delete data[key]
       //       // }
@@ -79,7 +79,7 @@
           try {
             node = JSON.parse(content)
           } catch (error) {
-            console.log('error', error)
+            //console.log('error', error)
           }
           if (node) {
             node = modifyNodeId(node, Object.keys(window.$_nodecomponents || {}), this.idCache || [])

@@ -88,7 +88,6 @@
             throw new Error()
           }
         }).catch((e) => {
-          console.log(e)
           this.$message({
             type: 'error',
             message: '脚本添加失败'

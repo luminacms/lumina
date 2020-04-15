@@ -194,7 +194,7 @@
        * 事件调用的目标元素修改后。获取新的可以选择的事件列表
        */
       handleChange (value) {
-        console.log(value)
+        //console.log(value)
         let target = window.$_nodecomponents[this.selectedOptions[this.selectedOptions.length - 1]] || window.$vue
         this.dealMethods(target)
       },
@@ -375,7 +375,7 @@
       },
       paramsChange: function () {
         var content = this.joinContent()
-        console.log('update:content', JSON.stringify(content, null, 2))
+        //console.log('update:content', JSON.stringify(content, null, 2))
         this.$emit('update:content', content)
       },
       hasParams: function (methodName) {

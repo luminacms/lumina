@@ -11,7 +11,7 @@ async function track ({action, app_id, page_id, label}, noFingerprint) { // esli
   if (!noFingerprint) {
     try {
       arg.finger_print = await getFingerPrint().then((res) => {
-        console.log(res)
+        //console.log(res)
         return res
       })
     } catch (e) {

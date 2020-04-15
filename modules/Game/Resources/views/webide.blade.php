@@ -3,7 +3,7 @@
 @push('style')
     <style>
         #m-webide { min-width:320px; margin:0px auto 0 auto; background:white; border-radius:0px; padding:0px; overflow:hidden; }
-        #webide__tree { width:100%;float:left; border-right:1px solid silver; overflow:auto; padding:0px 0; }
+        #webide__tree { width:100%;float:left; border-right:1px solid silver; overflow-x:hidden; padding:0px 0; }
         #data textarea { margin:0; padding:0; height:100%; width:100%; border:0; background:white; display:block; line-height:18px; resize:none; }
         #data, #code { font: normal normal normal 12px/18px 'Consolas', monospace !important; }
         #j_page_tab .icon-nosave{display: inline-block; width: 8px;height: 8px;background-color: #f19805;border-radius: 100%;margin-right: 5px;}
@@ -58,7 +58,7 @@
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.19.3/min/vs/editor/editor.main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script>
-        layui.use('element', function(){
+        layui.use(['element', 'admin'], function(){
             var element = layui.element,
                 admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 pageMap = [],
@@ -69,7 +69,6 @@
                     $content = $("#m-webide").find("#webide__content"),
                     fileID;
                 var $tab = $("#j_page_tab");
-
 
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),"Accept": "application/json"}});
                 $("#j_submit").click(function(e){

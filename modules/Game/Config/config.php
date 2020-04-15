@@ -11,7 +11,7 @@ return [
             [
                 'id' => 1,
                 'name' => 'pageContainer',
-                'path' => url('assets/game/plugins/pageContainer/1.0.2/index.js'),
+                'path' => asset('assets/game/plugins/pageContainer/1.0.2/index.js'),
                 'version' => '1.0.2',
                 'desc' => '页面容器组件',
                 'visibilitylevel' => 1,

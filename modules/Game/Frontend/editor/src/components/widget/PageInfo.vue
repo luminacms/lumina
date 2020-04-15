@@ -63,14 +63,14 @@
         var urlInfo = common.parseURL(window.location.href)
         var temp = new Image()
         temp.src = `${Config.VIEW_PATH}` + urlInfo.params.uid
-        console.log('src', temp.src)
+        //console.log('src', temp.src)
         return 'https://www.kuaizhan.com/common/encode-png?large=true&data=' + encodeURIComponent(temp.src)
       },
       outUrl: function () {
         var urlInfo = common.parseURL(window.location.href)
         var temp = new Image()
         temp.src = `${Config.VIEW_PATH}` + urlInfo.params.uid
-        console.log('srcout', temp.src)
+        //console.log('srcout', temp.src)
         return temp.src
       },
     },

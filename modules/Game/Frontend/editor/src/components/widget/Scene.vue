@@ -217,7 +217,7 @@
       this.selectNodeStacked = window.$vue && window.$vue.stacked
 
       this.ema.bind('select.oneInfo', ({vm}) => {
-        console.log('scene', vm.nodeInfo)
+        //console.log('scene', vm.nodeInfo)
         this.selectNode = vm.nodeInfo
         this.selectNodeStacked = vm.stacked
       })
@@ -267,7 +267,7 @@
         var that = this
         await eachToPx($nodes)
         loading.close()
-        console.log('完成')
+        //console.log('完成')
         async function eachToPx ($nodes) {
           for (let $node of $nodes) await toPx($node)
         }
@@ -276,14 +276,14 @@
           $node.actived()
           await that.$nextTick()
           await sleep(100)
-          console.log($node.nodeInfo.id, 'actived')
+          //console.log($node.nodeInfo.id, 'actived')
           let $selector = $node.$refs.selector
           $selector.mousedown({stopPropagation: () => {}}, '')
           await that.$nextTick()
           await sleep(100)
-          console.log($node.nodeInfo.id, 'selector')
+          //console.log($node.nodeInfo.id, 'selector')
           let $children = $node.$children.filter(v => v.$options.name === 'node')
-          console.log('$children', $children.length)
+          //console.log('$children', $children.length)
           if ($children && $children.length) await eachToPx($children)
         }
       },
@@ -327,14 +327,14 @@
           }
         }
         walk([this.info])
-        console.log(parent, key)
+        //console.log(parent, key)
         if (!parent) return
         this.$delete(parent, key)
         return node
       },
       bindMove: function () {
         this.ema.bind('move.node', (moveId, targetNode, pos) => {
-          console.log('move.node is coming', this.info)
+          //console.log('move.node is coming', this.info)
           var moveNode = cloneDeep(this.deleteNode(moveId))
           if (pos) {
             moveNode.style.left = pos.left
@@ -363,7 +363,7 @@
           datas = datas || []
           for (let index = 0; index < datas.length; index++) {
             const element = datas[index]
-            console.log(id, element.id)
+            //console.log(id, element.id)
             if (element.id === id) {
               // element.lock = true
               self.$set(element, 'lock', flag)
@@ -376,19 +376,19 @@
               return node
             }
             if (element.child) {
-              console.log('going')
+              //console.log('going')
               walk(element.child)
             }
           }
         }
         walk([this.info])
-        console.log('node', node, 'parent', parent, 'key', key)
+        //console.log('node', node, 'parent', parent, 'key', key)
         // this.$set(this.i)
-        console.log('lockNode', this.info)
+        //console.log('lockNode', this.info)
       },
       bindLock: function () {
         this.ema.bind('lock.node', (moveId, flag) => {
-          console.log('lock.node is coming', this.info)
+          //console.log('lock.node is coming', this.info)
           this.lockNode(moveId, flag)
           // var moveNode = cloneDeep(this.lockNode(moveId))
         })

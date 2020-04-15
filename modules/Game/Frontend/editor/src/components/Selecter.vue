@@ -622,7 +622,7 @@
         // }
       },
       keydown: function (e) {
-        console.log('keydown', e, e.keyCode)
+        //console.log('keydown', e, e.keyCode)
       },
       changeStatus: function (newVal) {
         if (newVal == 'absolute' || newVal == 'fixed') {

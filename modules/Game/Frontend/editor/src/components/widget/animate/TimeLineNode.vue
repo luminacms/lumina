@@ -157,7 +157,7 @@
        * 显示右键菜单
        */
       showContextMenu: function (info, event) {
-        console.log(event)
+        //console.log(event)
         this.showAddFramePos = event.offsetX
       },
       addFrame (ev, info) {

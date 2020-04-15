@@ -67,7 +67,7 @@
           Vue.component(name, tempModule)
           fn()
         }).catch(() => {
-          console.log('Chunk loading failed', name)
+          //console.log('Chunk loading failed', name)
         })
       }
     }

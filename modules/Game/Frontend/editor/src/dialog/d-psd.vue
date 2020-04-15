@@ -89,7 +89,7 @@
     computed: {},
     methods: {
       uptoServer (file) {
-        console.log('file', file)
+        //console.log('file', file)
         var form = new window.FormData()
         form.append('file', file)
         return Server({
@@ -102,7 +102,7 @@
       async change (e) {
         const phoneSize = Number(this.$store.state.setting.phoneSize.width.split('px')[0])
         let file = this.$refs.input.files
-        console.log('file', file)
+        //console.log('file', file)
         if (!file[0]) return
         const size = (file[0].size / 1024 / 1024).toFixed(2)
         if (size > 30) return this.$alert('psd文件不能大于30M')
@@ -153,7 +153,7 @@
         if (!dataurl.startsWith('data:image/png;base64,')) {
           dataurl = 'data:image/png;bases64,' + dataurl
         }
-        console.log()
+        //console.log()
         var arr = dataurl.split(',')
         var mime = arr[0].match(/:(.*?);/)[1]
         var bstr = window.atob(arr[1])
@@ -171,7 +171,7 @@
         const url = '/ossupload/uploadFile'
         var form = new window.FormData()
         form.append('files', file)
-        console.log('form', form)
+        //console.log('form', form)
         return Server({
           url: url,
           method: 'post',
@@ -188,13 +188,13 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          console.log('确定')
+          //console.log('确定')
           const psdJson = {
             size: this.psdSize,
             name: this.psdName,
             // url: this.psdUrl
           }
-          console.log('this.content', this.content)
+          //console.log('this.content', this.content)
           this.changeNode(JSON.stringify(this.content), JSON.stringify(psdJson))
           this.close()
         }).catch(() => {})

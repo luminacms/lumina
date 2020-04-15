@@ -95,7 +95,7 @@
           return data.data || []
           // return [{id: 32, name: 32}, {id: 33, name: 33}, {id: 34, name: 34}, {id: 36, name: 36}, {id: 42, name: 42}, {id: 43, name: 42}, {id: 44, name: 42}, {id: 45, name: 42}]
         }).catch((e) => {
-          console.log(e)
+          //console.log(e)
           return []
         })
       },

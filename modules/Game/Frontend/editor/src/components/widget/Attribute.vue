@@ -265,7 +265,7 @@
         }
       },
       selectNode: function (newNode) {
-        console.log('selectNode', newNode)
+        //console.log('selectNode', newNode)
         if (newNode && newNode.lock) {
           this.forbidEdit = true
         } else {
@@ -429,7 +429,7 @@
           this.propsInfo = this.propsInfo.sort(function (a, b) {
             return a.order - b.order
           })
-          console.log('propsData', propsData)
+          //console.log('propsData', propsData)
         }
       },
       changeValue (tab, event) {

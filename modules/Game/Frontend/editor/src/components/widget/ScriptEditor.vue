@@ -298,7 +298,7 @@
         }
       },
       onTagSelect (tags) {
-        console.log(tags)
+        //console.log(tags)
         this.selectedTags = tags
         this.loadData(1, true)
       },
@@ -378,7 +378,6 @@
             throw new Error()
           }
         }).catch((e) => {
-          console.log(e)
           this.$message({
             type: 'error',
             message: '脚本保存失败'
@@ -410,7 +409,7 @@
           //   return
           // }
           // if (old.length == 0 && newVal.length == 0) return
-          console.log('load')
+          //console.log('load')
           if (this.info) {
             this.info.script = this.array
             this.ema.fire('component.reload', this.id)

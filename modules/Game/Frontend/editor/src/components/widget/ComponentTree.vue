@@ -95,7 +95,7 @@
         var parentNode = type === 'inner' ? dropNode : dropNode.parent
         var parentNodeInfo = parentNode.data || {}
         var draggingNodeInfo = draggingNode.data || {}
-        console.log(draggingNodeInfo.id, 'droped in', parentNodeInfo.id)
+        //console.log(draggingNodeInfo.id, 'droped in', parentNodeInfo.id)
         if (draggingNodeInfo.style && draggingNodeInfo.style.position === (parentNodeInfo.stack ? 'relative' : 'absolute')) {
           draggingNodeInfo.style = Object.assign({}, draggingNodeInfo.style, {
             position: parentNodeInfo.stack ? 'absolute' : 'relative',
@@ -106,7 +106,7 @@
         this.ema.fire('select.one', parentNode.data.id)
       },
       remove (node, data) {
-        console.log(node, data)
+        //console.log(node, data)
         this.ema.fire('move.node', data.id, null)
       },
       rename (node, data) {
@@ -132,7 +132,7 @@
         this.$delete(data, '_label')
       },
       onCheckChange (data, node) {
-        console.log('onCheckChange', data, node)
+        //console.log('onCheckChange', data, node)
         if (data.lock) {
           this.$message({type: 'warning', message: '已被锁定，请先解锁'})
         } else {
@@ -161,7 +161,7 @@
         this.ema.fire('hide.contextMenu')
       },
       lock: function (node, data, flag) {
-        console.log(node, data, 'ddd')
+        //console.log(node, data, 'ddd')
         // if (flag) {
         //   var $comtree = window.$comtree = this.$refs['tree']
         //   $comtree.setCurrentKey(this.rootNode.id)
@@ -170,7 +170,7 @@
         // this.ema.fire('node.copy', data)
       },
       lock2: function (node, data, flag) {
-        console.log(node, data, flag)
+        //console.log(node, data, flag)
         this.lockNode(data, flag)
       },
       lockNode: function (data) {
@@ -186,7 +186,7 @@
           datas = datas || []
           for (let index = 0; index < datas.length; index++) {
             const element = datas[index]
-            console.log(data.id, element.id)
+            //console.log(data.id, element.id)
             if (element.id === data.id) {
               element.lock = true
               if (element.child) {
@@ -200,7 +200,7 @@
         }
         walk([data])
         this.$set(this.info, data)
-        console.log('lockNode', data)
+        //console.log('lockNode', data)
       },
     },
     created () {
@@ -213,10 +213,10 @@
           // $comtree.setCurrentKey(this.rootNode.id)
           this.$message({type: 'warning', message: '已被锁定，请先解锁'})
         } else {
-          console.log('select.one 2', id, $comtree.getNode(id))
+          //console.log('select.one 2', id, $comtree.getNode(id))
           $comtree.setCurrentKey(id)
           this.currentNode = $comtree.getNode(id)
-          console.log('tree', this.currentNode)
+          //console.log('tree', this.currentNode)
         }
       })
       this.ema.bind('edit-type.change', type => {

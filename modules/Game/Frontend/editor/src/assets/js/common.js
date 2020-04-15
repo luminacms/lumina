@@ -89,7 +89,7 @@ function modifyNodeId(tree, idCache = [], exclude = [], key = 'id', childKey = '
 
 /**
  * 获取Dom节点相对于页面的位置 TOP LEFT
- * @param {DOM}} node 
+ * @param {DOM}} node
  */
 function getNodePosition(node) {
   var pos = node.getBoundingClientRect()
@@ -105,7 +105,7 @@ function getNodePosition(node) {
 }
 /**
  * 获取一个元素在忽略旋转后的相对页面的位置信息
- * @param {DOM}} el 
+ * @param {DOM}} el
  */
 function getNoRotateBoundingClientRect(el) {
   let innerWidth = window.innerWidth
@@ -135,8 +135,8 @@ function getNoRotateBoundingClientRect(el) {
 
 /**
  * 获取一个元素相对父元素的定位信息。如果该元素是fixed定位。获取的就是相对舞台的定位信息
- * @param {DOM} el 
- * @param {DOM} parent 
+ * @param {DOM} el
+ * @param {DOM} parent
  */
 function dimensionAnyTopx(el, parent) {
   if (!el || !parent) {
@@ -153,7 +153,7 @@ function dimensionAnyTopx(el, parent) {
   var isRoot = parent.getAttribute('id') == 'appWarp'
   if (isRoot || elPosition === 'fixed') parent = document.getElementById('stage')
   var [parentRect, rect] = [parent, el].map(el => getNoRotateBoundingClientRect(el))
-  console.log(parentRect, rect)
+  //console.log(parentRect, rect)
   var dimension = {
     left: null,
     top: null,
@@ -188,7 +188,7 @@ function dimensionAnyTopx(el, parent) {
       }
       break
   }
-  console.log(dimension)
+  //console.log(dimension)
   return dimension
 }
 

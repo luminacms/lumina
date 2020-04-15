@@ -9,8 +9,9 @@
 namespace Modules\Game\Http\Controllers\Interfaces;
 
 use Illuminate\Http\Request;
-use Modules\Core\Http\Controllers\BaseController;
 use Modules\Game\Models\GamePage;
+use Modules\Core\Http\Controllers\BaseController;
+use Modules\Game\Http\Resources\GamePageResource;
 use Modules\Game\Models\Repositories\GamePagegamePage;
 
 class GamePageController extends BaseController
@@ -77,7 +78,7 @@ class GamePageController extends BaseController
         $request->validate(['uid' => 'required']);
 
         $model = $this->gamePage->where(['uid' => $request->get('uid')])->first();
-        return $this->toResponse($model, 'success');
+        return $this->toResource($model, GamePageResource::class);
     }
 
     public function searchByName()
@@ -106,7 +107,7 @@ class GamePageController extends BaseController
      */
     public function save(Request $request)
     {
-        $page = GamePage::find($request->get('id'));
+        $page = GamePage::where('uid', $request->get('uid'))->first();
         $page->fill($request->all());
         $page->save();
 

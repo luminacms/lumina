@@ -263,7 +263,7 @@
     },
     methods: {
       onTabRemove (key) {
-        console.log('start', Date.now())
+        //console.log('start', Date.now())
         if (key === SEARCHRESULT) return this.closeFile(SEARCHRESULT)
         this.codes.map((item, index) => {
           if (item.key === key) {
@@ -271,7 +271,7 @@
             else this.closeFile(index)
           }
         })
-        console.log('end', Date.now())
+        //console.log('end', Date.now())
       },
       openFile (file, {comId, highlight}) {
         this.ema.fire('dock.panelActive', 'widgetCodePanel')

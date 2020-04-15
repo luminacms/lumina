@@ -259,7 +259,7 @@
       },
       install: function (item) {
         var node = item.content
-        if (!node) return console.log('empty combined com')
+        if (!node) return //console.log('empty combined com')
         if (!window.$vue) return this.$alert('请先选中页面内的组件，再为其添加子组件')
         window.$vue.copyChild(node, {isJson: 1, keepPos: 1})
         this.ema.fire('resource.use', item.id)
@@ -269,13 +269,13 @@
         return item.userId == uid
       },
       onTagSelect (tags) {
-        console.log(tags)
+        //console.log(tags)
         this.selectedTags = tags
         this.loadData(1, true)
       },
       remove (item) {
         var id = item.id
-        if (!id) return console.log('no id founded')
+        if (!id) return //console.log('no id founded')
         this.$confirm('确定要从组件库删除该组件吗？').then(() => {
           Server({
             url: 'editor/resources/delete',

@@ -19,6 +19,12 @@ Route::post('game/editor/pages/publiclist', function(){
 Route::post('game/component/useone', function(){
     return response()->json(test_resource(['id' => 11]));
 });
+Route::get('/game/statistics/report', function(){
+    return response()->json(test_resource());
+});
+Route::get('/game/upload/getTocken', function(){
+    return response()->json(test_resource());
+});
 
 
 Route::post('game/editor/pages/detail', 'GamePageController@detail');

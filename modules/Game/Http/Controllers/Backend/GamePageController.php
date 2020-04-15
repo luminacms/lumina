@@ -49,7 +49,7 @@ class GamePageController extends BaseController
     {
         $gamePage = collect();
         if($request->expectsJson()) {
-            $gamePage = $this->repository->paginate($request->get('limit', 15));
+            $gamePage = $this->repository->filter($request)->paginate($request->get('limit', 15));
             return $this->toCollection($gamePage, GamePageResource::class);
         }
         return view('game::backend.gamePage.index');

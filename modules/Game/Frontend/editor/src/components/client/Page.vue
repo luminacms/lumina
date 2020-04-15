@@ -45,7 +45,7 @@
             this.setViewPort(data.canvas && data.canvas.width)
             var content
             try {
-              content = JSON.parse(data.content)
+              content = JSON.parse(data.diy_content)
             } catch (error) {
             }
             this.nodeInfo = content
@@ -66,7 +66,7 @@
           data.historyid = historyid
         }
         if (!uid) {
-          console.log('缺少页面id')
+          //console.log('缺少页面id')
           return
         }
         fetch(`${this.Config.API_PATH}editor/pages/detail`, {
@@ -82,7 +82,7 @@
           var data = respond.data
           this.info = data
           var info = null
-          var content = this.info.diyconent
+          var content = this.info.diy_content
           try {
             info = JSON.parse(content)
           } catch (error) {

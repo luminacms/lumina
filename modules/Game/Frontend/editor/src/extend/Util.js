@@ -99,7 +99,7 @@ function useComponent (id) {
     }
   })
   .then(() => true)
-  .catch(console.log)
+  .catch()
 }
 
 function getNumber (style) {

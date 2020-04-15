@@ -4,11 +4,11 @@
       <template slot="ListContainer" v-if="isListContainer" slot-scope="listCell">
         <prenode :info="nodeChild[0]" :scope="listCell"></prenode>
       </template>
-      <template v-if="isPageContainer">
-        <prenode slot="PageContainer" :scope="scope" :info="item" v-for="item in nodeChild" :key="item.id"></prenode>
+      <template v-if="ispageContainer">
+        <prenode slot="pageContainer" :scope="scope" :info="item" v-for="item in nodeChild" :key="item.id"></prenode>
       </template>
     </component>
-    <template v-if="hasChild && !isListContainer && !isPageContainer">
+    <template v-if="hasChild && !isListContainer && !ispageContainer">
       <prenode v-for="item in nodeInfo.child" :key="item.id" :stacked='nodeInfo.stack' :scope="scope" :info="item"></prenode>
     </template>
   </div>
@@ -116,8 +116,8 @@
       isListContainer () {
         return this.nodeInfo && this.nodeInfo.type.indexOf('ListContainer') > -1
       },
-      isPageContainer () {
-        return this.nodeInfo && this.nodeInfo.type.indexOf('PageContainer') > -1
+      ispageContainer () {
+        return this.nodeInfo && this.nodeInfo.type.indexOf('pageContainer') > -1
       },
     },
     beforeDestroy: function () {

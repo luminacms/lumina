@@ -94,7 +94,7 @@
           },
           methods: {
             done: function (e, type) {
-              console.log('pos', e)
+              //console.log('pos', e)
               let cUrl = me.url.split('?')[0]
               if (type == 'circle') {
                 me.inUrl = cUrl + `?x-oss-process=image/rotate,${e.rotate}/crop,x_${parseInt(e.x)},y_${parseInt(e.y)},w_${parseInt(e.width)},h_${parseInt(e.height)}/circle,r_${parseInt(e.width / 2)}`

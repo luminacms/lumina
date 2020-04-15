@@ -22,8 +22,6 @@ export default {
             type,
             version
         })
-
-        console.log(C_KEY)
         if (component) return component
         let request, url
         if (!this.requestCache[C_KEY]) {
@@ -37,12 +35,10 @@ export default {
         }
         return await request.then(s => {
             component = window[C_KEY + 'index'] || window[C_KEY] || window[C_KEY.replace('@', '')]
-
-            console.log(component)
             this.componentCache[C_KEY] = component = component.default || component
             return component
         }).catch(h => {
-            console.log('加载脚本失败', url)
+            // //console.log('加载脚本失败', url)
             console.error(h)
         })
     },
@@ -71,7 +67,7 @@ export default {
             this.componentCache[C_KEY] = component = component.default || component
             return component
         }).catch(h => {
-            console.log('该组件不存在对应编辑器', type)
+            // //console.log('该组件不存在对应编辑器', type)
         })
     }
 }

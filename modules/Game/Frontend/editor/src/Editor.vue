@@ -139,8 +139,8 @@
             bindEvent: function() {
                 var me = this
                 // 监控内容变化。做持久化
-                this.$watch('nodeInfo', (diyconent) => {
-                    this.doSave(diyconent)
+                this.$watch('nodeInfo', (diy_content) => {
+                    this.doSave(diy_content)
                 }, {
                     deep: true
                 })
@@ -173,9 +173,9 @@
                     }
                 })
                 // 绑定替换页面模板信息
-                this.ema.bind('selectPageTemplate', (diyconent) => {
-                    if (diyconent) {
-                        Object.assign(this.nodeInfo, cloneDeep(diyconent))
+                this.ema.bind('selectPageTemplate', (diy_content) => {
+                    if (diy_content) {
+                        Object.assign(this.nodeInfo, cloneDeep(diy_content))
                     }
                 })
                 // 保存页面
@@ -212,18 +212,16 @@
                 })
                 // psd解析
                 this.ema.bind('pageInfo.psd', (fast) => {
-                    console.log('pageInfo.psd', this.nodeInfo)
                     this.openDialog({
                         name: 'd-psd',
                         data: {
                             title: 'psd上传'
                         },
                         methods: {
-                            changeNode: function(diyconent, psdString) {
-                                console.log('changeNode')
+                            changeNode: function(diy_content, psdString) {
                                 var node = null
                                 try {
-                                    node = JSON.parse(diyconent)
+                                    node = JSON.parse(diy_content)
                                 } catch (error) {
                                     console.log('error', error)
                                 }
@@ -233,10 +231,8 @@
                                     psdList.push(JSON.parse(psdString))
                                     tempNode.psdList = psdList
                                     tempNode.child = tempNode.child.concat(node)
-                                    console.log('tempNode', tempNode)
                                     let n = common.modifyNodeId(tempNode, Object.keys(window.$_nodecomponents || {}), [])
                                     me.nodeInfo = JSON.parse(JSON.stringify(n))
-                                    console.log(me.nodeInfo)
                                     me.ema.fire('nodeInfo.change')
                                 } else {}
                             }
@@ -246,8 +242,8 @@
                 // 复制事件
                 window.Clipboard = Clipboard
                 new Clipboard(this.$refs['clipboard'])
-                this.ema.bind('clipboard.copy', (diyconent, msg) => {
-                    this.clipboardContent = String(diyconent)
+                this.ema.bind('clipboard.copy', (diy_content, msg) => {
+                    this.clipboardContent = String(diy_content)
                     window.setTimeout(() => {
                         this.$refs['clipboard'].click()
                         this.$message({
@@ -343,7 +339,7 @@
                                 id
                             }
                         })
-                        .then(console.log)
+                        .then()
                         .catch(console.error)
                 })
             },
@@ -385,7 +381,7 @@
                     this.pageInfo = data.data
                     var info = null
                     try {
-                        info = JSON.parse(this.pageInfo.diyContent) || emptyPage
+                        info = JSON.parse(this.pageInfo.diy_content) || emptyPage
                     } catch (error) {}
                     this.$store.dispatch('setPageType', this.pageInfo.type)
                     if (info.canvas && info.canvas.width) this.$store.dispatch('SettingChange', {
@@ -401,20 +397,19 @@
              * 持久化数据并更新操作历史数据
              * @augments String content 内容
              */
-            doSave: function(diyContent, immediately) {
+            doSave: function(diy_content, immediately) {
                 var me = this
                 if (this.timer) {
                     window.clearTimeout(this.timer)
                 }
                 if (immediately) {
-                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diyContent))
+                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
                 } else {
                     this.timer = window.setTimeout(() => {
-                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diyContent))
-                        console.log('newChage', diyContent)
+                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
                         // 被回退或者前进操作的时候不添加历史记录
                         if (!me.lock) {
-                            HistoryCache.add(diyContent) // 历史记录本身来处理数据的序列化和反序列化
+                            HistoryCache.add(diy_content) // 历史记录本身来处理数据的序列化和反序列化
                         }
                         this.lock = false
                     }, 500)
@@ -426,8 +421,7 @@
             savePage() {
                 if (this.demoMode) return this.$alert('您处在demo模式下，不能保存数据哦')
                 var info = Object.assign({}, this.pageInfo)
-                info.diyconent = window.localStorage.getItem(this.STORAGE_KEY)
-                console.log(info)
+                info.diy_content = window.localStorage.getItem(this.STORAGE_KEY)
                 Server({
                     url: 'editor/pages/save',
                     method: 'post', // default
@@ -449,7 +443,7 @@
                         message: '保存失败'
                     })
                 })
-                this.savePagePreviewImage()
+                // this.savePagePreviewImage()
             },
             savePagePreviewImage() {
                 var urlInfo = common.parseURL(window.location.href)
@@ -457,9 +451,8 @@
                     height: 486,
                     fileName: urlInfo.params.key + '.jpg'
                 }, (src) => {
-                    console.log('screenshot', src)
                     var info = Object.assign({}, this.pageInfo)
-                    info.diyconent = window.localStorage.getItem(this.STORAGE_KEY)
+                    info.diy_content = window.localStorage.getItem(this.STORAGE_KEY)
                     info.image = src
                     Server({
                         url: 'editor/pages/save',
@@ -484,7 +477,7 @@
                         type: this.pageInfo.type,
                         id: this.pageInfo.id,
                         projectId: this.pageInfo.projectId,
-                        diyconent: window.localStorage.getItem(this.STORAGE_KEY)
+                        diy_content: window.localStorage.getItem(this.STORAGE_KEY)
                     }
                 }).then(({
                     data

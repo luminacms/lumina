@@ -142,7 +142,7 @@
           movable: true,
           dragMode: this.dragMode,
           ready: function () {
-            console.log('ready')
+            //console.log('ready')
             var cropper = this.cropper
             var containerData = cropper.getContainerData()
             var cropBoxData = cropper.getCropBoxData()
@@ -157,7 +157,7 @@
             }
           },
           crop (e) {
-            // console.log(e.detail)
+            // //console.log(e.detail)
             // let position = {'x': e.detail.x, 'y': e.detail.y, 'w': e.detail.width, 'h': e.detail.height}
             self.cropData = e.detail
           },
@@ -210,7 +210,7 @@
       },
       getImageData () {
         let data = this.cropperInstance.getImageData()
-        console.log(data)
+        //console.log(data)
       },
       save () {
         this.done(this.cropData, this.cutStyle)

@@ -103,7 +103,7 @@ UploadImage.prototype.send = function (name) {
       'success_action_status': '200',
       'signature': configUplaod.signature
     }
-    console.log('newMultipartParams', newMultipartParams)
+    //console.log('newMultipartParams', newMultipartParams)
     this.uploader.setOption({
       'url': configUplaod.host,
       'multipart_params': newMultipartParams

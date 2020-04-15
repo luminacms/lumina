@@ -212,12 +212,12 @@
         })
         for (const key1 in this.info) {
           if (!styles[key1]) {
-            console.log('删除没用的元素', key1)
+            //console.log('删除没用的元素', key1)
             this.$delete(this.info, key1)
           }
         }
         for (const key in styles) {
-          console.log(key, styles[key])
+          //console.log(key, styles[key])
           this.$set(this.info, key, styles[key])
         }
       }

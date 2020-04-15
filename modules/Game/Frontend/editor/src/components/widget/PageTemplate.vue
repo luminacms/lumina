@@ -242,7 +242,7 @@
         })
       },
       onTagSelect (tags) {
-        console.log(tags)
+        //console.log(tags)
         this.selectedTags = tags
         this.loadData(1, true)
       },
