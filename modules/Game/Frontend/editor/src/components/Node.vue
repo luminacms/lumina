@@ -118,7 +118,7 @@
       'nodeInfo.type': function (newVal, oldVal) {
         this.nodeInfo.props = {}
         if (this.nodeInfo.type !== 'node') {
-          if (this.nodeInfo.type == 'truckpageContainer') {
+          if (this.nodeInfo.type == 'pageContainer') {
             this.nodeInfo.style.width = '100%'
             this.nodeInfo.style.height = '100%'
             this.nodeInfo.style.left = '0'
@@ -334,7 +334,7 @@
             // 对page容器特殊处理
             var parent = this.$parent
             if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('pageContainer') != -1) {
-              this.ema.fire('select.truckpageContainer', id)
+              this.ema.fire('select.pageContainer', id)
             }
           }
         })
@@ -376,7 +376,7 @@
       bindpageContainerSelect: function () {
         var parent = this.$parent
         if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('pageContainer') != -1) {
-          this.ema.bind('select.truckpageContainer', id => {
+          this.ema.bind('select.pageContainer', id => {
             if (id != this.nodeInfo.id) {
               this.nodeInfo.visible = false
             } else {

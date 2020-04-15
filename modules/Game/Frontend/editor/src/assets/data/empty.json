@@ -1,6 +1,6 @@
 {
     "id": "root",
-    "type": "truck/emptyContainer",
+    "type": "emptyContainer",
     "visible": true,
     "style": {
       "background-color": "rgba(255,255,255,1)",
@@ -11,11 +11,11 @@
     },
     "props": {},
     "child": [{
-      "id": "truck/richtextj0n4g65h",
-      "type": "truck/richtext",
+      "id": "richtextj0n4g65h",
+      "type": "richtext",
       "label": "初次见面，请移除我",
       "visible": true,
-      "path": "https://ymm-maliang.oss-cn-hangzhou.aliyuncs.com/truck/richtext/1.1.5/index.js",
+      "path": "/assets/game/plugins/richtext/1.1.5/index.js",
       "style": {
         "position": "absolute",
         "width": "219px",
@@ -33,12 +33,12 @@
       "script": [],
       "version": "1.1.5",
       "events": [],
-      "url": "https://ymm-maliang.oss-cn-hangzhou.aliyuncs.com/truck/richtext/1.1.5/index.js"
+      "url": "/assets/game/plugins/richtext/1.1.5/index.js"
     }],
     "script": [],
     "animate": [],
     "version": "1.0.2",
-    "path": "https://ymm-maliang.oss-cn-hangzhou.aliyuncs.com/truck/emptyContainer/1.0.2/index.js",
+    "path": "/assets/game/plugins/emptyContainer/1.0.2/index.js",
     "events": [],
     "label": "root"
   }
