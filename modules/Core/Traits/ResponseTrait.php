@@ -191,25 +191,4 @@ trait ResponseTrait {
         $_html .= '</tbody></table></div></div>';
         return $_html;
     }
-
-    /**
-     * org登陆逻辑
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function toLoginWithOrg()
-    {
-        $_user = auth()->user();
-        session()->forget('__org');
-        // oid参数不存在，管理员取任意oid，普通管理员取自身所在组织
-
-        $_oid = $_user->hasRole('SUPER')?Organization::first()->oid:$_user->organizations[0]->oid;
-        $org = Organization::where('oid', $_oid)->first();
-        session(['__org' => $org]);
-        session()->save();
-
-        return \request()->wantsJson()?$this->toResponse([
-            'token' => JWTAuth::fromUser($_user),
-            'expired_at' => now()->addMinutes(Auth::guard('api')->factory()->getTTL())->timestamp
-        ]):redirect()->route('dashboard', $_oid);
-    }
 }
