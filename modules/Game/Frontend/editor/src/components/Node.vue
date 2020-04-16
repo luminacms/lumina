@@ -116,9 +116,10 @@
         }
       },
       'nodeInfo.type': function (newVal, oldVal) {
+          console.log(this.nodeInfo)
         this.nodeInfo.props = {}
         if (this.nodeInfo.type !== 'node') {
-          if (this.nodeInfo.type == 'pageContainer') {
+          if (this.nodeInfo.type == 'truckPageContainer') {
             this.nodeInfo.style.width = '100%'
             this.nodeInfo.style.height = '100%'
             this.nodeInfo.style.left = '0'
@@ -204,7 +205,7 @@
       this.bindSelectOne()
       this.bindCopy()
       this.bindDrag()
-      this.bindpageContainerSelect()
+      this.bindPageContainerSelect()
       this.bindRunAnimation()
       this.bindReload()
       this.registerNodeToGlobal()
@@ -319,7 +320,7 @@
           if (id != this.nodeInfo.id) {
             this.isActive = false
           } else {
-            // console.log('select.one 1', this.nodeInfo)
+            console.log('select.one 1', this.nodeInfo)
             if (!keepContextMenu || keepContextMenu instanceof window.Event) this.ema.fire('hide.contextMenu') // 隐藏已有菜单
             this.isActive = true
             // 把组件里面的参数设置到数据里面
@@ -333,8 +334,8 @@
             }, 200)
             // 对page容器特殊处理
             var parent = this.$parent
-            if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('pageContainer') != -1) {
-              this.ema.fire('select.pageContainer', id)
+            if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('PageContainer') != -1) {
+              this.ema.fire('select.truckPageContainer', id)
             }
           }
         })
@@ -373,10 +374,10 @@
       /**
        * 对page容器绑定，选择page下面的直接孩子的时候，其他孩子隐藏掉
        */
-      bindpageContainerSelect: function () {
+      bindPageContainerSelect: function () {
         var parent = this.$parent
-        if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('pageContainer') != -1) {
-          this.ema.bind('select.pageContainer', id => {
+        if (parent && parent.nodeInfo && parent.nodeInfo.type.indexOf('PageContainer') != -1) {
+          this.ema.bind('select.truckPageContainer', id => {
             if (id != this.nodeInfo.id) {
               this.nodeInfo.visible = false
             } else {
@@ -477,7 +478,7 @@
        */
       actived: function (keepContextMenu) {
         // 通知所有节点被选中的是谁
-        // console.log('actived....', keepContextMenu, this.nodeInfo)
+        console.log('actived....', keepContextMenu, this.nodeInfo)
         if (this.nodeInfo.lock) {
           this.$message({type: 'warning', message: '已被锁定，请先解锁'})
         } else {

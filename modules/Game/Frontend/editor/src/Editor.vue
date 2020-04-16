@@ -139,8 +139,8 @@
             bindEvent: function() {
                 var me = this
                 // 监控内容变化。做持久化
-                this.$watch('nodeInfo', (diy_content) => {
-                    this.doSave(diy_content)
+                this.$watch('nodeInfo', (content) => {
+                    this.doSave(content)
                 }, {
                     deep: true
                 })
@@ -173,9 +173,9 @@
                     }
                 })
                 // 绑定替换页面模板信息
-                this.ema.bind('selectPageTemplate', (diy_content) => {
-                    if (diy_content) {
-                        Object.assign(this.nodeInfo, cloneDeep(diy_content))
+                this.ema.bind('selectPageTemplate', (content) => {
+                    if (content) {
+                        Object.assign(this.nodeInfo, cloneDeep(content))
                     }
                 })
                 // 保存页面
@@ -218,10 +218,10 @@
                             title: 'psd上传'
                         },
                         methods: {
-                            changeNode: function(diy_content, psdString) {
+                            changeNode: function(content, psdString) {
                                 var node = null
                                 try {
-                                    node = JSON.parse(diy_content)
+                                    node = JSON.parse(content)
                                 } catch (error) {
                                     console.log('error', error)
                                 }
@@ -242,8 +242,8 @@
                 // 复制事件
                 window.Clipboard = Clipboard
                 new Clipboard(this.$refs['clipboard'])
-                this.ema.bind('clipboard.copy', (diy_content, msg) => {
-                    this.clipboardContent = String(diy_content)
+                this.ema.bind('clipboard.copy', (content, msg) => {
+                    this.clipboardContent = String(content)
                     window.setTimeout(() => {
                         this.$refs['clipboard'].click()
                         this.$message({
@@ -397,19 +397,19 @@
              * 持久化数据并更新操作历史数据
              * @augments String content 内容
              */
-            doSave: function(diy_content, immediately) {
+            doSave: function(content, immediately) {
                 var me = this
                 if (this.timer) {
                     window.clearTimeout(this.timer)
                 }
                 if (immediately) {
-                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
+                    window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(content))
                 } else {
                     this.timer = window.setTimeout(() => {
-                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(diy_content))
+                        window.localStorage.setItem(me.STORAGE_KEY, JSON.stringify(content))
                         // 被回退或者前进操作的时候不添加历史记录
                         if (!me.lock) {
-                            HistoryCache.add(diy_content) // 历史记录本身来处理数据的序列化和反序列化
+                            HistoryCache.add(content) // 历史记录本身来处理数据的序列化和反序列化
                         }
                         this.lock = false
                     }, 500)

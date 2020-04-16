@@ -80,7 +80,7 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
         '/interface': {
-            target: 'http://192.168.50.100:8000',
+            target: 'http://127.0.0.1:8000',
             changeOrigin: true
         }
     }
