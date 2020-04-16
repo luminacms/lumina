@@ -86,7 +86,10 @@ class AuthController extends BaseController
         }
 
         if ($this->attemptLogin($this->request)) {
-            return $this->toLoginWithOrg();
+            return \request()->expectsJson()?$this->toResponse([
+                'token' => JWTAuth::fromUser(auth()->user()),
+                'expired_at' => now()->addMinutes(Auth::guard('api')->factory()->getTTL())->timestamp
+            ]):redirect()->route('dashboard');
         }
         return $this->sendFailedLoginResponse($this->request);
     }
