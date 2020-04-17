@@ -23,6 +23,7 @@
     <script>
         layui.use(['table', 'element'], function(){
             var table = layui.table,
+                admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 element = layui.element;
 
             table.render({
@@ -52,7 +53,7 @@
                 var checked = table.checkStatus('data_usersocialite_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('core.user-socialites.create') }}', '新增数据')
+                    admin.openTabsPage('{{ route('core.user-socialites.create') }}', '新增数据')
                     return true;
                 }
 
@@ -64,7 +65,7 @@
 
                     if(obj.event === 'delete') {
                         layer.confirm('真的删除行么', function(index){
-                            parent.layui.admin.request.post('{{ route('core.user-socialites.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
+                            admin.request.post('{{ route('core.user-socialites.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('删除成功');
                                 table.reload('data_usersocialite_table')
                             })
@@ -72,7 +73,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('core.user-socialites.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
+                        admin.openTabsPage('{{route('core.user-socialites.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
                         return true;
                     }
                 }

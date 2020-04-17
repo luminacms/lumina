@@ -31,7 +31,7 @@
         layui.use(['table', 'element', 'jstree'], function(){
             var table = layui.table,
                 $ = layui.jquery,
-                admin = layui.admin,
+                admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 jstree = layui.jstree,
                 element = layui.element;
 
@@ -46,7 +46,7 @@
                 var checked = table.checkStatus('department_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('core.departments.create') }}', '新增数据')
+                    admin.openTabsPage('{{ route('core.departments.create') }}', '新增数据')
                     return true;
                 }
 
@@ -60,7 +60,7 @@
 
                     if(obj.event === 'delete') {
                         layer.confirm('真的删除行么', function(index){
-                            parent.layui.admin.request.post('{{ route('core.departments.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
+                            admin.request.post('{{ route('core.departments.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('删除成功');
                                 table.reload('data_qlpost_table')
                             })
@@ -69,7 +69,7 @@
                         });
                     }else if(obj.event === 'update') {
                         console.log(222)
-                        parent.layui.admin.openTabsPage('{{route('core.departments.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
+                        admin.openTabsPage('{{route('core.departments.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

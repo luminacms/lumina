@@ -62,6 +62,7 @@
         layui.use(['table', 'jstree'], function(){
             var table = layui.table,
                 jstree = layui.jstree,
+                admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 $department_tree = $("#depart_tree");
 
             table.render({
@@ -82,7 +83,7 @@
                 var checked = table.checkStatus('data_permission_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('core.permission.create') }}', '新增数据')
+                    admin.openTabsPage('{{ route('core.permission.create') }}', '新增数据')
                     return true;
                 }
 

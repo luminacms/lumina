@@ -37,7 +37,7 @@
     <script>
         layui.use(['table', 'element', 'jstree', 'pickerUser', 'admin'], function(){
             var table = layui.table,
-                admin = layui.admin,
+                admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 jstree = layui.jstree,
                 pickerUser = layui.pickerUser,
                 element = layui.element;
@@ -77,7 +77,7 @@
                 var checked = table.checkStatus('user_depart_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openDrawer('{{ route('core.users.create') }}', '新增数据')
+                    admin.openDrawer('{{ route('core.users.create') }}', '新增数据')
                     return true;
                 }
 
@@ -89,15 +89,15 @@
 
                     if(obj.event === 'delete') {
                         layer.confirm('真的删除行么', function(index){
-                            parent.layui.admin.request.post('{{ route('core.users.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
+                            admin.request.post('{{ route('core.users.destroy', '_id_') }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('删除成功');
-                                table.reload('data_qlpost_table')
+                                table.reload('user_depart_table')
                             })
 
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('core.users.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
+                        admin.openDrawer('{{route('core.users.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
                         return true;
                     }
                 }
@@ -123,7 +123,7 @@
             table.render({
                 elem: '#user_role_table',
                 url: '{{ URL::full() }}',
-                where: {'orderBy': 'created_at', 'sortedBy': 'desc', 'role_id': ''},
+                where: {'orderBy': 'created_at', 'sortedBy': 'desc', 'role_id': '-1'},
                 page: true,
                 canSearch: true,
                 height: 'full-100',
