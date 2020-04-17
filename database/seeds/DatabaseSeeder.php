@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $_user = User::firstOrCreate(['email' => 'jorycn@163.com'], [
             'name' => 'Jory',
             'userid' => 'jory',
+            'email_verified_at' => now(),
             'password' => Hash::make('123456')
         ]);
         $_user->assignRole(1);

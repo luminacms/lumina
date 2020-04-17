@@ -44,7 +44,7 @@ class SubMenu extends Component
                                 @if(isset($item['uri']))
                                     <a lay-href="{{ isset($item['uri'])?$item['uri']:'javascript:;' }}">{{ $item['name'] }}</a>
                                 @elseif(isset($item['url']))
-                                    <a href="{{ isset($item['url'])?$item['url']:'javascript:;' }}">{{ $item['name'] }}</a>
+                                    <a href="{{ isset($item['url'])?$item['url']:'javascript:;' }}" class="block">{{ $item['name'] }}</a>
                                 @endif
                             </li>
                         @endif

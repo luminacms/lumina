@@ -3,8 +3,8 @@
 @section('content')
     <x-submenu :items="
         [
-            ['name' => '基本资料', 'uri' => route('core.user.profile'),'on'=>true ],
-            ['name' => '修改密码', 'uri' => route('core.user.resetpasswd') ],
+            ['name' => '基本资料', 'url' => route('core.user.profile'),'on'=>true],
+            ['name' => '修改密码', 'url' => route('core.user.resetpasswd')],
        ]" />
 
     <div class="layui-card">

@@ -3,9 +3,10 @@
 @section('content')
     <x-submenu :items="
         [
-            ['name' => '基本资料', 'uri' => route('core.user.profile') ],
-            ['name' => '修改密码', 'uri' => route('core.user.resetpasswd'),'on'=>true ],
+            ['name' => '基本资料', 'url' => route('core.user.profile') ],
+            ['name' => '修改密码', 'url' => route('core.user.resetpasswd'),'on'=>true ],
        ]" />
+
     <div class="layui-card">
         <div class="layui-card-body">
             <form class="layui-form" id="layuiadmin-form-useradmin" method="post" actio="{{ route('core.user.resetpasswd') }}">
