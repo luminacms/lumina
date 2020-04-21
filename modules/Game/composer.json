@@ -1,0 +1,27 @@
+{
+    "name": "wdcms/game-module",
+    "type": "laravel-module",
+    "description": "wdcms 游戏引擎",
+    "keywords": ["wdcms","laravel","game"],
+    "authors": [
+        {
+            "name": "Jory",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Game\\Providers\\GameServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Game\\": ""
+        }
+    }
+}
