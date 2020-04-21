@@ -4,7 +4,7 @@
     <x-submenu :items="[
         ['name' => '列表管理', 'uri' => route('coupon.coupon-code.index')]
     ]" />
-    
+
     <table class="layui-hide" id="data_couponcode_table" lay-filter="data_couponcode_table"></table>
 @endsection
 
@@ -26,7 +26,10 @@
                 toolbar: 'default',
                 height: 'full-100',
                 cellMinWidth: 80,
-                cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true"},{"field":"coupon_id","title":"coupon_id"},{"field":"code","title":"code"},{"field":"status","title":"status"},{"field":"owner_by","title":"owner_by"},{"field":"received_at","title":"received_at"},{"field":"used_at","title":"used_at"},{"field":"expired_at","title":"expired_at"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
+                cols: [[
+                    {"type":"checkbox","fixed":"left"},
+                    {"field":"code","title":"code",width:350},
+                    {"field":"status","title":"status"},{"field":"owner_by","title":"owner_by"},{"field":"received_at","title":"received_at"},{"field":"used_at","title":"used_at"},{"field":"expired_at","title":"expired_at"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
             });
 
             //监听行工具事件

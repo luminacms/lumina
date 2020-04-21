@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Coupon\Models\CouponCode;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +17,6 @@ Route::group(['prefix' => '/', 'as' => 'coupon.','middleware' => 'auth:org'], fu
 
     Route::resource('coupon', 'CouponController');
     Route::resource('coupon-code', 'CouponCodeController');
-
-
 
 });
 

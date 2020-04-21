@@ -31,6 +31,7 @@ class CreateCouponCodesTable extends Migration
 
             $table->timestamps();
 
+            $table->createby();
             $table->index('code');
 		});
 	}

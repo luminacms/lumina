@@ -3,6 +3,7 @@
 namespace Modules\Coupon\Models;
 
 use Modules\Core\Models\BaseModel;
+use Modules\Core\Traits\HasCreateBy;
 
 /**
  * Class CouponCode.
@@ -11,6 +12,8 @@ use Modules\Core\Models\BaseModel;
  */
 class CouponCode extends BaseModel
 {
+    use HasCreateBy;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +28,27 @@ class CouponCode extends BaseModel
      *
      * @var array
      */
-    protected $fieldSearchable = [];
+    protected $fieldSearchable = ['code' => 'like'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->code = self::getUuid('code', 32);
+        });
+    }
+
+    public function ownerBy()
+    {
+        return $this->hasOne('Modules\Core\Models\User', 'owner_by', 'userid')->withDefault();
+    }
+
+
+    public static function genCode($coupon_id, $num)
+    {
+
+
+    }
 
 }
