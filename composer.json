@@ -19,8 +19,7 @@
         "laravel/framework": "^7.3",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
-        "league/commonmark-ext-table": "^2.1",
+        "league/commonmark": "^1.4",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.1",
         "nwidart/laravel-modules": "^6.2",
@@ -28,10 +27,10 @@
         "spatie/laravel-permission": "^3.11",
         "tymon/jwt-auth": "^1.0",
         "xbhub/laravel-filter": "^2.0",
-        "xbhub/laravel-socialite": "^2.0",
-        "xbhub/laravel-xgee": "^7.1"
+        "xbhub/laravel-socialite": "^2.0"
     },
     "require-dev": {
+        "xbhub/laravel-xgee": "dev-master",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "joshbrw/laravel-module-installer": "^0.1.4",

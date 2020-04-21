@@ -40,7 +40,7 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping
             $row->id,
             $row->order_id,
             $row->getModel($row->model_type, $row->model_id)->title,
-            PayTransaction::getStatus()[$row->status],
+            PayTransaction::$statusMap[$row->status],
             $row->price,
             $row->payed_at,
             $row->created_at,

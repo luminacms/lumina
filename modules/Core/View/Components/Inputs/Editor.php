@@ -20,12 +20,12 @@ class Editor extends Component
      *
      * @return void
      */
-    public function __construct($name, $label = null, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'text', $verify = null, $value = null)
     {
         $this->name = $name;
         $this->type = $type;
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
+
         $this->value = $value ?? old($name);
 
         $this->iptkey = Str::random(6);
@@ -38,7 +38,7 @@ class Editor extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return  <<<'blade'
         <textarea name="{{$name}}" id="{{$iptkey}}" class="layui-textarea" style="min-height: 350px;">{{$value}}</textarea>
         <script>
             layui.use(['admin', 'wangEditor'], function(){
@@ -52,7 +52,6 @@ class Editor extends Component
             })
         </script>
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

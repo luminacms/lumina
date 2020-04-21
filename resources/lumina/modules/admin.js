@@ -354,16 +354,14 @@ layui.extend({
         })
     }
     // Drawer 组件
-    Admin.openDrawer = function(content, title, shadeClose, option){
+    Admin.openDrawer = function(content, title, option){
         var frame = parent === self ? self : parent;
-        var _shadeClose = shadeClose || false;
         var type = content.search(/^((https|http)?:\/\/)[^\s]+/) > -1 ? 2 : 1;
         return frame.layer.open($.extend({
             type: type,
             id: "lumina_drawer_right",
             anim: -1,
             title: title,
-            shadeClose: _shadeClose,
             closeBtn: 1,
             offset: "r",
             shade: .1,

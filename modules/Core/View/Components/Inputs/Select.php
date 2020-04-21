@@ -29,7 +29,7 @@ class Select extends Component
         $this->type = $type;
         $this->options = array_merge(['' => '----'.__('main.place_select').'----'], $options);
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
+
         $this->value = $value ?? old($name);
         $this->search = $search;
         $this->optionHtml = $optionHtml;
@@ -44,7 +44,7 @@ class Select extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return  <<<'blade'
             <select id="{{$iptkey}}"
                 name="{{$name}}"
                 @if($search)lay-search @endif
@@ -58,7 +58,6 @@ class Select extends Component
                 @endif
             </select>
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

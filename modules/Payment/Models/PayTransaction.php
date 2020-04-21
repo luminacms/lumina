@@ -38,18 +38,16 @@ class PayTransaction extends BaseModel
     /**
      * @return array
      */
-    public static function getStatus(){
-        return [
-            self::STATUS_NOPAY => '未支付',
-            self::STATUS_SUCCESS => '支付成功',
-            self::STATUS_FAIL => '支付失败',
-            self::STATUS_REFUND => '转入退款',
-            self::STATUS_CLOSED => '支付关闭',
-            self::STATUS_REVOKED => '支付撤销',
-            self::STATUS_PAYERROR => '支付错误',
-            self::STATUS_FINISHED => '支付完结'
-        ];
-    }
+    public static  $statusMap = [
+        self::STATUS_NOPAY => '未支付',
+        self::STATUS_SUCCESS => '支付成功',
+        self::STATUS_FAIL => '支付失败',
+        self::STATUS_REFUND => '转入退款',
+        self::STATUS_CLOSED => '支付关闭',
+        self::STATUS_REVOKED => '支付撤销',
+        self::STATUS_PAYERROR => '支付错误',
+        self::STATUS_FINISHED => '支付完结'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -156,9 +154,9 @@ class PayTransaction extends BaseModel
         try{
             $_driver = $this->pay_driver;
             $sync = Pay::$_driver();
-    
+
             $find = $sync->find(['out_trade_no' => $this->transaction_id]);
-    
+
             if($find['trade_status'] == 'TRADE_SUCCESS') {
                 return self::updateTransaction($this->transaction_id, $find['trade_status'], [
                     'transaction_code' => $find['trade_no'] ?? '',

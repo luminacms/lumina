@@ -22,13 +22,12 @@ class Checkbox extends Component
      *
      * @return void
      */
-    public function __construct($name, $options, $label = null, $type = 'text', $verify = null, $value = null, $selected = null)
+    public function __construct($name, $options, $type = 'text', $verify = null, $value = null, $selected = null)
     {
         $this->name = $name;
         $this->type = $type;
         $this->options = $options ?? [];
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
         $this->value = $value ?? old($name);
         $this->selected = $selected;
 
@@ -42,7 +41,7 @@ class Checkbox extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return <<<'blade'
             @foreach($options as $_k=>$_opt)
             <input id="{{$iptkey}}" type="checkbox"
                 name="{{$name}}"
@@ -51,7 +50,6 @@ class Checkbox extends Component
                 value="{{$_k}}" />
             @endforeach
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

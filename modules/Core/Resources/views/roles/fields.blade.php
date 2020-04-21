@@ -1,6 +1,14 @@
+<x-formItem label="name">
 <x-input name="name" :value="$role->name??''"/>
+</x-formItem>
+
+<x-formItem label="label">
 <x-input name="label" :value="$role->label??''"/>
+</x-formItem>
+
+<x-formItem label="guard_name">
 <x-input.select name="guard_name" required :options="['web', 'org']" :value="$permission->guard_name??''" />
+</x-formItem>
 
 
 <div class="layui-form-item layui-layout-admin">

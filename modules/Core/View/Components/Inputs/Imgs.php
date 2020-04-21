@@ -26,7 +26,7 @@ class Imgs extends Component
         $this->name = $name;
         $this->type = $type;
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
+
         $this->value = $value ?? old($name);
         $this->limit = $limit;
 
@@ -40,7 +40,7 @@ class Imgs extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return  <<<'blade'
             <div class="J_form_wrap m-uploader clearfix" id="{{$iptkey}}">
                 <!--用来存放文件信息-->
                 <ul class="uploader__files J_form_box" id="j_uploader_box"></ul>
@@ -52,7 +52,6 @@ class Imgs extends Component
                 class="layui-input J_form_val"
                 @if($verify)lay-verify="{{$verify}}"@endif />
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

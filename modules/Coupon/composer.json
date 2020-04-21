@@ -1,0 +1,25 @@
+{
+    "name": "Xbhub/coupon",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory Zhou",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Coupon\\Providers\\CouponServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Coupon\\": ""
+        }
+    }
+}

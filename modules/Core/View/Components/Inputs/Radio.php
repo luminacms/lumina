@@ -28,7 +28,7 @@ class Radio extends Component
         $this->type = $type;
         $this->options = $options ?? [];
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
+
         $this->value = $value ?? old($name);
         $this->search = $search;
 
@@ -42,7 +42,7 @@ class Radio extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return  <<<'blade'
             @foreach($options as $_k=>$_opt)
             <input id="{{$iptkey}}" type="radio"
                 name="{{$name}}"
@@ -51,7 +51,6 @@ class Radio extends Component
                 value="{{$_k}}" />
             @endforeach
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

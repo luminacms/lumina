@@ -1,6 +1,11 @@
+<x-formItem label="部门名称">
+    <x-input name="name" required :value="$department->name??''"></x-input>
+</x-formItem>
 
-<x-input label="部门名称" name="name" required :value="$department->name??''"></x-input>
-<x-input.select label="父级栏目" name="parentid" :optionHtml="\Modules\Core\Models\Department::getOptionsHtml($department->parentid??'')" :value="$department->parentid??''" />
+<x-formItem label="父级栏目">
+    <x-input.select name="parentid" :optionHtml="\Modules\Core\Models\Department::getOptionsHtml($department->parentid??'')" :value="$department->parentid??''" />
+</x-formItem>
+
 
 <div class="layui-form-item layui-layout-admin">
     <div class="layui-input-block">

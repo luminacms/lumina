@@ -1,10 +1,23 @@
-
+<x-formItem label="name">
 <x-input name="name" :value="$user->name??''" label="name" required></x-input>
-<x-input.select name="department" :optionHtml="\Modules\Core\Models\Department::getOptionsHtml(isset($user->departments[0])?$user->departments[0]->id:0)" label="department" required></x-input>
+</x-formItem>
 
+<x-formItem label="department">
+<x-input.select name="department" :optionHtml="\Modules\Core\Models\Department::getOptionsHtml(isset($user->departments[0])?$user->departments[0]->id:0)" label="department" required>
+</x-input.select>
+</x-formItem>
+
+<x-formItem label="mobile">
 <x-input name="mobile" :value="$user->mobile??''" label="mobile" required></x-input>
+</x-formItem>
+
+<x-formItem label="email">
 <x-input type="email" name="email" :value="$user->email??''" label="email" required></x-input>
+</x-formItem>
+
+<x-formItem label="password">
 <x-input type="password" name="password" label="password" required></x-input>
+</x-formItem>
 
 
 <div class="layui-form-item layui-layout-admin">

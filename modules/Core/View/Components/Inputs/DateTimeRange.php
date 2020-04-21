@@ -24,14 +24,14 @@ class DateTimeRange extends Component
      *
      * @return void
      */
-    public function __construct($name, $label = null, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'text', $verify = null, $value = null)
     {
         $this->iptkey = Str::random(6);
 
         $this->name = $name;
         $this->type = $type;
         $this->verify = $verify;
-        $this->label = $label ?? __('main.'.$name);
+
 
         $this->muIpt = Str::contains($name, ';') ? explode(';', $name) : [];
         $this->value = (!empty($this->muIpt) ? explode(';', $value):$value) ?? old($name);
@@ -44,7 +44,7 @@ class DateTimeRange extends Component
      */
     public function render()
     {
-        $_ipt = <<<'blade'
+        return  <<<'blade'
             <div id="{{$iptkey}}_wrap">
             @if(empty($muIpt))
                 <input type="text"
@@ -87,7 +87,6 @@ class DateTimeRange extends Component
             })
             </script>
         blade;
-        return '<x-formItem label="'.$this->label.'">'.$_ipt.'</x-formItem>';
     }
 
 }

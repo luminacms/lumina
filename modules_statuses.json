@@ -2,5 +2,7 @@
     "Core": true,
     "Doc": true,
     "Vote": true,
-    "Game": true
+    "Game": true,
+    "Ticket": true,
+    "Coupon": true
 }

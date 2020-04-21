@@ -1,9 +1,15 @@
+<x-formItem label="name">
 <x-input name="name" label="organization.name" :value="$organization->name??''" />
+</x-formItem>
 
+<x-formItem label="parentid">
 <x-input.select name="parentid" label="organization.parentid"
     :optionHtml="\Modules\Core\Models\Organization::getOptionsHtml($organization->parentid??'')" />
+</x-formItem>
 
+<x-formItem label="sort">
 <x-input name="sort" label="sort" :value="$organization->sort ?? 50"/>
+</x-formItem>
 
 <div class="layui-form-item">
 	<label for="permission">Permission</label>

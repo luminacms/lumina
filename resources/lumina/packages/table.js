@@ -383,14 +383,14 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
 
         if (options.toolbar === 'default') {
             layui.each(leftDefaultTemp, function (i, item) {
-                leftToolElem.push('<div class="layui-inline tool px-3 py-1" title="' + item.title + '" lay-event="' + item.layEvent + '">' + item.title + '</div>');
+                leftToolElem.push('<div class="layui-inline tool px-3 py-1" title="' + item.title + '" lay-event="' + item.layEvent + '"><i class="fa '+item.icon+'"></i></div>');
             });
             elemToolTemp.html(leftToolElem.join(''));
         } else if (typeof options.toolbar === 'object') {
             layui.each(options.toolbar, function (i, item) {
                 var thisItem = leftDefaultTemp[item];
                 if (thisItem) {
-                    leftToolElem.push('<div class="layui-inline tool px-3 py-1" title="' + thisItem.title + '" lay-event="' + thisItem.layEvent + '">' + thisItem.title + '</div>');
+                    leftToolElem.push('<div class="layui-inline tool px-3 py-1" title="' + thisItem.title + '" lay-event="' + thisItem.layEvent + '"><i class="fa '+thisItem.icon+'"></i></div>');
                 }
             });
             elemToolTemp.html(leftToolElem.join(''));
@@ -1702,7 +1702,8 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                     type: 'get',
                     url: options.autoShow.replace('_id_', obj.data.id),
                     success: function (res) {
-                        admin.openDrawer(res, '详情#'+obj.data.id, true, {
+                        admin.openDrawer(res, '详情#'+obj.data.id, {
+                            shadeClose: true,
                             area: device.mobile ? options.autoShowWidthMobile : options.autoShowWidth
                         })
                     },
