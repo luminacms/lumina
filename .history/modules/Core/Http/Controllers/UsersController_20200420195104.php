@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Core\Http\Requests\UserRequest;
 use Modules\Core\Http\Resources\UserResource;
 use Illuminate\Validation\ValidationException;
-use Modules\Core\Traits\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
  * Class UsersController.

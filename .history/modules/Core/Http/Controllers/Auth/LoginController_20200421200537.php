@@ -2,7 +2,7 @@
 
 namespace Modules\Core\Http\Controllers\Auth;
 
-use Modules\Core\Traits\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Core\Http\Controllers\BaseController;

@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Modules\Doc\Models\Member;
 use Illuminate\Routing\Controller as Controller;
 use Modules\Core\Http\Controllers\BaseController;
-use Modules\Core\Traits\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends BaseController
 {

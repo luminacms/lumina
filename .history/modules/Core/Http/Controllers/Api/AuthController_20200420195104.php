@@ -4,7 +4,7 @@
 namespace Modules\Core\Http\Controllers\Api;
 
 
-use Modules\Core\Traits\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
