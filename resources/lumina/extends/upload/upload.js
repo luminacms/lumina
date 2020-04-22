@@ -138,7 +138,8 @@ layui.extend({
     Class.prototype.events = function (layero) {
         var self = this,
             uploader = self.uploadObj,
-            options = self.config;
+            options = self.config,
+            errorMsg = '';
 
         var $wrap = $('#uploader'),
 
@@ -229,8 +230,26 @@ layui.extend({
         uploader.onUploadSuccess = function(file, response) {
             if(response.errcode == 0){
                 self.uploadFiles.push(response.data.url)
+            }else{
+                setState('error')
+                errorMsg = response.msg || '未知错误'
+                self.uploadFailNum += 1;
             }
         }
+        uploader.onUploadError = function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        }
+        // uploader.on( 'uploadComplete', function( file ) {
+        //     $( '#'+file.id ).find('.progress').remove();
+        // });
 
         uploader.on( 'all', function( type ) {
             var stats;
@@ -292,8 +311,9 @@ layui.extend({
                     text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
                         stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
                 }
-
-            } else {
+            } else if( state === 'error'){
+                text = 'Error: <strong class="text-error">'+errorMsg+'</strong>';
+            }else{
                 stats = uploader.getStats();
                 text = '共' + fileCount + '张（' +
                     WebUploader.formatSize( fileSize )  +
@@ -303,7 +323,6 @@ layui.extend({
                     text += '，失败' + stats.uploadFailNum + '张';
                 }
             }
-
             $info.html( text );
         }
 
@@ -348,9 +367,11 @@ layui.extend({
                     $upload.text( '开始上传' ).addClass( 'disabled' );
 
                     stats = uploader.getStats();
-                    if ( stats.successNum && !stats.uploadFailNum ) {
+                    if ( !errorMsg && stats.successNum && !stats.uploadFailNum ) {
                         setState( 'finish' );
                         return;
+                    }else{
+                        setState( 'error' );
                     }
                     break;
                 case 'finish':
@@ -361,6 +382,10 @@ layui.extend({
                         location.reload();
                     }
                     break;
+                case 'error':
+
+                    break;
+
             }
 
             updateStatus();
@@ -425,10 +450,8 @@ layui.extend({
                     $li.off( 'mouseenter mouseleave' );
                     $btns.remove();
                 }
-
                 // 成功
                 if ( cur === 'error' || cur === 'invalid' ) {
-                    console.log( file.statusText );
                     showError( file.statusText );
                     percentages[ file.id ][ 1 ] = 1;
                 } else if ( cur === 'interrupt' ) {

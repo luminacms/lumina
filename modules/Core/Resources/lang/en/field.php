@@ -88,4 +88,10 @@ return [
     'pre_total_fee'             => '下单支付费用',
     'transaction_code'          => '对方交易ID',
     'payment_at'                => '支付时间',
+
+    // shop
+    'brand'                     => 'Brand',
+    'pic_url'                   => 'PicUrl',
+    'price_fee'                 => 'PriceFee',
+    'market_price_fee'          => 'MarketPriceFee',
 ];

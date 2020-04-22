@@ -1,12 +1,15 @@
 <?php
 
-function test_resource($data = []){
-    return [
-        'data' => $data,
-        'code' => 1,
-        'msg' => 'success'
-    ];
+if(!function_exists('test_resource')){
+    function test_resource($data = []){
+        return [
+            'data' => $data,
+            'code' => 1,
+            'msg' => 'success'
+        ];
+    }
 }
+
 Route::get('game/editor/tags/list', function(){
     return response()->json(test_resource());
 });

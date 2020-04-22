@@ -4,5 +4,7 @@
     "Vote": true,
     "Game": true,
     "Ticket": true,
-    "Coupon": true
+    "Coupon": true,
+    "Mall": true,
+    "Shop": true
 }

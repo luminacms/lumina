@@ -41,21 +41,16 @@ class Imgs extends Component
     public function render()
     {
         return  <<<'blade'
-            <div class="layui-form-img" lay-filter="ximg">
-                <input type="hidden"
-                    name="{{$name}}"
-                    @if($value)value="{{$value}}"@endif
-                    class="layui-input"
-                    @if($verify)lay-verify="{{$verify}}"@endif />
+            <div class="J_form_wrap m-uploader clearfix" id="{{$iptkey}}">
+                <!--用来存放文件信息-->
+                <ul class="uploader__files J_form_box" id="j_uploader_box"></ul>
+                <div data-id="{{$iptkey}}_picker" class="J_form_img img__picker" data-limit="{{$limit}}"></div>
             </div>
-            <script>
-            layui.use(['form'], function(){
-                var form = layui.form;
-                form.on('img(ximg)', function(e) {
-                    console.log(e)
-                })
-            })
-        </script>
+            <input type="hidden"
+                name="{{$name}}"
+                @if($value)value="{{$value}}"@endif
+                class="layui-input J_form_val"
+                @if($verify)lay-verify="{{$verify}}"@endif />
         blade;
     }
 

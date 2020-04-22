@@ -1,0 +1,23 @@
+{
+    "name": "Shop",
+    "alias": "shop",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Shop\\Providers\\ShopServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"sort": 50,"name": "mall", "icon": "fa-shopping-cart", "label": "电商引擎", "children": [
+            {"name": "mall_product_brand", "icon": "", "label": "品牌管理", "route": "shop.spu.index"},
+            {"name": "mall_product_category", "icon": "", "label": "栏目管理", "route": "shop.spu.index"},
+            {"name": "mall_product_spu", "icon": "", "label": "商品管理", "route": "shop.spu.index"},
+            {"name": "mall_order", "icon": "", "label": "订单管理", "route": "shop.spu.index"},
+            {"name": "mall_stock", "icon": "", "label": "库存管理", "route": "shop.spu.index"},
+            {"name": "mall_ship", "icon": "", "label": "发货管理", "route": "shop.spu.index"}
+        ]}
+    ]
+}
