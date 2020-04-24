@@ -23,7 +23,7 @@ class CouponCode extends BaseModel
      * @var array
      */
     public $table = 'coupon__codes';
-    protected $fillable = ['coupon_id', 'status', 'owner_by', 'received_at', 'used_at', 'expired_at', 'used_at_ip'];
+    protected $fillable = ['coupon_id', 'status', 'owner_by', 'received_at', 'used_at', 'expired_at', 'used_at_ip', 'used_tag'];
     protected $date = ['received_at', 'used_at', 'expired_at'];
 
     /**
@@ -58,6 +58,11 @@ class CouponCode extends BaseModel
         return $this->hasOne('Modules\Core\Models\User', 'userid', 'owner_by');
     }
 
+    /**
+     * coupon
+     *
+     * @return void
+     */
     public function coupon()
     {
         return $this->hasOne('Modules\Coupon\Models\Coupon', 'uid', 'coupon_id');
@@ -99,13 +104,13 @@ class CouponCode extends BaseModel
      */
     public function getStatusLable()
     {
-        $_html = '<span class="layui-badge bg-gray-600">未领取</span>';
+        $_html = '<span class="layui-badge bg-gray-800">未领取</span>';
         if($this->used_at) {
             $_html = '<span class="layui-badge bg-green-600">已使用</span>';
         }else if(!$this->used_at && $this->received_at) {
             $_html = '<span class="layui-badge bg-yellow-600">已领取</span>';
         }else if(now()->isAfter($this->expired_at)) {
-            $_html = '<span class="layui-badge bg-gray-900">已过期</span>';
+            $_html = '<span class="layui-badge bg-gray-600">已过期</span>';
         }
         return $_html;
     }

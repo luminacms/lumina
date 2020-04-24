@@ -28,6 +28,8 @@ class CreateCouponCodesTable extends Migration
             $table->timestamp('received_at')->nullable()->comment('领取时间');
             $table->timestamp('used_at')->nullable()->comment('使用时间');
             $table->ipAddress('used_at_ip')->nullable()->comment('使用坐标');
+            $table->string('used_tag')->nullable()->comment('核销标签');
+
             $table->timestamp('expired_at')->nullable()->comment('过期时间');
 
 

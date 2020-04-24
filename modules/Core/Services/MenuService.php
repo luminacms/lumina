@@ -3,7 +3,9 @@ namespace Modules\Core\Services;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Modules\Core\Models\Department;
 use Modules\Core\Models\Permission;
+use Modules\Core\Utils\Tree;
 use Nwidart\Modules\Facades\Module;
 
 /**
@@ -17,19 +19,20 @@ class MenuService
     protected $roles;
 
     const _core_menu = [
-        ["sort"=>0, "name"=>"system", "icon"=>"fa-cogs", "label"=>"全局配置", "route"=>"core.option.index", "auth"=>true],
-        ["sort"=>10,"name"=>"user", "icon"=>"fa-users", "label"=>"用户管理", "children"=>[
-            ["name"=>"user_organizations", "icon"=>"", "label"=>"组织管理", "route"=>"core.organizations.index", "auth"=>["ROLE"=>"SUPER"]],
-            ["name"=>"user_departments", "icon"=>"", "label"=>"部门管理", "route"=>"core.departments.index"],
-            ["name"=>"user_layer", "icon"=>"", "label"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER"]],
-            ["name"=>"user_users", "icon"=>"", "label"=>"员工管理", "route"=>"core.users.index"],
-            ["name"=>"user_users_social", "icon"=>"", "label"=>"粉丝管理", "route"=>"core.user-socialites.index"],
-            ["name"=>"user_address", "icon"=>"", "label"=>"地址管理", "route"=>"core.user-addresses.index"]
-        ]],
-        ["name"=>"tool", "icon"=>"fa-magic", "label"=>"系统工具", "auth"=>["ROLE"=>"SUPER"], "sort"=>999, "children"=>[
-            ["name"=>"tool_log", "icon"=>"", "label"=>"日志管理", "route"=>"core.tool.log"],
-            ["name"=>"tool_apitest", "icon"=>"", "label"=>"接口管理", "route"=>"apitest.index"],
-        ]]
+        ["sort"=>0, "id"=>"system", "parentid"=>"0", "icon"=>"fa-cogs", "label"=>"全局配置", "route"=>"core.option.index", "auth"=>true],
+        ["sort"=>10,"id"=>"user", "parentid"=>"0", "icon"=>"fa-users", "label"=>"用户管理"],
+
+        ["sort"=>10,"id"=>"user_organizations", "parentid"=>"user", "icon"=>"", "label"=>"组织管理", "route"=>"core.organizations.index", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>10,"id"=>"user_departments", "parentid"=>"user","icon"=>"", "label"=>"部门管理", "route"=>"core.departments.index"],
+        ["sort"=>10,"id"=>"user_layer", "parentid"=>"user","icon"=>"", "label"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>10,"id"=>"user_users", "parentid"=>"user","icon"=>"", "label"=>"员工管理", "route"=>"core.users.index"],
+        ["sort"=>10,"id"=>"user_users_social", "parentid"=>"user","icon"=>"", "label"=>"粉丝管理", "route"=>"core.user-socialites.index"],
+        ["sort"=>10,"id"=>"user_address", "parentid"=>"user", "icon"=>"", "label"=>"地址管理", "route"=>"core.user-addresses.index"],
+
+        ["id"=>"tool", "parentid"=>"0", "icon"=>"fa-magic", "label"=>"系统工具", "auth"=>["ROLE"=>"SUPER"], "sort"=>999],
+
+        ["id"=>"tool_log", "parentid" => "tool", "icon"=>"", "label"=>"日志管理", "route"=>"core.tool.log"],
+        ["id"=>"tool_apitest", "parentid" => "tool", "icon"=>"", "label"=>"接口管理", "route"=>"apitest.index"],
     ];
 
     /**
@@ -79,6 +82,11 @@ class MenuService
      */
     protected function _parseMenu($menu)
     {
+        // $r = (new Department())->getTree();
+
+        // $tree = new Tree($menu);
+        // dd($tree->get_tree_array());
+
         if (empty($menu)) return [];
 
         foreach ($menu as $_k => $_menu) {

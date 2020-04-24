@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'apitest', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'apitest', 'as' => 'apitest.', 'middleware' => ['auth']], function() {
 
     Route::get('/', 'ApiTestController@index')->name('index');
     Route::get('/data', 'ApiTestController@data');

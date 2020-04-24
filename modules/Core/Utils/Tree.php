@@ -117,6 +117,8 @@ class Tree {
                     $newarr[$id] = $a;
             }
         }
+
+        dd($newarr);
         return $newarr ? $newarr : false;
     }
 
