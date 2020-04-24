@@ -6,7 +6,7 @@ use Modules\Core\Utils\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Modules\Core\Console\Commands\SyncModulePermission;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        SyncModulePermission::class
     ];
 
     /**

@@ -27,7 +27,8 @@ class MenuService
             ["name"=>"user_address", "icon"=>"", "label"=>"地址管理", "route"=>"core.user-addresses.index"]
         ]],
         ["name"=>"tool", "icon"=>"fa-magic", "label"=>"系统工具", "auth"=>["ROLE"=>"SUPER"], "sort"=>999, "children"=>[
-            ["name"=>"tool_log", "icon"=>"", "label"=>"日志管理", "route"=>"core.tool.log"]
+            ["name"=>"tool_log", "icon"=>"", "label"=>"日志管理", "route"=>"core.tool.log"],
+            ["name"=>"tool_apitest", "icon"=>"", "label"=>"接口管理", "route"=>"apitest.index"],
         ]]
     ];
 

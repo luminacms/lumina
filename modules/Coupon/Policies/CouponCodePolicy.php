@@ -54,4 +54,29 @@ class CouponCodePolicy extends BasePolicy
     {
         //
     }
+
+    /**
+     * 领取优惠码权限验证
+     *
+     * @param User $user
+     * @param CouponCode $couponCode
+     * @return void
+     */
+    public function receive(User $user, CouponCode $couponCode)
+    {
+        return is_null($couponCode->owner_by);
+    }
+
+    /**
+     * 使用优惠码
+     * 验证：1：自己的码 2：未使用 3：未过期
+     *
+     * @param User $user
+     * @param CouponCode $couponCode
+     * @return void
+     */
+    public function use(User $user, CouponCode $couponCode)
+    {
+        return $couponCode->owner_by == $user->userid && is_null($couponCode->used_at) && now()->isBefore($couponCode->expired_at);
+    }
 }

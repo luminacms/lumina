@@ -36,6 +36,7 @@ class HttpMethodParser implements BlockParserInterface
 
 //        $match = RegexHelper::matchAt(RegexHelper::getInstance()->getThematicBreakRegex(), $cursor->getLine(), $cursor->getNextNonSpacePosition());
         $match = RegexHelper::matchAll(self::REGEXP_DEFINITION, $cursor->getLine(), $cursor->getNextNonSpacePosition());
+
 //
         if (empty($match) || count($match) !== 3) {
             return false;

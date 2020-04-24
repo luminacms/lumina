@@ -23,31 +23,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
         HIDE = 'layui-hide',
         DISABLED = 'layui-disabled';
 
-    var FORM_WRAP = '.J_form_wrap',
-        FORM_BOX = '.J_form_box',
-        FORM_VAL = '.J_form_val',
-        FORM_RENDER = [{
-                'type': 'ide',
-                'elem': '.J_form_ide'
-            },
-            {
-                'type': 'img',
-                'elem': '#j_uploader_box'
-            },
-            {
-                'type': 'date',
-                'elem': '.J_form_date'
-            },
-            {
-                'type': 'datetime',
-                'elem': '.J_form_datetime'
-            },
-            {
-                'type': 'time',
-                'elem': '.J_form_time'
-            },
-        ],
-        FORM_IMG = '.J_form_img';
     var Form = function () {
         this.config = {
             verify: {
@@ -133,7 +108,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                 return filter ? ('[lay-filter="' + filter + '"]') : '';
             }()),
             items = {
-
                 //下拉选择框
                 select: function () {
                     var TIPS = '请选择',
@@ -474,12 +448,9 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                             checkbox: ['layui-form-checkbox', 'layui-form-checked', 'checkbox'],
                             _switch: ['layui-form-switch', 'layui-form-onswitch', 'switch']
                         },
-                        checks = elemForm.find('input[type=checkbox]')
-
-                        ,
+                        checks = elemForm.find('input[type=checkbox]'),
                         events = function (reElem, RE_CLASS) {
                             var check = $(this);
-
                             //勾选
                             reElem.on('click', function () {
                                 var filter = check.attr('lay-filter') //获取过滤器
@@ -664,7 +635,23 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         othis.append(reElem);
                         events.call(this, reElem);
                     });
-                }
+                },
+
+                // date
+                date: function () {
+                    var CLASS_DATETIME = 'layui-form-datetime',
+                        CLASS_DATE = 'layui-form-date',
+                        CLASS_TIME = 'layui-form-time';
+                    elemForm.find('.' + CLASS_DATE).each(function (i, n) {
+                        laydate.render({elem: '#' + $(this).attr('id'),type: 'date',format: 'yyyy-MM-dd'});
+                    });
+                    elemForm.find('.' + CLASS_DATETIME).each(function (i, n) {
+                        laydate.render({elem: '#' + $(this).attr('id'),type: 'datetime',format: 'yyyy-MM-dd HH:mm:ss'});
+                    });
+                    elemForm.find('.' + CLASS_TIME).each(function (i, n) {
+                        laydate.render({elem: '#' + $(this).attr('id'),type: 'time',format: 'HH:mm:ss'});
+                    });
+                },
             };
         type ? (
             items[type] ? items[type]() : hint.error('不支持的' + type + '表单渲染')
@@ -673,11 +660,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
         });
         return that;
     };
-
-    Form.prototype.bindDatePicker = function () {
-        var $dom = $(document);
-
-    }
 
     //表单提交校验
     var submit = function () {
@@ -814,7 +796,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
         $win = $(window);
 
     form.render();
-    form.bindDatePicker();
 
     //表单reset重置渲染
     $dom.on('reset', ELEM, function () {

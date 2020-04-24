@@ -53,7 +53,6 @@ class DateTimeRange extends Component
                     class="layui-input"
                     id="{{$iptkey}}"
                     readonly
-                    lay-key="{{$iptkey}}"
                     @if($verify)lay-verify="{{$verify}}"@endif />
             @else
                 <input type="text"
@@ -61,7 +60,6 @@ class DateTimeRange extends Component
                     class="layui-input"
                     id="{{$iptkey}}"
                     readonly
-                    lay-key="{{$iptkey}}"
                     @if($verify)lay-verify="{{$verify}}"@endif />
                 <input type="hidden" name="{{$muIpt[0]}}" class="start_at" value="{{$value[0]??''}}" />
                 <input type="hidden" name="{{$muIpt[1]}}" class="end_at" value="{{$value[1]??''}}" />

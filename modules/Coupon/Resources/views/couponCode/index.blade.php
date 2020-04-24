@@ -18,18 +18,25 @@
 
             table.render({
                 elem: '#data_couponcode_table',
-                url: '{{ URL::full() }}',
+                url: '{{ route("coupon.coupon-code.index") }}?coupon_id={{ request("coupon_id") }}',
                 autoShow: '{{ route("coupon.coupon-code.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,
                 canSearch: true,
-                toolbar: 'default',
+                toolbar: [],
+                action: [{'text': '生成优惠码', 'event': 'makeCode'}],
                 height: 'full-100',
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
                     {"field":"code","title":"code",width:350},
-                    {"field":"status","title":"status"},{"field":"owner_by","title":"owner_by"},{"field":"received_at","title":"received_at"},{"field":"used_at","title":"used_at"},{"field":"expired_at","title":"expired_at"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
+                    {"field":"status","title":"状态"},
+                    {"field":"owner_by_name","title":"领取人"},
+                    {"field":"received_at","title":"领取时间"},
+                    {"field":"used_at","title":"使用时间"},
+                    {"field":"expired_at","title":"过期时间"},
+                    {"field":"created_at","title":"创建时间"},
+                ]]
             });
 
             //监听行工具事件
@@ -39,7 +46,7 @@
                 if(obj.event == 'create') {
                     var createModal = admin.openDrawer('{{ route("coupon.coupon-code.create", \request()->all()) }}', '新增数据', {
                         end: function(index, layero){
-                            table.reload('data_game_table')
+                            table.reload('data_couponcode_table')
                         }
                     })
                     return true;
@@ -68,6 +75,19 @@
                         })
                         return true;
                     }
+                }
+
+                // 生成优惠码
+                if(obj.event == 'makeCode'){
+                    layer.prompt({
+                        value: '1',
+                        title: '请输入生成优惠码数量'
+                    }, function(value, index, elem){
+                        layer.close(index);
+                        admin.request.post('{{ route("coupon.coupon-code.make") }}', {'number': value, 'coupon_id': '{{ request("coupon_id") }}'}, function(res){
+                            table.reload('data_couponcode_table')
+                        })
+                    });
                 }
             });
 

@@ -6,5 +6,6 @@
     "Ticket": true,
     "Coupon": true,
     "Mall": true,
-    "Shop": true
+    "Shop": true,
+    "ApiTest": true
 }

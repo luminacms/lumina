@@ -4,6 +4,7 @@ namespace Modules\Coupon\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Coupon\Providers\AuthServiceProvider;
 
 class CouponServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class CouponServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
     }
 
     /**

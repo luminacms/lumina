@@ -40,6 +40,12 @@ return [
     'share_img'                 => 'Share Img',
     'place_select'              => 'Place Select',
     'title'                     => 'Title',
+    'type'                      => 'Type',
+    'range'                     => 'Range',
+    'start_at'                  => 'Start At',
+    'end_at'                    => 'End At',
+    'times'                     => 'Times',
+    'expired_type'              => 'Expired Type',
 
     // 组织
     'organization'              => [
@@ -94,4 +100,13 @@ return [
     'pic_url'                   => 'PicUrl',
     'price_fee'                 => 'PriceFee',
     'market_price_fee'          => 'MarketPriceFee',
+
+    // Coupon
+    'coupon_id'                 => 'Coupon ID',
+    'code'                      => 'Code',
+    'owner_by'                  => 'OwnerBy',
+    'received_at'               => 'receivedAt',
+    'used_at'                   => 'usedAt',
+    'used_at_ip'                => 'usedAtIp',
+    'expired_at'                => 'expiredAt'
 ];

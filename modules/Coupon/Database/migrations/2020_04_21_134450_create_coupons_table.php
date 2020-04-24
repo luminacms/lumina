@@ -41,6 +41,7 @@ class CreateCouponsTable extends Migration
             $table->status();
             $table->createby();
 
+            $table->unique('uid');
             $table->timestamps();
 		});
 	}

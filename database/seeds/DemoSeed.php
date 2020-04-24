@@ -17,9 +17,9 @@ class DemoSeed extends Seeder
 
         $this->call(UserSeed::class);
 
-        if($module->find('cms')->isEnabled())  $this->call(CmsSeed::class);
-        if($module->find('mall')->isEnabled())  $this->call(MallSeed::class);
-        if($module->find('doc')->isEnabled())  $this->call(DocSeed::class);
-        if($module->find('querylist')->isEnabled())  $this->call(QueryListSeed::class);
+        if($module->find('cms') && $module->find('cms')->isEnabled())  $this->call(CmsSeed::class);
+        if($module->find('mall') && $module->find('mall')->isEnabled())  $this->call(MallSeed::class);
+        if($module->find('doc') && $module->find('doc')->isEnabled())  $this->call(DocSeed::class);
+        if($module->find('querylist') && $module->find('querylist')->isEnabled())  $this->call(QueryListSeed::class);
     }
 }

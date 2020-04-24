@@ -15,6 +15,8 @@ class ApiTestServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerConfig();
+
         $this->registerTranslations();
         $this->registerViews();
         $this->registerFactories();
@@ -28,13 +30,6 @@ class ApiTestServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerConfig();
-
-        // If Api Tester is disabled, we won't run any service providers.
-        if (!config('apitest.enabled')) {
-            return;
-        }
-
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
     }

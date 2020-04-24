@@ -1,7 +1,7 @@
 {
     "name": "Coupon",
     "alias": "coupon",
-    "description": "",
+    "description": "优惠券",
     "keywords": [],
     "order": 0,
     "providers": [

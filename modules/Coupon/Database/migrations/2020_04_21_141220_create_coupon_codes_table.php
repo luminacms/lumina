@@ -19,7 +19,7 @@ class CreateCouponCodesTable extends Migration
 		Schema::create('coupon__codes', function(Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('coupon_id');
+            $table->uuid('coupon_id');
             $table->char('code', 32);
 
             $table->status();
@@ -27,12 +27,14 @@ class CreateCouponCodesTable extends Migration
             $table->char('owner_by')->nullable()->comment('拥有人');
             $table->timestamp('received_at')->nullable()->comment('领取时间');
             $table->timestamp('used_at')->nullable()->comment('使用时间');
+            $table->ipAddress('used_at_ip')->nullable()->comment('使用坐标');
             $table->timestamp('expired_at')->nullable()->comment('过期时间');
 
-            $table->timestamps();
 
             $table->createby();
-            $table->index('code');
+            $table->unique('code');
+
+            $table->timestamps();
 		});
 	}
 

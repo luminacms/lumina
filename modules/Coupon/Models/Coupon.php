@@ -67,7 +67,7 @@ class Coupon extends BaseModel
 
     public function code()
     {
-        return $this->hasMany('Modules\Coupon\Models\CouponCode', 'coupon_id', 'id');
+        return $this->hasMany('Modules\Coupon\Models\CouponCode', 'coupon_id', 'uid');
     }
 
 }

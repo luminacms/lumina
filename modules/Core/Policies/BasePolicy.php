@@ -14,20 +14,9 @@ class BasePolicy
 {
     use HandlesAuthorization;
 
-    public function __construct()
+    // 超级管理员
+    protected function isAdmin($user)
     {
-        //
-    }
-
-    /**
-     * @param $user
-     * @param $ability
-     * @return bool
-     */
-    public function before($user, $ability)
-    {
-        if($user->isSuper()) {
-            return true;
-        }
+        return $user->isSuper() || $user->hasRole('ADMIN');
     }
 }

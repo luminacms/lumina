@@ -45,7 +45,6 @@ class Color extends Component
                 class="layui-input"
                 id="{{$iptkey}}"
                 readonly
-                lay-key="{{$iptkey}}"
                 @if($verify)lay-verify="{{$verify}}"@endif />
             <script>
             layui.use('laydate', function(){

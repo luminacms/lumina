@@ -4,6 +4,9 @@ namespace Modules\Coupon\Models;
 
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
+use Modules\Coupon\Http\Filters\CouponFilter;
 
 /**
  * Class CouponCode.
@@ -20,7 +23,7 @@ class CouponCode extends BaseModel
      * @var array
      */
     public $table = 'coupon__codes';
-    protected $fillable = ['coupon_id', 'status', 'owner_by', 'received_at', 'used_at', 'expired_at'];
+    protected $fillable = ['coupon_id', 'status', 'owner_by', 'received_at', 'used_at', 'expired_at', 'used_at_ip'];
     protected $date = ['received_at', 'used_at', 'expired_at'];
 
     /**
@@ -29,26 +32,82 @@ class CouponCode extends BaseModel
      * @var array
      */
     protected $fieldSearchable = ['code' => 'like'];
+    public function filters()
+    {
+        return [
+            'coupon_id' => CouponFilter::class
+        ];
+    }
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function($model) {
-            $model->code = self::getUuid('code', 32);
+            $model->code = self::getRandom('code', 32);
         });
     }
 
+    /**
+     * ownerby
+     *
+     * @return void
+     */
     public function ownerBy()
     {
-        return $this->hasOne('Modules\Core\Models\User', 'owner_by', 'userid')->withDefault();
+        return $this->hasOne('Modules\Core\Models\User', 'userid', 'owner_by');
+    }
+
+    public function coupon()
+    {
+        return $this->hasOne('Modules\Coupon\Models\Coupon', 'uid', 'coupon_id');
     }
 
 
-    public static function genCode($coupon_id, $num)
+    /**
+     * make coupon code
+     *
+     * @param [type] $coupon_id
+     * @param [type] $num
+     * @return void
+     */
+    public function genCode($coupon_id, $num)
     {
+        try{
+            $coupon = Coupon::where('uid', $coupon_id)->firstOrFail();
 
+            // 计算失效期
+            $data = ['coupon_id' => $coupon_id];
+            if($coupon->expired_type == Coupon::EXPIRED_TYPE_FIXED) {
+                $data['expired_at'] = $coupon->end_at;
+            }
+            Collection::times($num, function ($i) use($data) {
+                return self::create($data);
+            });
 
+            return true;
+        }catch(\Exception $e) {
+            Log::error($e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * 优惠码状态
+     *
+     * @return void
+     */
+    public function getStatusLable()
+    {
+        $_html = '<span class="layui-badge bg-gray-600">未领取</span>';
+        if($this->used_at) {
+            $_html = '<span class="layui-badge bg-green-600">已使用</span>';
+        }else if(!$this->used_at && $this->received_at) {
+            $_html = '<span class="layui-badge bg-yellow-600">已领取</span>';
+        }else if(now()->isAfter($this->expired_at)) {
+            $_html = '<span class="layui-badge bg-gray-900">已过期</span>';
+        }
+        return $_html;
     }
 
 }

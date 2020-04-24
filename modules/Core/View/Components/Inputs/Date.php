@@ -42,10 +42,9 @@ class Date extends Text
             <input type="text"
                 name="{{$name}}"
                 @if($value)value="{{$value}}"@endif
-                class="layui-input J_form_date"
+                class="layui-input layui-form-date"
                 id="{{$iptkey}}"
                 readonly
-                lay-key="{{$iptkey}}"
                 @if($verify)lay-verify="{{$verify}}"@endif />
         blade;
     }

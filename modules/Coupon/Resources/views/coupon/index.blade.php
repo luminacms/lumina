@@ -2,7 +2,8 @@
 
 @section('content')
     <x-submenu :items="[
-        ['name' => __('core::main.table_list'), 'uri' => route('coupon.coupon.index')]
+        ['name' => '优惠券管理', 'uri' => route('coupon.coupon.index')],
+        ['name' => '文档', 'uri' => route('core.doc', ['path' => urlencode(module_path('coupon').'/doc.md')]), 'right'=>'true']
     ]" />
 
     <table class="layui-hide" id="data_coupon_table" lay-filter="data_coupon_table"></table>
@@ -11,7 +12,7 @@
 
 @push('script')
     <script type="text/html" id="tpl_title">
-        <a lay-href="{{ route('coupon.coupon-code.index') }}?coupon_id=@{{ d.id }}" class="cursor-pointer mr-1" title="优惠码管理"><span class="layui-badge layui-bg-black">@{{ d.code_count }}</span></a>
+        <a lay-href="{{ route('coupon.coupon-code.index') }}?coupon_id=@{{ d.uid }}" class="cursor-pointer mr-1" lay-text="优惠码管理"><span class="layui-badge layui-bg-black">@{{ d.code_count }}</span></a>
         @{{ d.title }}
     </script>
     <script>

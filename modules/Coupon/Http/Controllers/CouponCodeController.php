@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Modules\Coupon\Models\CouponCode;
 use Modules\Coupon\Http\Requests\CouponCodeRequest;
 use Modules\Coupon\Http\Resources\CouponCodeResource;
+use Modules\Coupon\Models\Coupon;
 
 /**
  * Class CouponCodeController.
@@ -119,7 +120,7 @@ class CouponCodeController extends BaseController
             }
             if($model->fill($request->all())->save()){
                 flash('update success', 'update success');
-                
+
                 return !$request->expectsJson()
                     ? redirect()->back()
                     : $this->toResponse($model, 'update success');
@@ -145,5 +146,19 @@ class CouponCodeController extends BaseController
 
         flash('delete success', 'success');
         return $this->toResponse([], '删除成功');
+    }
+
+    /**
+     * make coupon code
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function make(Request $request)
+    {
+        $request->validate(['number' => 'required|numeric', 'coupon_id' => 'required']);
+
+        $r = $this->couponCode->genCode($request->get('coupon_id'), $request->get('number'));
+        return $this->toResponse($r);
     }
 }

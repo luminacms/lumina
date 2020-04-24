@@ -13,7 +13,7 @@
 
 Route::group(['prefix' => 'apitest', 'middleware' => ['auth']], function() {
 
-    Route::get('/', 'ApiTestController@index')->name('home');
+    Route::get('/', 'ApiTestController@index')->name('index');
     Route::get('/data', 'ApiTestController@data');
     Route::get('/modules', 'ApiTestController@modules');
 

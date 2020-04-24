@@ -417,7 +417,7 @@ moduleDiv += "			        <span class='t0 h'><i class='fa fa-angle-up interface-m
 moduleDiv += "		        </span>";
 moduleDiv += "          </div>";
 moduleDiv += "      </div>";
-moduleDiv += "      <div id='panel_ca_moduleId' class='panel-collapse BGEEE collapse in'>";
+moduleDiv += "      <div id='panel_ca_moduleId' class='panel-collapse BGEEE collapse'>";
 moduleDiv += "          <div class='panel-body b0 p0'>";
 moduleDiv += "              ca_interfaces";
 moduleDiv += "           </div>";

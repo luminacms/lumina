@@ -10,7 +10,7 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' =>'vod', 'middleware' => 'checkOidParams', 'as' => 'vod.'], function () {
+Route::group(['prefix' =>'vod', 'middleware' => 'require.oid', 'as' => 'vod.'], function () {
 
     Route::get('/courses', 'CoursesController@index');
     Route::get('/courses/{id}', 'CoursesController@show');

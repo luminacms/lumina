@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Modules\Core\Models\Permission;
 use Modules\Core\Models\Role;
 use Nwidart\Modules\Facades\Module;
+use Nwidart\Modules\Module as ModulesModule;
 
 class SyncModulePermission extends Command
 {
@@ -40,12 +41,12 @@ class SyncModulePermission extends Command
      */
     public function handle()
     {
-        foreach (Module::getOrdered() as $_module) {
+        foreach (Module::getByStatus(true) as $_module) {
             $_name = $_module->getAlias();
             if($_name != 'core') {
                 Permission::updateOrCreate(['name' => 'module_'.$_name], [
                     'name' => 'module_'.$_name,
-                    'label' => $_module->get('description')??$_name,
+                    'label' => $_module->get('description') ?: $_name,
                     'guard_name' => 'org'
                 ]);
             }

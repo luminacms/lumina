@@ -42,10 +42,9 @@ class DateTime extends Component
             <input type="text"
                 name="{{$name}}"
                 @if($value)value="{{$value}}"@endif
-                class="layui-input J_form_datetime"
+                class="layui-input layui-form-datetime"
                 id="{{$iptkey}}"
                 readonly
-                lay-key="{{$iptkey}}"
                 @if($verify)lay-verify="{{$verify}}"@endif />
         blade;
     }

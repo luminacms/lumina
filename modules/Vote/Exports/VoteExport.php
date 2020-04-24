@@ -44,7 +44,7 @@ class VoteExport extends BaseExport
             'created_at' => $row->created_at,
             'create_ip' => $row->create_ip,
         ];
-        if(count($row->fields) > 0) {
+        if($row->fields && count($row->fields) > 0) {
             // 附加表头
             foreach($row->fields as $_k => $_v) {
                 $data[$_k] = $_k.':'.$_v;

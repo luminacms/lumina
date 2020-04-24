@@ -3985,16 +3985,16 @@
         },
         {
             "name": "rap2hpoutre/laravel-log-viewer",
-            "version": "v1.4.0",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
-                "reference": "3506baaddbe5661fc4482b048db2ec5cfc5f9025"
+                "reference": "337bb72d2af6b0de9b3128e77f13c1ff262bc962"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/3506baaddbe5661fc4482b048db2ec5cfc5f9025",
-                "reference": "3506baaddbe5661fc4482b048db2ec5cfc5f9025",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/337bb72d2af6b0de9b3128e77f13c1ff262bc962",
+                "reference": "337bb72d2af6b0de9b3128e77f13c1ff262bc962",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4046,7 +4046,7 @@
                 "logging",
                 "lumen"
             ],
-            "time": "2020-03-05T20:25:07+00:00"
+            "time": "2020-04-23T19:44:47+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -7680,16 +7680,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.5.3",
+            "version": "8.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "67750516bc02f300e2742fed2f50177f8f37bedf"
+                "reference": "8474e22d7d642f665084ba5ec780626cbd1efd23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/67750516bc02f300e2742fed2f50177f8f37bedf",
-                "reference": "67750516bc02f300e2742fed2f50177f8f37bedf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8474e22d7d642f665084ba5ec780626cbd1efd23",
+                "reference": "8474e22d7d642f665084ba5ec780626cbd1efd23",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -7765,7 +7765,17 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-03-31T08:52:04+00:00"
+            "funding": [
+                {
+                    "url": "https://phpunit.de/donate.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-04-23T04:39:42+00:00"
         },
         {
             "name": "scrivo/highlight.php",
@@ -8635,7 +8645,7 @@
             "source": {
                 "type": "git",
                 "url": "https://gitee.com/xbhub/laravel-xgee.git",
-                "reference": "7db7ad0cc52d14ba05056442f980fa8d54711c79"
+                "reference": "9a01a6391943a4ba1794e93b828b3cb470299383"
             },
             "require": {
                 "php": "~5.6|~7.0"
@@ -8671,7 +8681,7 @@
                 "lumina",
                 "lumina-generate"
             ],
-            "time": "2020-04-21T08:58:13+00:00"
+            "time": "2020-04-24T06:21:17+00:00"
         }
     ],
     "aliases": [],

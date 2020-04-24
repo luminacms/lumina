@@ -75,7 +75,7 @@ class Kernel extends HttpKernel
         'permission.org' => \Modules\Core\Http\Middleware\OrgPermissionMiddleware::class,
 
         // 'responseCache' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
-        'checkOidParams' => \Modules\Core\Http\Middleware\CheckOidParams::class,
+        'require.oid' => \Modules\Core\Http\Middleware\CheckOidParams::class,
         'aesDecode' => \Modules\Core\Http\Middleware\AesEncryptDecode::class,
 
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',

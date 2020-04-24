@@ -104,11 +104,14 @@ class User extends BaseModel implements
 
     /**
      * 获取用户姓名
+     * 优先级 username => nickname => name
      * @return mixed
      */
-    public function getName()
+    public function getName($mobileFirst = false)
     {
-        return !empty($this->name)?$this->name:(!empty($this->username)?$this->username:$this->nickname);
+        return $this->mobile&&$mobileFirst
+                    ? $this->mobile
+                    : ($this->username ?: ($this->nickname ?: ( $this->name ?: '' )));
     }
 
     /**
@@ -240,29 +243,6 @@ class User extends BaseModel implements
                     'last_login_ip_at' => request()->ip()
                 ]);
             }
-        }
-    }
-
-    /**
-     * 登录标记组织信息
-     */
-    public function loginTagOrg()
-    {
-        $_user = auth()->user();
-        session()->forget('__org');
-        if($_user->hasRole('SUPER') || $_user->hasAnyRole(['ADMIN'])) {
-            // oid参数不存在，管理员取任意oid，普通管理员取自身所在组织
-            $_oid = $_user->hasRole('SUPER')?Organization::first()->oid:$_user->organizations[0]->oid;
-            $org = Organization::where('oid', $_oid)->first();
-            session(['__org' => $org]);
-            session()->save();
-
-            return redirect()->route('dashboard', $_oid);
-        }else{
-            flash('暂无权限，请确定你在该组织中且是管理员身份', 'error');
-            Auth::logout();
-
-            return redirect('/');
         }
     }
 }

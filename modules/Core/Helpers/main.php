@@ -112,7 +112,7 @@ if(!function_exists('markdown_converter')) {
         $environment = League\CommonMark\Environment::createCommonMarkEnvironment();
 
         // 表格扩展
-        $environment->addExtension(new League\CommonMark\Ext\Table\TableExtension());
+        $environment->addExtension(new League\CommonMark\Extension\Table\TableExtension());
 //        $environment->addExtension(new Webuni\CommonMark\TableExtension\TableExtension());
 //        $environment->addExtension(new Webuni\CommonMark\AttributesExtension\AttributesExtension());
 

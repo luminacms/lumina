@@ -163,9 +163,9 @@ trait ResponseTrait {
                             $_json .= '<dd>'.$_jk.'：'.$_ji.'</dd>';
                         }
                     }
-                    $_html .= '<tr><td width="120">'.__("field.".$_key).'</td><td><pre class="layui-code"><dl>'.($_json).'</dl></pre></td></td></tr>';
+                    $_html .= '<tr><td width="120">'.__("core::field.".$_key).'</td><td><pre class="layui-code"><dl>'.($_json).'</dl></pre></td></td></tr>';
                 }else{
-                    $_html .= '<tr><td width="120">'.__("field.".$_key).'</td><td>'.$_item.'</td></td></tr>';
+                    $_html .= '<tr><td width="120">'.__("core::field.".$_key).'</td><td>'.$_item.'</td></td></tr>';
                 }
             }
         }else{
