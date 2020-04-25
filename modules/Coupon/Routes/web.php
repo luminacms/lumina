@@ -21,11 +21,3 @@ Route::group(['prefix' => '/', 'as' => 'coupon.','middleware' => 'auth:org'], fu
     Route::resource('coupon-code', 'CouponCodeController');
 
 });
-
-Route::get('/a', function(){
-
-    $a = CouponCode::where('code', 'zXuIw5riOxrIvwdJGGVJDeDhy5ciMGu4')->first();
-
-    dd($a->coupon->uid);
-
-});

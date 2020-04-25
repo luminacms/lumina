@@ -12,10 +12,10 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 50,"name": "vote", "icon": "fa-wpforms", "label": "表单引擎", "children": [
-            {"name": "vote_votes", "icon": "", "label": "表单管理", "route": "backend.vote.votes.index"},
-            {"name": "vote_vote_data", "icon": "", "label": "线索库"},
-            {"name": "vote_vote_state", "icon": "", "label": "数据统计"}
-        ]}
+        {"sort": 50,"id": "vote", "parentid": "0","icon": "fa-wpforms", "text": "表单引擎"},
+
+        {"sort": 50,"id": "vote_votes", "parentid": "vote", "text": "表单管理", "route": "backend.vote.votes.index"},
+        {"sort": 50,"id": "vote_vote_data", "parentid": "vote", "text": "线索库", "route": "backend.vote.votes.index"},
+        {"sort": 50,"id": "vote_vote_state", "parentid": "vote", "text": "数据统计", "route": "backend.vote.votes.index"}
     ]
 }

@@ -19,20 +19,19 @@ class MenuService
     protected $roles;
 
     const _core_menu = [
-        ["sort"=>0, "id"=>"system", "parentid"=>"0", "icon"=>"fa-cogs", "label"=>"全局配置", "route"=>"core.option.index", "auth"=>true],
-        ["sort"=>10,"id"=>"user", "parentid"=>"0", "icon"=>"fa-users", "label"=>"用户管理"],
+        ["sort"=>0, "id"=>"system", "parentid"=>"0", "icon"=>"fa-cogs", "text"=>"全局配置", "route"=>"core.option.index"],
 
-        ["sort"=>10,"id"=>"user_organizations", "parentid"=>"user", "icon"=>"", "label"=>"组织管理", "route"=>"core.organizations.index", "auth"=>["ROLE"=>"SUPER"]],
-        ["sort"=>10,"id"=>"user_departments", "parentid"=>"user","icon"=>"", "label"=>"部门管理", "route"=>"core.departments.index"],
-        ["sort"=>10,"id"=>"user_layer", "parentid"=>"user","icon"=>"", "label"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER"]],
-        ["sort"=>10,"id"=>"user_users", "parentid"=>"user","icon"=>"", "label"=>"员工管理", "route"=>"core.users.index"],
-        ["sort"=>10,"id"=>"user_users_social", "parentid"=>"user","icon"=>"", "label"=>"粉丝管理", "route"=>"core.user-socialites.index"],
-        ["sort"=>10,"id"=>"user_address", "parentid"=>"user", "icon"=>"", "label"=>"地址管理", "route"=>"core.user-addresses.index"],
+        ["sort"=>10,"id"=>"user", "parentid"=>"0", "icon"=>"fa-users", "text"=>"用户管理"],
+        ["sort"=>101,"id"=>"user_organizations", "parentid"=>"user", "icon"=>"", "text"=>"组织管理", "route"=>"core.organizations.index", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>102,"id"=>"user_departments", "parentid"=>"user","icon"=>"", "text"=>"部门管理", "route"=>"core.departments.index"],
+        ["sort"=>103,"id"=>"user_layer", "parentid"=>"user","icon"=>"", "text"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>104,"id"=>"user_users", "parentid"=>"user","icon"=>"", "text"=>"员工管理", "route"=>"core.users.index"],
+        ["sort"=>105,"id"=>"user_users_social", "parentid"=>"user","icon"=>"", "text"=>"粉丝管理", "route"=>"core.user-socialites.index"],
+        ["sort"=>106,"id"=>"user_address", "parentid"=>"user", "icon"=>"", "text"=>"地址管理", "route"=>"core.user-addresses.index"],
 
-        ["id"=>"tool", "parentid"=>"0", "icon"=>"fa-magic", "label"=>"系统工具", "auth"=>["ROLE"=>"SUPER"], "sort"=>999],
-
-        ["id"=>"tool_log", "parentid" => "tool", "icon"=>"", "label"=>"日志管理", "route"=>"core.tool.log"],
-        ["id"=>"tool_apitest", "parentid" => "tool", "icon"=>"", "label"=>"接口管理", "route"=>"apitest.index"],
+        ["sort"=>999, "id"=>"tool", "parentid"=>"0", "icon"=>"fa-magic", "text"=>"系统工具", "auth"=>["ROLE"=>"SUPER"]],
+        ["id"=>"tool_log", "parentid" => "tool", "icon"=>"", "text"=>"日志管理", "route"=>"core.tool.log"],
+        ["id"=>"tool_apitest", "parentid" => "tool", "icon"=>"", "text"=>"接口管理", "route"=>"apitest.index"],
     ];
 
     /**
@@ -40,7 +39,7 @@ class MenuService
      */
     public function make()
     {
-        $menus = collect()->merge($this->_parseMenu(self::_core_menu));
+        $menus = collect()->merge(self::_core_menu);
         foreach(Module::getOrdered() as $module){
             $_permisson_key = 'module_'.$module->getAlias();
 
@@ -51,21 +50,23 @@ class MenuService
                 in_array($module->getAlias(), ['core']) || //Core模块全部菜单不验证模块权限
                 Permission::where('name', $_permisson_key)->exists()&&auth()->org()->hasPermissionTo($_permisson_key, 'org') // 模块权限组织验证
             ){
-                $menus = $menus->merge($this->_parseMenu($module->get('menus', [])));
+                $menus = $menus->merge($module->get('menus', []));
             }
         }
-        $menus = $menus->sortBy('sort')->values()->all();
+
+        $menus = $this->_parseMenu($menus)->sortBy('sort')->all();
+        $menuTree = (new Tree($menus))->get_tree_array();
 
         // 构造html
         $menuHtml = '';
-        foreach($menus as $_menu) {
-            $menuHtml .= '<li data-name="'.$_menu['name'].'" class="layui-nav-item">';
+        foreach($menuTree as $_menu) {
+            $menuHtml .= '<li data-id="'.$_menu['id'].'" class="layui-nav-item">';
             if(!isset($_menu['target'])) {
-                $menuHtml .= '<a href="javascript:;" lay-tips="'.$_menu['label'].'" lay-direction="2" '.(!isset($_menu['children'])?'lay-href='.$_menu['url']:'').'>';
+                $menuHtml .= '<a href="javascript:;" lay-tips="'.$_menu['text'].'" lay-direction="2" '.(!isset($_menu['children'])?'lay-href='.$_menu['url']:'').'>';
             }else{
                 $menuHtml .= '<a href="'.$_menu['url'].'" target="'.$_menu['target'].'">';
             }
-            $menuHtml .= '<i class="fa '.$_menu['icon'].' absolute" style="left: 20px;top: 50%;margin-top: -5px;"></i><cite>'.$_menu['label'].'</cite>';
+            $menuHtml .= '<i class="fa '.($_menu['icon'] ?? '').' absolute" style="left: 20px;top: 50%;margin-top: -5px;"></i><cite>'.$_menu['text'].'</cite>';
 
             if (isset($_menu['children'])) {
                 $menuHtml .= '<i class="fa fa-angle-right ml-1"></i></a>'.$this->__buildChildHtml($_menu['children']);
@@ -77,32 +78,20 @@ class MenuService
     }
 
     /**
+     * 权限检查, url生成
      * @param $menu
      * @return array
      */
-    protected function _parseMenu($menu)
+    protected function _parseMenu($menus)
     {
-        // $r = (new Department())->getTree();
+        if (empty($menus)) return [];
 
-        // $tree = new Tree($menu);
-        // dd($tree->get_tree_array());
-
-        if (empty($menu)) return [];
-
-        foreach ($menu as $_k => $_menu) {
-            // 权限检查
-            if(isset($_menu['auth'])) {
-                if(!$this->__checkIfPass($_menu['auth']) || $_menu['auth']!=true) {
-                    unset($menu[$_k]);
-                    continue;
-                }
-            }
-            $menu[$_k]['url'] = $this->__buildUrl($_menu);
-            if(isset($_menu['children'])) {
-                $menu[$_k]['children'] = $this->_parseMenu($_menu['children']);
-            }
-        }
-        return $menu;
+        return $menus->filter(function($item){
+            return !isset($item['auth']) || $this->__checkIfPass($item['auth']);
+        })->map(function($item) {
+            $item['url'] = $this->__buildUrl($item);
+            return $item;
+        });
     }
 
     /**
@@ -130,8 +119,8 @@ class MenuService
     {
         $childHtml = '<dl class="layui-nav-child">';
         foreach ($child as $_child) {
-            $childHtml .= '<dd data-name="'.$_child['name'].'">';
-            $childHtml .= '<a '.(!isset($_child['children'])&&!empty($_child['url'])?'lay-href='.$_child['url']:'href="javascript:;"').'>'.(isset($_child['icon'])?'<i class="fa '.$_child['icon'].' mr-1"></i>':'').$_child['label'];
+            $childHtml .= '<dd data-id="'.$_child['id'].'">';
+            $childHtml .= '<a '.(!isset($_child['children'])&&!empty($_child['url'])?'lay-href='.$_child['url']:'href="javascript:;"').'>'.(isset($_child['icon'])?'<i class="fa '.$_child['icon'].' mr-1"></i>':'').$_child['text'];
             if(isset($_child['children'])) {
                 $childHtml .= '<i class="fa fa-angle-right ml-1"></i></a>'.$this->__buildChildHtml($_child['children']);
             }else{
@@ -148,6 +137,10 @@ class MenuService
      */
     protected function __checkIfPass($auth)
     {
+        if(\is_bool($auth)){
+            return $auth;
+        }
+
         $user = \auth()->user();
         $pass = true;
 

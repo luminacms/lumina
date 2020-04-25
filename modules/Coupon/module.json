@@ -11,8 +11,7 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 50,"name": "coupon", "icon": "fa-ticket", "label": "优惠券", "children": [
-            {"name": "coupon_coupon", "icon": "", "label": "优惠券管理", "route": "coupon.coupon.index"}
-        ]}
+        {"sort": 50,"id": "coupon","parentid":"0", "icon": "fa-ticket", "text": "优惠券"},
+        {"sort": 50,"id": "coupon_coupon","parentid":"coupon", "text": "优惠券管理", "route": "coupon.coupon.index"}
     ]
 }

@@ -113,12 +113,11 @@ class Tree {
         $a = $newarr = array();
         if (is_array($this->arr)) {
             foreach ($this->arr as $id => $a) {
-                if ($a['parentid'] == $myid)
+                if (strcmp($a['parentid'], $myid) === 0){
                     $newarr[$id] = $a;
+                }
             }
         }
-
-        dd($newarr);
         return $newarr ? $newarr : false;
     }
 
@@ -210,6 +209,7 @@ class Tree {
     public function get_tree_array($parentid = 0) {
         $retarray = array();
         //一级栏目数组
+
         $child = $this->get_child($parentid);
         if (is_array($child)) {
             //数组长度

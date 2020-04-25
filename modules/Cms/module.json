@@ -1,7 +1,6 @@
 {
     "name": "Cms",
     "alias": "cms",
-    "label": "CMS引擎",
     "description": "CMS引擎",
     "keywords": [],
     "active": 1,
@@ -13,10 +12,9 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 50,"name": "cms", "icon": "fa-book", "label": "内容引擎", "children": [
-            {"name": "cms_category", "icon": "", "label": "栏目管理", "route": "backend.cms.cms-categories.index"},
-            {"name": "cms_post", "icon": "", "label": "文章管理", "route": "backend.cms.posts.index"},
-            {"name": "cms_page", "icon": "", "label": "单页管理", "route": "backend.cms.cms-pages.index"}
-        ]}
+        {"sort": 50,"id": "cms", "parentid":"0", "icon": "fa-book", "text": "内容引擎"},
+        {"sort": 50,"id": "cms_category", "parentid": "cms", "icon": "fa-book", "text": "栏目管理","route": "backend.cms.cms-categories.index"},
+        {"sort": 50,"id": "cms_post", "parentid": "cms", "icon": "fa-book", "text": "文章管理","route": "backend.cms.posts.index"},
+        {"sort": 50,"id": "cms_page", "parentid": "cms", "icon": "fa-book", "text": "单页管理","route": "backend.cms.cms-pages.index"}
     ]
 }

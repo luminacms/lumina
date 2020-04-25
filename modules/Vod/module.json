@@ -12,10 +12,10 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 50,"name": "vod", "icon": "fa-video-camera", "label": "点播引擎", "children": [
-            {"name": "vod_course", "icon": "", "label": "专栏管理", "route": "vod.courses.index"},
-            {"name": "vod_lesson", "icon": "", "label": "课节管理", "route": "vod.lessons.index"},
-            {"name": "vod_order", "icon": "", "label": "订单管理", "route": "vod.vod-orders.index"}
-        ]}
+        {"sort": 50,"id": "vod", "parentid":"0","icon": "fa-video-camera", "text": "点播引擎"},
+
+        {"sort": 50,"id": "vod_course", "parentid":"vod", "text": "专栏管理", "route": "vod.courses.index"},
+        {"sort": 50,"id": "vod_lesson", "parentid":"vod", "text": "课节管理", "route": "vod.lessons.index"},
+        {"sort": 50,"id": "vod_order", "parentid":"vod", "text": "订单管理", "route": "vod.vod-orders.index"}
     ]
 }

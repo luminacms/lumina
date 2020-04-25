@@ -12,14 +12,14 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 20,"name": "mp", "icon": "fa-html5", "label": "营销引擎", "children": [
-            {"name": "cms_category", "icon": "", "label": "活动管理", "route": "game.games.index"},
-            {"name": "cms_post", "icon": "", "label": "报名组件", "route": "backend.vote.votes.index"},
-            {"name": "cms_page", "icon": "", "label": "抽奖组件", "route": ""},
-            {"name": "cms_page", "icon": "", "label": "开放平台", "children":  [
-                {"name": "cms_page", "icon": "", "label": "微信组件", "route": "backend.wechat.index"},
-                {"name": "cms_page", "icon": "", "label": "头条组件", "route": ""}
-            ]}
-        ]}
+        {"sort": 20,"id": "game", "parentid":0,"icon": "fa-html5", "text": "营销引擎"},
+
+        {"sort": 21,"id": "game_category", "parentid":"game", "text": "活动管理", "route": "game.games.index"},
+        {"sort": 22,"id": "game_post", "parentid":"game", "text": "报名组件", "route": "backend.vote.votes.index"},
+        {"sort": 23,"id": "game_page", "parentid":"game", "text": "抽奖组件"},
+        {"sort": 24,"id": "game_open", "parentid":"game", "text": "开放平台"},
+
+        {"sort": 241,"id": "game_open_wechat", "parentid":"game_open", "text": "微信组件", "route": "backend.wechat.index"},
+        {"sort": 242,"id": "game_open_toutiao", "parentid":"game_open", "text": "头条组件"}
     ]
 }

@@ -12,9 +12,9 @@
     "files": [],
     "requires": [],
     "menus": [
-        {"sort": 50,"name": "payment", "icon": "fa-rmb", "label": "支付引擎", "children": [
-            {"name": "payment_transaction", "icon": "", "label": "交易管理", "route": "payment.transaction.index"},
-            {"name": "payment_logs", "icon": "", "label": "支付日志", "route": "payment.logs.index"}
-        ]}
+        {"sort": 50,"id": "payment", "parentid": "0", "icon": "fa-rmb", "text": "支付引擎"},
+
+        {"sort": 50,"id": "payment_transaction", "parentid": "payment", "text": "交易管理", "route": "payment.transaction.index"},
+        {"sort": 50,"id": "payment_logs", "parentid": "payment", "text": "支付日志", "route": "payment.logs.index"}
     ]
 }
