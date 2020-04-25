@@ -33,7 +33,7 @@
                 var checked = table.checkStatus('data_cmspage_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('backend.cms.cms-pages.create') }}', '新增数据')
+                    parent.layui.admin.openTab('{{ route('backend.cms.cms-pages.create') }}', '新增数据')
                     return true;
                 }
 
@@ -53,7 +53,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('backend.cms.cms-pages.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
+                        parent.layui.admin.openTab('{{route('backend.cms.cms-pages.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
                         return true;
                     }
                 }

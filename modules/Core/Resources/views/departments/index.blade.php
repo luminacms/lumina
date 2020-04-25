@@ -46,7 +46,7 @@
                 var checked = table.checkStatus('department_table');
 
                 if(obj.event == 'create') {
-                    admin.openTabsPage('{{ route('core.departments.create') }}', '新增数据')
+                    admin.openTab('{{ route('core.departments.create') }}', '新增数据')
                     return true;
                 }
 
@@ -69,7 +69,7 @@
                         });
                     }else if(obj.event === 'update') {
                         console.log(222)
-                        admin.openTabsPage('{{route('core.departments.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
+                        admin.openTab('{{route('core.departments.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

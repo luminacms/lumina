@@ -34,7 +34,7 @@
                 'quote',
                 'head',
                 'unorderlist',
-                'emotion'
+                // 'emotion'
             ];
 
             exports('wangEditorLight', wangEditorLight);
@@ -77,7 +77,7 @@
         var nodeName = $elem[0].nodeName;
         if (nodeName !== 'TEXTAREA' && nodeName !== 'DIV') {
             // 只能是 textarea 和 div ，其他类型的元素不行
-            return;   
+            return;
         }
         this.valueNodeName = nodeName.toLowerCase();
         this.$valueContainer = $elem;
@@ -283,7 +283,7 @@ _e(function (E, $) {
         opt = opt === 'start' ? true : false;
 
         range = range || this.currentRange();
-        
+
         if (range) {
             // 合并，保存
             range.collapse(opt);
@@ -388,7 +388,7 @@ _e(function (E, $) {
         if (opt === 'end') {
             this.collapseRange(this.currentRange(), 'end');
         }
-        
+
         // 恢复选区
         this.restoreSelection();
     };
@@ -404,7 +404,7 @@ _e(function (E, $) {
         var range;
         var $txt = editor.txt.$txt;
         var $firstChild = $txt.children().first();
-        
+
         if ($firstChild.length) {
             editor.restoreSelectionByElem($firstChild.get(0));
         }
@@ -435,7 +435,7 @@ _e(function (E, $) {
             // 继续向下
             lastTextNode = lastTextNode.lastChild;
         }
-        
+
         var range = document.createRange();
         if (firstTextNode && lastTextNode) {
             // 说明 elem 有内容，能取到子元素
@@ -542,15 +542,15 @@ _e(function (E, $) {
         } catch (ex) {
 
         }
-        
+
         if(currentRange.text.length === 0){
             try {
                 // IE8 插入表情会报错
                 range.collapse(false);
             } catch (ex) {
-                
+
             }
-            
+
         }else{
             range.setEndPoint('StartToStart', currentRange);
         }
@@ -560,17 +560,17 @@ _e(function (E, $) {
 });
 // editor command hooks
 _e(function (E, $) {
-    
+
     E.fn.commandHooks = function () {
         var editor = this;
         var commandHooks = {};
-        
+
         // insertHtml
         commandHooks.insertHtml = function (html) {
             var $elem = $(html);
             var rangeElem = editor.getRangeElem();
             var targetElem;
-            
+
             targetElem = editor.getLegalTags(rangeElem);
             if (!targetElem) {
                 return;
@@ -591,7 +591,7 @@ _e(function (E, $) {
     E.fn.command = function (e, commandName, commandValue, callback) {
         var editor = this;
         var hooks;
-        
+
         function commandFn() {
             if (!commandName) {
                 return;
@@ -678,7 +678,7 @@ _e(function (E, $) {
         // 隐藏 dropPanel dropList modal  设置 200ms 间隔
         function hidePanelAndModal() {
             editor.hideDropPanelAndModal();
-        } 
+        }
         setTimeout(hidePanelAndModal, 200);
 
         if (e) {
@@ -763,9 +763,9 @@ _e(function (E, $) {
 
         if (!matchesSelector) {
             // 定义 matchesSelector 函数
-            matchesSelector = elem.webkitMatchesSelector || 
+            matchesSelector = elem.webkitMatchesSelector ||
                               elem.mozMatchesSelector ||
-                              elem.oMatchesSelector || 
+                              elem.oMatchesSelector ||
                               elem.matchesSelector;
         }
         if (!matchesSelector) {
@@ -816,7 +816,7 @@ _e(function (E, $) {
         // 执行 addMenus 之前：
         // 1. 允许用户修改 editor.UI 自定义配置UI
         // 2. 允许用户通过修改 editor.menus 来自定义配置菜单
-        // 因此要在 create 时执行，而不是 init           
+        // 因此要在 create 时执行，而不是 init
         editor.addMenus();
 
         // 渲染
@@ -970,7 +970,7 @@ _e(function (E, $) {
 
         $editorContainer.append($menuContainer);
     };
-    
+
     // 获取菜单栏的高度
     MenuContainer.fn.height = function () {
         var $menuContainer = this.$menuContainer;
@@ -1051,7 +1051,7 @@ _e(function (E, $) {
 
         if (menuUI == null) {
             E.warn('editor.UI配置中，没有菜单 "' + menuId + '" 的UI配置，只能取默认值');
-            
+
             // 必须写成 uiConfig['default'];
             // 写成 uiConfig.default IE8会报错
             menuUI = uiConfig['default'];
@@ -1080,7 +1080,7 @@ _e(function (E, $) {
     Menu.fn.render = function (groupIdx) {
         // 渲染UI
         this.initUI();
-        
+
         var editor = this.editor;
         var menuContainer = editor.menuContainer;
         var $menuItem = menuContainer.appendMenu(groupIdx, this);
@@ -1278,7 +1278,7 @@ _e(function (E, $) {
         } // if
     };
 
-    // 点击菜单，显示了 dropPanel modal 时，菜单的状态 
+    // 点击菜单，显示了 dropPanel modal 时，菜单的状态
     Menu.fn.active = function (active) {
         if (active == null) {
             return this._activeState;
@@ -1481,7 +1481,7 @@ _e(function (E, $) {
 });
 // dropListfn api
 _e(function (E, $) {
-    
+
     var DropList = E.DropList;
 
     // 渲染
@@ -1702,7 +1702,7 @@ _e(function (E, $) {
 });
 // dropPanel fn api
 _e(function (E, $) {
-   
+
     var DropPanel = E.DropPanel;
 
     // 渲染
@@ -2315,7 +2315,7 @@ _e(function (E, $) {
                             });
                         }
                     }
-                    
+
                 } else if (ieData && ieData.getData) {
                     // IE 直接从剪切板中取出纯文本格式
                     resultHtml = ieData.getData('text');
@@ -2371,7 +2371,7 @@ _e(function (E, $) {
                 });
                 return;
             }
-            
+
             if (legalTagArr.indexOf(nodeName) >= 0) {
                 // 如果是合法标签之内的，则根据元素类型，获取值
                 resultHtml += getResult(elem);
@@ -2426,7 +2426,7 @@ _e(function (E, $) {
                 return '<' + nodeName + '>' + htmlForP + '</' + nodeName + '>';
 
             } else if (['ul', 'ol'].indexOf(nodeName) >= 0) {
-                
+
                 // ul ol元素，获取子元素（li元素）的text link img，再拼接
                 $elem = $(elem);
                 $elem.children().each(function () {
@@ -2444,9 +2444,9 @@ _e(function (E, $) {
                     htmlForLi += '<li>' + html + '</li>';
                 });
                 return '<' + nodeName + '>' + htmlForLi + '</' + nodeName + '>';
-            
+
             } else {
-                
+
                 // 其他元素，移除元素属性
                 $elem = $(removeAttrs(elem));
                 return $('<div>').append($elem).html();
@@ -2502,7 +2502,7 @@ _e(function (E, $) {
             regArr.push(new RegExp(reg, 'ig'));
         });
 
-        // 增加 li 
+        // 增加 li
         regArr.push(new RegExp('\>\\s*\<(li)\>', 'ig'));
 
         // 增加 tr
@@ -2570,7 +2570,7 @@ _e(function (E, $) {
             if (html === undefined) {
                 return result;
             } else {
-                // 手动触发 change 事件，因为 $txt 监控了 change 事件来判断是否需要执行 editor.onchange 
+                // 手动触发 change 事件，因为 $txt 监控了 change 事件来判断是否需要执行 editor.onchange
                 $txt.change();
             }
         };
@@ -2713,7 +2713,7 @@ _e(function (E, $) {
         }).on('mouseup', function () {
             $txt.off('mouseleave.saveSelection');
         });
-        
+
     };
 
     // 随时更新 value
@@ -2875,7 +2875,7 @@ _e(function (E, $) {
             // 计算初步的结果
             var resultHeight = height + paddingTop + marginTop + paddingBottom + marginBottom;
             var resultTop = top + menuContainer.height();
-            
+
             // var spaceValue;
 
             // // 判断是否超出下边界
@@ -2918,7 +2918,7 @@ _e(function (E, $) {
 
     // IE8 [].indexOf()
     if(!Array.prototype.indexOf){
-        //IE低版本不支持 arr.indexOf 
+        //IE低版本不支持 arr.indexOf
         Array.prototype.indexOf = function(elem){
             var i = 0,
                 length = this.length;
@@ -2944,7 +2944,7 @@ _e(function (E, $) {
     // IE8 Date.now()
     if (!Date.now) {
         Date.now = function () {
-            return new Date().valueOf(); 
+            return new Date().valueOf();
         };
     }
 
@@ -2997,7 +2997,7 @@ _e(function (E, $) {
 // 语言包
 _e(function (E, $) {
     E.langs = {};
-    
+
     // 中文
     E.langs['zh-cn'] = {
         bold: '粗体',
@@ -3182,23 +3182,23 @@ _e(function (E, $) {
             data: [
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                    value: '[草泥马]'    
+                    value: '[草泥马]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                    value: '[神马]'    
+                    value: '[神马]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                    value: '[浮云]'    
+                    value: '[浮云]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                    value: '[给力]'    
+                    value: '[给力]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                    value: '[围观]'    
+                    value: '[围观]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
@@ -3325,7 +3325,7 @@ _e(function (E, $) {
             selected: '.selected'
         }
      };
-     
+
 });
 // 对象配置
 _e(function (E, $) {
@@ -3470,7 +3470,7 @@ _e(function (E, $) {
 });
 // italic 菜单
 _e(function (E, $) {
-    
+
     E.createMenu(function (check) {
         var menuId = 'italic';
         if (!check(menuId)) {
@@ -4203,13 +4203,13 @@ _e(function (E, $) {
         var $editorContainer = editor.$editorContainer;
         var editorTop = $editorContainer.offset().top;
         var editorHeight = $editorContainer.outerHeight();
-        
+
         var $menuContainer = editor.menuContainer.$menuContainer;
         var menuCssPosition = $menuContainer.css('position');
         var menuCssTop = $menuContainer.css('top');
         var menuTop = $menuContainer.offset().top;
         var menuHeight = $menuContainer.outerHeight();
-        
+
         var $txt = editor.txt.$txt;
 
         // E.$window.scroll(function () {
@@ -4432,7 +4432,7 @@ _e(function (E, $) {
     });
 
 });
-    
+
     // 最终返回wangEditorLight构造函数
     return window.wangEditorLight;
 });

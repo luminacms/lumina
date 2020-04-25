@@ -44,7 +44,7 @@
                 var checked = table.checkStatus('data_couponcode_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openDrawer('{{ route("coupon.coupon-code.create", \request()->all()) }}', '新增数据', {
+                    var createModal = admin.openModal('{{ route("coupon.coupon-code.create", \request()->all()) }}', '新增数据', {
                         end: function(index, layero){
                             table.reload('data_couponcode_table')
                         }
@@ -68,7 +68,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openDrawer('{{route("coupon.coupon-code.edit", "_id_")}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id, {
+                        var createModal = admin.openModal('{{route("coupon.coupon-code.edit", "_id_")}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_game_table')
                             }

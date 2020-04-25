@@ -46,7 +46,7 @@
 
             table.on('tool(data_game_table)', function(obj){
                 if(obj.event == 'gamePages'){
-                    admin.openTabsPage('{{ route("game.game-page.index", ['game_id' => '_id_']) }}'.replace('_id_', obj.data.id), '页面管理')
+                    admin.openTab('{{ route("game.game-page.index", ['game_id' => '_id_']) }}'.replace('_id_', obj.data.id), '页面管理')
                     return true;
                 }
             })
@@ -56,7 +56,7 @@
                 var checked = table.checkStatus('data_game_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openDrawer('{{ route("game.games.create") }}', '创建页面', {
+                    var createModal = admin.openModal('{{ route("game.games.create") }}', '创建页面', {
                         end: function(index, layero){
                             // table.reload('data_game_table')
                         }
@@ -80,7 +80,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var updateModal = admin.openDrawer('{{ url("/backend/game/games/_id_/edit") }}'.replace('_id_', checked.data[0].id), '更新页面#'+checked.data[0].id, {
+                        var updateModal = admin.openModal('{{ url("/backend/game/games/_id_/edit") }}'.replace('_id_', checked.data[0].id), '更新页面#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_game_table')
                             }

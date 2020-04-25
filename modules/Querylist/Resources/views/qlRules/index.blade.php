@@ -38,7 +38,7 @@
                 var checked = table.checkStatus('data_qlrule_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('querylist.ql-rules.create') }}', '新增数据')
+                    parent.layui.admin.openTab('{{ route('querylist.ql-rules.create') }}', '新增数据')
                     return true;
                 }
 
@@ -58,7 +58,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('querylist.ql-rules.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据')
+                        parent.layui.admin.openTab('{{route('querylist.ql-rules.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据')
                         return true;
                     }
                 }

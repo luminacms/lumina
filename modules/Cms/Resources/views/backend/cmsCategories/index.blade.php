@@ -45,7 +45,7 @@
                 var checked = table.checkStatus('category_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('backend.cms.cms-categories.create') }}', '新增数据')
+                    parent.layui.admin.openTab('{{ route('backend.cms.cms-categories.create') }}', '新增数据')
                     return true;
                 }
 
@@ -65,7 +65,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('backend.cms.cms-categories.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{route('backend.cms.cms-categories.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

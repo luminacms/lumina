@@ -52,7 +52,7 @@
                 var checked = table.checkStatus('data_votedata_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ url("/voteDatas/create") }}', '新增数据')
+                    parent.layui.admin.openTab('{{ url("/voteDatas/create") }}', '新增数据')
                     return true;
                 }
 
@@ -72,7 +72,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ url("/voteDatas/_id_/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{ url("/voteDatas/_id_/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

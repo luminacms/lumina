@@ -43,7 +43,7 @@ class Editor extends Component
         <script>
             layui.use(['admin', 'wangEditor'], function(){
                 var $self = $("#{{$iptkey}}");
-                var editor = new wangEditor({{$iptkey}});
+                var editor = new wangEditor("{{$iptkey}}");
                 editor.onchange = function () {
                     $self.val(this.$txt.html())
                 }

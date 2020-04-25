@@ -55,7 +55,7 @@
                 var checked = table.checkStatus('data_paytransaction_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ url("/payTransactions/create") }}', '新增数据')
+                    parent.layui.admin.openTab('{{ url("/payTransactions/create") }}', '新增数据')
                     return true;
                 }
 
@@ -75,7 +75,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ url("/payTransactions/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{ url("/payTransactions/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

@@ -171,7 +171,7 @@
                             e.stopPropagation()
                             var _id = $(this).parents("li").data("id")
                             var _uid = $(this).parents("li").data("uid")
-                            var createModal = admin.openDrawer('{{ route("game.game-page.edit", "_id_") }}'.replace('_id_', _id), '修改页面#'+_id, {
+                            var createModal = admin.openModal('{{ route("game.game-page.edit", "_id_") }}'.replace('_id_', _id), '修改页面#'+_id, {
                                 end: function(index, layero){
                                     element.tabDelete("webideTab", _uid);
                                     initWebide();
@@ -189,7 +189,7 @@
 
                             if(uid == '__create') {
                                 // 新建页面
-                                var createModal = admin.openDrawer('{{ route("game.game-page.create", \request()->merge(["mode"=>"source"])->all()) }}', '创建页面', {
+                                var createModal = admin.openModal('{{ route("game.game-page.create", \request()->merge(["mode"=>"source"])->all()) }}', '创建页面', {
                                     end: function(index, layero){
                                         initWebide();
                                     }

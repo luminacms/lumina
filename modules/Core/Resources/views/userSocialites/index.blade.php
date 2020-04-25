@@ -53,7 +53,7 @@
                 var checked = table.checkStatus('data_usersocialite_table');
 
                 if(obj.event == 'create') {
-                    admin.openTabsPage('{{ route('core.user-socialites.create') }}', '新增数据')
+                    admin.openTab('{{ route('core.user-socialites.create') }}', '新增数据')
                     return true;
                 }
 
@@ -73,7 +73,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        admin.openTabsPage('{{route('core.user-socialites.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
+                        admin.openTab('{{route('core.user-socialites.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
                         return true;
                     }
                 }

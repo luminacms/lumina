@@ -46,7 +46,7 @@
                 var checked = table.checkStatus('data_paylog_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ url("/payLogs/create") }}', '新增数据')
+                    parent.layui.admin.openTab('{{ url("/payLogs/create") }}', '新增数据')
                     return true;
                 }
 
@@ -66,7 +66,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ url("/payLogs/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{ url("/payLogs/:id/edit") }}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

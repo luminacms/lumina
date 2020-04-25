@@ -289,7 +289,7 @@ layui.extend({
 
         Admin.tabsPage.elem = $this;
         var frame = parent === self ? layui : top.layui;
-        frame.admin.openTabsPage(_href, _text || $this.text(), _id)
+        frame.admin.openTab(_href, _text || $this.text(), _id)
     });
     $body.on("click", "*[lumina-event]", function () {
         var e = $(this),
@@ -321,7 +321,7 @@ layui.extend({
     };
 
     // 打开tab页面
-    Admin.openTabsPage = function(href, title, tabid){
+    Admin.openTab = function(href, title, tabid){
         var hasOpened, _tabs = $($navs).find("li"),
             tabID = tabid || href.replace(location.origin, "");
 
@@ -356,7 +356,7 @@ layui.extend({
         })
     }
     // Drawer 组件
-    Admin.openDrawer = function(content, title, option){
+    Admin.openModal = function(content, title, option){
         var frame = parent === self ? self : parent;
         var type = content.search(/^((https|http)?:\/\/)[^\s]+/) > -1 ? 2 : 1;
         return frame.layer.open($.extend({

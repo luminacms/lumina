@@ -77,11 +77,12 @@
 <script>
 	layui.extend({
 		'MallProductAttrPicker': "modules/mall/product_attr_picker"
-	}).use(['table', 'MallProductAttrPicker', 'laytpl', 'autocomplete', 'upload'], function(){
+	}).use(['table', 'MallProductAttrPicker', 'laytpl', 'autocomplete', 'form'], function(){
 		var $table = $("#mall_product_sku"),
 				laytpl = layui.laytpl,
 				autocomplete = layui.autocomplete,
-				upload = layui.upload,
+                upload = layui.upload,
+                form = layui.form,
 				MallProductAttrPicker = layui.MallProductAttrPicker,
 				skuCouunt = 0,
 				IMG_LIMIT = 9,
@@ -91,11 +92,7 @@
 					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][price_fee]"> </td>' +
 					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][market_price_fee]"> </td>' +
 					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][quantity]"></td>' +
-					'<td><div class="m-uploader clearfix" id="">\n' +
-					'   <ul class="uploader__files" id="j_uploader_box"></ul>\n' +
-					'     	<div class="img__picker j_img_picker" id="imgPicker_@{{d.idx}}"></div>\n' +
-					'        <input type="hidden" name=""  value="" class="form-control j_img">\n' +
-					'     </div></td>' +
+					'<td><div class="layui-form-img"><input type="hidden" name="img" ></div></td>' +
 					'<td></td>'+
 				'</tr>',
 				_autocompleteUrl = '/interface/mall/product-attr-values',
@@ -104,38 +101,15 @@
 				'<div class="layui-input-block"><input type="text" class="layui-input" name="sku[@{{ d.idx }}][attrs][@{{ d.id }}]" lay-autocomplete lay-url="'+_autocompleteUrl+'"></div>' +
 				'</div>';
 
-        function renderTpl(){
-            $('.j_img_picker').click(function(i ,n) {
-                var uploadInst = upload.render({
-                    elem: '#'+$(this).attr("id"),
-                    url: '{{ url('/interface/core/upload') }}',
-                    fileNumLimit: IMG_LIMIT,
-                    done: function(res, $el){
-                        var $ipt = $el.parent(".m-uploader").find("input.j_img")
-                        var $iptVal = $ipt.val();
-                        var $imgBox = $el.parent(".m-uploader").find("ul.uploader__files");
-                        $iptVal = $iptVal.length>1?$iptVal.split(','):[]
-                        if($iptVal.length >= IMG_LIMIT) return;
-                        $.each(res, function(i, n){
-                            $iptVal.push(n)
-                            if($iptVal.length >= IMG_LIMIT) {
-                                $el.hide();
-                            }
-                            $imgBox.append(laytpl(_imgItem).render({
-                                upfile: n
-                            }))
-                        })
-                        $ipt.val($iptVal.join(','))
-                    }
-                });
-            })
-        }
+
 		$table.on("click","#j_addSku", function(){
 			var _body = $table.find("tbody")
 			skuCouunt = _body.find("tr").length
-            _body.append(laytpl(_sku_tpl).render({'idx': skuCouunt}))
+            _body.prepend(laytpl(_sku_tpl).render({'idx': skuCouunt}))
 
-            renderTpl();
+            form.render('img')
+            // $(document).scrollTop($(document).height());
+            // renderTpl();
 		})
 		$table.on("click",".j_sku_attr_picker", function(){
 			var $this = $(this);

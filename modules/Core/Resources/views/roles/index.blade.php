@@ -34,7 +34,7 @@
                 var checked = table.checkStatus('data_role_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.lumina.openTabsPage('{{ route('core.roles.create') }}', '新增数据')
+                    parent.layui.lumina.openTab('{{ route('core.roles.create') }}', '新增数据')
                     return true;
                 }
 
@@ -54,7 +54,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.lumina.openTabsPage('{{route('core.roles.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
+                        parent.layui.lumina.openTab('{{route('core.roles.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id)
                         return true;
                     }
                 }

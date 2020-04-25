@@ -50,7 +50,7 @@
                 var checked = table.checkStatus('data_vote_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route("backend.vote.votes.create") }}', '新增报名')
+                    parent.layui.admin.openTab('{{ route("backend.vote.votes.create") }}', '新增报名')
                     return true;
                 }
 
@@ -70,7 +70,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{ route("backend.vote.votes.edit", "_id_") }}'.replace('_id_', checked.data[0].id), '更新报名')
+                        parent.layui.admin.openTab('{{ route("backend.vote.votes.edit", "_id_") }}'.replace('_id_', checked.data[0].id), '更新报名')
                         return true;
                     }
 
@@ -79,7 +79,7 @@
 
             table.on('tool(data_vote_table)', function(obj){
                 if(obj.event == 'goVoteData') {
-                    parent.layui.admin.openTabsPage('{{ route("backend.vote.data.index") }}?vote_id='+obj.data.id, '报名数据#'+obj.data.id)
+                    parent.layui.admin.openTab('{{ route("backend.vote.data.index") }}?vote_id='+obj.data.id, '报名数据#'+obj.data.id)
                     return true;
                 }else if(obj.event == 'goVoteDemo') {
                     var tempwindow=parent.window.open('_blank');

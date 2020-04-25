@@ -632,24 +632,53 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                             '<div class="img__picker" data-limit="9" ></div>',
                         '</div>'].join(''));
 
+                        if(othis.find('.m-uploader').length > 0) return;
+
                         othis.append(reElem);
-                        events.call(this, reElem);
+                        events.call(this, reElem.find(".img__picker"));
                     });
                 },
 
                 // date
                 date: function () {
-                    var CLASS_DATETIME = 'layui-form-datetime',
-                        CLASS_DATE = 'layui-form-date',
-                        CLASS_TIME = 'layui-form-time';
+                    var CLASS_DATE = 'layui-form-date',
+                        CLASS_DATERANGE = 'layui-form-daterange';
+
                     elemForm.find('.' + CLASS_DATE).each(function (i, n) {
-                        laydate.render({elem: n,type: 'date',format: 'yyyy-MM-dd'});
+                        laydate.render({elem: n,type: $(n).attr("date-type") || 'date'});
                     });
-                    elemForm.find('.' + CLASS_DATETIME).each(function (i, n) {
-                        laydate.render({elem: n,type: 'datetime',format: 'yyyy-MM-dd HH:mm:ss'});
-                    });
-                    elemForm.find('.' + CLASS_TIME).each(function (i, n) {
-                        laydate.render({elem: n,type: 'time',format: 'HH:mm:ss'});
+
+                    // dateRange render
+                    elemForm.find('.' + CLASS_DATERANGE).each(function (i, n) {
+                        var othis = $(this),
+                            insStart = '',
+                            insEnd = '',
+                            option = othis.data('options');
+
+                        insStart = laydate.render({
+                            elem: othis.find(".start_at")[0],
+                            min: option.min || '1900-1-1',
+                            max: option.max || '2999-12-31',
+                            type: option.type || 'date',
+                            value: othis.find(".start_at")[0].value,
+                            done: function(value, date){
+                            insEnd.config.min = lay.extend({}, date, {
+                                month: date.month - 1
+                            });
+                            }
+                        });
+                        insEnd = laydate.render({
+                            elem: othis.find(".end_at")[0],
+                            min: option.min || '1900-1-1',
+                            max: option.max || '2999-12-31',
+                            type: option.type || 'date',
+                            value: othis.find(".end_at")[0].value,
+                            done: function(value, date){
+                                insStart.config.max = lay.extend({}, date, {
+                                    month: date.month - 1
+                                });
+                            }
+                        });
                     });
                 },
             };

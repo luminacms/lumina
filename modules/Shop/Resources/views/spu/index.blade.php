@@ -46,7 +46,7 @@
                 var checked = table.checkStatus('data_spu_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openDrawer('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
+                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
                         end: function(index, layero){
                             table.reload('data_game_table')
                         }
@@ -70,7 +70,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openDrawer('{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id, {
+                        var createModal = admin.openTab('{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_game_table')
                             }

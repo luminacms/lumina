@@ -28,7 +28,7 @@ class DateRange extends Component
         $this->type = $type;
         $this->verify = $verify;
 
-        $this->value = $value ? explode(',', $value) : [old($this->name[0]), old($this->name[1])];
+        $this->value = $value ? explode(',', $value): [old($this->name[0]), old($this->name[1])];
 
         $this->iptkey = Str::random(6);
         $this->min = $min;
@@ -43,41 +43,14 @@ class DateRange extends Component
     public function render()
     {
         return  <<<'blade'
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" name="{{$name[0]}}" placeholder="开始日期" id="j_start_at" readonly>
+        <div
+            class="layui-input-inline layui-form-daterange"
+            data-options='{"type":"{{$type}}", "min": "{{$min}}", "max": "{{$max}}"}'
+        >
+            <input type="text" class="layui-input start_at" name="{{$name[0]}}" placeholder="开始日期" readonly value="{{$value[0] ?? ''}}">
             <span>-</span>
-            <input type="text" class="layui-input" name="{{$name[0]}}" placeholder="结束日期" id="j_start_end" readonly>
+            <input type="text" class="layui-input end_at" name="{{$name[1]}}" placeholder="结束日期" readonly value="{{$value[1] ?? ''}}">
         </div>
-        <script>
-        layui.use(['laydate'], function(){
-            var laydate = layui.laydate;
-
-            var insStart = laydate.render({
-              elem: '#j_start_at',
-              min: '{{$min}}',
-              max: '{{$max}}',
-              type: '{{$type}}',
-              value: '{{$value[0] ?? ''}}',
-              done: function(value, date){
-                insEnd.config.min = lay.extend({}, date, {
-                  month: date.month - 1
-                });
-              }
-            });
-            var insEnd = laydate.render({
-              elem: '#j_start_end',
-              min: '{{$min}}',
-              max: '{{$max}}',
-              type: '{{$type}}',
-              value: '{{$value[1] ?? ''}}',
-              done: function(value, date){
-                insStart.config.max = lay.extend({}, date, {
-                  month: date.month - 1
-                });
-              }
-            });
-          });
-        </script>
         blade;
     }
 

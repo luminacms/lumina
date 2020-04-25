@@ -44,7 +44,7 @@
                 var checked = table.checkStatus('data_qlpost_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('querylist.ql-posts.create') }}', '新增数据')
+                    parent.layui.admin.openTab('{{ route('querylist.ql-posts.create') }}', '新增数据')
                     return true;
                 }
 
@@ -64,7 +64,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('querylist.ql-posts.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{route('querylist.ql-posts.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

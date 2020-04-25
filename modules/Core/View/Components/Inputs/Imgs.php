@@ -48,14 +48,6 @@ class Imgs extends Component
                     class="layui-input"
                     @if($verify)lay-verify="{{$verify}}"@endif />
             </div>
-            <script>
-            layui.use(['form'], function(){
-                var form = layui.form;
-                form.on('img(ximg)', function(e) {
-                    console.log(e)
-                })
-            })
-        </script>
         blade;
     }
 

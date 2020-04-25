@@ -27,13 +27,23 @@
             </x-formItem>
 
             <x-formItem label="date" inline>
+                <span class="ml-6">date</span>
                 <x-input.date name="date" verify="required" />
-                <span class="ml-6">你好呀</span>
+                <span class="ml-6">datetime</span>
                 <x-input.date name="date" type="datetime" verify="required" />
+                <span class="ml-6">time</span>
+                <x-input.date name="date" type="time" verify="required" />
             </x-formItem>
 
             <x-formItem label="daterange">
-                <x-input.dateRange name="start_at,end_at" verify="required" min="0" />
+                <x-input.dateRange name="start_at,end_at" verify="required" min="0" value="2018-12-1,2019-11-5"/>
+            </x-formItem>
+
+            <x-formItem label="daterange">
+                <x-input.dateRange name="start_at,end_at" type="datetime" verify="required" min="0" />
+            </x-formItem>
+            <x-formItem label="daterange">
+                <x-input.dateRange name="start_at,end_at" type="time" verify="required" min="0" />
             </x-formItem>
 
             <x-input.rate name="rate" verify="required" />

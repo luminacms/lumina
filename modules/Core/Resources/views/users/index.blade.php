@@ -77,7 +77,7 @@
                 var checked = table.checkStatus('user_depart_table');
 
                 if(obj.event == 'create') {
-                    admin.openDrawer('{{ route('core.users.create') }}', '新增数据')
+                    admin.openModal('{{ route('core.users.create') }}', '新增数据')
                     return true;
                 }
 
@@ -97,7 +97,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        admin.openDrawer('{{route('core.users.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
+                        admin.openModal('{{route('core.users.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
                         return true;
                     }
                 }

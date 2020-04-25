@@ -74,7 +74,7 @@
                 var checked = table.checkStatus('user_depart_table');
 
                 if(obj.event == 'create') {
-                    parent.layui.admin.openTabsPage('{{ route('backend.cms.posts.create') }}', '新增数据')
+                    parent.layui.admin.openTab('{{ route('backend.cms.posts.create') }}', '新增数据')
                     return true;
                 }
 
@@ -94,7 +94,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        parent.layui.admin.openTabsPage('{{route('backend.cms.posts.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
+                        parent.layui.admin.openTab('{{route('backend.cms.posts.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '新增数据')
                         return true;
                     }
                 }

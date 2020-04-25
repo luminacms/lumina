@@ -41,7 +41,7 @@
                 var checked = table.checkStatus('data_organization_table');
 
                 if(obj.event == 'create') {
-                    admin.openTabsPage('{{ route('core.organizations.create') }}', '新增数据')
+                    admin.openTab('{{ route('core.organizations.create') }}', '新增数据')
                     return true;
                 }
 
@@ -61,7 +61,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        admin.openTabsPage('{{route('core.organizations.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
+                        admin.openTab('{{route('core.organizations.edit', '_id_')}}'.replace('_id_', checked.data[0].id), '更新数据')
                         return true;
                     }
                 }

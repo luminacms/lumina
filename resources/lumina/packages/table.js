@@ -1702,7 +1702,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                     type: 'get',
                     url: options.autoShow.replace('_id_', obj.data.id),
                     success: function (res) {
-                        admin.openDrawer(res, '详情#'+obj.data.id, {
+                        admin.openModal(res, '详情#'+obj.data.id, {
                             shadeClose: true,
                             area: device.mobile ? options.autoShowWidthMobile : options.autoShowWidth
                         })

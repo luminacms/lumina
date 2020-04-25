@@ -76,7 +76,7 @@
                 var checked = table.checkStatus('data_gamepage_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openDrawer('{{ route("game.game-page.create", \request()->all()) }}', '创建页面', {
+                    var createModal = admin.openModal('{{ route("game.game-page.create", \request()->all()) }}', '创建页面', {
                         end: function(index, layero){
                             // table.reload('data_gamepage_table')
                         }
@@ -100,14 +100,14 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var updateModal = admin.openDrawer('{{route("game.game-page.edit", ["_id_"])}}'.replace('_id_', checked.data[0].id), '更新页面#'+checked.data[0].id, {
+                        var updateModal = admin.openModal('{{route("game.game-page.edit", ["_id_"])}}'.replace('_id_', checked.data[0].id), '更新页面#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_game_table')
                             }
                         })
                         return true;
                     }else if(obj.event == 'connectVote'){
-                        admin.openTabsPage('{{ url("/backend/vote/votes/create") }}?model_id='+checked.data[0].id+'&model='+GAME_MODEL, '新增报名')
+                        admin.openTab('{{ url("/backend/vote/votes/create") }}?model_id='+checked.data[0].id+'&model='+GAME_MODEL, '新增报名')
                         return true;
                     }
                 }
@@ -116,13 +116,13 @@
             // tool event
             table.on('tool(data_gamepage_table)', function(obj){
                 if(obj.event == 'sourceIde'){
-                    admin.openTabsPage('{{ route("game.sourceide", \request()->all()) }}&uid='+obj.data.uid)
+                    admin.openTab('{{ route("game.sourceide", \request()->all()) }}&uid='+obj.data.uid)
                     return true;
                 }else if(obj.event == 'diyIde') {
-                    admin.openTabsPage('{{ route("game.diyide", \request()->all()) }}&uid='+obj.data.uid)
+                    admin.openTab('{{ route("game.diyide", \request()->all()) }}&uid='+obj.data.uid)
                     return true;
                 }else if(obj.event == 'show') {
-                    admin.openTabsPage("{{ url("/g") }}/"+obj.data.uid, "_blank")
+                    admin.openTab("{{ url("/g") }}/"+obj.data.uid, "_blank")
                     return true;
                 }
             })

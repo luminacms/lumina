@@ -1,4 +1,4 @@
-@extends('core::layouts.modal')
+@extends('shop::layouts.master')
 
 @section('content')
     <x-card>

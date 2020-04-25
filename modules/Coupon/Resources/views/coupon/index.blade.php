@@ -43,7 +43,7 @@
                 var checked = table.checkStatus('data_coupon_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openDrawer('{{ route("coupon.coupon.create", \request()->all()) }}', '{{ __("core::main.create") }}', {
+                    var createModal = admin.openModal('{{ route("coupon.coupon.create", \request()->all()) }}', '{{ __("core::main.create") }}', {
                         end: function(index, layero){
                             table.reload('data_game_table')
                         }
@@ -67,7 +67,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openDrawer('{{route("coupon.coupon.edit", "_id_")}}'.replace('_id_', checked.data[0].id), 'Edit#'+checked.data[0].id, {
+                        var createModal = admin.openModal('{{route("coupon.coupon.edit", "_id_")}}'.replace('_id_', checked.data[0].id), 'Edit#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_game_table')
                             }
