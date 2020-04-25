@@ -119,7 +119,6 @@ class Media extends Component
                         }
                     })
                 })
-
                 // 图片操作层
                 $imgbox.on("mouseenter", ".uploader__file", function(){
                     $(this).find(".uploader__mask").show()

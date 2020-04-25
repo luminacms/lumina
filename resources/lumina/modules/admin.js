@@ -211,8 +211,6 @@ layui.extend({
             Admin.sideFlexible()
         }
     };
-    // Admin.openTabsPage = function(a, d){
-
     Admin.on("tabsPage(setMenustatus)", function (e) {
         var i = e.url;
         var t = function (e) {
@@ -284,12 +282,14 @@ layui.extend({
     });
     $body.on("click", "*[lay-href]", function () {
         var $this = $(this),
+            _id = $this.parent("dd").data('id'),
             _href = $this.attr("lay-href"),
             _text = $this.attr("lay-text");
         layui.router();
+
         Admin.tabsPage.elem = $this;
         var frame = parent === self ? layui : top.layui;
-        frame.admin.openTabsPage(_href, _text || $this.text())
+        frame.admin.openTabsPage(_href, _text || $this.text(), _id)
     });
     $body.on("click", "*[lumina-event]", function () {
         var e = $(this),
@@ -321,9 +321,9 @@ layui.extend({
     };
 
     // 打开tab页面
-    Admin.openTabsPage = function(href, title){
+    Admin.openTabsPage = function(href, title, tabid){
         var hasOpened, _tabs = $($navs).find("li"),
-            tabID = href.replace(location.href, "");
+            tabID = tabid || href.replace(location.origin, "");
 
         _tabs.each(function (idx) {
             var $this = $(this),
@@ -347,6 +347,8 @@ layui.extend({
             var u = Admin.tabsBody(Admin.tabsPage.index).find(".lumina-iframe");
             u[0].contentWindow.location.href = href
         }
+
+        // window.location.hash = tabID
         element.tabChange(layNavs, tabID)
         Admin.tabsBodyChange(Admin.tabsPage.index, {
             url: href,

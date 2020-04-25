@@ -12,7 +12,8 @@ class DateRange extends Component
     public $label;
     public $verify;
     public $value;
-    public $muIpt = false;
+    public $min;
+    public $max;
 
     public $iptkey;
 
@@ -21,16 +22,17 @@ class DateRange extends Component
      *
      * @return void
      */
-    public function __construct($name, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'date', $min = '1900-1-1', $max = '2999-12-31', $verify = null, $value = null)
     {
-        $this->name = $name;
+        $this->name = explode(',', $name);
         $this->type = $type;
         $this->verify = $verify;
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ? explode(',', $value) : [old($this->name[0]), old($this->name[1])];
 
         $this->iptkey = Str::random(6);
-        $this->muIpt = Str::contains(';', $name) ? explode(';', $name) : false;
+        $this->min = $min;
+        $this->max = $max;
     }
 
     /**
@@ -41,45 +43,41 @@ class DateRange extends Component
     public function render()
     {
         return  <<<'blade'
-            <div id="{{$iptkey}}_wrap">
-            @if($muIpt=='false')
-                <input type="text"
-                    name="{{$name}}"
-                    @if($value)value="{{$value}}"@endif
-                    class="layui-input"
-                    id="{{$iptkey}}"
-                    readonly
-                    @if($verify)lay-verify="{{$verify}}"@endif />
-            @else
-                <input type="text"
-                    @if($value)value="{{$value}}"@endif
-                    class="layui-input"
-                    id="{{$iptkey}}"
-                    readonly
-                    @if($verify)lay-verify="{{$verify}}"@endif />
-                <input type="hidden" name="{{$muIpt[0]}}" class="start_at"/>
-                <input type="hidden" name="{{$muIpt[1]}}" class="end_at"/>
-            @endif
-            </div>
-            <script>
-            layui.use('laydate', function(){
-                var muIpt = '{{$muIpt}}',
-                    muIptWrap = $("#{{$iptkey}}_wrap")
-                layui.laydate.render({
-                    elem: '#{{$iptkey}}',
-                    type: 'date',
-                    format: 'yyyy-MM-dd',
-                    range: '~',
-                    done: function(value, date, endDate){
-                        var _val = value.split('~')
-                        if(muIpt != 'false') {
-                            muIptWrap.find(".start_at").val(_val[0])
-                            muIptWrap.find(".end_at").val(_val[1])
-                        }
-                    }
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="{{$name[0]}}" placeholder="开始日期" id="j_start_at" readonly>
+            <span>-</span>
+            <input type="text" class="layui-input" name="{{$name[0]}}" placeholder="结束日期" id="j_start_end" readonly>
+        </div>
+        <script>
+        layui.use(['laydate'], function(){
+            var laydate = layui.laydate;
+
+            var insStart = laydate.render({
+              elem: '#j_start_at',
+              min: '{{$min}}',
+              max: '{{$max}}',
+              type: '{{$type}}',
+              value: '{{$value[0] ?? ''}}',
+              done: function(value, date){
+                insEnd.config.min = lay.extend({}, date, {
+                  month: date.month - 1
                 });
-            })
-            </script>
+              }
+            });
+            var insEnd = laydate.render({
+              elem: '#j_start_end',
+              min: '{{$min}}',
+              max: '{{$max}}',
+              type: '{{$type}}',
+              value: '{{$value[1] ?? ''}}',
+              done: function(value, date){
+                insStart.config.max = lay.extend({}, date, {
+                  month: date.month - 1
+                });
+              }
+            });
+          });
+        </script>
         blade;
     }
 

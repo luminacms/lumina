@@ -22,8 +22,20 @@
 
         <div class="layui-tab-item layui-show layui-form">
 
-            <x-input name="username" verify="required" />
-            <x-input.date name="date" verify="required" />
+            <x-formItem label="input">
+                <x-input name="username" verify="required" />
+            </x-formItem>
+
+            <x-formItem label="date" inline>
+                <x-input.date name="date" verify="required" />
+                <span class="ml-6">你好呀</span>
+                <x-input.date name="date" type="datetime" verify="required" />
+            </x-formItem>
+
+            <x-formItem label="daterange">
+                <x-input.dateRange name="start_at,end_at" verify="required" min="0" />
+            </x-formItem>
+
             <x-input.rate name="rate" verify="required" />
             <x-input.select name="rate" :options="['苹果','橘子']"  value="module"/>
             <x-input.radio name="rate" :options="['苹果','橘子']"  value="module"/>

@@ -643,13 +643,13 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         CLASS_DATE = 'layui-form-date',
                         CLASS_TIME = 'layui-form-time';
                     elemForm.find('.' + CLASS_DATE).each(function (i, n) {
-                        laydate.render({elem: '#' + $(this).attr('id'),type: 'date',format: 'yyyy-MM-dd'});
+                        laydate.render({elem: n,type: 'date',format: 'yyyy-MM-dd'});
                     });
                     elemForm.find('.' + CLASS_DATETIME).each(function (i, n) {
-                        laydate.render({elem: '#' + $(this).attr('id'),type: 'datetime',format: 'yyyy-MM-dd HH:mm:ss'});
+                        laydate.render({elem: n,type: 'datetime',format: 'yyyy-MM-dd HH:mm:ss'});
                     });
                     elemForm.find('.' + CLASS_TIME).each(function (i, n) {
-                        laydate.render({elem: '#' + $(this).attr('id'),type: 'time',format: 'HH:mm:ss'});
+                        laydate.render({elem: n,type: 'time',format: 'HH:mm:ss'});
                     });
                 },
             };

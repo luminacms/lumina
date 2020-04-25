@@ -20,7 +20,7 @@ class Date extends Text
      *
      * @return void
      */
-    public function __construct($name, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'date', $verify = null, $value = null)
     {
         $this->name = $name;
         $this->type = $type;
@@ -43,6 +43,7 @@ class Date extends Text
                 name="{{$name}}"
                 @if($value)value="{{$value}}"@endif
                 class="layui-input layui-form-date"
+                date-type="{{$type}}"
                 id="{{$iptkey}}"
                 readonly
                 @if($verify)lay-verify="{{$verify}}"@endif />

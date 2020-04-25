@@ -2,6 +2,7 @@
 
 namespace Modules\Core\View\Components;
 
+use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 
 class FormItem extends Component
@@ -9,16 +10,18 @@ class FormItem extends Component
 
     public $label;
     public $type;
+    private $inline;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label = '', $type = '')
+    public function __construct($label = '', $type = '', $inline = 'false')
     {
         $this->label = $label;
         $this->type = $type;
+        $this->inline = $inline;
     }
 
     /**
@@ -29,21 +32,18 @@ class FormItem extends Component
     public function render()
     {
         $_ipt = '';
-        switch($this->type){
-            case 'submit':
-                $_ipt = $this->renderSubmitItem();
-                break;
-            case 'inline':
-                $_ipt = $this->renderInlineItem();
-                break;
-            default:
-                $_ipt = <<<'blade'
-                    <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                        <label for="name" class="layui-form-label">{{$label}}</label>
-                        <div class="layui-input-block">{{$slot}}</div>
-                    </div>
-                blade;
-            break;
+
+        if($this->type == 'submit') {
+            $_ipt = $this->renderSubmitItem();
+        }else if($this->inline !== 'false' || $this->type == 'inline') {
+            $_ipt = $this->renderInlineItem();
+        }else{
+            $_ipt = <<<'blade'
+            <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
+                <label for="name" class="layui-form-label">{{$label}}</label>
+                <div class="layui-input-block">{{$slot}}</div>
+            </div>
+            blade;
         }
         return $_ipt;
     }
@@ -52,8 +52,8 @@ class FormItem extends Component
     {
         return <<<'blade'
             <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                <div class="layui-inline">
-                    <label for="name" class="layui-form-label">{{$label}}</label>
+                <label for="name" class="layui-form-label">{{$label}}</label>
+                <div class="layui-input-block">
                     <div class="layui-input-inline">{{$slot}}</div>
                 </div>
             </div>
