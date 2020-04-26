@@ -158,7 +158,7 @@ class User extends BaseModel implements
      */
     public function isSuper()
     {
-        return \auth()->user()->hasRole('SUPER');
+        return $this->hasRole('SUPER');
     }
 
     /**

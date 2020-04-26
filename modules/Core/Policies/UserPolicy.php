@@ -15,7 +15,7 @@ class UserPolicy extends BasePolicy
      */
     public function admin(User $user)
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     public function create(User $user)

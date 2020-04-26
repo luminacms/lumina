@@ -1,0 +1,18 @@
+{
+    "name": "Point",
+    "alias": "point",
+    "description": "积分系统",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Point\\Providers\\PointServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "menus": [
+        {"id": "point", "parentid": "0", "text": "积分系统", "sort": 200, "icon": "fa-heartbeat"},
+        {"id": "point_index", "parentid": "point", "text": "积分管理", "sort": 200, "route": "point.point.index"},
+        {"id": "point_log", "parentid": "point", "text": "积分日志", "sort": 200, "route": "point.point-log.index"}
+    ]
+}

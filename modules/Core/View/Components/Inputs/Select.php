@@ -45,7 +45,8 @@ class Select extends Component
     public function render()
     {
         return  <<<'blade'
-            <select id="{{$iptkey}}"
+            <select {{$attributes}}
+                id="{{$iptkey}}"
                 name="{{$name}}"
                 @if($search)lay-search @endif
                 @if($verify)lay-verify="{{$verify}}" @endif >

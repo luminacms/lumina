@@ -66,6 +66,7 @@ class CoreServiceProvider extends ServiceProvider
         Blueprint::macro('count', function (){ CoreBlueprint::count($this); });
         Blueprint::macro('sort', function (){ CoreBlueprint::sort($this); });
         Blueprint::macro('org', function (){ CoreBlueprint::org($this); });
+        Blueprint::macro('trace', function (){ CoreBlueprint::trace($this); });
     }
 
 

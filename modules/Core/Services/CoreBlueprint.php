@@ -15,7 +15,7 @@ class CoreBlueprint
      */
     public static function org(Blueprint $table)
     {
-        $table->char('oid', 32)->nullable()->comment('组织id');
+        $table->char('oid', 32)->comment('组织id');
     }
 
     /**
@@ -64,5 +64,17 @@ class CoreBlueprint
     public static function sort(Blueprint $table)
     {
         $table->integer('sort')->default(50)->comment('排序');
+    }
+
+    /**
+     * 数据跟踪
+     *
+     * @param Blueprint $table
+     * @return void
+     */
+    public static function trace(Blueprint $table)
+    {
+        $table->ipAddress('trace_ip');
+        $table->string('trace_agent');
     }
 }

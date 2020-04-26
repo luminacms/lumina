@@ -407,7 +407,8 @@ hr, .layui-timeline-item:before{background-color: #e6e6e6;}
 .layui-input-block{margin-left: 96px; min-height: 36px;}
 .layui-input-inline{display: inline-block; vertical-align: middle;}
 .layui-form-text .layui-input-inline{width: auto;}
-.layui-form-item .layui-input-inline .layui-input{display: inline-block; width: 190px; margin-right: 10px;}
+.layui-form-item .layui-input-inline .layui-input,
+.layui-form-item .layui-input-inline .layui-form-select{display: inline-block; width: 190px; margin-right: 10px;}
 .layui-form-item .layui-input-inline span{margin-right: 10px;}
 
 /* 分割块 */.layui-form-mid{position: relative; float: left; display: block; padding: 9px 0 !important; line-height: 20px; margin-right: 10px;}

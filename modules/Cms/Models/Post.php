@@ -5,6 +5,7 @@ namespace Modules\Cms\Models;
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCount;
 use Modules\Core\Traits\HasCreateBy;
+use Modules\Point\Traits\Pointable;
 
 /**
  * Class Post.
@@ -13,7 +14,7 @@ use Modules\Core\Traits\HasCreateBy;
  */
 class Post extends BaseModel
 {
-    use HasCreateBy, HasCount;
+    use HasCreateBy, HasCount, Pointable;
 
     protected $hashConnect = 'cms';
     protected $table = 'cms__posts';
@@ -23,5 +24,15 @@ class Post extends BaseModel
      * @var array
      */
     protected $fillable = ['title', 'content', 'category_id', 'post_at', 'author', 'origin', 'description', 'status', 'order', 'count'];
+
+    /**
+     * point
+     *
+     * @return void
+     */
+    public function pointlog()
+    {
+        return $this->morphMany('Modules\Point\Models\PointLog', 'model');
+    }
 
 }

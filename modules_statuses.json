@@ -7,5 +7,6 @@
     "Coupon": true,
     "Mall": true,
     "Shop": true,
-    "ApiTest": true
+    "ApiTest": true,
+    "Point": true
 }

@@ -50,7 +50,7 @@ Route::get('/chart/dataset', 'ChartController@dataset')->name('chart.dataset');
 
 Route::view('/demo/{demo}', 'demo.index');
 
-Route::get('/home/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org', 'verified']);
+Route::get('/dashboard/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org', 'verified']);
 Route::group(['prefix' =>'backend', 'as' => 'core.', 'middleware' => ['auth:org']], function(){
 
     Route::get('/home', 'CoreController@dashboard')->name('dashboard');

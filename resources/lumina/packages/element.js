@@ -404,7 +404,7 @@ layui.define(['jquery', 'util'], function (exports) {
 
                 //Tab选项卡
                 tab: function () {
-                    call.tabAuto.call({});
+                    // call.tabAuto.call({});
                 },
 
                 //导航菜单
@@ -582,7 +582,7 @@ layui.define(['jquery', 'util'], function (exports) {
         dom = $(document);
     element.render();
 
-    var TITLE = '.layui-tab-title>li';
+    var TITLE = '.layui-tab>.layui-tab-title>li';
 
     dom.off().on('click', TITLE, call.tabClick); //Tab切换
     dom.on('contextmenu', TITLE, call.tabContext); //Tab切换

@@ -39,10 +39,10 @@ class Text extends Component
     public function render()
     {
         return  <<<'blade'
-            <input type="{{$type}}"
+            <input {{$attributes->merge(['class'=>'layui-input'])}}
+                type="{{$type}}"
                 name="{{$name}}"
                 @if($value)value="{{$value}}"@endif
-                class="layui-input"
                 @if($verify)lay-verify="{{$verify}}"@endif />
         blade;
     }

@@ -1,0 +1,25 @@
+{
+    "name": "Xbhub/point",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jory Zhou",
+            "email": "jorycn@163.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Point\\Providers\\PointServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Point\\": ""
+        }
+    }
+}
