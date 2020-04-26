@@ -87,20 +87,20 @@ layui.define(['laytpl', 'form'], function(exports){
         //主模板
         ,TPL_MAIN = ['<div class="layui-transfer layui-form layui-border-box" lay-filter="LAY-transfer-{{ d.index }}">'
             ,TPL_BOX({
-                index: 0
-                ,checkAllName: 'layTransferLeftCheckAll'
+                index: 0,
+                checkAllName: 'layTransferLeftCheckAll'
             })
             ,'<div class="layui-transfer-active">'
             ,'<button type="button" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-disabled" data-index="0">'
-            ,'<i class="layui-icon layui-icon-next"></i>'
+            ,'<i class="fa fa-arrow-right"></i>'
             ,'</button>'
             ,'<button type="button" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-disabled" data-index="1">'
-            ,'<i class="layui-icon layui-icon-prev"></i>'
+            ,'<i class="fa fa-arrow-left"></i>'
             ,'</button>'
             ,'</div>'
             ,TPL_BOX({
-                index: 1
-                ,checkAllName: 'layTransferRightCheckAll'
+                index: 1,
+                checkAllName: 'layTransferRightCheckAll'
             })
             ,'</div>'].join('')
 
@@ -114,8 +114,9 @@ layui.define(['laytpl', 'form'], function(exports){
 
     //默认配置
     Class.prototype.config = {
-        title: ['列表一', '列表二']
-        ,width: 200
+        title: ['列表一', '列表二'],
+        searchKey: '',
+        width: 200
         ,height: 360
         ,data: [] //数据源
         ,value: [] //选中的数据
@@ -146,8 +147,8 @@ layui.define(['laytpl', 'form'], function(exports){
 
         //解析模板
         var thisElem = that.elem = $(laytpl(TPL_MAIN).render({
-            data: options
-            ,index: that.index //索引
+            data: options,
+            index: that.index //索引
         }));
 
         var othis = options.elem = $(options.elem);
@@ -213,6 +214,8 @@ layui.define(['laytpl', 'form'], function(exports){
         that.layData.eq(0).html(arr[0].views.join(''));
         that.layData.eq(1).html(arr[1].views.join(''));
 
+        // 渲染搜索框值
+        // that.laySearch.eq(0).find("input").val(options.searchKey)
         that.renderCheckBtn();
     }
 
@@ -391,24 +394,45 @@ layui.define(['laytpl', 'form'], function(exports){
 
         //搜索
         that.laySearch.find('input').on('keyup', function(){
-            var value = this.value
-                ,thisDataElem = $(this).parents('.'+ ELEM_SEARCH).eq(0).siblings('.'+ ELEM_DATA)
-                ,thisListElem = thisDataElem.children('li');
 
-            thisListElem.each(function(){
-                var thisList = $(this)
-                    ,thisElemCheckbox = thisList.find('input[type="checkbox"]')
-                    ,isMatch = thisElemCheckbox[0].title.indexOf(value) !== -1;
+            var self = $(this),
+                value = this.value,
+                thisDataElem = $(this).parents('.'+ ELEM_SEARCH).eq(0).siblings('.'+ ELEM_DATA),
+                thisListElem = thisDataElem.children('li'),
+                index = self.parents(".layui-transfer-box").data('index');
 
-                thisList[isMatch ? 'removeClass': 'addClass'](HIDE);
-                thisElemCheckbox.data('hide', isMatch ? false : true);
-            });
+            if(index == 0 && options.showSearch.indexOf("http") > -1){
+                // 服务器搜索
+                setTimeout(function(){
+                    $.ajax({
+                        url: options.showSearch,
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'Accept': 'application/json', 'X-Requested-With':'XMLHttpRequest'},
+                        data: {'key': value},
+                        dataType: 'json',
+                        success: function(res){
+                            that.reload({'data': res.data, 'searchKey': value})
+                        }
+                    })
+                }, 500)
+            }else{
+                thisListElem.each(function(){
+                    var thisList = $(this),
+                        thisElemCheckbox = thisList.find('input[type="checkbox"]'),
+                        isMatch = thisElemCheckbox[0].title.indexOf(value) !== -1;
+
+                    thisList[isMatch ? 'removeClass': 'addClass'](HIDE);
+                    thisElemCheckbox.data('hide', isMatch ? false : true);
+                });
+
+                 //无匹配数据视图
+                var isNone = thisListElem.length === thisDataElem.children('li.'+ HIDE).length;
+                that.noneView(thisDataElem, isNone ? options.text.searchNone : '');
+            }
+
 
             that.renderCheckBtn();
 
-            //无匹配数据视图
-            var isNone = thisListElem.length === thisDataElem.children('li.'+ HIDE).length;
-            that.noneView(thisDataElem, isNone ? options.text.searchNone : '');
+
         });
     };
 

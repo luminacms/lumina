@@ -4,6 +4,7 @@ layui.extend({
     jstree: 'libs/jstree/jstree.min',
     echarts: "libs/echarts.min",
     split: "libs/split.min",
+    vue: "libs/vue.min",
     // 扩展包
     upload: "extends/upload/upload",
     autocomplete: "extends/autocomplete",

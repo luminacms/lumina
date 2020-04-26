@@ -15,4 +15,31 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
 
     Route::resource('spu', 'SpuController');
 
+    Route::get('/attrs', function(){
+
+        return json_encode([
+            'errcode' => 0,
+            'data' => [
+                ["value"=>"1", "title"=>"李白", "disabled"=>"", "checked"=>""],
+                ["value"=>"2", "title"=>"杜甫", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+                ["value"=>"3", "title"=>"阿达", "disabled"=>"", "checked"=>""],
+            ]
+        ]);
+
+    });
+
 });

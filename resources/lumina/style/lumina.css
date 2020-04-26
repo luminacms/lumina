@@ -358,7 +358,7 @@ hr, .layui-timeline-item:before{background-color: #e6e6e6;}
 
 
 /* 圆角 */.layui-btn-radius{border-radius: 100px;}
-.layui-btn .fa{margin-right: 3px; font-size: 18px; vertical-align: bottom; vertical-align: middle\0;}
+.layui-btn .fa{margin-right: 3px; font-size: 18px; vertical-align: middle;}
 
 /* 原始 */.layui-btn-primary{border: 1px solid #C9C9C9; background-color: #fff; color: #555;}
 .layui-btn-primary:hover{border-color: #17a2b8; color: #333}
@@ -1163,7 +1163,12 @@ body .layui-util-face  .layui-layer-content{padding:0; background-color:#fff; co
 .layui-transfer-active .layui-btn{display: block; margin: 0; padding: 0 15px; background-color: #5FB878; border-color: #5FB878; color: #fff;}
 .layui-transfer-active .layui-btn-disabled{background-color: #FBFBFB; border-color: #e6e6e6; color: #C9C9C9;}
 .layui-transfer-active .layui-btn:first-child{margin-bottom: 15px;}
-.layui-transfer-active .layui-btn .layui-icon{margin: 0; font-size: 14px !important;}
+.layui-transfer-active .layui-btn .fa{
+    font-size: 12px!important;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    margin-right: 0;
+}
 .layui-transfer-data{padding: 5px 0; overflow: auto;}
 .layui-transfer-data li{height: 32px; line-height: 32px; padding: 0 10px;}
 .layui-transfer-data li:hover{background-color: #f2f2f2; transition: .5s all;}

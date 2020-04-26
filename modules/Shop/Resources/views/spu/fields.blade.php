@@ -42,10 +42,54 @@
 	<x-input name="create_by" verify="required" :value="$spu->create_by??''"/>
 </x-formItem>
 
+
+@verbatim
+<div id="skuBox">
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th colspan="7">
+                    <h3 class="py-2">属性管理<a href="javascript:;" class="btn btn-primary ml-4 btn-sm" id="j_addSku">新增</a></h3>
+                </th>
+            </tr>
+            <tr><th>属性名称</th><th>属性值</th></tr>
+        </thead>
+        <tbody>
+            <tr v-for="attr in attrs" data-name="{{ attr.name }}">
+                <td>{{ attr.label }}</td>
+                <td>
+                    <el-tag
+                        :key="tag"
+                        class="mr-2"
+                        v-for="tag in attr.value"
+                        closable
+                        :disable-transitions="false"
+                        @close="handleClose(tag)">
+                        {{tag.label}}
+                    </el-tag>
+                    <el-input
+                        class="input-new-tag"
+                        v-if="inputVisible"
+                        v-model="inputValue"
+                        ref="saveTagInput"
+                        size="small"
+                        @keyup.enter.native="handleInputConfirm"
+                        @blur="handleInputConfirm"
+                    >
+                    </el-input>
+                    <el-button v-else class="button-new-tag" size="small" @click="showInput">+新增</el-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {{ name }}
+</div>
+@endverbatim
+
 <script type="text/html" id="mall_product_sku_tool">
 	<a href="" class="layui-btn layui-btn-danger layui-btn-xs" data-event="remove"><i class="fa fa-delete"></i></a>
 </script>
-<table id="mall_product_sku" class="layui-table">
+{{-- <table id="mall_product_sku" class="layui-table">
 	<thead>
 	<tr>
 		<th colspan="7">
@@ -63,7 +107,7 @@
 	</tr>
 	</thead>
 	<tbody></tbody>
-</table>
+</table> --}}
 
 
 <x-formItem class="layui-layout-admin">
@@ -73,16 +117,58 @@
 	</div>
 </x-formItem>
 
+@push('style')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.13.1/lib/theme-chalk/index.css">
+@endpush
 @push('script')
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/element-ui@2.13.1/lib/index.js"></script>
 <script>
+    var app = new Vue({
+        el: '#skuBox',
+        data(){
+            return {
+                attrs: [
+                    {'name': 'color', 'label':'颜色', 'value': [{'name':'red', 'label':'红色'},{'name':'blue', 'label':'蓝色'}]},
+                    {'name': 'size', 'label':'尺寸', 'value': [{'name':'l', 'label':'L'},{'name':'xl', 'label':'XL'}]}
+                ],
+                dynamicTags: ['标签一', '标签二', '标签三'],
+                inputVisible: false,
+                inputValue: ''
+            }
+        },
+        methods: {
+            handleClose(tag) {
+                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            },
+            showInput() {
+                this.inputVisible = true;
+                this.$nextTick(_ => {
+                this.$refs.saveTagInput.$refs.input.focus();
+                });
+            },
+
+            handleInputConfirm() {
+                let inputValue = this.inputValue;
+                if (inputValue) {
+                this.dynamicTags.push(inputValue);
+                }
+                this.inputVisible = false;
+                this.inputValue = '';
+            }
+        }
+    })
 	layui.extend({
-		'MallProductAttrPicker': "modules/mall/product_attr_picker"
+        'MallProductAttrPicker': "modules/mall/product_attr_picker"
 	}).use(['table', 'MallProductAttrPicker', 'laytpl', 'autocomplete', 'form'], function(){
 		var $table = $("#mall_product_sku"),
 				laytpl = layui.laytpl,
 				autocomplete = layui.autocomplete,
                 upload = layui.upload,
                 form = layui.form,
+                vue = layui.vue,
+                inputTags = layui.inputTags,
 				MallProductAttrPicker = layui.MallProductAttrPicker,
 				skuCouunt = 0,
 				IMG_LIMIT = 9,
@@ -101,10 +187,10 @@
 				'<div class="layui-input-block"><input type="text" class="layui-input" name="sku[@{{ d.idx }}][attrs][@{{ d.id }}]" lay-autocomplete lay-url="'+_autocompleteUrl+'"></div>' +
 				'</div>';
 
+        $table.on("click","#j_addSku", function(){
+            var _body = $table.find("tbody");
 
-		$table.on("click","#j_addSku", function(){
-			var _body = $table.find("tbody")
-			skuCouunt = _body.find("tr").length
+			skuCouunt = _body.find("tr").length;
             _body.prepend(laytpl(_sku_tpl).render({'idx': skuCouunt}))
 
             form.render('img')
