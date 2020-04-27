@@ -36,7 +36,7 @@ class UsersController extends BaseController
      */
     public function index(Request $request)
     {
-        $users = $this->model->paginate(\request('limit', 15));
+        $users = $this->model->filter($request)->paginate(\request('limit', 15));
 
         return $this->toCollection($users, UserResource::class);
     }

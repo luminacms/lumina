@@ -122,7 +122,7 @@
                     admin.openTab('{{ route("game.diyide", \request()->all()) }}&uid='+obj.data.uid)
                     return true;
                 }else if(obj.event == 'show') {
-                    admin.openTab("{{ url("/g") }}/"+obj.data.uid, "_blank")
+                    window.top.open("{{ url("/g") }}/"+obj.data.uid, '', '_target')
                     return true;
                 }
             })

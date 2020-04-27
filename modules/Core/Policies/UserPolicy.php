@@ -20,7 +20,7 @@ class UserPolicy extends BasePolicy
 
     public function create(User $user)
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     public function delete(User $user)

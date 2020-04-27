@@ -10,11 +10,18 @@
 
 ## 我的优惠券
 
-GET:/interface/coupon/receive
+GET:/interface/coupon/my
+|参数名|是否必须|类型|说明|
+|:----    |:---|:----- |-----   |
+|status |否  |string |received 已领取<br/>used 已使用<br/>expired 未使用已过期   |
+
+## 获取优惠码
+
+GET:/interface/coupon/code
 
 |参数名|是否必须|类型|说明|
 |:----    |:---|:----- |-----   |
-|code |是  |string |优惠券码   |
+|coupon_id |是  |string |优惠券id，多个优惠券id用英文,分割   |
 
 ## 优惠券领取
 

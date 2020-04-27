@@ -26,7 +26,7 @@ class ServiceController extends BaseController
         $qrCode->setSize($request->get('w', 350));
 
         header('Content-Type: '.$qrCode->getContentType());
-        return new QrCodeResponse($qrCode);
+        return $qrCode->writeString();
     }
 
 

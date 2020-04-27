@@ -6,6 +6,7 @@ use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Modules\Coupon\Http\Filters\CouponCodeFilter;
 use Modules\Coupon\Http\Filters\CouponFilter;
 
 /**
@@ -31,11 +32,12 @@ class CouponCode extends BaseModel
      *
      * @var array
      */
-    protected $fieldSearchable = ['code' => 'like'];
+    protected $fieldSearchable = ['code' => 'like', 'used_at' => ''];
     public function filters()
     {
         return [
-            'coupon_id' => CouponFilter::class
+            'coupon_id' => CouponFilter::class,
+            'status' => CouponCodeFilter::class
         ];
     }
 
@@ -113,6 +115,28 @@ class CouponCode extends BaseModel
             $_html = '<span class="layui-badge bg-gray-600">已过期</span>';
         }
         return $_html;
+    }
+
+    /**
+     * 获取优惠码
+     *
+     * @param [type] $coupon_id
+     * @return void
+     */
+    public static function getCode($coupon_id): array
+    {
+        try{
+            $coupon = Coupon::where('uid', $coupon_id)->first();
+            $code = $coupon->code->whereNull('owner_by')->whereNull('received_at')->where('expired_at', '>', now())->first();
+            return $code ? [
+                'coupon_id' => $coupon_id,
+                'title' => $coupon['title'],
+                'code' => $code['code'],
+                'expired_at' => $code['expired_at']
+            ] : [];
+        }catch(\Exception $e) {
+            return [];
+        }
     }
 
 }

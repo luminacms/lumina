@@ -33,8 +33,8 @@
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"uid","title":"uid"},
-                    {"field":"title","title":"title",templet: "#tpl_title"},
+                    {"field":"uid","title":"coupon_id","width":250},
+                    {"field":"title","title":"title",templet: "#tpl_title", width: 250},
                     {"field":"type","title":"type"},{"field":"range","title":"range"},{"field":"expired_type","title":"expired_type"},{"field":"expired_hours","title":"expired_hours"},{"field":"start_at","title":"start_at"},{"field":"end_at","title":"end_at"},{"field":"times","title":"times"},{"field":"desc","title":"desc"},{"field":"status","title":"status"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
             });
 

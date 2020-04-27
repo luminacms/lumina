@@ -10,7 +10,6 @@
 |
 */
 Route::get('/', 'CoreController@index');
-Route::view('home', 'home');
 
 // 授权
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -50,6 +49,7 @@ Route::get('/chart/dataset', 'ChartController@dataset')->name('chart.dataset');
 
 Route::view('/demo/{demo}', 'demo.index');
 
+Route::redirect('home', 'dashboard');
 Route::get('/dashboard/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org', 'verified']);
 Route::group(['prefix' =>'backend', 'as' => 'core.', 'middleware' => ['auth:org']], function(){
 
