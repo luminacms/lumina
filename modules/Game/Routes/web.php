@@ -14,7 +14,7 @@ Route::redirect('/case/{uid}', '/g/{uid}?'.http_build_query(array_merge(['old' =
 Route::redirect('/game/{uid}', '/g/{uid}?'.http_build_query(array_merge(['old' => 1, 'p'=>\request('p')])));
 
 Route::get("/g/{uid}", "GameController@show")->name("game.show")->middleware([Modules\Game\Http\Middleware\GameOauthCheck::class]);
-// Route::get("/g/{uid}", "GameController@show")->name("game.show")->middleware([Modules\Game\Http\Middleware\GameOauthCheck::class, 'responseCache']);
+Route::get("/game/{uid}", "GameController@show")->name("game.show")->middleware([Modules\Game\Http\Middleware\GameOauthCheck::class, 'responseCache']);
 
 // Backend
 Route::group(['middleware' => ['auth:org', 'permission.org:module_game'], 'prefix' =>'backend/game', 'as' => 'game.', 'namespace' => 'Backend'], function () {

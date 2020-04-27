@@ -25,6 +25,7 @@
         "nwidart/laravel-modules": "^6.2",
         "rap2hpoutre/laravel-log-viewer": "^1.4",
         "spatie/laravel-permission": "^3.11",
+        "spatie/laravel-responsecache": "6.2.*",
         "tymon/jwt-auth": "^1.0",
         "xbhub/laravel-filter": "dev-master",
         "xbhub/laravel-socialite": "^2.0"

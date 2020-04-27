@@ -74,7 +74,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'permission.org' => \Modules\Core\Http\Middleware\OrgPermissionMiddleware::class,
 
-        // 'responseCache' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
+        'responseCache' => \Modules\Core\Http\Middleware\CacheResponse::class,
         'require.oid' => \Modules\Core\Http\Middleware\CheckOidParams::class,
         'aesDecode' => \Modules\Core\Http\Middleware\AesEncryptDecode::class,
 
