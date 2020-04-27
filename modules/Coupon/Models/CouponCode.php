@@ -2,12 +2,13 @@
 
 namespace Modules\Coupon\Models;
 
+use DateTimeInterface;
 use Modules\Core\Models\BaseModel;
+use Illuminate\Support\Facades\Log;
 use Modules\Core\Traits\HasCreateBy;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
-use Modules\Coupon\Http\Filters\CouponCodeFilter;
 use Modules\Coupon\Http\Filters\CouponFilter;
+use Modules\Coupon\Http\Filters\CouponCodeFilter;
 
 /**
  * Class CouponCode.
@@ -25,7 +26,6 @@ class CouponCode extends BaseModel
      */
     public $table = 'coupon__codes';
     protected $fillable = ['coupon_id', 'status', 'owner_by', 'received_at', 'used_at', 'expired_at', 'used_at_ip', 'used_tag'];
-    protected $date = ['received_at', 'used_at', 'expired_at'];
 
     /**
      * The attributes that are can be search =/like.
@@ -68,6 +68,11 @@ class CouponCode extends BaseModel
     public function coupon()
     {
         return $this->hasOne('Modules\Coupon\Models\Coupon', 'uid', 'coupon_id');
+    }
+
+    public function scopeValidate($query)
+    {
+        return $query->whereNull('received_at')->where('expired_at', '>', now());
     }
 
 

@@ -1,9 +1,9 @@
 @include('core::layouts._head')
 
-<div id="lumina_app" class="min-h-screen">
+<div id="lumina_app">
     @include('core::flash.default')
 
-    <x-card class="m-2">
+    <x-card class="m-3">
         @yield('submenu')
         @yield('content')
     </x-card>

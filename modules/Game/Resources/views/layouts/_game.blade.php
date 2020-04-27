@@ -14,9 +14,10 @@
     <meta name="format-detection" content="email=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.sxmgcm.cn/libs/flexible/flexible.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zepto@1.2.0/dist/zepto.min.js"></script>
     <script>
-        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        $.ajaxSettings.beforeSend = function(xhr,request){xhr.setRequestHeader("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));}
+        $.ajaxSettings.error = function(xhr, errorType, error){console.error(error)}
         window.userinfo = {!! json_encode(!auth()->guest()?auth()->user():[]) !!}
     </script>
     <script src="{{ mix('game/head.js', 'dist') }}"></script>

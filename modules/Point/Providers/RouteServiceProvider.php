@@ -34,8 +34,8 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
+        $this->mapInterfaceRoutes();
     }
 
     /**
@@ -65,5 +65,19 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Point', '/Routes/api.php'));
+    }
+
+    /**
+     * interface
+     *
+     * @return void
+     */
+    protected function mapInterfaceRoutes()
+    {
+        Route::prefix('interface')
+            ->middleware('interface')
+            ->as('interface.')
+            ->namespace($this->moduleNamespace . '\Interfaces')
+            ->group(module_path('Point', '/Routes/interface.php'));
     }
 }

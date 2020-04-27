@@ -29,7 +29,7 @@ POST:/interface/coupon/receive
 
 |参数名|是否必须|类型|说明|
 |:----    |:---|:----- |-----   |
-|code |是  |string |优惠券码   |
+|coupon_id |是  |string |优惠券id   |
 
 ## 优惠券核销
 

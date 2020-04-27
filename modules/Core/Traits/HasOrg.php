@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Traits;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -38,11 +39,12 @@ trait HasOrg
         static::creating(function ($model) {
             // 新增数据必须要求登录
             $_oid = auth()->guard('org')->oid();
-            if(\request()->is('api/*') && !Auth::guard('api')->guest()) {
+            if(\request()->is('api/*') || \request()->is('interface/*') ) {
                 // jwt接口oid直接取路由oid
                 $_oid = \request('oid', request()->header('oid'));
             }
             if(!$_oid && !$model->oid) {
+                Log::error('oid缺失');
                 return false;
             }
             $model->oid = $model->oid?$model->oid:$_oid;

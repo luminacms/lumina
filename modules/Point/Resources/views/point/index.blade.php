@@ -4,6 +4,7 @@
     <x-submenu :items="[
         ['name' => '积分管理', 'uri' => route('point.point.index')],
         ['name' => '积分日志', 'uri' => route('point.point-log.index')],
+        ['name' => '文档', 'uri' => route('core.doc', ['path' => urlencode(module_path('point').'/doc.md')]), 'right'=>'true']
     ]" />
 
     <table class="layui-hide" id="data_point_table" lay-filter="data_point_table"></table>

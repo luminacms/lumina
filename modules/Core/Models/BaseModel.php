@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Models;
 
+use DateTimeInterface;
 use Xbhub\Filter\Filterable;
 use Modules\Core\Traits\HasUnique;
 use Illuminate\Database\Eloquent\Model as LaravelModel;
@@ -16,5 +17,4 @@ class BaseModel extends LaravelModel
     use HasUnique, Filterable;
 
 //    protected $connection = 'lumina';
-
 }

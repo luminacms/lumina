@@ -3,11 +3,12 @@
 namespace Modules\Coupon\Http\Controllers\Interfaces;
 
 use Illuminate\Http\Request;
+use Modules\Coupon\Models\Coupon;
 use Modules\Coupon\Models\CouponCode;
 use Modules\Core\Http\Controllers\BaseController;
-use Modules\Coupon\Http\Resources\CouponMyCodeResource;
 use Modules\Coupon\Http\Resources\CouponResource;
-use Modules\Coupon\Models\Coupon;
+use Modules\Coupon\Http\Resources\CouponCodeResource;
+use Modules\Coupon\Http\Resources\CouponMyCodeResource;
 
 /**
  * Class CouponCodeController.
@@ -36,7 +37,6 @@ class CouponCodeController extends BaseController
         $this->request->validate(['coupon_id' => 'required']);
 
         $ids = explode(',', $this->request->get('coupon_id'));
-
         $data = [];
         if(count($ids) == 1) {
             $data = [$ids[0] =>  CouponCode::getCode($ids[0])];
@@ -56,17 +56,24 @@ class CouponCodeController extends BaseController
      */
     public function receive()
     {
-        $this->request->validate(['code' => 'required']);
+        $this->request->validate(['coupon_id' => 'required']);
 
-        $code = $this->couponCode->where('code', $this->request->get('code'))->firstOrFail();
-        $this->authorize('receive', $code);
+        $coupon = Coupon::where('uid', $this->request->get('coupon_id'))->firstOrFail();
+        if($coupon) {
+            $code = $coupon->code()->validate();
+            if($code->count() > 0){
+                $model = $code->first();
+                $model->update([
+                    'owner_by' => $this->request->user()->userid,
+                    'received_at' => now()
+                ]);
+                return $this->toResource($model, CouponMyCodeResource::class);
+            }else{
+                return $this->toError(-1, '码已领完，请稍后刷新重试');
+            }
+        }
 
-        $r = $code->update([
-            'owner_by' => $this->request->user()->userid,
-            'received_at' => now()
-        ]);
-
-        return $this->toResponse($r, 'success');
+        return $this->toError(-1, 'error');
     }
 
     /**
