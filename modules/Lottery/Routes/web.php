@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'auth', 'prefix' =>'lottery', 'as' => 'lottery.'], function () {
+Route::group(['middleware' => 'auth:org', 'prefix' =>'lottery', 'as' => 'lottery.'], function () {
 
     Route::get('/', 'LotteryController@index');
     

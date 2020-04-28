@@ -27,7 +27,7 @@ class VotesController extends BaseController
 
     public function __construct(Vote $vote, Request $request)
     {
-        $this->middleware('auth')->only('my');
+        $this->middleware('auth:org')->only('my');
         $this->vote = $vote;
         $vote = $request->route('vote');
         if($vote) {

@@ -34,7 +34,7 @@ Route::get('/oauth/{driver}/{oid}', 'Auth\SocialiteAuthController@redirectToProv
 Route::get('/callback/oauth/{driver}/{oid}', 'Auth\SocialiteAuthController@handleProviderCallback');
 
 // 全局服务
-Route::group(['prefix' => 'service', 'middleware' => ['auth'], 'as' => 'service.'], function(){
+Route::group(['prefix' => 'service', 'middleware' => ['auth:org'], 'as' => 'service.'], function(){
     Route::get('/qrcode', 'ServiceController@qrcode')->name('qrcode');
     Route::get('/imgmix', 'ServiceController@imgMix')->name('imgmix');
 });
