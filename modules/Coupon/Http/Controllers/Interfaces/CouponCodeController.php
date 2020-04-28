@@ -23,8 +23,6 @@ class CouponCodeController extends BaseController
     {
         $this->couponCode = $couponCode;
         $this->request = $request;
-
-        $request->validate(['oid' => 'required']);
     }
 
     /**
@@ -34,7 +32,7 @@ class CouponCodeController extends BaseController
      */
     public function code()
     {
-        $this->request->validate(['coupon_id' => 'required']);
+        $this->request->validate(['coupon_id' => 'required', 'oid' => 'required']);
 
         $ids = explode(',', $this->request->get('coupon_id'));
         $data = [];
@@ -56,7 +54,7 @@ class CouponCodeController extends BaseController
      */
     public function receive()
     {
-        $this->request->validate(['coupon_id' => 'required']);
+        $this->request->validate(['coupon_id' => 'required', 'oid' => 'required']);
 
         $coupon = Coupon::where('uid', $this->request->get('coupon_id'))->firstOrFail();
         if($coupon) {
@@ -72,7 +70,6 @@ class CouponCodeController extends BaseController
                 return $this->toError(-1, '码已领完，请稍后刷新重试');
             }
         }
-
         return $this->toError(-1, 'error');
     }
 
@@ -83,6 +80,7 @@ class CouponCodeController extends BaseController
      */
     public function my()
     {
+        $this->request->validate(['oid' => 'required']);
         $code = $this->couponCode->filter($this->request)->where('owner_by', $this->request->user()->userid)
                 ->where('coupon__coupons.oid', request('oid'))
                 ->leftJoin('coupon__coupons','coupon__codes.coupon_id','=','coupon__coupons.uid')
@@ -99,13 +97,14 @@ class CouponCodeController extends BaseController
      */
     public function use()
     {
-        $this->request->validate(['code' => 'required']);
+        $this->request->validate(['code' => 'required', 'oid' => 'required']);
 
         $code = $this->couponCode->where('code', $this->request->get('code'))->firstOrFail();
         $this->authorize('use', $code);
 
         $r = $code->update([
             'used_at' => now(),
+            'used_tag' => $this->request->get('used_tag'),
             'used_at_ip' => $this->request->getClientIp()
         ]);
 

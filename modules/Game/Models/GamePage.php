@@ -27,6 +27,9 @@ class GamePage extends BaseModel
         'oauth', 'share_img', 'share_title', 'share_desc', 'oid', 'create_by', 'count', 'uid', 'status', 'cover',
         'start_at', 'end_at'
     ];
+    public $fieldSearchable = [
+        'game_id' => '='
+    ];
 
     const MODE_SOURCE = 'source';
     const MODE_DIY = 'diy';

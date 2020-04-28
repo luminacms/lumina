@@ -29,15 +29,15 @@ class GamePageController extends BaseController
     {
         $this->repository = $repository;
 
-        $game_id = \request('game_id');
-        if($game_id) {
-            $this->repository->where(function($query) use($game_id) {
-                return $query->where('game_id', $game_id);
-            });
-            $this->game = Game::find($game_id);
+        // $game_id = \request('game_id');
+        // if($game_id) {
+        //     $this->repository->where(function($query) use($game_id) {
+        //         return $query->where('game_id', $game_id);
+        //     });
+        //     $this->game = Game::find($game_id);
 
-            View::share('game', $this->game);
-        }
+        //     View::share('game', $this->game);
+        // }
     }
 
     /**

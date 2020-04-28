@@ -77,8 +77,15 @@
 
                 if(obj.event == 'create') {
                     var createModal = admin.openModal('{{ route("game.game-page.create", \request()->all()) }}', '创建页面', {
-                        end: function(index, layero){
-                            // table.reload('data_gamepage_table')
+                        yes: function(index, layero){
+                            console.log(index)
+                            table.reload('data_gamepage_table')
+                        },
+                        cancel: function(index, layero){
+                        if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+                            layer.close(index)
+                        }
+                        return false;
                         }
                     })
                     return true;

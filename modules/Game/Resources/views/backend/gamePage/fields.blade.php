@@ -30,11 +30,10 @@
     <x-input.meditor  name="desc" :value="$gamePage->desc??''"/>
 </x-formItem>
 
-
 <div class="layui-form-item layui-layout-admin">
     <div class="layui-input-block">
         <div class="layui-footer z-50 shadow" style="left:0;">
-            <input type="hidden" name="game_id" value="{{ $gamePage->game_id ?? request('game_id') }}">
+            <input type="hidden" name="game_id" value="{{ $gamePage->game_id ?? get_search_params('game_id') }}">
             <input type="hidden" name="oid" value="{{ $gamePage->oid ?? 1 }}">
 			<button class="layui-btn" lay-submit lay-ajax="true">提交</button>
 			<button type="reset" class="layui-btn layui-btn-primary" lay-submit-cancel>取消</button>

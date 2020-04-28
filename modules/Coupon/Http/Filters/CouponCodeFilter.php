@@ -19,13 +19,16 @@ class CouponCodeFilter extends Filter
     {
         switch($value) {
             case 'received':
-                $builder->whereNull('used_at')->where('expired_at', '>', now());
+                $builder->whereNotNull('received_at')->whereNull('used_at')->where('expired_at', '>', now());
                 break;
             case 'used':
                 $builder->whereNotNull('used_at');
                 break;
             case 'expired':
                 $builder->whereNull('used_at')->where('expired_at', '<', now());
+                break;
+            case 'wait':
+                $builder->whereNull('received_at')->where('expired_at', '>', now());
                 break;
         }
         return $builder;

@@ -3,6 +3,7 @@
 namespace Modules\Coupon\Models;
 
 use DateTimeInterface;
+use Illuminate\Support\Str;
 use Modules\Core\Models\BaseModel;
 use Illuminate\Support\Facades\Log;
 use Modules\Core\Traits\HasCreateBy;
@@ -57,7 +58,7 @@ class CouponCode extends BaseModel
      */
     public function ownerBy()
     {
-        return $this->hasOne('Modules\Core\Models\User', 'userid', 'owner_by');
+        return $this->hasOne('Modules\Core\Models\User', 'userid', 'owner_by')->withDefault();
     }
 
     /**
@@ -86,17 +87,34 @@ class CouponCode extends BaseModel
     public function genCode($coupon_id, $num)
     {
         try{
+            if($num > 10000){
+                return false;
+            }
             $coupon = Coupon::where('uid', $coupon_id)->firstOrFail();
 
             // 计算失效期
-            $data = ['coupon_id' => $coupon_id];
+            $data = [
+                'coupon_id' => $coupon_id,
+                'create_by' => auth()->guard('org')->user()->userid,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
             if($coupon->expired_type == Coupon::EXPIRED_TYPE_FIXED) {
                 $data['expired_at'] = $coupon->end_at;
             }
-            Collection::times($num, function ($i) use($data) {
-                return self::create($data);
-            });
 
+            $collect = collect();
+            while($num > 0) {
+                // $code = self::getRandom('code', 32);
+                $code = Str::random(32);
+                if(!$collect->contains('code', $code)) {
+                    $collect->push(array_merge($data, [
+                        'code' => $code
+                    ]));
+                    $num--;
+                }
+            }
+            self::insert($collect->all());
             return true;
         }catch(\Exception $e) {
             Log::error($e->getMessage());

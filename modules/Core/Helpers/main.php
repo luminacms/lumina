@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Illuminate\Support\Arr;
 use Modules\Core\Models\Option;
 
 require __DIR__.'/avatar.php';
@@ -180,4 +181,27 @@ if (! function_exists('str_clearEmoji')) {
         $clean_text = preg_replace($regexDingbats, '', $clean_text);
         return $clean_text;
     }
+}
+
+if (! function_exists('get_search_params')) {
+    /**
+     * @param $search
+     * @return array
+     */
+    function get_search_params($k = '')
+    {
+        $res = [];
+        $seach = \request('search');
+        if($seach) {
+            $searchfield = explode(';', $seach);
+            foreach($searchfield as $field) {
+                $_field = explode(':', $field);
+                if($_field[0]) {
+                    $res[$_field[0]] = $_field[1] ?? '';
+                }
+            }
+        }
+        return $k ? ($res[$k] ?? '') : $res;
+    }
+
 }

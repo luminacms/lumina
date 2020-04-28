@@ -42,10 +42,11 @@ class OrgGuard extends SessionGuard
      *
      * @return void
      */
-    public function check()
-    {
-        return parent::check() && $this->session->exists($this->getOrgName());
-    }
+    // public function check()
+    // {
+    //     dd(parent::check() && $this->session->exists($this->getOrgName()));
+    //     return parent::check() && $this->session->exists($this->getOrgName());
+    // }
 
     /**
      * Attempt to authenticate the user using the given credentials and return the token.

@@ -13,7 +13,7 @@
 GET:/interface/coupon/my
 |参数名|是否必须|类型|说明|
 |:----    |:---|:----- |-----   |
-|status |否  |string |received 已领取<br/>used 已使用<br/>expired 未使用已过期   |
+|status |否  |string |wait 可领取 <br/>received 已领取<br/>used 已使用<br/>expired 未使用已过期   |
 
 ## 获取优惠码
 

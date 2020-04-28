@@ -18,14 +18,18 @@
 
             table.render({
                 elem: '#data_couponcode_table',
-                url: '{{ route("coupon.coupon-code.index") }}?coupon_id={{ request("coupon_id") }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route("coupon.coupon-code.show", "_id_") }}',
-                where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
+                where: {'orderBy': 'updated_at', 'sortedBy': 'desc'},
+                export: {url: '{{ route("coupon.coupon-code.export", ["coupon_id" => request("coupon_id")]) }}', can: true, all: true},
                 page: true,
                 canSearch: true,
                 toolbar: [],
                 action: [{'text': '生成优惠码', 'event': 'makeCode'}],
                 height: 'full-100',
+                filters: [
+                    {'name': 'status', "value":"{{ request('status') }}", "options": {"wait":"待领取","received":"已领取","used":"已使用","expired":"已过期"}}
+                ],
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
@@ -34,6 +38,7 @@
                     {"field":"owner_by_name","title":"领取人"},
                     {"field":"received_at","title":"领取时间"},
                     {"field":"used_at","title":"使用时间"},
+                    {"field":"used_tag","title":"使用标记"},
                     {"field":"expired_at","title":"过期时间"},
                     {"field":"created_at","title":"创建时间"},
                 ]]

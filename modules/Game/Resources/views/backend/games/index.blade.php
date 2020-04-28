@@ -46,7 +46,7 @@
 
             table.on('tool(data_game_table)', function(obj){
                 if(obj.event == 'gamePages'){
-                    admin.openTab('{{ route("game.game-page.index", ['game_id' => '_id_']) }}'.replace('_id_', obj.data.id), '页面管理')
+                    admin.openTab('{{ route("game.game-page.index", ["search" => "game_id:_id_"]) }}'.replace('_id_', obj.data.id), '页面管理')
                     return true;
                 }
             })

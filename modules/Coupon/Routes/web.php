@@ -18,6 +18,7 @@ Route::group(['prefix' => '/', 'as' => 'coupon.','middleware' => 'auth:org'], fu
     Route::resource('coupon', 'CouponController');
 
     Route::post('coupon-code/make', 'CouponCodeController@make')->name('coupon-code.make');
+    Route::post('coupon-code/export', 'CouponCodeController@export')->name('coupon-code.export');
     Route::resource('coupon-code', 'CouponCodeController');
 
 });

@@ -46,6 +46,7 @@ return [
     'end_at'                    => 'End At',
     'times'                     => 'Times',
     'expired_type'              => 'Expired Type',
+    'used_tag'                  => 'UsedTags',
 
     // 组织
     'organization'              => [

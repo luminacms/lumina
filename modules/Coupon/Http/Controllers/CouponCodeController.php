@@ -2,13 +2,14 @@
 
 namespace Modules\Coupon\Http\Controllers;
 
-use Modules\Core\Http\Controllers\BaseController;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Modules\Coupon\Models\Coupon;
 use Modules\Coupon\Models\CouponCode;
+use Modules\Coupon\Exports\CouponCodeExport;
+use Illuminate\Validation\ValidationException;
+use Modules\Core\Http\Controllers\BaseController;
 use Modules\Coupon\Http\Requests\CouponCodeRequest;
 use Modules\Coupon\Http\Resources\CouponCodeResource;
-use Modules\Coupon\Models\Coupon;
 
 /**
  * Class CouponCodeController.
@@ -156,9 +157,22 @@ class CouponCodeController extends BaseController
      */
     public function make(Request $request)
     {
-        $request->validate(['number' => 'required|numeric', 'coupon_id' => 'required']);
+        $request->validate(['number' => 'required|numeric|max:10000', 'coupon_id' => 'required']);
 
         $r = $this->couponCode->genCode($request->get('coupon_id'), $request->get('number'));
         return $this->toResponse($r);
+    }
+
+    /**
+     * export code
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function export(Request $request)
+    {
+        $request->validate(['coupon_id' => 'required']);
+
+        $this->toAjaxExport(new CouponCodeExport($request->get('ids'), ['coupon_id' => request('coupon_id')]));
     }
 }

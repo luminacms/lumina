@@ -19,7 +19,6 @@ class PointController extends BaseController
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->request->validate(['oid' => 'required', 'type' => 'required']);
     }
 
     /**
@@ -29,6 +28,7 @@ class PointController extends BaseController
      */
     public function index()
     {
+        $this->request->validate(['oid' => 'required', 'type' => 'required']);
         return $this->toResponse(Point::total($this->request->get('type')));
     }
 
@@ -39,9 +39,9 @@ class PointController extends BaseController
      */
     public function submit()
     {
-        $request = $this->request;
-        $request->validate(['count' => 'required|numeric']);
+        $this->request->validate(['oid' => 'required', 'type' => 'required', 'count' => 'required|numeric']);
 
+        $request = $this->request;
         $r = Point::increase($request->get('count'), [
             'type' => $request->get('type')
         ]);
@@ -58,6 +58,8 @@ class PointController extends BaseController
      */
     public function log()
     {
+        $this->request->validate(['oid' => 'required', 'type' => 'required']);
+
         $request = $this->request;
         $model = PointLog::where('point_type', $request->get('type'))->when($request->get('log_type'), function($model, $val) {
             return $model->where('type', $val);

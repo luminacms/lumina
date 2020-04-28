@@ -30,7 +30,8 @@ class GameOauthCheck
 
         // 已登录直接过
         $_session_social = session('__social');
-        if(!Auth::guest() && isset($_session_social[$case->oauth])) {
+        // if(!Auth::guest() && isset($_session_social[$case->oauth])) {
+        if(isset($_session_social[$case->oauth])) {
             $case->addCount();
             return $next($request);
         }

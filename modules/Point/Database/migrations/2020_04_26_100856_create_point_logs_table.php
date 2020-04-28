@@ -23,7 +23,8 @@ class CreatePointLogsTable extends Migration
             $table->integer('count');
             $table->integer('left_count');
             $table->string('desc', 500)->nullable();
-            $table->morphs('model')->nullable();
+            $table->string('model_type', 500)->nullable();
+            $table->bigInteger('model_id')->nullable();
 
             $table->integer('point_id');
             $table->char('point_type', 15)->nullable();

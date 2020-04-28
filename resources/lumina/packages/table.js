@@ -11,6 +11,8 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         admin = layui.admin,
         device = layui.device(),
         autoshowCol = false,
+        xfilters = null,
+        xfilterLables = null,
 
         //外部接口
         table = {
@@ -102,8 +104,17 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         return '{{# if(item2.fixed === "right"){ }}';
                     }
                     return '';
-                }(), '{{# var isSort = !(item2.colGroup) && item2.sort; }}', '<th data-field="{{ item2.field||i2 }}" data-key="{{d.index}}-{{i1}}-{{i2}}" {{# if( item2.parentKey){ }}data-parentkey="{{ item2.parentKey }}"{{# } }} {{# if(item2.minWidth){ }}data-minwidth="{{item2.minWidth}}"{{# } }} ' + rowCols + ' {{# if(item2.unresize || item2.colGroup){ }}data-unresize="true"{{# } }} class="{{# if(item2.hide){ }}layui-hide{{# } }}{{# if(isSort){ }} layui-unselect{{# } }}{{# if(!item2.field){ }} layui-table-col-special{{# } }}">', '<div class="layui-table-cell laytable-cell-', '{{# if(item2.colGroup){ }}', 'group', '{{# } else { }}', '{{d.index}}-{{i1}}-{{i2}}', '{{# if(item2.type !== "normal"){ }}', ' laytable-cell-{{ item2.type }}', '{{# } }}', '{{# } }}', '" {{#if(item2.align){}}align="{{item2.align}}"{{#}}}>', '{{# if(item2.type === "checkbox"){ }}' //复选框
-                , '<input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose" {{# if(item2[d.data.checkName]){ }}checked{{# }; }}>', '{{# } else { }}', '<span>{{item2.title||""}}</span>', '{{# if(isSort){ }}', '<span class="layui-table-sort layui-inline"><i class="layui-edge fa-sort-asc" title="升序"></i><i class="layui-edge fa-sort-desc" title="降序"></i></span>', '{{# } }}', '{{# } }}', '</div>', '</th>', (options.fixed ? '{{# }; }}' : ''), '{{# }); }}', '</tr>', '{{# }); }}', '</thead>', '</table>'
+                }(),
+                '{{# var isSort = !(item2.colGroup) && item2.sort; }}',
+                '<th data-field="{{ item2.field||i2 }}" data-key="{{d.index}}-{{i1}}-{{i2}}" {{# if( item2.parentKey){ }}data-parentkey="{{ item2.parentKey }}"{{# } }} {{# if(item2.minWidth){ }}data-minwidth="{{item2.minWidth}}"{{# } }} ' + rowCols + ' {{# if(item2.unresize || item2.colGroup){ }}data-unresize="true"{{# } }} class="{{# if(item2.hide){ }}layui-hide{{# } }}{{# if(isSort){ }} layui-unselect{{# } }}{{# if(!item2.field){ }} layui-table-col-special{{# } }}">',
+                '<div class="layui-table-cell laytable-cell-', '{{# if(item2.colGroup){ }}', 'group', '{{# } else { }}', '{{d.index}}-{{i1}}-{{i2}}', '{{# if(item2.type !== "normal"){ }}', ' laytable-cell-{{ item2.type }}', '{{# } }}', '{{# } }}',
+                '" {{#if(item2.align){}}align="{{item2.align}}"{{#}}}>', '{{# if(item2.type === "checkbox"){ }}' //复选框
+                , '<input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose" {{# if(item2[d.data.checkName]){ }}checked{{# }; }}>',
+                '{{# } else { }}', '<span>{{item2.title||""}}</span>',
+                '{{# if(isSort){ }}',
+                '<span class="layui-table-sort layui-inline"><i class="layui-edge fa-sort-asc" title="升序"></i><i class="layui-edge fa-sort-desc" title="降序"></i></span>',
+                 '{{# } }}',
+                 '{{# } }}', '</div>', '</th>', (options.fixed ? '{{# }; }}' : ''), '{{# }); }}', '</tr>', '{{# }); }}', '</thead>', '</table>'
             ].join('');
         },
 
@@ -251,6 +262,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
 
         //初始化工具栏
         that.renderToolbar();
+        that.renderFilter();
 
         //让表格平铺
         that.fullSize();
@@ -355,6 +367,47 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
 
     };
 
+    //初始化过滤器
+    Class.prototype.renderFilter = function(){
+        var that = this,
+        options = that.config,
+        filterItems = [
+            '<div class="layui-inline filterbox pull-right cursor-pointer">',
+            '<div class="layui-btn-dropdown" data-toggle="dropdown">',
+            '<i class="fa fa-filter" title="筛选"></i>',
+            '<ul class="layui-dropdown-menu" data-name="{{ d.name }}">{{ d.actionItems }}</ul>',
+            '</div></div></div>'
+        ].join('');
+
+        if(xfilters) {
+            // 显示过滤器
+            var elemToolTemp = that.layTool.find('.layui-table-tool-temp'),
+                opt = '';
+
+                console.log(xfilterLables)
+            $.each(xfilterLables, function(i, n){
+                opt += '<span lay-event="clearFilter" data-name="'+i+'" class="layui-badge-rim mr-2 border-red-600">'+n.label+'：'+n.val+'<i class="fa fa-trash text-error ml-1"></i></span>'
+            })
+            elemToolTemp.append(['<div class="layui-inline filterbox pull-right cursor-pointer">',opt,'<div>'].join(""))
+        }
+        if(options.filters) {
+            $.each(options.filters, function (i, n) {
+                var _cel = that.layHeader.find("th[data-field="+n.name+"]"),
+                    actionItems = '';
+
+                $.each(n.options, function (key, val) {
+                    actionItems += '<li><a lay-event="'+key+'">' + val + '</a></li>'
+                })
+                _cel.find(".layui-table-cell").append(laytpl(filterItems).render({
+                    'actionItems': actionItems,
+                    'name': n.name
+                }))
+            })
+            dropdown.render();
+        }
+        console.log(xfilters)
+    };
+
     //初始工具栏
     Class.prototype.renderToolbar = function () {
         var that = this,
@@ -404,8 +457,8 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         if (options.action) {
             var actionItems = '';
             var leftActionTemp = [
-                '<div class="layui-inline tool ml-2 px-3 py-1"><div class="layui-btn-dropdown">',
-                '<a class="fa" data-toggle="dropdown"><i class="fa fa-ellipsis-v px-2"></i></a>',
+                '<div class="layui-inline tool ml-2 px-3 py-1" data-toggle="dropdown"><div class="layui-btn-dropdown">',
+                '<i class="fa fa-ellipsis-v px-2"></i>',
                 '<ul class="layui-dropdown-menu">{{ d.actionItems }}</ul>',
                 '</div></div></div>'
             ].join('');
@@ -1378,6 +1431,17 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         location.reload();
                     }
                     break;
+                case 'clearFilter':
+                    var name = othis.data('name')
+
+                    delete xfilters[name]
+                    delete xfilterLables[name]
+
+                    othis.parents(".filterbox ").remove();
+                    that.reload($.extend(options, {
+                        where: xfilters
+                    }))
+                    break;
             }
 
             layui.event.call(this, MOD_NAME, 'toolbar(' + filter + ')', $.extend({
@@ -1778,6 +1842,26 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                     }
                 }
                 return false;
+            })
+        }
+
+        // 单元过滤器
+        if(options.filters) {
+            that.layHeader.on('click', '*[lay-event]', function (){
+                var othis = $(this),
+                filterName = othis.parents("ul").data("name"),
+                filterLabel = othis.parents(".layui-table-cell").find("span").text(),
+                event = othis.attr('lay-event');
+
+                var params = {}, paramLabels = {};
+                params[filterName] = event;
+                paramLabels[filterName] = {'label': filterLabel, 'val': othis.text()}
+                xfilters = $.extend(xfilters, params)
+                xfilterLables = $.extend(xfilterLables, paramLabels)
+                options = $.extend(options, {
+                    'where': xfilters
+                })
+                that.reload(options);
             })
         }
     };
