@@ -8,7 +8,7 @@
             status: {}, //记录模块加载状态
             timeout: 10, //符合规范的模块请求最长等待秒数
             event: {}, //记录模块自定义事件
-            version: '2.2.0'
+            version: '3.0.0'
         },
         Layui = function () {
             this.v = config.version; //版本号

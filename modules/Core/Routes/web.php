@@ -15,8 +15,8 @@ Route::get('/', 'CoreController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('register', 'Auth\RegisterController@register');
 
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -26,9 +26,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
-Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+// Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/oauth/{driver}/{oid}', 'Auth\SocialiteAuthController@redirectToProvider')->name('ologin');
 Route::get('/callback/oauth/{driver}/{oid}', 'Auth\SocialiteAuthController@handleProviderCallback');
@@ -50,7 +50,7 @@ Route::get('/chart/dataset', 'ChartController@dataset')->name('chart.dataset');
 Route::view('/demo/{demo}', 'demo.index');
 
 Route::redirect('home', 'dashboard');
-Route::get('/dashboard/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org', 'verified']);
+Route::get('/dashboard/{oid?}', 'CoreController@home')->name('dashboard')->middleware(['auth:org']);
 Route::group(['prefix' =>'backend', 'as' => 'core.', 'middleware' => ['auth:org']], function(){
 
     Route::get('/home', 'CoreController@dashboard')->name('dashboard');

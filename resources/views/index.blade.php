@@ -28,8 +28,8 @@
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
-            @auth
-                <a href="{{ route('dashboard', auth()->oid()) }}">进入后台</a>
+            @if(auth()->guard('org')->check())
+                <a href="{{ route('dashboard', auth()->guard('org')->oid()) }}">进入后台</a>
                 <a class="dropdown-item" href="javascript:;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                 </a>

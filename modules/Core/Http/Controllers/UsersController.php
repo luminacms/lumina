@@ -74,7 +74,7 @@ class UsersController extends BaseController
             $user = $this->model->create($request->all());
 
             $user->departments()->attach($request->get('department'));
-            $user->organizations()->attach(auth()->org());
+            $user->organizations()->attach(auth()->guard('org')->org());
 
             flash('新增操作成功', 'success');
             return redirect()->back();
