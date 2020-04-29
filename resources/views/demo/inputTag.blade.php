@@ -1,3 +1,6 @@
+@extends('core::layouts.full')
+
+@section('content')
 
 <div class="tags" id="tags">
     <input type="text" name="" id="inputTags" placeholder="回车生成标签" autocomplete="off" class="layui-input">
@@ -19,3 +22,4 @@
     })
 </script>
 
+@endsection

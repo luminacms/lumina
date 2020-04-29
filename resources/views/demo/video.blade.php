@@ -15,8 +15,6 @@
     </style>
 </head>
 <body>
-aaa
-
 <div id="xgvideo"></div>
 <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.7/browser/index.js" charset="utf-8"></script>
 <script>
