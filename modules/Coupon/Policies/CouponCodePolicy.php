@@ -77,6 +77,6 @@ class CouponCodePolicy extends BasePolicy
      */
     public function use(User $user, CouponCode $couponCode)
     {
-        return $couponCode->owner_by == $user->userid && is_null($couponCode->used_at) && now()->isBefore($couponCode->expired_at);
+        return is_null($couponCode->used_at) && now()->isBefore($couponCode->expired_at);
     }
 }

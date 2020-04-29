@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Cms\Models\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +28,9 @@ Route::group(['prefix' => 'backend/cms', 'as' => 'backend.cms.', 'namespace' => 
     Route::resource('cms-pages', 'CmsPagesController');
 });
 
+Route::get('/a', function(){
+
+    $post = Post::where('id','<',10)->get();
+    dd($post);
+
+});

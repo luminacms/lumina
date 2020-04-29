@@ -87,11 +87,11 @@ class CouponCode extends BaseModel
     public function genCode($coupon_id, $num)
     {
         try{
-            if($num > 10000){
-                return false;
-            }
             $coupon = Coupon::where('uid', $coupon_id)->firstOrFail();
 
+            if(now()->isAfter($coupon->expired_at)){
+                return ['msg' => '优惠券已失效，不能再生成优惠码' ];
+            }
             // 计算失效期
             $data = [
                 'coupon_id' => $coupon_id,
@@ -118,7 +118,7 @@ class CouponCode extends BaseModel
             return true;
         }catch(\Exception $e) {
             Log::error($e->getMessage());
-            return false;
+            return ['msg' => '生成失败，请重试'];
         }
     }
 

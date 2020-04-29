@@ -2,11 +2,12 @@
 
 namespace Modules\Coupon\Http\Controllers;
 
-use Modules\Core\Http\Controllers\BaseController;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Modules\Coupon\Models\Coupon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\ValidationException;
 use Modules\Coupon\Http\Requests\CouponRequest;
+use Modules\Core\Http\Controllers\BaseController;
 use Modules\Coupon\Http\Resources\CouponResource;
 
 /**
@@ -33,7 +34,9 @@ class CouponController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $coupon = $this->coupon->withCount('code')->filter($request)->paginate($request->get('limit', 15));
+            $coupon = $this->coupon->withCount(['code' => function(Builder $query){
+                return $query->where('received_at', null)->where('expired_at', '>', now());
+            }])->filter($request)->paginate($request->get('limit', 15));
             return $this->toCollection($coupon, CouponResource::class);
         }
         return view('coupon::coupon.index');

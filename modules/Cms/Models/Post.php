@@ -2,10 +2,10 @@
 
 namespace Modules\Cms\Models;
 
-use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCount;
-use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Models\BaseModel;
 use Modules\Point\Traits\Pointable;
+use Modules\Core\Traits\HasCreateBy;
 
 /**
  * Class Post.

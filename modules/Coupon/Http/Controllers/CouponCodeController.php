@@ -160,7 +160,7 @@ class CouponCodeController extends BaseController
         $request->validate(['number' => 'required|numeric|max:10000', 'coupon_id' => 'required']);
 
         $r = $this->couponCode->genCode($request->get('coupon_id'), $request->get('number'));
-        return $this->toResponse($r);
+        return $r['msg']? $this->toError(-1, $r['msg']) : $this->toResponse($r);
     }
 
     /**
