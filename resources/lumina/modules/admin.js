@@ -7,7 +7,7 @@ layui.extend({
     vue: "libs/vue.min",
     // 扩展包
     upload: "extends/upload/upload",
-    autocomplete: "extends/autocomplete",
+    autocomplete: "extends/autocomplete/autocomplete",
     formSelect: 'extends/formSelect/formSelect',
     wangEditor: 'extends/wangEditor/wangEditor',
     wangEditorLight: 'extends/wangEditor/wangEditor.light',
