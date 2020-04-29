@@ -2,6 +2,7 @@
 
 namespace Modules\Coupon\Models;
 
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Support\Str;
 use Modules\Core\Models\BaseModel;
@@ -89,7 +90,7 @@ class CouponCode extends BaseModel
         try{
             $coupon = Coupon::where('uid', $coupon_id)->firstOrFail();
 
-            if(now()->isAfter($coupon->expired_at)){
+            if(now()->isAfter($coupon->end_at)){
                 return ['msg' => '优惠券已失效，不能再生成优惠码' ];
             }
             // 计算失效期
