@@ -1,3 +1,4 @@
+
 <x-formItem :label="__('core::field.brand_id')">
 	<x-input name="brand_id" verify="required" :value="$spu->brand_id??''"/>
 </x-formItem>
@@ -43,72 +44,213 @@
 </x-formItem>
 
 
-@verbatim
-<div id="skuBox">
-    <table class="layui-table">
-        <thead>
-            <tr>
-                <th colspan="7">
-                    <h3 class="py-2">属性管理<a href="javascript:;" class="btn btn-primary ml-4 btn-sm" id="j_addSku">新增</a></h3>
-                </th>
-            </tr>
-            <tr><th>属性名称</th><th>属性值</th></tr>
-        </thead>
-        <tbody>
-            <tr v-for="attr in attrs" data-name="{{ attr.name }}">
-                <td>{{ attr.label }}</td>
-                <td>
-                    <el-tag
-                        :key="tag"
-                        class="mr-2"
-                        v-for="tag in attr.value"
-                        closable
-                        :disable-transitions="false"
-                        @close="handleClose(tag)">
-                        {{tag.label}}
-                    </el-tag>
-                    <el-input
-                        class="input-new-tag"
-                        v-if="inputVisible"
-                        v-model="inputValue"
-                        ref="saveTagInput"
-                        size="small"
-                        @keyup.enter.native="handleInputConfirm"
-                        @blur="handleInputConfirm"
-                    >
-                    </el-input>
-                    <el-button v-else class="button-new-tag" size="small" @click="showInput">+新增</el-button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    {{ name }}
+<style>
+    @charset "UTF-8";
+/* 多规格 */
+.goods-spec-many { display: block; /* 添加规格组 */ /* sku容器 */ }
+.goods-spec-many .goods-spec-box { margin-top: 15px; border: 1px solid #e4e4e4; padding: 20px; border-radius: 4px; }
+.goods-spec-many input { font-size: 1.3rem !important; padding-left: 10px !important; border: 1px solid #e3e2e5 !important; }
+.goods-spec-many input.am-field-error { border-color: #dd514c !important; }
+.goods-spec-many .spec-group-item { margin-bottom: 25px; }
+.goods-spec-many .spec-group-item .spec-group-name { margin-bottom: 15px; }
+.goods-spec-many .spec-group-item .spec-group-name span { font-size: 1.5rem; }
+.goods-spec-many .spec-group-item .spec-group-name .fa { display: inline-block; }
+.goods-spec-many .spec-group-item .spec-list .spec-item { position: relative; margin-right: 12px; margin-bottom: 12px; }
+.goods-spec-many .spec-group-item .spec-list .spec-item span { min-width: 50px; display: inline-block; border: 1px solid #ddd; text-align: center; padding: 0 15px; border-radius: 2px; font-size: 1.3rem; line-height: 30px; }
+.goods-spec-many .spec-group-item .spec-list .spec-item:hover .fa { visibility: visible; }
+.goods-spec-many .spec-group-item .spec-list .spec-item .fa { position: absolute; width: 20px; top: -9px; right: -9px; visibility: hidden; }
+.goods-spec-many .spec-group-item .spec-item-add input { width: 110px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+.goods-spec-many .spec-group-item .spec-item-add button { display: table-cell; height: 32px; font-size: 1.3rem; border-color: #e3e2e5; border-left: none; border-top-right-radius: 4px; border-bottom-right-radius: 4px; outline: none; }
+.goods-spec-many .fa { cursor: pointer; text-align: center; color: #ababab; font-size: 1.3rem; }
+.goods-spec-many .fa:hover { color: #6b6b6b; }
+.goods-spec-many .spec-group-add { display: none; }
+.goods-spec-many .spec-group-add .spec-group-add-item { margin-bottom: 10px; }
+.goods-spec-many .spec-group-add .spec-group-add-item input { width: 160px; border-radius: 4px; display: inline-block; margin-left: 12px; }
+.goods-spec-many .goods-sku { display: none; /* 批量设置sku */ /* 商品sku表格 */ }
+.goods-spec-many .goods-sku .goods-spec-line { border: 1px dashed #e3e2e5; }
+.goods-spec-many .goods-sku .spec-batch { margin-bottom: 2rem; }
+.goods-spec-many .goods-sku .spec-batch .am-form-label { padding-top: 0; }
+.goods-spec-many .goods-sku .spec-batch .am-form-group { margin-left: .6rem; }
+.goods-spec-many .goods-sku .spec-batch .am-form-group input { width: 140px; }
+.goods-spec-many .goods-sku .spec-sku-tabel td.td-spec-value { padding: .7rem 1.3rem !important; }
+.goods-spec-many .goods-sku .spec-sku-tabel input { display: inline-block !important; }
+
+/*# sourceMappingURL=goods.css.map */
+
+</style>
+
+
+<div class="goods-spec-many am-form-group">
+    <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
+        <!-- 规格属性 -->
+        <div class="spec-attr"></div>
+
+        <!-- 添加规格：按钮 -->
+        <div class="spec-group-button">
+            <button type="button" class="btn-addSpecGroup layui-btn layui-btn-sm">添加规格</button>
+        </div>
+
+        <!-- 添加规格：表单 -->
+        <div class="spec-group-add">
+            <div class="spec-group-add-item am-form-group">
+                <label class="am-form-label form-require">规格名 </label>
+                <input type="text" class="input-specName tpl-form-input layui-input" placeholder="请输入规格名称">
+            </div>
+            <div class="spec-group-add-item am-form-group">
+                <label class="am-form-label form-require">规格值 </label>
+                <input type="text" class="input-specValue tpl-form-input layui-input" placeholder="请输入规格值">
+            </div>
+            <div class="spec-group-add-item am-margin-top">
+                <button type="button" class="btn-addSpecName layui-btn layui-btn-sm"> 确定
+                </button>
+                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"> 取消
+                </button>
+            </div>
+        </div>
+        <!-- 商品多规格sku信息 -->
+        <div class="goods-sku am-scrollable-horizontal">
+            <!-- 分割线 -->
+            <div class="goods-spec-line am-margin-top-lg am-margin-bottom-lg"></div>
+            <!-- sku 批量设置 -->
+            <div class="spec-batch layui-inline">
+                <label class="layui-form-label w-48">批量设置</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                  <input type="text" data-type="goods_no" placeholder="商家编码" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" data-type="goods_price" placeholder="销售价" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" data-type="line_price" placeholder="划线价" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" data-type="stock_num" placeholder="库存数量" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" data-type="goods_weight" placeholder="重量" class="layui-input">
+                </div>
+
+                <div class="layui-input-inline" style="width: 100px;">
+                    <button type="button" class="btn-specBatchBtn layui-btn">确定</button>
+                </div>
+            </div>
+            <!-- sku table -->
+            <table class="spec-sku-tabel layui-table"></table>
+        </div>
+    </div>
 </div>
-@endverbatim
 
-<script type="text/html" id="mall_product_sku_tool">
-	<a href="" class="layui-btn layui-btn-danger layui-btn-xs" data-event="remove"><i class="fa fa-delete"></i></a>
+
+<!-- 商品规格属性模板 -->
+<script id="tpl_spec_attr" type="text/template">
+    @{{ each spec_attr }}
+    <div class="spec-group-item" data-index="@{{ $index }}" data-group-id="@{{ $value.group_id }}">
+        <div class="spec-group-name">
+            <span>@{{ $value.group_name }}</span>
+            <i class="spec-group-delete fa fa-times-circle" title="点击删除"></i>
+        </div>
+        <div class="spec-list am-cf">
+            @{{ each $value.spec_items item key }}
+            <div class="spec-item am-fl" data-item-index="@{{ key }}">
+                <span>@{{ item.spec_value }}</span>
+                <i class="spec-item-delete fa fa-times-circle" title="点击删除"></i>
+            </div>
+            @{{ /each }}
+            <div class="spec-item-add layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="ipt-specItem layui-input" style="height:32px">
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="btn-addSpecItem layui-btn layui-btn-sm">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{{ /each }}
 </script>
-{{-- <table id="mall_product_sku" class="layui-table">
-	<thead>
-	<tr>
-		<th colspan="7">
-			<h3 class="py-2">SKU管理<a href="javascript:;" class="btn btn-primary ml-4 btn-sm" id="j_addSku">新增</a></h3>
-		</th>
-	</tr>
-	<tr>
-		<th width="80">编号</th>
-		<th width="250">属性</th>
-		<th>售卖价</th>
-		<th>市场价</th>
-		<th>库存</th>
-		<th width="350">图集</th>
-		<th>操作</th>
-	</tr>
-	</thead>
-	<tbody></tbody>
-</table> --}}
 
+<!-- 商品规格table模板 -->
+<script id="tpl_spec_table" type="text/template">
+    <thead>
+        <tr>
+            @{{ each spec_attr }}
+            <th>@{{ $value.group_name }}</th>
+            @{{ /each }}
+            <th>商家编码</th>
+            <th>销售价</th>
+            <th>划线价</th>
+            <th>库存</th>
+            <th>重量(kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{{ each spec_list item }}
+    <tr data-index="@{{ $index }}" data-sku-id="@{{ item.spec_sku_id }}">
+        @{{ each item.rows td itemKey }}
+        <td class="td-spec-value am-text-middle" rowspan="@{{ td.rowspan }}">
+            @{{ td.spec_value }}
+        </td>
+        @{{ /each }}
+        <td>
+            <input type="text" name="goods_no" value="@{{ item.form.goods_no }}" class="ipt-goods-no layui-input am-field-valid">
+        </td>
+        <td>
+            <input type="number" name="goods_price" value="@{{ item.form.goods_price }}" class="am-field-valid layui-input"
+                   required>
+        </td>
+        <td>
+            <input type="number" name="line_price" value="@{{ item.form.line_price }}" class="am-field-valid layui-input">
+        </td>
+        <td>
+            <input type="number" name="stock_num" value="@{{ item.form.stock_num }}" class="am-field-valid layui-input"
+                   required>
+        </td>
+        <td>
+            <input type="number" name="goods_weight" value="@{{ item.form.goods_weight }}" class="am-field-valid layui-input"
+                   required>
+        </td>
+    </tr>
+    @{{ /each }}
+    </tbody>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/art-template@4.13.2/lib/template-web.js"></script>
+<script>
+    layui.extend({
+        'attr': 'modules/shop/attr'
+    }).use('attr', function(){
+        var attr = layui.attr;
+
+        attr.render({
+            container: '.goods-spec-many'
+        },{
+            spec_attr: [
+                {'group_id': 1, 'group_name': '颜色', 'spec_items': [
+                    {'item_id': 11, 'spec_value': '红色'},
+                    {'item_id': 12, 'spec_value': '白色'},
+                    {'item_id': 13, 'spec_value': '蓝色'},
+                ]},
+                {'group_id': 2, 'group_name': '内存', 'spec_items': [
+                    {'item_id': 21, 'spec_value': '8G'},
+                    {'item_id': 22, 'spec_value': '16G'},
+                ]}
+            ],
+            spec_list: []
+        })
+
+    })
+
+        // 切换单/多规格
+        $('input:radio[name="goods[spec_type]"]').change(function (e) {
+            var $goodsSpecMany = $('.goods-spec-many')
+                , $goodsSpecSingle = $('.goods-spec-single');
+            if (e.currentTarget.value === '10') {
+                $goodsSpecMany.hide() && $goodsSpecSingle.show();
+            } else {
+                $goodsSpecMany.show() && $goodsSpecSingle.hide();
+            }
+        });
+
+</script>
 
 <x-formItem class="layui-layout-admin">
 	<div class="layui-footer z-50 shadow" style="left:0;">
@@ -116,161 +258,3 @@
 		<button type="reset" class="layui-btn layui-btn-primary" lay-submit-cancel>重置</button>
 	</div>
 </x-formItem>
-
-@push('style')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.13.1/lib/theme-chalk/index.css">
-@endpush
-@push('script')
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/element-ui@2.13.1/lib/index.js"></script>
-<script>
-    var app = new Vue({
-        el: '#skuBox',
-        data(){
-            return {
-                attrs: [
-                    {'name': 'color', 'label':'颜色', 'value': [{'name':'red', 'label':'红色'},{'name':'blue', 'label':'蓝色'}]},
-                    {'name': 'size', 'label':'尺寸', 'value': [{'name':'l', 'label':'L'},{'name':'xl', 'label':'XL'}]}
-                ],
-                dynamicTags: ['标签一', '标签二', '标签三'],
-                inputVisible: false,
-                inputValue: ''
-            }
-        },
-        methods: {
-            handleClose(tag) {
-                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-            },
-            showInput() {
-                this.inputVisible = true;
-                this.$nextTick(_ => {
-                this.$refs.saveTagInput.$refs.input.focus();
-                });
-            },
-
-            handleInputConfirm() {
-                let inputValue = this.inputValue;
-                if (inputValue) {
-                this.dynamicTags.push(inputValue);
-                }
-                this.inputVisible = false;
-                this.inputValue = '';
-            }
-        }
-    })
-	layui.extend({
-        'MallProductAttrPicker': "modules/mall/product_attr_picker"
-	}).use(['table', 'MallProductAttrPicker', 'laytpl', 'autocomplete', 'form'], function(){
-		var $table = $("#mall_product_sku"),
-				laytpl = layui.laytpl,
-				autocomplete = layui.autocomplete,
-                upload = layui.upload,
-                form = layui.form,
-                vue = layui.vue,
-                inputTags = layui.inputTags,
-				MallProductAttrPicker = layui.MallProductAttrPicker,
-				skuCouunt = 0,
-				IMG_LIMIT = 9,
-				_sku_tpl = '<tr data-idx=@{{ d.idx }}>' +
-					'<td>#</td>' +
-					'<td><a href="javascript:;" class="j_sku_attr_picker">添加属性</a><dl></dl></td>' +
-					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][price_fee]"> </td>' +
-					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][market_price_fee]"> </td>' +
-					'<td><input type="number" class="layui-input" name="sku[@{{ d.idx }}][quantity]"></td>' +
-					'<td><div class="layui-form-img"><input type="hidden" name="img" ></div></td>' +
-					'<td></td>'+
-				'</tr>',
-				_autocompleteUrl = '/interface/mall/product-attr-values',
-				_attr_tpl = '<div class="layui-form-item">' +
-				'<label for="" class="layui-form-label">@{{ d.name }}：</label>' +
-				'<div class="layui-input-block"><input type="text" class="layui-input" name="sku[@{{ d.idx }}][attrs][@{{ d.id }}]" lay-autocomplete lay-url="'+_autocompleteUrl+'"></div>' +
-				'</div>';
-
-        $table.on("click","#j_addSku", function(){
-            var _body = $table.find("tbody");
-
-			skuCouunt = _body.find("tr").length;
-            _body.prepend(laytpl(_sku_tpl).render({'idx': skuCouunt}))
-
-            form.render('img')
-            // $(document).scrollTop($(document).height());
-            // renderTpl();
-		})
-		$table.on("click",".j_sku_attr_picker", function(){
-			var $this = $(this);
-			var _iptHtml = '';
-			var _pickerDialog = MallProductAttrPicker.render();
-			var _idx = $this.parents("tr").attr("data-idx")
-
-			if(!_idx) return;
-			_pickerDialog.on("yes", function(res){
-				$.each(res, function(i, n){
-					_iptHtml += (laytpl(_attr_tpl).render({
-						id: n.id,
-						name: n.name,
-						idx: _idx
-					}))
-				})
-				$this.next("dl").append(_iptHtml)
-
-				autocomplete.init();
-				_pickerDialog.hide()
-			})
-			// MallProductAttrPicker.on("btn(yes)", function(res){
-			// 	console.log(res)
-			// })
-		})
-
-		// 上传
-		var  _imgItem = '<li class="uploader__file" style="background-image: url(@{{ d.upfile }})"><div class="uploader__mask" style="display: none">' +
-				'<div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="@{{ d.upfile }}"><i class="fa fa-close"></i></a></div>' +
-				'</div></li>';
-		// var uploadInst = upload.render({
-		// 	elem: '.j_img_picker',
-		// 	url: '{{ url('/interface/core/upload') }}',
-		// 	fileNumLimit: IMG_LIMIT,
-		// 	done: function(res, $el){
-		// 		var $ipt = $el.parent(".m-uploader").find("input.j_img")
-		// 		var $iptVal = $ipt.val();
-		// 		var $imgBox = $el.parent(".m-uploader").find("ul.uploader__files");
-		// 		$iptVal = $iptVal.length>1?$iptVal.split(','):[]
-		// 		if($iptVal.length >= IMG_LIMIT) return;
-		// 		$.each(res, function(i, n){
-		// 			$iptVal.push(n)
-		// 			if($iptVal.length >= IMG_LIMIT) {
-		// 				$el.hide();
-		// 			}
-		// 			$imgBox.append(laytpl(_imgItem).render({
-		// 				upfile: n
-		// 			}))
-		// 		})
-		// 		$ipt.val($iptVal.join(','))
-		// 	}
-		// });
-		// 图片操作层
-		$(document).on("mouseenter", ".uploader__file", function(){
-			$(this).find(".uploader__mask").show()
-		}).on("mouseleave", ".uploader__file", function(){
-			$(this).find(".uploader__mask").hide()
-		})
-		$(document).on("click", ".j_delete", function(){
-			var url = $(this).attr("data-id")
-			var $ipt = $(this).parents(".m-uploader").find("input.j_img")
-			var $picker = $(this).parents(".m-uploader").find(".j_img_picker")
-			var $iptVal = $ipt.val();
-
-			$(this).parents(".uploader__file").remove();
-
-			$iptVal = $iptVal.length>1?$iptVal.split(','):[]
-			var _idx = $iptVal.indexOf(url);
-			if(_idx > -1) {
-				$iptVal.splice(_idx, 1);
-			}
-			$iptVal.length >= IMG_LIMIT?$picker.hide():$picker.show();
-			$ipt.val($iptVal.join(','))
-		})
-	})
-</script>
-
-@endpush
