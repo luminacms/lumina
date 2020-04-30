@@ -65,6 +65,9 @@ table.render({
     lineHeight: 65,
     action: [{'text': '推送到微信', 'event': 'pushWx'}], // 自定义方法
     height: 'full-100',
+    filters: [
+        {'name': 'status', "value":"{{ request('status') }}", "options": {"wait":"待领取","received":"已领取","used":"已使用","expired":"已过期"}}
+    ],
     cols: []
 });
 

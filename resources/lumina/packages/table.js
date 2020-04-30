@@ -1364,10 +1364,10 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         list: function () {
                             var _export = [];
                             if (options.export.can) {
-                                _export.push('<li data-type="checked">导出选中</li><li data-type="filtered">导出当前列表</li>')
+                                _export.push('<li data-type="checked">导出选中</li>')
                             }
                             if (options.export.all) {
-                                _export.push('<li data-type="all">导出全部</li>')
+                                _export.push('<li data-type="all">导出当前列表</li>')
                             }
                             return _export.join('')
                         }(),
@@ -1395,8 +1395,6 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                                     }).join(',')
                                 } else if (type === 'all') {
                                     ids = 'all';
-                                } else if(type === 'filtered') {
-                                    ids = 'filtered'
                                     data = $.extend(data, options.where)
                                 }
 

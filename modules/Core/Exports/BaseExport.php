@@ -27,7 +27,7 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
         $_ids = $request->get('ids');
 
         $this->request = $request;
-        $this->ids = $_ids === 'all'||'filtered' ? null : explode(',', $_ids);
+        $this->ids = $_ids === 'all' ? null : explode(',', $_ids);
         $this->params = $params;
     }
 
@@ -40,7 +40,7 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
     public static function beforeExport(BeforeExport $event)
     {
         $uinfo = var_export(auth()->user()->only(['id', 'name', 'email', 'mobile']), true);
-        Log::channel('exportlog')->info('before Export: '.get_called_class().';from:'.$uinfo);
+        Log::channel('exportlog')->info('before Export: '.get_called_class().';from:'.json_encode($uinfo));
     }
 
     public static function beforeWriting(BeforeWriting $event){}
