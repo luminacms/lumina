@@ -726,6 +726,33 @@ select.layui-table-edit{padding: 0 0 0 10px; border-color: #C9C9C9;}
 .layui-table-view .layui-form-checkbox{top: -1px; height: 26px; line-height: 26px;}
 .layui-table-view .layui-form-checkbox i{height: 26px;}
 
+/* 搜索框 */
+.layui-table-tool-search{position: relative;width: 250px;}
+.layui-table-tool-search input{
+    border-color: #e6e6e6;
+    height: 30px;
+    width: 250px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 34px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+}
+.layui-table-tool-search button{
+    border-color: transparent;
+    background-color: transparent;
+    width: 38px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    color: #d2d2d2;
+}
+.layui-table-tool-search button:focus{
+    outline: none;
+}
+
 /* 展开溢出的单元格 */
 .layui-table-grid .layui-table-cell{overflow: visible;}
 .layui-table-grid-down{position: absolute; top: 0; right: 0; width: 26px; height: 100%; padding: 5px 0; border-width: 0; border-left-width: 1px; text-align: center; background-color: #fff; color: #999; cursor: pointer;}
@@ -1279,10 +1306,13 @@ html #layuicss-layer{display: none; position: absolute; width: 1989px;}
 .layui-layer-btn a{height: 28px; line-height: 28px; margin: 5px 5px 0; padding: 0 15px; border: 1px solid #dedede; background-color:#fff; color: #333; border-radius: 2px; font-weight:400; cursor:pointer; text-decoration: none;}
 .layui-layer-btn a:hover{opacity: 0.9; text-decoration: none;}
 .layui-layer-btn a:active{opacity: 0.8;}
-.layui-layer-btn .layui-layer-btn0,.layui-layer-btn .layui-layer-btn1{padding: 2px 6px;}
+.layui-layer-btn .layui-layer-btn0,.layui-layer-btn .layui-layer-btn1{padding: 2px 6px;line-height: 23px;}
 .layui-layer-btn .layui-layer-btn0{border-color: #1E9FFF; background-color: #1E9FFF; color:#fff !important;}
 .layui-layer-btn-l{text-align: left;}
 .layui-layer-btn-c{text-align: center;}
+.layui-layer-adminRight .layui-layer-btn0,
+.layui-layer-adminRight .layui-layer-btn1{padding: 0 15px;line-height: 26px;}
+.layui-layer-adminRight .layui-layer-btn1{margin-right:15px;}
 
 /* 定制化 */
 .layui-layer-dialog{min-width:260px;}
@@ -1821,6 +1851,9 @@ html #layuicss-layer{display: none; position: absolute; width: 1989px;}
   box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);
   border-radius: 0;
   overflow: auto;
+}
+.layui-layer-adminRight .layui-layer-btn{
+    padding: 12px 15px;
 }
 
 .layui-anim-rl {

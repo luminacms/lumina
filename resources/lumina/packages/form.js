@@ -703,7 +703,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
             formElem = button.parents('form')[0], //获取当前所在的form元素，如果存在的话
             fieldElem = elem.find('input,select,textarea'), //获取所有表单域
             filter = button.attr('lay-filter'), //获取过滤器
-            ajaxsubmit = button.attr('lay-ajax'); // 是否ajax提交
+            ajaxsubmit = button.hasClass('J_ajax'); // 是否ajax提交
 
         //开始校验
         layui.each(verifyElem, function (_, item) {

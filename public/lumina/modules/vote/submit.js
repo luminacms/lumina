@@ -1,1 +1,35 @@
-"use strict";layui.extend({fingerprint:"libs/fingerprint"}).define(["fingerprint"],function(e){var i=layui.fingerprint,n=void 0;e("submit",{fingerprintReport:function(){i.get(function(e){n=i.x64hash128(e.map(function(e){return e.value}).join(),31)})},setDeviceId:function(){n=window.requestIdleCallback?requestIdleCallback(this.fingerprintReport):setTimeout(this.fingerprintReport,500)},render:function(i){this.setDeviceId(),$(i.elem).click(function(){void 0!==n?$.post(i.url,$.extend(i.data,{deviceid:n}),function(e){"function"==typeof i.done&&i.done(e)}):this.setDeviceId()})}})});
+layui.extend({
+    'fingerprint': 'libs/fingerprint'
+}).define(['fingerprint'], function(exports){
+    var fingerprint = layui.fingerprint;
+    var deviceid = undefined;
+    var Submit = {
+
+         fingerprintReport: function () {
+             fingerprint.get(function(components) {
+                 deviceid = fingerprint.x64hash128(components.map(function (pair) { return pair.value }).join(), 31)
+            })
+        },
+        setDeviceId: function(){
+            if (window.requestIdleCallback) {
+                deviceid = requestIdleCallback(this.fingerprintReport)
+            } else {
+                deviceid = setTimeout(this.fingerprintReport, 500)
+            }
+        },
+        render: function(option){
+            this.setDeviceId();
+
+            $(option.elem).click(function(){
+                if(deviceid === undefined){
+                    this.setDeviceId();
+                    return;
+                }
+                $.post(option.url, $.extend(option.data, {'deviceid': deviceid}), function(res) {
+                    (typeof option.done==='function')&&option.done(res)
+                })
+            })
+        }
+    }
+    exports('submit', Submit)
+})

@@ -40,7 +40,9 @@ class Coupon extends BaseModel
      *
      * @var array
      */
-    protected $fieldSearchable = [];
+    protected $fieldSearchable = [
+        'uid' => '='
+    ];
 
     protected static function boot()
     {

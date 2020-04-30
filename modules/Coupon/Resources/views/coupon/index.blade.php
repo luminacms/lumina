@@ -19,10 +19,12 @@
         layui.use(['table', 'element'], function(){
             var table = layui.table,
                 admin = parent.layui.admin,
+                form = layui.form,
+                tableName = 'data_coupon_table',
                 element = layui.element;
 
             table.render({
-                elem: '#data_coupon_table',
+                elem: '#'+tableName,
                 url: '{{ URL::full() }}',
                 autoShow: '{{ route("coupon.coupon.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
@@ -38,14 +40,15 @@
                     {"field":"type","title":"type"},{"field":"range","title":"range"},{"field":"expired_type","title":"expired_type"},{"field":"expired_hours","title":"expired_hours"},{"field":"start_at","title":"start_at"},{"field":"end_at","title":"end_at"},{"field":"times","title":"times"},{"field":"desc","title":"desc"},{"field":"status","title":"status"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
             });
 
+
             //监听行工具事件
-            table.on('toolbar(data_coupon_table)', function(obj){
-                var checked = table.checkStatus('data_coupon_table');
+            table.on('toolbar('+tableName+')', function(obj){
+                var checked = table.checkStatus(tableName);
 
                 if(obj.event == 'create') {
                     var createModal = admin.openModal('{{ route("coupon.coupon.create", \request()->all()) }}', '{{ __("core::main.create") }}', {
                         end: function(index, layero){
-                            table.reload('data_game_table')
+                            table.reload(tableName)
                         }
                     })
                     return true;
@@ -61,7 +64,7 @@
                         layer.confirm('{{ __("core::main.table_delete_tip") }}', function(index){
                             admin.request.post('{{ route("coupon.coupon.destroy", "_id_") }}'.replace('_id_', checked.data[0].id), {'_method': 'DELETE'}, function(res){
                                 layer.msg('{{ __("core::main.delete_success") }}');
-                                table.reload('data_coupon_table')
+                                table.reload(tableName)
                             })
 
                             layer.close(index);

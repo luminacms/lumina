@@ -405,7 +405,6 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
             })
             dropdown.render();
         }
-        console.log(xfilters)
     };
 
     //初始工具栏
@@ -1813,22 +1812,23 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         if (options.canSearch) {
             form.on('submit(*)', function (data) {
                 var _wd = data.field.wd,
+                    _opt = {},
                     data_type = $(data.elem).attr("data-type"),
                     table_id = $(data.elem).attr("data-table");
 
                 if(data_type == 'cancel') {
-                    table.reload(table_id, {
+                    _opt = {
                         where: $.extend(options.where, {
                             search: ''
                         }),
                         page: {
                             curr: 1
                         }
-                    })
+                    }
                 }else{
                     if (WD != _wd || _wd.length > 0) {
                         WD = _wd
-                        table.reload(table_id, {
+                        _opt = {
                             where: $.extend(options.where, {
                                 search: data.field.wd,
                                 searchFields: options.searchFields
@@ -1836,11 +1836,12 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                             page: {
                                 curr: 1
                             }
-                        })
+                        }
                     } else {
                         layer.msg('请输入关键字');
                     }
                 }
+                that.reload(_opt)
                 return false;
             })
         }

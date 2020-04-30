@@ -176,7 +176,6 @@ var watchHandler = function (type, file) {
             devMiniJs();
             break;
         case 'css':
-            compileAutoprefixer();
             miniCSS();
             break;
         case 'html':
@@ -191,7 +190,8 @@ var watchHandler = function (type, file) {
 
 function watch(cb) {
     var watcher = gulp.watch([
-        paths.src.dir + '/**/*.js'
+        paths.src.dir + '/**/*.js',
+        paths.src.dir + '/**/*.css'
     ], {
         ignored: /[\/\\]\./
     });

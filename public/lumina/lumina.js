@@ -1,1 +1,2326 @@
-"use strict";function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}!function(a){function n(){this.v=h.version}function d(){a.console&&console.error}var e,y=document,h={modules:{},status:{},timeout:10,event:{},version:"3.0.0"},m=(e=y.currentScript?y.currentScript.src:function(){for(var e,t=y.scripts,i=t.length-1,n=i;0<n;n--)if("interactive"===t[n].readyState){e=t[n].src;break}return e||t[i].src}()).substring(0,e.lastIndexOf("/")+1),g="undefined"!=typeof opera&&"[object Opera]"===opera.toString(),v={laydate:"packages/laydate/laydate",laypage:"packages/laypage",layer:"packages/layer",laytpl:"packages/laytpl",form:"packages/form",tree:"packages/tree",table:"packages/table",element:"packages/element",rate:"packages/rate",colorpicker:"packages/colorpicker",slider:"packages/slider",carousel:"packages/carousel",flow:"packages/flow",util:"packages/util",code:"packages/code/code",dropdown:"packages/dropdown",transfer:"packages/transfer"};n.prototype.cache=h,n.prototype.define=function(e,n){function t(){function i(e,t){layui[e]=t,h.status[e]=!0}return"function"==typeof n&&n(function(e,t){i(e,t),h.callback[e]=function(){n(i)}}),this}var i=this;return"function"==typeof e&&(n=e,e=[]),layui["layui.all"]||!layui["layui.all"]&&layui["layui.mobile"]?t.call(i):(i.use(e,t),i)},n.prototype.use=function(i,e,t){function n(e,t){var i="PLaySTATION 3"===navigator.platform?/^complete$/:/^(complete|loaded)$/;"load"!==e.type&&!i.test((e.currentTarget||e.srcElement).readyState)||(h.modules[s]=t,l.removeChild(p),function e(){if(++c>1e3*h.timeout/4)return d();h.status[s]?a():setTimeout(e,4)}())}function a(){t.push(layui[s]),1<i.length?o.use(i.slice(1),e,t):"function"==typeof e&&e.apply(layui,t)}var o=this,r=h.dir=h.dir?h.dir:m,l=y.getElementsByTagName("head")[0];i="string"==typeof i?[i]:i,window.jQuery&&jQuery.fn.on&&(o.each(i,function(e,t){"jquery"===t&&i.splice(e,1)}),layui.jquery=layui.$=jQuery);var s=i[0],c=0;if(t=t||[],h.host=h.host||(r.match(/\/\/([\s\S]+?)\//)||["//"+location.host+"/"])[0],0===i.length||layui["layui.all"]&&v[s]||!layui["layui.all"]&&layui["layui.mobile"]&&v[s])return a(),o;var u,f=(v[s]?r:!/^\{\/\}/.test(o.modules[s])&&h.base||"")+(o.modules[s]||s)+".js";if(f=f.replace(/^\{\/\}/,""),!h.modules[s]&&layui[s]&&(h.modules[s]=f),h.modules[s])!function e(){if(++c>1e3*h.timeout/4)return d();"string"==typeof h.modules[s]&&h.status[s]?a():setTimeout(e,4)}();else{var p=y.createElement("script");p.async=!0,p.charset="utf-8",p.src=f+((u=!0===h.version?h.v||(new Date).getTime():h.version||"")?"?v="+u:""),l.appendChild(p),!p.attachEvent||p.attachEvent.toString&&p.attachEvent.toString().indexOf("[native code")<0||g?p.addEventListener("load",function(e){n(e,f)},!1):p.attachEvent("onreadystatechange",function(e){n(e,f)}),h.modules[s]=f}return o},n.prototype.getStyle=function(e,t){var i=e.currentStyle?e.currentStyle:a.getComputedStyle(e,null);return i[i.getPropertyValue?"getPropertyValue":"getAttribute"](t)},n.prototype.link=function(e,t,i){var n=this,a=y.createElement("link"),o=y.getElementsByTagName("head")[0];"string"==typeof t&&(i=t);var r=(i||e).replace(/\.|\//g,""),l=a.id="layuicss-"+r,s=0;return a.rel="stylesheet",a.href=e+(h.debug?"?v="+(new Date).getTime():""),a.media="all",y.getElementById(l)||o.appendChild(a),"function"!=typeof t||function e(){if(++s>1e3*h.timeout/100)return d();1989===parseInt(n.getStyle(y.getElementById(l),"width"))?t():setTimeout(e,100)}(),n},h.callback={},n.prototype.factory=function(e){if(layui[e])return"function"==typeof h.callback[e]?h.callback[e]:null},n.prototype.addcss=function(e,t,i){return layui.link(h.base+e,t,i)},n.prototype.img=function(e,t,i){var n=new Image;if(n.src=e,n.complete)return t(n);n.onload=function(){n.onload=null,"function"==typeof t&&t(n)},n.onerror=function(e){n.onerror=null,"function"==typeof i&&i(e)}},n.prototype.config=function(e){for(var t in e=e||{})h[t]=e[t];return this},n.prototype.modules=function(){var e={};for(var t in v)e[t]=v[t];return e}(),n.prototype.extend=function(e){for(var t in e=e||{})this[t]||this.modules[t]||(this.modules[t]=e[t]);return this},n.prototype.router=function(e){var i={path:[],search:{},hash:((e=e||location.hash).match(/[^#](#.*$)/)||[])[1]||""};return/^#\//.test(e)&&(e=e.replace(/^#\//,""),i.href="/"+e,e=e.replace(/([^#])(#.*$)/,"$1").split("/")||[],this.each(e,function(e,t){/^\w+=/.test(t)?(t=t.split("="),i.search[t[0]]=t[1]):i.path.push(t)})),i},n.prototype.data=function(e,t,i){if(e=e||"layui",i=i||localStorage,a.JSON&&a.JSON.parse){if(null===t)return delete i[e];t="object"===_typeof(t)?t:{key:t};try{var n=JSON.parse(i[e])}catch(e){n={}}return"value"in t&&(n[t.key]=t.value),t.remove&&delete n[t.key],i[e]=JSON.stringify(n),t.key?n[t.key]:n}},n.prototype.sessionData=function(e,t){return this.data(e,t,sessionStorage)},n.prototype.device=function(e){function t(e){var t=new RegExp(e+"/([^\\s\\_\\-]+)");return(e=(i.match(t)||[])[1])||!1}var i=navigator.userAgent.toLowerCase(),n={os:/windows/.test(i)?"windows":/linux/.test(i)?"linux":/iphone|ipod|ipad|ios/.test(i)?"ios":/mac/.test(i)?"mac":void 0,ie:!!(a.ActiveXObject||"ActiveXObject"in a)&&((i.match(/msie\s(\d+)/)||[])[1]||"11"),weixin:t("micromessenger")};return e&&!n[e]&&(n[e]=t(e)),n.android=/android/.test(i),n.ios="ios"===n.os,n.mobile=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(i)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(i.substr(0,4)),n},n.prototype.hint=function(){return{error:d}},n.prototype.each=function(e,t){var i;if("function"!=typeof t)return this;if((e=e||[]).constructor===Object){for(i in e)if(t.call(e[i],i,e[i]))break}else for(i=0;i<e.length&&!t.call(e[i],i,e[i]);i++);return this},n.prototype.sort=function(e,o,t){var i=JSON.parse(JSON.stringify(e||[]));return o&&(i.sort(function(e,t){var i=/^-?\d+$/,n=e[o],a=t[o];return i.test(n)&&(n=parseFloat(n)),i.test(a)&&(a=parseFloat(a)),n&&!a?1:!n&&a?-1:a<n?1:n<a?-1:0}),t&&i.reverse()),i},n.prototype.stope=function(t){t=t||a.event;try{t.stopPropagation()}catch(e){t.cancelBubble=!0}},n.prototype.onevent=function(e,t,i){return"string"!=typeof e||"function"!=typeof i?this:n.event(e,t,null,i)},n.prototype.event=n.event=function(e,t,i,n){function a(e,t){!1===(t&&t.call(o,i))&&null===r&&(r=!1)}var o=this,r=null,l=t.match(/\((.*)\)$/)||[],s=(e+"."+t).replace(l[0],""),c=l[1]||"";return n?(h.event[s]=h.event[s]||{},h.event[s][c]=[n],this):(layui.each(h.event[s],function(e,t){"{*}"!==c?(""===e&&layui.each(t,a),c&&e===c&&layui.each(t,a)):layui.each(t,a)}),r)},a.layui=new n}(window),function(f){f.layui&&layui.define;function t(e){var t=this;t.index=++y.index,t.config=p.extend({},t.config,d.config,e),document.body?t.creat():setTimeout(function(){t.creat()},30)}var p,u,e,i,d={getPath:(e=document.currentScript?document.currentScript.src:function(){for(var e,t=document.scripts,i=t.length-1,n=i;0<n;n--)if("interactive"===t[n].readyState){e=t[n].src;break}return e||t[i].src}()).substring(0,e.lastIndexOf("/")+1),config:{},end:{},minIndex:0,minLeft:[],btn:["&#x786E;&#x5B9A;","&#x53D6;&#x6D88;"],type:["dialog","page","iframe","loading","tips"],getStyle:function(e,t){var i=e.currentStyle?e.currentStyle:f.getComputedStyle(e,null);return i[i.getPropertyValue?"getPropertyValue":"getAttribute"](t)},link:function(e,t,i){if(y.path){var n=document.getElementsByTagName("head")[0],a=document.createElement("link");"string"==typeof t&&(i=t);var o="layuicss-"+(i||e).replace(/\.|\//g,"");a.rel="stylesheet",a.href=y.path+e,a.id=o,document.getElementById(o)||n.appendChild(a)}}},y={v:"3.1.1",ie:(i=navigator.userAgent.toLowerCase(),!!(f.ActiveXObject||"ActiveXObject"in f)&&((i.match(/msie\s(\d+)/)||[])[1]||"11")),index:f.layer&&f.layer.v?1e5:0,path:d.getPath,config:function(e){return e=e||{},y.cache=d.config=p.extend({},d.config,e),y.path=d.config.path||y.path,"string"==typeof e.extend&&(e.extend=[e.extend]),d.config.path&&y.ready(),e.extend,this},ready:function(){return this},alert:function(e,t,i){var n="function"==typeof t;return n&&(i=t),y.open(p.extend({content:e,yes:i},n?{}:t))},confirm:function(e,t,i,n){var a="function"==typeof t;return a&&(n=i,i=t),y.open(p.extend({content:e,btn:d.btn,yes:i,btn2:n},a?{}:t))},msg:function(e,t,i){var n="function"==typeof t,a=d.config.skin,o=(a?a+" "+a+"-msg":"")||"layui-layer-msg",r=c.anim.length-1;return n&&(i=t),y.open(p.extend({content:e,time:3e3,shade:!1,skin:o,title:!1,closeBtn:!1,btn:!1,resize:!1,end:i},n&&!d.config.skin?{skin:o+" layui-layer-hui",anim:r}:(-1!==(t=t||{}).icon&&(void 0!==t.icon||d.config.skin)||(t.skin=o+" "+(t.skin||"layui-layer-hui")),t)))},load:function(e,t){return y.open(p.extend({type:3,icon:e||1,resize:!1,shade:.01},t))},tips:function(e,t,i){return y.open(p.extend({type:4,content:[e,t],closeBtn:!1,time:3e3,shade:!1,resize:!1,fixed:!1,maxWidth:210},i))}};t.pt=t.prototype;var c=["layui-layer",".layui-layer-title",".layui-layer-main",".layui-layer-dialog","layui-layer-iframe","layui-layer-content","layui-layer-btn","layui-layer-close"];c.anim=["layer-anim-00","layer-anim-01","layer-anim-02","layer-anim-03","layer-anim-04","layer-anim-05","layer-anim-06"],t.pt.config={type:0,shade:.3,fixed:!0,move:c[1],title:"&#x4FE1;&#x606F;",offset:"auto",area:"auto",closeBtn:1,time:0,zIndex:19891014,maxWidth:360,anim:0,isOutAnim:!0,icon:-1,moveType:1,resize:!0,scrollbar:!0,tips:2},t.pt.vessel=function(e,t){var i,n=this.index,a=this.config,o=a.zIndex+n,r="object"===_typeof(a.title),l=a.maxmin&&(1===a.type||2===a.type),s=a.title?'<div class="layui-layer-title" style="'+(r?a.title[1]:"")+'">'+(r?a.title[0]:a.title)+"</div>":"";return a.zIndex=o,t([a.shade?'<div class="layui-layer-shade" id="layui-layer-shade'+n+'" times="'+n+'" style="z-index:'+(o-1)+'; "></div>':"",'<div class="'+c[0]+" layui-layer-"+d.type[a.type]+(0!=a.type&&2!=a.type||a.shade?"":" layui-layer-border")+" "+(a.skin||"")+'" id="'+c[0]+n+'" type="'+d.type[a.type]+'" times="'+n+'" showtime="'+a.time+'" conType="'+(e?"object":"string")+'" style="z-index: '+o+"; width:"+a.area[0]+";height:"+a.area[1]+(a.fixed?"":";position:absolute;")+'">'+(e&&2!=a.type?"":s)+'<div id="'+(a.id||"")+'" class="layui-layer-content'+(0==a.type&&-1!==a.icon?" layui-layer-padding":"")+(3==a.type?" layui-layer-loading"+a.icon:"")+'">'+(0==a.type&&-1!==a.icon?'<i class="layui-layer-ico layui-layer-ico'+a.icon+'"></i>':"")+((1!=a.type||!e)&&a.content||"")+'</div><span class="layui-layer-setwin">'+(i=l?'<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>':"",a.closeBtn&&(i+='<a class="layui-layer-ico '+c[7]+" "+c[7]+(a.title?a.closeBtn:4==a.type?"1":"2")+'" href="javascript:;"></a>'),i)+"</span>"+(a.btn?function(){var e="";"string"==typeof a.btn&&(a.btn=[a.btn]);for(var t=0,i=a.btn.length;t<i;t++)e+='<a class="'+c[6]+t+'">'+a.btn[t]+"</a>";return'<div class="'+c[6]+" layui-layer-btn-"+(a.btnAlign||"")+'">'+e+"</div>"}():"")+(a.resize?'<span class="layui-layer-resize"></span>':"")+"</div>"],s,p('<div class="layui-layer-move"></div>')),this},t.pt.creat=function(){var n=this,a=n.config,o=n.index,r="object"===_typeof(s=a.content),l=p("body");if(!a.id||!p("#"+a.id)[0]){switch("string"==typeof a.area&&(a.area="auto"===a.area?["",""]:[a.area,""]),a.shift&&(a.anim=a.shift),6==y.ie&&(a.fixed=!1),a.type){case 0:a.btn="btn"in a?a.btn:d.btn[0],y.closeAll("dialog");break;case 2:var s=a.content=r?a.content:[a.content||"","auto"];a.content='<iframe scrolling="'+(a.content[1]||"auto")+'" allowtransparency="true" id="'+c[4]+o+'" name="'+c[4]+o+'" onload="this.className=\'\';" class="layui-layer-load" frameborder="0" src="'+a.content[0]+'"></iframe>';break;case 3:delete a.title,delete a.closeBtn,-1===a.icon&&a.icon,y.closeAll("loading");break;case 4:r||(a.content=[a.content,"body"]),a.follow=a.content[1],a.content=a.content[0]+'<i class="layui-layer-TipsG"></i>',delete a.title,a.tips="object"===_typeof(a.tips)?a.tips:[a.tips,!0],a.tipsMore||y.closeAll("tips")}if(n.vessel(r,function(e,t,i){l.append(e[0]),r?2==a.type||4==a.type?p("body").append(e[1]):s.parents("."+c[0])[0]||(s.data("display",s.css("display")).show().addClass("layui-layer-wrap").wrap(e[1]),p("#"+c[0]+o).find("."+c[5]).before(t)):l.append(e[1]),p(".layui-layer-move")[0]||l.append(d.moveElem=i),n.layero=p("#"+c[0]+o),a.scrollbar||c.html.css("overflow","hidden").attr("layer-full",o)}).auto(o),p("#layui-layer-shade"+n.index).css({"background-color":a.shade[1]||"#000",opacity:a.shade[0]||a.shade}),2==a.type&&6==y.ie&&n.layero.find("iframe").attr("src",s[0]),4==a.type?n.tips():n.offset(),a.fixed&&u.on("resize",function(){n.offset(),(/^\d+%$/.test(a.area[0])||/^\d+%$/.test(a.area[1]))&&n.auto(o),4==a.type&&n.tips()}),a.time<=0||setTimeout(function(){y.close(n.index)},a.time),n.move().callback(),c.anim[a.anim]){var e="layer-anim "+c.anim[a.anim];n.layero.addClass(e).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",function(){p(this).removeClass(e)})}a.isOutAnim&&n.layero.data("isOutAnim",!0)}},t.pt.auto=function(e){var t=this.config,i=p("#"+c[0]+e);""===t.area[0]&&0<t.maxWidth&&(y.ie&&y.ie<8&&t.btn&&i.width(i.innerWidth()),i.outerWidth()>t.maxWidth&&i.width(t.maxWidth));function n(e){(e=i.find(e)).height(a[1]-o-r-2*(0|parseFloat(e.css("padding-top"))))}var a=[i.innerWidth(),i.innerHeight()],o=i.find(c[1]).outerHeight()||0,r=i.find("."+c[6]).outerHeight()||0;switch(t.type){case 2:n("iframe");break;default:""===t.area[1]?0<t.maxHeight&&i.outerHeight()>t.maxHeight?(a[1]=t.maxHeight,n("."+c[5])):t.fixed&&a[1]>=u.height()&&(a[1]=u.height(),n("."+c[5])):n("."+c[5])}return this},t.pt.offset=function(){var e=this,t=e.config,i=e.layero,n=[i.outerWidth(),i.outerHeight()],a="object"===_typeof(t.offset);e.offsetTop=(u.height()-n[1])/2,e.offsetLeft=(u.width()-n[0])/2,a?(e.offsetTop=t.offset[0],e.offsetLeft=t.offset[1]||e.offsetLeft):"auto"!==t.offset&&("t"===t.offset?e.offsetTop=0:"r"===t.offset?e.offsetLeft=u.width()-n[0]:"b"===t.offset?e.offsetTop=u.height()-n[1]:"l"===t.offset?e.offsetLeft=0:"lt"===t.offset?(e.offsetTop=0,e.offsetLeft=0):"lb"===t.offset?(e.offsetTop=u.height()-n[1],e.offsetLeft=0):"rt"===t.offset?(e.offsetTop=0,e.offsetLeft=u.width()-n[0]):"rb"===t.offset?(e.offsetTop=u.height()-n[1],e.offsetLeft=u.width()-n[0]):e.offsetTop=t.offset),t.fixed||(e.offsetTop=/%$/.test(e.offsetTop)?u.height()*parseFloat(e.offsetTop)/100:parseFloat(e.offsetTop),e.offsetLeft=/%$/.test(e.offsetLeft)?u.width()*parseFloat(e.offsetLeft)/100:parseFloat(e.offsetLeft),e.offsetTop+=u.scrollTop(),e.offsetLeft+=u.scrollLeft()),i.attr("minLeft")&&(e.offsetTop=u.height()-(i.find(c[1]).outerHeight()||0),e.offsetLeft=i.css("left")),i.css({top:e.offsetTop,left:e.offsetLeft})},t.pt.tips=function(){var e=this.config,t=this.layero,i=[t.outerWidth(),t.outerHeight()],n=p(e.follow);n[0]||(n=p("body"));var a={width:n.outerWidth(),height:n.outerHeight(),top:n.offset().top,left:n.offset().left},o=t.find(".layui-layer-TipsG"),r=e.tips[0];e.tips[1]||o.remove(),a.autoLeft=function(){0<a.left+i[0]-u.width()?(a.tipLeft=a.left+a.width-i[0],o.css({right:12,left:"auto"})):a.tipLeft=a.left},a.where=[function(){a.autoLeft(),a.tipTop=a.top-i[1]-10,o.removeClass("layui-layer-TipsB").addClass("layui-layer-TipsT").css("border-right-color",e.tips[1])},function(){a.tipLeft=a.left+a.width+10,a.tipTop=a.top,o.removeClass("layui-layer-TipsL").addClass("layui-layer-TipsR").css("border-bottom-color",e.tips[1])},function(){a.autoLeft(),a.tipTop=a.top+a.height+10,o.removeClass("layui-layer-TipsT").addClass("layui-layer-TipsB").css("border-right-color",e.tips[1])},function(){a.tipLeft=a.left-i[0]-10,a.tipTop=a.top,o.removeClass("layui-layer-TipsR").addClass("layui-layer-TipsL").css("border-bottom-color",e.tips[1])}],a.where[r-1](),1===r?a.top-(u.scrollTop()+i[1]+16)<0&&a.where[2]():2===r?0<u.width()-(a.left+a.width+i[0]+16)||a.where[3]():3===r?0<a.top-u.scrollTop()+a.height+i[1]+16-u.height()&&a.where[0]():4===r&&0<i[0]+16-a.left&&a.where[1](),t.find("."+c[5]).css({"background-color":e.tips[1],"padding-right":e.closeBtn?"30px":""}),t.css({left:a.tipLeft-(e.fixed?u.scrollLeft():0),top:a.tipTop-(e.fixed?u.scrollTop():0)})},t.pt.move=function(){var r=this,l=r.config,e=p(document),s=r.layero,t=s.find(l.move),i=s.find(".layui-layer-resize"),c={};return l.move&&t.css("cursor","move"),t.on("mousedown",function(e){e.preventDefault(),l.move&&(c.moveStart=!0,c.offset=[e.clientX-parseFloat(s.css("left")),e.clientY-parseFloat(s.css("top"))],d.moveElem.css("cursor","move").show())}),i.on("mousedown",function(e){e.preventDefault(),c.resizeStart=!0,c.offset=[e.clientX,e.clientY],c.area=[s.outerWidth(),s.outerHeight()],d.moveElem.css("cursor","se-resize").show()}),e.on("mousemove",function(e){if(c.moveStart){var t=e.clientX-c.offset[0],i=e.clientY-c.offset[1],n="fixed"===s.css("position");if(e.preventDefault(),c.stX=n?0:u.scrollLeft(),c.stY=n?0:u.scrollTop(),!l.moveOut){var a=u.width()-s.outerWidth()+c.stX,o=u.height()-s.outerHeight()+c.stY;t<c.stX&&(t=c.stX),a<t&&(t=a),i<c.stY&&(i=c.stY),o<i&&(i=o)}s.css({left:t,top:i})}if(l.resize&&c.resizeStart){t=e.clientX-c.offset[0],i=e.clientY-c.offset[1];e.preventDefault(),y.style(r.index,{width:c.area[0]+t,height:c.area[1]+i}),c.isResize=!0,l.resizing&&l.resizing(s)}}).on("mouseup",function(e){c.moveStart&&(delete c.moveStart,d.moveElem.hide(),l.moveEnd&&l.moveEnd(s)),c.resizeStart&&(delete c.resizeStart,d.moveElem.hide())}),r},t.pt.callback=function(){var t=this,i=t.layero,n=t.config;t.openLayer(),n.success&&(2==n.type?i.find("iframe").on("load",function(){n.success(i,t.index)}):n.success(i,t.index)),6==y.ie&&t.IE6(i),i.find("."+c[6]).children("a").on("click",function(){var e=p(this).index();0===e?n.yes?n.yes(t.index,i):n.btn1?n.btn1(t.index,i):y.close(t.index):!1===(n["btn"+(e+1)]&&n["btn"+(e+1)](t.index,i))||y.close(t.index)}),i.find("."+c[7]).on("click",function(){!1===(n.cancel&&n.cancel(t.index,i))||y.close(t.index)}),n.shadeClose&&p("#layui-layer-shade"+t.index).on("click",function(){y.close(t.index)}),i.find(".layui-layer-min").on("click",function(){!1===(n.min&&n.min(i))||y.min(t.index,n)}),i.find(".layui-layer-max").on("click",function(){p(this).hasClass("layui-layer-maxmin")?(y.restore(t.index),n.restore&&n.restore(i)):(y.full(t.index,n),setTimeout(function(){n.full&&n.full(i)},100))}),n.end&&(d.end[t.index]=n.end)},d.reselect=function(){p.each(p("select"),function(e,t){var i=p(this);i.parents("."+c[0])[0]||1==i.attr("layer")&&p("."+c[0]).length<1&&i.removeAttr("layer").show(),i=null})},t.pt.IE6=function(e){p("select").each(function(e,t){var i=p(this);i.parents("."+c[0])[0]||"none"===i.css("display")||i.attr({layer:"1"}).hide(),i=null})},t.pt.openLayer=function(){y.zIndex=this.config.zIndex,y.setTop=function(e){return y.zIndex=parseInt(e[0].style.zIndex),e.on("mousedown",function(){y.zIndex++,e.css("z-index",y.zIndex+1)}),y.zIndex}},d.record=function(e){var t=[e.width(),e.height(),e.position().top,e.position().left+parseFloat(e.css("margin-left"))];e.find(".layui-layer-max").addClass("layui-layer-maxmin"),e.attr({area:t})},d.rescollbar=function(e){c.html.attr("layer-full")==e&&(c.html[0].style.removeProperty?c.html[0].style.removeProperty("overflow"):c.html[0].style.removeAttribute("overflow"),c.html.removeAttr("layer-full"))},(f.layer=y).getChildFrame=function(e,t){return t=t||p("."+c[4]).attr("times"),p("#"+c[0]+t).find("iframe").contents().find(e)},y.getFrameIndex=function(e){return p("#"+e).parents("."+c[4]).attr("times")},y.iframeAuto=function(e){if(e){var t=y.getChildFrame("html",e).outerHeight(),i=p("#"+c[0]+e),n=i.find(c[1]).outerHeight()||0,a=i.find("."+c[6]).outerHeight()||0;i.css({height:t+n+a}),i.find("iframe").css({height:t})}},y.iframeSrc=function(e,t){p("#"+c[0]+e).find("iframe").attr("src",t)},y.style=function(e,t,i){var n=p("#"+c[0]+e),a=n.find(".layui-layer-content"),o=n.attr("type"),r=n.find(c[1]).outerHeight()||0,l=n.find("."+c[6]).outerHeight()||0;n.attr("minLeft");o!==d.type[3]&&o!==d.type[4]&&(i||(parseFloat(t.width)<=260&&(t.width=260),parseFloat(t.height)-r-l<=64&&(t.height=64+r+l)),n.css(t),l=n.find("."+c[6]).outerHeight(),o===d.type[2]?n.find("iframe").css({height:parseFloat(t.height)-r-l}):a.css({height:parseFloat(t.height)-r-l-parseFloat(a.css("padding-top"))-parseFloat(a.css("padding-bottom"))}))},y.min=function(e,t){var i=p("#"+c[0]+e),n=i.find(c[1]).outerHeight()||0,a=i.attr("minLeft")||181*d.minIndex+"px",o=i.css("position");d.record(i),d.minLeft[0]&&(a=d.minLeft[0],d.minLeft.shift()),i.attr("position",o),y.style(e,{width:180,height:n,left:a,top:u.height()-n,position:"fixed",overflow:"hidden"},!0),i.find(".layui-layer-min").hide(),"page"===i.attr("type")&&i.find(c[4]).hide(),d.rescollbar(e),i.attr("minLeft")||d.minIndex++,i.attr("minLeft",a)},y.restore=function(e){var t=p("#"+c[0]+e),i=t.find(c[1]).outerHeight()||0,n=t.attr("area").split(",");t.attr("type");y.style(e,{width:parseFloat(n[0]),height:parseFloat(n[1]),top:parseFloat(n[2]),left:parseFloat(n[3]),position:t.attr("position"),overflow:"visible"},!0),p("#layui-layer-iframe"+e).css("height",parseFloat(n[1])-i),t.find(".layui-layer-max").removeClass("layui-layer-maxmin"),t.find(".layui-layer-min").show(),"page"===t.attr("type")&&t.find(c[4]).show(),d.rescollbar(e)},y.full=function(t){var e,i=p("#"+c[0]+t),n=i.find(c[1]).outerHeight()||0;d.record(i),c.html.attr("layer-full")||c.html.css("overflow","hidden").attr("layer-full",t),clearTimeout(e),e=setTimeout(function(){var e="fixed"===i.css("position");y.style(t,{top:e?0:u.scrollTop(),left:e?0:u.scrollLeft(),width:u.width(),height:u.height()},!0),p("#layui-layer-iframe"+t).css("height",u.height()-n),i.find(".layui-layer-min").hide()},100)},y.title=function(e,t){p("#"+c[0]+(t||y.index)).find(c[1]).html(e)},y.close=function(n){var a=p("#"+c[0]+n),o=a.attr("type");if(a[0]){var r="layui-layer-wrap",e=function(){if(o===d.type[1]&&"object"===a.attr("conType")){a.children(":not(."+c[5]+")").remove();for(var e=a.find("."+r),t=0;t<2;t++)e.unwrap();e.css("display",e.data("display")).removeClass(r)}else{if(o===d.type[2])try{var i=p("#"+c[4]+n)[0];i.contentWindow.document.write(""),i.contentWindow.close(),a.find("."+c[5])[0].removeChild(i)}catch(e){}a[0].innerHTML="",a.remove()}"function"==typeof d.end[n]&&d.end[n](),delete d.end[n]};a.data("isOutAnim")&&a.addClass("layer-anim layer-anim-close"),p("#layui-layer-moves, #layui-layer-shade"+n).remove(),6==y.ie&&d.reselect(),d.rescollbar(n),a.attr("minLeft")&&(d.minIndex--,d.minLeft.push(a.attr("minLeft"))),y.ie&&y.ie<10||!a.data("isOutAnim")?e():setTimeout(function(){e()},200)}},y.closeAll=function(i){p.each(p("."+c[0]),function(){var e=p(this),t=i?e.attr("type")===i:1;t&&y.close(e.attr("times")),t=null})};function h(e){return n.skin?" "+n.skin+" "+n.skin+"-"+e:""}var n=y.cache||{};y.prompt=function(i,n){var e="";if("function"==typeof(i=i||{})&&(n=i),i.area){var t=i.area;e='style="width: '+t[0]+"; height: "+t[1]+';"',delete i.area}var a,o=2==i.formType?'<textarea class="layui-layer-input"'+e+"></textarea>":'<input type="'+(1==i.formType?"password":"text")+'" class="layui-layer-input">',r=i.success;return delete i.success,y.open(p.extend({type:1,btn:["&#x786E;&#x5B9A;","&#x53D6;&#x6D88;"],content:o,skin:"layui-layer-prompt"+h("prompt"),maxWidth:u.width(),success:function(e){(a=e.find(".layui-layer-input")).val(i.value||"").focus(),"function"==typeof r&&r(e)},resize:!1,yes:function(e){var t=a.val();""===t?a.focus():t.length>(i.maxlength||500)?y.tips("&#x6700;&#x591A;&#x8F93;&#x5165;"+(i.maxlength||500)+"&#x4E2A;&#x5B57;&#x6570;",a,{tips:1}):n&&n(t,e,a)}},i))},y.tab=function(a){var n=(a=a||{}).tab||{},o="layui-this",i=a.success;return delete a.success,y.open(p.extend({type:1,skin:"layui-layer-tab"+h("tab"),resize:!1,title:function(){var e=n.length,t=1,i="";if(0<e)for(i='<span class="'+o+'">'+n[0].title+"</span>";t<e;t++)i+="<span>"+n[t].title+"</span>";return i}(),content:'<ul class="layui-layer-tabmain">'+function(){var e=n.length,t=1,i="";if(0<e)for(i='<li class="layui-layer-tabli '+o+'">'+(n[0].content||"no content")+"</li>";t<e;t++)i+='<li class="layui-layer-tabli">'+(n[t].content||"no  content")+"</li>";return i}()+"</ul>",success:function(e){var t=e.find(".layui-layer-title").children(),n=e.find(".layui-layer-tabmain").children();t.on("mousedown",function(e){e.stopPropagation?e.stopPropagation():e.cancelBubble=!0;var t=p(this),i=t.index();t.addClass(o).siblings().removeClass(o),n.eq(i).show().siblings().hide(),"function"==typeof a.change&&a.change(i)}),"function"==typeof i&&i(e)}},a))},y.photos=function(a,e,t){var i={};if((a=a||{}).photos){var n=a.photos.constructor===Object,o=n?a.photos:{},r=o.data||[],l=o.start||0;i.imgIndex=1+(0|l),a.img=a.img||"img";var s=a.success;if(delete a.success,n){if(0===r.length)return y.msg("&#x6CA1;&#x6709;&#x56FE;&#x7247;")}else{var c=p(a.photos),u=function(){r=[],c.find(a.img).each(function(e){var t=p(this);t.attr("layer-index",e),r.push({alt:t.attr("alt"),pid:t.attr("layer-pid"),src:t.attr("layer-src")||t.attr("src"),thumb:t.attr("src")})})};if(u(),0===r.length)return;if(e||c.on("click",a.img,function(){var e=p(this).attr("layer-index");y.photos(p.extend(a,{photos:{start:e,data:r,tab:a.tab},full:a.full}),!0),u()}),!e)return}i.imgprev=function(e){i.imgIndex--,i.imgIndex<1&&(i.imgIndex=r.length),i.tabimg(e)},i.imgnext=function(e,t){i.imgIndex++,i.imgIndex>r.length&&(i.imgIndex=1,t)||i.tabimg(e)},i.keyup=function(e){if(!i.end){var t=e.keyCode;e.preventDefault(),37===t?i.imgprev(!0):39===t?i.imgnext(!0):27===t&&y.close(i.index)}},i.tabimg=function(e){if(!(r.length<=1))return o.start=i.imgIndex-1,y.close(i.index),y.photos(a,!0,e)},i.event=function(){i.bigimg.hover(function(){i.imgsee.show()},function(){i.imgsee.hide()}),i.bigimg.find(".layui-layer-imgprev").on("click",function(e){e.preventDefault(),i.imgprev()}),i.bigimg.find(".layui-layer-imgnext").on("click",function(e){e.preventDefault(),i.imgnext()}),p(document).on("keyup",i.keyup)},i.loadi=y.load(1,{shade:!("shade"in a)&&.9,scrollbar:!1}),function(e,t,i){var n=new Image;if(n.src=e,n.complete)return t(n);n.onload=function(){n.onload=null,t(n)},n.onerror=function(e){n.onerror=null,i(e)}}(r[l].src,function(n){y.close(i.loadi),i.index=y.open(p.extend({type:1,id:"layui-layer-photos",area:function(){var e=[n.width,n.height],t=[p(f).width()-100,p(f).height()-100];if(!a.full&&(e[0]>t[0]||e[1]>t[1])){var i=[e[0]/t[0],e[1]/t[1]];i[1]<i[0]?(e[0]=e[0]/i[0],e[1]=e[1]/i[0]):i[0]<i[1]&&(e[0]=e[0]/i[1],e[1]=e[1]/i[1])}return[e[0]+"px",e[1]+"px"]}(),title:!1,shade:.9,shadeClose:!0,closeBtn:!1,move:".layui-layer-phimg img",moveType:1,scrollbar:!1,moveOut:!0,isOutAnim:!1,skin:"layui-layer-photos"+h("photos"),content:'<div class="layui-layer-phimg"><img src="'+r[l].src+'" alt="'+(r[l].alt||"")+'" layer-pid="'+r[l].pid+'"><div class="layui-layer-imgsee">'+(1<r.length?'<span class="layui-layer-imguide"><a href="javascript:;" class="layui-layer-iconext layui-layer-imgprev"></a><a href="javascript:;" class="layui-layer-iconext layui-layer-imgnext"></a></span>':"")+'<div class="layui-layer-imgbar" style="display:'+(t?"block":"")+'"><span class="layui-layer-imgtit"><a href="javascript:;">'+(r[l].alt||"")+"</a><em>"+i.imgIndex+"/"+r.length+"</em></span></div></div></div>",success:function(e){i.bigimg=e.find(".layui-layer-phimg"),i.imgsee=e.find(".layui-layer-imguide,.layui-layer-imgbar"),i.event(e),a.tab&&a.tab(r[l],e),"function"==typeof s&&s(e)},end:function(){i.end=!0,p(document).off("keyup",i.keyup)}},a))},function(){y.close(i.loadi),y.msg("&#x5F53;&#x524D;&#x56FE;&#x7247;&#x5730;&#x5740;&#x5F02;&#x5E38;<br>&#x662F;&#x5426;&#x7EE7;&#x7EED;&#x67E5;&#x770B;&#x4E0B;&#x4E00;&#x5F20;&#xFF1F;",{time:3e4,btn:["&#x4E0B;&#x4E00;&#x5F20;","&#x4E0D;&#x770B;&#x4E86;"],yes:function(){1<r.length&&i.imgnext(!0,!0)}})})}},d.run=function(e){u=(p=e)(f),c.html=p("html"),y.open=function(e){return new t(e).index}},f.layui&&layui.define?(y.ready(),layui.define("jquery",function(e){y.path=layui.cache.dir,d.run(layui.$),e("layer",f.layer=y)})):"function"==typeof define&&define.amd?define([],function(){return d.run(f.jQuery),y}):(d.run(f.jQuery),y.ready())}(window),layui.define(["jquery"],function(e){var f=layui.$;e("util",{loadJs:function(e,t){var i=document.createElement("script");i.setAttribute("type","text/javascript"),i.setAttribute("src",e),document.getElementsByTagName("head")[0].appendChild(i),/msie/.test(window.navigator.userAgent.toLowerCase())?i.onreadystatechange=function(){"loaded"!=this.readyState&&"complete"!=this.readyState||t()}:/gecko/.test(window.navigator.userAgent.toLowerCase())?i.onload=function(){t()}:t()},fixbar:function(t){var e,i,n="layui-fixbar",a="layui-fixbar-top",o=f(document),r=f("body");(t=f.extend({showHeight:200},t)).bar1=!0===t.bar1?"&#xe606;":t.bar1,t.bar2=!0===t.bar2?"&#xe607;":t.bar2,t.bgcolor=t.bgcolor?"background-color:"+t.bgcolor:"";function l(){o.scrollTop()>=t.showHeight?e||(u.show(),e=1):e&&(u.hide(),e=0)}var s=[t.bar1,t.bar2,"&#xe604;"],c=f(['<ul class="'+n+'">',t.bar1?'<li class="fa" lay-type="bar1" style="'+t.bgcolor+'">'+s[0]+"</li>":"",t.bar2?'<li class="fa" lay-type="bar2" style="'+t.bgcolor+'">'+s[1]+"</li>":"",'<li class="fa '+a+'" lay-type="top" style="'+t.bgcolor+'">'+s[2]+"</li>","</ul>"].join("")),u=c.find("."+a);f("."+n)[0]||("object"===_typeof(t.css)&&c.css(t.css),r.append(c),l(),c.find("li").on("click",function(){var e=f(this).attr("lay-type");"top"===e&&f("html,body").animate({scrollTop:0},200),t.click&&t.click.call(this,e)}),o.on("scroll",function(){clearTimeout(i),i=setTimeout(function(){l()},100)}))},countdown:function(e,t,i){var n=this,a="function"==typeof t,o=new Date(e).getTime(),r=new Date(!t||a?(new Date).getTime():t).getTime(),l=o-r,s=[Math.floor(l/864e5),Math.floor(l/36e5)%24,Math.floor(l/6e4)%60,Math.floor(l/1e3)%60];a&&(i=t);var c=setTimeout(function(){n.countdown(e,r+1e3,i)},1e3);return i&&i(0<l?s:[0,0,0,0],t,c),l<=0&&clearTimeout(c),c},timeAgo:function(e,t){var i=this,n=[[],[]],a=(new Date).getTime()-new Date(e).getTime();return 6912e5<a?(a=new Date(e),n[0][0]=i.digit(a.getFullYear(),4),n[0][1]=i.digit(a.getMonth()+1),n[0][2]=i.digit(a.getDate()),t||(n[1][0]=i.digit(a.getHours()),n[1][1]=i.digit(a.getMinutes()),n[1][2]=i.digit(a.getSeconds())),n[0].join("-")+" "+n[1].join(":")):864e5<=a?(a/1e3/60/60/24|0)+"天前":36e5<=a?(a/1e3/60/60|0)+"小时前":12e4<=a?(a/1e3/60|0)+"分钟前":a<0?"未来":"刚刚"},digit:function(e,t){var i="";t=t||2;for(var n=(e=String(e)).length;n<t;n++)i+="0";return e<Math.pow(10,t)?i+(0|e):e},toDateString:function(e,t){var i=this,n=new Date(e||new Date),a=[i.digit(n.getFullYear(),4),i.digit(n.getMonth()+1),i.digit(n.getDate())],o=[i.digit(n.getHours()),i.digit(n.getMinutes()),i.digit(n.getSeconds())];return(t=t||"yyyy-MM-dd HH:mm:ss").replace(/yyyy/g,a[0]).replace(/MM/g,a[1]).replace(/dd/g,a[2]).replace(/HH/g,o[0]).replace(/mm/g,o[1]).replace(/ss/g,o[2])},escape:function(e){return String(e||"").replace(/&(?!#?[a-zA-Z0-9]+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"&#39;").replace(/"/g,"&quot;")},formatSize:function(e){if(null==e||""==e)return"0 Bytes";var t,i=new Array("Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"),n=parseFloat(e);t=Math.floor(Math.log(n)/Math.log(1024));var a=n/Math.pow(1024,t);return(a=a.toFixed(2))+i[t]},getExtension:function(e){var t=e.lastIndexOf(".");return t<0?"":e.substr(t+1,e.length)},toRmb:function(e){var t=99999999999.99,i="壹",n="贰",a="叁",o="拾",r="佰",l="仟",s="万",c="亿",u="角",f="分";if(""==(e=e.toString()))return alert("转换内容不能为空!"),"";if(null!=e.match(/[^,.\d]/))return alert("输入有误,请输入小数点和纯数字!"),"";if(null==e.match(/^((\d{1,3}(,\d{3})*(.((\d{3},)*\d{1,3}))?)|(\d+(.\d+)?))$/))return alert("输入有误,请输入小数点和纯数字!"),"";if(e=(e=e.replace(/,/g,"")).replace(/^0+/,""),Number(e)>t)return alert("对不起,你输入的数字太大了!最大数字为99999999999.99！"),"";if(t=1<(t=e.split(".")).length?(e=t[0],(t=t[1]).substr(0,2)):(e=t[0],""),i=new Array("零",i,n,a,"肆","伍","陆","柒","捌","玖"),o=new Array("",o,r,l),s=new Array("",s,c),f=new Array(u,f),u="",0<Number(e)){for(r=c=0;r<e.length;r++)n=(a=e.length-r-1)/4,a%=4,"0"==(l=e.substr(r,1))?c++:(0<c&&(u+=i[0]),c=0,u+=i[Number(l)]+o[a]),0==a&&c<4&&(u+=s[n]);u+="元"}if(""!=t)for(r=0;r<t.length;r++)"0"!=(l=t.substr(r,1))&&(u+=i[Number(l)]+f[r]);return""==u&&(u="零元"),t.length<2&&(u+="整"),u}})}),layui.define(function(e){function t(e){this.tpl=e}var o={open:"{{",close:"}}"},r=function(e,t,i){var n=["#([\\s\\S])+?","([^{#}])*?"][e||0];return c((t||"")+o.open+n+o.close+(i||""))},l=function(e){return String(e||"").replace(/&(?!#?[a-zA-Z0-9]+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"&#39;").replace(/"/g,"&quot;")},s=function(e,t){var i="Laytpl Error：";return"undefined"==typeof console||_typeof(console),i+e},c=function(e){return new RegExp(e,"g")};t.pt=t.prototype,window.errors=0,t.pt.parse=function(e,t){var i=e,n=c("^"+o.open+"#",""),a=c(o.close+"$","");e='"use strict";var view = "'+(e=e.replace(/\s+|\r|\t|\n/g," ").replace(c(o.open+"#"),o.open+"# ").replace(c(o.close+"}"),"} "+o.close).replace(/\\/g,"\\\\").replace(c(o.open+"!(.+?)!"+o.close),function(e){return e=e.replace(c("^"+o.open+"!"),"").replace(c("!"+o.close),"").replace(c(o.open+"|"+o.close),function(e){return e.replace(/(.)/g,"\\$1")})}).replace(/(?="|')/g,"\\").replace(r(),function(e){return'";'+(e=e.replace(n,"").replace(a,"")).replace(/\\/g,"")+';view+="'}).replace(r(1),function(e){var t='"+(';return e.replace(/\s/g,"")===o.open+o.close?"":(e=e.replace(c(o.open+"|"+o.close),""),/^=/.test(e)&&(e=e.replace(/^=/,""),t='"+_escape_('),t+e.replace(/\\/g,"")+')+"')}))+'";return view;';try{return this.cache=e=new Function("d, _escape_",e),e(t,l)}catch(e){return delete this.cache,s(e,i)}},t.pt.render=function(e,t){var i;return e?(i=this.cache?this.cache(e,l):this.parse(this.tpl,e),t?void t(i):i):s("no data")};function i(e){return"string"!=typeof e?s("Template not found"):new t(e)}i.config=function(e){for(var t in e=e||{})o[t]=e[t]},i.v="1.2.0",e("laytpl",i)});
+;
+! function (win) {
+    "use strict";
+
+    var doc = document,
+        config = {
+            modules: {}, //记录模块物理路径
+            status: {}, //记录模块加载状态
+            timeout: 10, //符合规范的模块请求最长等待秒数
+            event: {}, //记录模块自定义事件
+            version: '3.0.0'
+        },
+        Layui = function () {
+            this.v = config.version; //版本号
+        },
+
+        //获取layui所在目录
+        getPath = function () {
+            var jsPath = doc.currentScript ? doc.currentScript.src : function () {
+                var js = doc.scripts,
+                    last = js.length - 1,
+                    src;
+                for (var i = last; i > 0; i--) {
+                    if (js[i].readyState === 'interactive') {
+                        src = js[i].src;
+                        break;
+                    }
+                }
+                return src || js[last].src;
+            }();
+            return jsPath.substring(0, jsPath.lastIndexOf('/') + 1);
+        }(),
+
+        //异常提示
+        error = function (msg) {
+            win.console && console.error && console.error('Layui hint: ' + msg);
+        },
+        isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
+        //内置模块
+        modules = {
+            laydate: 'packages/laydate/laydate', //日期
+            laypage: 'packages/laypage', //分页
+            layer: 'packages/layer',
+            laytpl: 'packages/laytpl', //模板引擎
+            form: 'packages/form', //表单集
+            tree: 'packages/tree', //树结构
+            table: 'packages/table', //表格
+            element: 'packages/element', //常用元素操作
+            rate: 'packages/rate', //评分组件
+            colorpicker: 'packages/colorpicker', //颜色选择器
+            slider: 'packages/slider', //滑块
+            carousel: 'packages/carousel', //轮播
+            flow: 'packages/flow', //流加载
+            util: 'packages/util', //工具块
+            code: 'packages/code/code', //代码修饰器
+            dropdown: 'packages/dropdown', //下拉按钮
+            transfer: 'packages/transfer', //穿梭
+        };
+
+    //记录基础数据
+    Layui.prototype.cache = config;
+
+    //定义模块
+    Layui.prototype.define = function (deps, factory) {
+        var that = this,
+            type = typeof deps === 'function',
+            callback = function () {
+                var setApp = function (app, exports) {
+                    layui[app] = exports;
+                    config.status[app] = true;
+                };
+                typeof factory === 'function' && factory(function (app, exports) {
+                    setApp(app, exports);
+                    config.callback[app] = function () {
+                        factory(setApp);
+                    }
+                });
+                return this;
+            };
+
+        type && (
+            factory = deps,
+            deps = []
+        );
+
+        if (layui['layui.all'] || (!layui['layui.all'] && layui['layui.mobile'])) {
+            return callback.call(that);
+        }
+
+        that.use(deps, callback);
+        return that;
+    };
+
+    //使用特定模块
+    Layui.prototype.use = function (apps, callback, exports) {
+        var that = this,
+            dir = config.dir = config.dir ? config.dir : getPath,
+            head = doc.getElementsByTagName('head')[0];
+
+        apps = typeof apps === 'string' ? [apps] : apps;
+
+        //如果页面已经存在 jQuery 1.7+ 库且所定义的模块依赖 jQuery，则不加载内部 jquery 模块
+        if (window.jQuery && jQuery.fn.on) {
+            that.each(apps, function (index, item) {
+                if (item === 'jquery') {
+                    apps.splice(index, 1);
+                }
+            });
+            layui.jquery = layui.$ = jQuery;
+        }
+
+        var item = apps[0],
+            timeout = 0;
+        exports = exports || [];
+
+        //静态资源host
+        config.host = config.host || (dir.match(/\/\/([\s\S]+?)\//) || ['//' + location.host + '/'])[0];
+
+        //加载完毕
+        function onScriptLoad(e, url) {
+            var readyRegExp = navigator.platform === 'PLaySTATION 3' ? /^complete$/ : /^(complete|loaded)$/
+            if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
+                config.modules[item] = url;
+                head.removeChild(node);
+                (function poll() {
+                    if (++timeout > config.timeout * 1000 / 4) {
+                        return error(item + ' is not a valid module');
+                    };
+                    config.status[item] ? onCallback() : setTimeout(poll, 4);
+                }());
+            }
+        }
+
+        //回调
+        function onCallback() {
+            exports.push(layui[item]);
+            apps.length > 1 ?
+                that.use(apps.slice(1), callback, exports) :
+                (typeof callback === 'function' && callback.apply(layui, exports));
+        }
+
+        //如果引入了完整库（layui.all.js），内置的模块则不必再加载
+        if (apps.length === 0 ||
+            (layui['layui.all'] && modules[item]) ||
+            (!layui['layui.all'] && layui['layui.mobile'] && modules[item])
+        ) {
+            return onCallback(), that;
+        }
+
+        //获取加载的模块 URL
+        //如果是内置模块，则按照 dir 参数拼接模块路径
+        //如果是扩展模块，则判断模块路径值是否为 {/} 开头，
+        //如果路径值是 {/} 开头，则模块路径即为后面紧跟的字符。
+        //否则，则按照 base 参数拼接模块路径
+        var url = (modules[item] ? (dir) :
+            (/^\{\/\}/.test(that.modules[item]) ? '' : (config.base || ''))
+        ) + (that.modules[item] || item) + '.js';
+
+        url = url.replace(/^\{\/\}/, '');
+
+        //如果扩展模块（即：非内置模块）对象已经存在，则不必再加载
+        if (!config.modules[item] && layui[item]) {
+            config.modules[item] = url; //并记录起该扩展模块的 url
+        }
+
+        //首次加载模块
+        if (!config.modules[item]) {
+            var node = doc.createElement('script');
+
+            node.async = true;
+            node.charset = 'utf-8';
+            node.src = url + function () {
+                var version = config.version === true ?
+                    (config.v || (new Date()).getTime()) :
+                    (config.version || '');
+                return version ? ('?v=' + version) : '';
+            }();
+
+            head.appendChild(node);
+
+            if (node.attachEvent && !(node.attachEvent.toString && node.attachEvent.toString().indexOf('[native code') < 0) && !isOpera) {
+                node.attachEvent('onreadystatechange', function (e) {
+                    onScriptLoad(e, url);
+                });
+            } else {
+                node.addEventListener('load', function (e) {
+                    onScriptLoad(e, url);
+                }, false);
+            }
+
+            config.modules[item] = url;
+        } else { //缓存
+            (function poll() {
+                if (++timeout > config.timeout * 1000 / 4) {
+                    return error(item + ' is not a valid module');
+                };
+                (typeof config.modules[item] === 'string' && config.status[item]) ?
+                onCallback(): setTimeout(poll, 4);
+            }());
+        }
+
+        return that;
+    };
+
+    //获取节点的style属性值
+    Layui.prototype.getStyle = function (node, name) {
+        var style = node.currentStyle ? node.currentStyle : win.getComputedStyle(node, null);
+        return style[style.getPropertyValue ? 'getPropertyValue' : 'getAttribute'](name);
+    };
+
+    //css外部加载器
+    Layui.prototype.link = function (href, fn, cssname) {
+        var that = this,
+            link = doc.createElement('link'),
+            head = doc.getElementsByTagName('head')[0];
+
+        if (typeof fn === 'string') cssname = fn;
+
+        var app = (cssname || href).replace(/\.|\//g, ''),
+            id = link.id = 'layuicss-' + app,
+            timeout = 0;
+
+        link.rel = 'stylesheet';
+        link.href = href + (config.debug ? '?v=' + new Date().getTime() : '');
+        link.media = 'all';
+
+        if (!doc.getElementById(id)) {
+            head.appendChild(link);
+        }
+
+        if (typeof fn !== 'function') return that;
+
+        //轮询css是否加载完毕
+        (function poll() {
+            if (++timeout > config.timeout * 1000 / 100) {
+                return error(href + ' timeout');
+            };
+            parseInt(that.getStyle(doc.getElementById(id), 'width')) === 1989 ? function () {
+                fn();
+            }() : setTimeout(poll, 100);
+        }());
+
+        return that;
+    };
+
+    //存储模块的回调
+    config.callback = {};
+
+    //重新执行模块的工厂函数
+    Layui.prototype.factory = function (modName) {
+        if (layui[modName]) {
+            return typeof config.callback[modName] === 'function' ?
+                config.callback[modName] :
+                null;
+        }
+    };
+
+    //css内部加载器
+    Layui.prototype.addcss = function (firename, fn, cssname) {
+        return layui.link(config.base + firename, fn, cssname);
+    };
+
+    //图片预加载
+    Layui.prototype.img = function (url, callback, error) {
+        var img = new Image();
+        img.src = url;
+        if (img.complete) {
+            return callback(img);
+        }
+        img.onload = function () {
+            img.onload = null;
+            typeof callback === 'function' && callback(img);
+        };
+        img.onerror = function (e) {
+            img.onerror = null;
+            typeof error === 'function' && error(e);
+        };
+    };
+
+    //全局配置
+    Layui.prototype.config = function (options) {
+        options = options || {};
+        for (var key in options) {
+            config[key] = options[key];
+        }
+        return this;
+    };
+
+    //记录全部模块
+    Layui.prototype.modules = function () {
+        var clone = {};
+        for (var o in modules) {
+            clone[o] = modules[o];
+        }
+        return clone;
+    }();
+
+    //拓展模块
+    Layui.prototype.extend = function (options) {
+        var that = this;
+
+        //验证模块是否被占用
+        options = options || {};
+        for (var o in options) {
+            if (that[o] || that.modules[o]) {
+                // error('\u6A21\u5757\u540D '+ o +' \u5DF2\u88AB\u5360\u7528');
+            } else {
+                that.modules[o] = options[o];
+            }
+        }
+        return that;
+    };
+
+    //路由解析
+    Layui.prototype.router = function (hash) {
+        var that = this,
+            hash = hash || location.hash,
+            data = {
+                path: [],
+                search: {},
+                hash: (hash.match(/[^#](#.*$)/) || [])[1] || ''
+            };
+
+        if (!/^#\//.test(hash)) return data; //禁止非路由规范
+        hash = hash.replace(/^#\//, '');
+        data.href = '/' + hash;
+        hash = hash.replace(/([^#])(#.*$)/, '$1').split('/') || [];
+
+        //提取Hash结构
+        that.each(hash, function (index, item) {
+            /^\w+=/.test(item) ? function () {
+                item = item.split('=');
+                data.search[item[0]] = item[1];
+            }() : data.path.push(item);
+        });
+
+        return data;
+    };
+
+    //本地持久性存储
+    Layui.prototype.data = function (table, settings, storage) {
+        table = table || 'layui';
+        storage = storage || localStorage;
+
+        if (!win.JSON || !win.JSON.parse) return;
+
+        //如果settings为null，则删除表
+        if (settings === null) {
+            return delete storage[table];
+        }
+
+        settings = typeof settings === 'object' ?
+            settings : {
+                key: settings
+            };
+
+        try {
+            var data = JSON.parse(storage[table]);
+        } catch (e) {
+            var data = {};
+        }
+
+        if ('value' in settings) data[settings.key] = settings.value;
+        if (settings.remove) delete data[settings.key];
+        storage[table] = JSON.stringify(data);
+
+        return settings.key ? data[settings.key] : data;
+    };
+
+    //本地会话性存储
+    Layui.prototype.sessionData = function (table, settings) {
+        return this.data(table, settings, sessionStorage);
+    }
+
+    //设备信息
+    Layui.prototype.device = function (key) {
+        var agent = navigator.userAgent.toLowerCase(),
+
+            //获取版本号
+            getVersion = function (label) {
+                var exp = new RegExp(label + '/([^\\s\\_\\-]+)');
+                label = (agent.match(exp) || [])[1];
+                return label || false;
+            },
+            //返回结果集
+            result = {
+                os: function () { //底层操作系统
+                    if (/windows/.test(agent)) {
+                        return 'windows';
+                    } else if (/linux/.test(agent)) {
+                        return 'linux';
+                    } else if (/iphone|ipod|ipad|ios/.test(agent)) {
+                        return 'ios';
+                    } else if (/mac/.test(agent)) {
+                        return 'mac';
+                    }
+                }(),
+                ie: function () { //ie版本
+                    return (!!win.ActiveXObject || "ActiveXObject" in win) ? (
+                        (agent.match(/msie\s(\d+)/) || [])[1] || '11' //由于ie11并没有msie的标识
+                    ) : false;
+                }(),
+                weixin: getVersion('micromessenger') //是否微信
+            };
+
+        //任意的key
+        if (key && !result[key]) {
+            result[key] = getVersion(key);
+        }
+
+        //移动设备
+        result.android = /android/.test(agent);
+        result.ios = result.os === 'ios';
+        result.mobile = /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(agent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(agent.substr(0, 4))
+
+        return result;
+    };
+
+    //提示
+    Layui.prototype.hint = function () {
+        return {
+            error: error
+        }
+    };
+
+    //遍历
+    Layui.prototype.each = function (obj, fn) {
+        var key, that = this;
+        if (typeof fn !== 'function') return that;
+        obj = obj || [];
+        if (obj.constructor === Object) {
+            for (key in obj) {
+                if (fn.call(obj[key], key, obj[key])) break;
+            }
+        } else {
+            for (key = 0; key < obj.length; key++) {
+                if (fn.call(obj[key], key, obj[key])) break;
+            }
+        }
+        return that;
+    };
+
+    //将数组中的对象按其某个成员排序
+    Layui.prototype.sort = function (obj, key, desc) {
+        var clone = JSON.parse(
+            JSON.stringify(obj || [])
+        );
+
+        if (!key) return clone;
+
+        //如果是数字，按大小排序，如果是非数字，按字典序排序
+        clone.sort(function (o1, o2) {
+            var isNum = /^-?\d+$/,
+                v1 = o1[key],
+                v2 = o2[key];
+
+            if (isNum.test(v1)) v1 = parseFloat(v1);
+            if (isNum.test(v2)) v2 = parseFloat(v2);
+
+            if (v1 && !v2) {
+                return 1;
+            } else if (!v1 && v2) {
+                return -1;
+            }
+
+            if (v1 > v2) {
+                return 1;
+            } else if (v1 < v2) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
+        desc && clone.reverse(); //倒序
+        return clone;
+    };
+
+    //阻止事件冒泡
+    Layui.prototype.stope = function (thisEvent) {
+        thisEvent = thisEvent || win.event;
+        try {
+            thisEvent.stopPropagation()
+        } catch (e) {
+            thisEvent.cancelBubble = true;
+        }
+    };
+
+    //自定义模块事件
+    Layui.prototype.onevent = function (modName, events, callback) {
+        if (typeof modName !== 'string' ||
+            typeof callback !== 'function') return this;
+
+        return Layui.event(modName, events, null, callback);
+    };
+
+    //执行自定义模块事件
+    Layui.prototype.event = Layui.event = function (modName, events, params, fn) {
+        var that = this,
+            result = null,
+            filter = events.match(/\((.*)\)$/) || [] //提取事件过滤器字符结构，如：select(xxx)
+            ,
+            eventName = (modName + '.' + events).replace(filter[0], '') //获取事件名称，如：form.select
+            ,
+            filterName = filter[1] || '' //获取过滤器名称,，如：xxx
+            ,
+            callback = function (_, item) {
+                var res = item && item.call(that, params);
+                res === false && result === null && (result = false);
+            };
+
+        //添加事件
+        if (fn) {
+            config.event[eventName] = config.event[eventName] || {};
+
+            //这里不再对多次事件监听做支持，避免更多麻烦
+            //config.event[eventName][filterName] ? config.event[eventName][filterName].push(fn) :
+            config.event[eventName][filterName] = [fn];
+            return this;
+        }
+
+        //执行事件回调
+        layui.each(config.event[eventName], function (key, item) {
+            //执行当前模块的全部事件
+            if (filterName === '{*}') {
+                layui.each(item, callback);
+                return;
+            }
+
+            //执行指定事件
+            key === '' && layui.each(item, callback);
+            (filterName && key === filterName) && layui.each(item, callback);
+        });
+
+        return result;
+    };
+
+    win.layui = new Layui();
+
+}(window);
+
+/**
+
+ @Name：layer v3.1.2 Web弹层组件
+ @Author：贤心
+ @Site：http://layer.layui.com
+ @License：MIT
+ */
+;
+! function (window, undefined) {
+    "use strict";
+
+    var isLayui = window.layui && layui.define,
+        $, win, ready = {
+            getPath: function () {
+                var jsPath = document.currentScript ? document.currentScript.src : function () {
+                    var js = document.scripts,
+                        last = js.length - 1,
+                        src;
+                    for (var i = last; i > 0; i--) {
+                        if (js[i].readyState === 'interactive') {
+                            src = js[i].src;
+                            break;
+                        }
+                    }
+                    return src || js[last].src;
+                }();
+                return jsPath.substring(0, jsPath.lastIndexOf('/') + 1);
+            }(),
+
+            config: {},
+            end: {},
+            minIndex: 0,
+            minLeft: [],
+            btn: ['&#x786E;&#x5B9A;', '&#x53D6;&#x6D88;'],
+
+            //五种原始层模式
+            type: ['dialog', 'page', 'iframe', 'loading', 'tips'],
+
+            //获取节点的style属性值
+            getStyle: function (node, name) {
+                var style = node.currentStyle ? node.currentStyle : window.getComputedStyle(node, null);
+                return style[style.getPropertyValue ? 'getPropertyValue' : 'getAttribute'](name);
+            },
+
+            //载入CSS配件
+            link: function (href, fn, cssname) {
+
+                //未设置路径，则不主动加载css
+                if (!layer.path) return;
+
+                var head = document.getElementsByTagName("head")[0],
+                    link = document.createElement('link');
+                if (typeof fn === 'string') cssname = fn;
+                var app = (cssname || href).replace(/\.|\//g, '');
+                var id = 'layuicss-' + app,
+                    timeout = 0;
+
+                link.rel = 'stylesheet';
+                link.href = layer.path + href;
+                link.id = id;
+
+                if (!document.getElementById(id)) {
+                    head.appendChild(link);
+                }
+
+                if (typeof fn !== 'function') return;
+
+                //轮询css是否加载完毕
+                // (function poll() {
+                //     if (++timeout > 8 * 1000 / 100) {
+                //         return window.console && console.error('layer.css: Invalid');
+                //     };
+                //     parseInt(ready.getStyle(document.getElementById(id), 'width')) === 1989 ? fn() : setTimeout(poll, 100);
+                // }());
+            }
+        };
+
+    //默认内置方法。
+    var layer = {
+        v: '3.1.1',
+        ie: function () { //ie版本
+            var agent = navigator.userAgent.toLowerCase();
+            return (!!window.ActiveXObject || "ActiveXObject" in window) ? (
+                (agent.match(/msie\s(\d+)/) || [])[1] || '11' //由于ie11并没有msie的标识
+            ) : false;
+        }(),
+        index: (window.layer && window.layer.v) ? 100000 : 0,
+        path: ready.getPath,
+        config: function (options, fn) {
+            options = options || {};
+            layer.cache = ready.config = $.extend({}, ready.config, options);
+            layer.path = ready.config.path || layer.path;
+            typeof options.extend === 'string' && (options.extend = [options.extend]);
+
+            if (ready.config.path) layer.ready();
+
+            if (!options.extend) return this;
+
+            // isLayui
+            //     ?
+            //     layui.addcss('modules/layer/' + options.extend) :
+            //     ready.link('theme/' + options.extend);
+
+            return this;
+        },
+
+        //主体CSS等待事件
+        ready: function (callback) {
+            // var cssname = 'layer',
+            //     ver = '',
+            //     path = (isLayui ? 'modules/layer/' : 'theme/') + 'default/layer.css?v=' + layer.v + ver;
+            // isLayui ? layui.addcss(path, callback, cssname) : ready.link(path, callback, cssname);
+            return this;
+        },
+
+        //各种快捷引用
+        alert: function (content, options, yes) {
+            var type = typeof options === 'function';
+            if (type) yes = options;
+            return layer.open($.extend({
+                content: content,
+                yes: yes
+            }, type ? {} : options));
+        },
+
+        confirm: function (content, options, yes, cancel) {
+            var type = typeof options === 'function';
+            if (type) {
+                cancel = yes;
+                yes = options;
+            }
+            return layer.open($.extend({
+                content: content,
+                btn: ready.btn,
+                yes: yes,
+                btn2: cancel
+            }, type ? {} : options));
+        },
+
+        msg: function (content, options, end) { //最常用提示层
+            var type = typeof options === 'function',
+                rskin = ready.config.skin;
+            var skin = (rskin ? rskin + ' ' + rskin + '-msg' : '') || 'layui-layer-msg';
+            var anim = doms.anim.length - 1;
+            if (type) end = options;
+            return layer.open($.extend({
+                content: content,
+                time: 3000,
+                shade: false,
+                skin: skin,
+                title: false,
+                closeBtn: false,
+                btn: false,
+                resize: false,
+                end: end
+            }, (type && !ready.config.skin) ? {
+                skin: skin + ' layui-layer-hui',
+                anim: anim
+            } : function () {
+                options = options || {};
+                if (options.icon === -1 || options.icon === undefined && !ready.config.skin) {
+                    options.skin = skin + ' ' + (options.skin || 'layui-layer-hui');
+                }
+                return options;
+            }()));
+        },
+
+        load: function (icon, options) {
+            return layer.open($.extend({
+                type: 3,
+                icon: icon || 1,
+                resize: false,
+                shade: 0.01
+            }, options));
+        },
+
+        tips: function (content, follow, options) {
+            return layer.open($.extend({
+                type: 4,
+                content: [content, follow],
+                closeBtn: false,
+                time: 3000,
+                shade: false,
+                resize: false,
+                fixed: false,
+                maxWidth: 210
+            }, options));
+        }
+    };
+
+    var Class = function (setings) {
+        var that = this;
+        that.index = ++layer.index;
+        that.config = $.extend({}, that.config, ready.config, setings);
+        document.body ? that.creat() : setTimeout(function () {
+            that.creat();
+        }, 30);
+    };
+
+    Class.pt = Class.prototype;
+
+    //缓存常用字符
+    var doms = ['layui-layer', '.layui-layer-title', '.layui-layer-main', '.layui-layer-dialog', 'layui-layer-iframe', 'layui-layer-content', 'layui-layer-btn', 'layui-layer-close'];
+    doms.anim = ['layer-anim-00', 'layer-anim-01', 'layer-anim-02', 'layer-anim-03', 'layer-anim-04', 'layer-anim-05', 'layer-anim-06'];
+
+    //默认配置
+    Class.pt.config = {
+        type: 0,
+        shade: 0.3,
+        fixed: true,
+        move: doms[1],
+        title: '&#x4FE1;&#x606F;',
+        offset: 'auto',
+        area: 'auto',
+        closeBtn: 1,
+        time: 0, //0表示不自动关闭
+        zIndex: 19891014,
+        maxWidth: 360,
+        anim: 0,
+        isOutAnim: true,
+        icon: -1,
+        moveType: 1,
+        resize: true,
+        scrollbar: true, //是否允许浏览器滚动条
+        tips: 2
+    };
+
+    //容器
+    Class.pt.vessel = function (conType, callback) {
+        var that = this,
+            times = that.index,
+            config = that.config;
+        var zIndex = config.zIndex + times,
+            titype = typeof config.title === 'object';
+        var ismax = config.maxmin && (config.type === 1 || config.type === 2);
+        var titleHTML = (config.title ? '<div class="layui-layer-title" style="' + (titype ? config.title[1] : '') + '">' +
+            (titype ? config.title[0] : config.title) +
+            '</div>' : '');
+
+        config.zIndex = zIndex;
+        callback([
+            //遮罩
+            config.shade ? ('<div class="layui-layer-shade" id="layui-layer-shade' + times + '" times="' + times + '" style="' + ('z-index:' + (zIndex - 1) + '; ') + '"></div>') : '',
+
+            //主体
+            '<div class="' + doms[0] + (' layui-layer-' + ready.type[config.type]) + (((config.type == 0 || config.type == 2) && !config.shade) ? ' layui-layer-border' : '') + ' ' + (config.skin || '') + '" id="' + doms[0] + times + '" type="' + ready.type[config.type] + '" times="' + times + '" showtime="' + config.time + '" conType="' + (conType ? 'object' : 'string') + '" style="z-index: ' + zIndex + '; width:' + config.area[0] + ';height:' + config.area[1] + (config.fixed ? '' : ';position:absolute;') + '">' +
+            (conType && config.type != 2 ? '' : titleHTML) +
+            '<div id="' + (config.id || '') + '" class="layui-layer-content' + ((config.type == 0 && config.icon !== -1) ? ' layui-layer-padding' : '') + (config.type == 3 ? ' layui-layer-loading' + config.icon : '') + '">' +
+            (config.type == 0 && config.icon !== -1 ? '<i class="layui-layer-ico layui-layer-ico' + config.icon + '"></i>' : '') +
+            (config.type == 1 && conType ? '' : (config.content || '')) +
+            '</div>' +
+            '<span class="layui-layer-setwin">' + function () {
+                var closebtn = ismax ? '<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>' : '';
+                config.closeBtn && (closebtn += '<a class="layui-layer-ico ' + doms[7] + ' ' + doms[7] + (config.title ? config.closeBtn : (config.type == 4 ? '1' : '2')) + '" href="javascript:;"></a>');
+                return closebtn;
+            }() + '</span>' +
+            (config.btn ? function () {
+                var button = '';
+                typeof config.btn === 'string' && (config.btn = [config.btn]);
+                for (var i = 0, len = config.btn.length; i < len; i++) {
+                    button += '<a class="' + doms[6] + '' + i + '">' + config.btn[i] + '</a>'
+                }
+                return '<div class="' + doms[6] + ' layui-layer-btn-' + (config.btnAlign || '') + '">' + button + '</div>'
+            }() : '') +
+            (config.resize ? '<span class="layui-layer-resize"></span>' : '') +
+            '</div>'
+        ], titleHTML, $('<div class="layui-layer-move"></div>'));
+        return that;
+    };
+
+    //创建骨架
+    Class.pt.creat = function () {
+        var that = this,
+            config = that.config,
+            times = that.index,
+            nodeIndex, content = config.content,
+            conType = typeof content === 'object',
+            body = $('body');
+
+        if (config.id && $('#' + config.id)[0]) return;
+
+        if (typeof config.area === 'string') {
+            config.area = config.area === 'auto' ? ['', ''] : [config.area, ''];
+        }
+
+        //anim兼容旧版shift
+        if (config.shift) {
+            config.anim = config.shift;
+        }
+
+        if (layer.ie == 6) {
+            config.fixed = false;
+        }
+
+        switch (config.type) {
+            case 0:
+                config.btn = ('btn' in config) ? config.btn : ready.btn[0];
+                layer.closeAll('dialog');
+                break;
+            case 2:
+                var content = config.content = conType ? config.content : [config.content || '', 'auto'];
+                config.content = '<iframe scrolling="' + (config.content[1] || 'auto') + '" allowtransparency="true" id="' + doms[4] + '' + times + '" name="' + doms[4] + '' + times + '" onload="this.className=\'\';" class="layui-layer-load" frameborder="0" src="' + config.content[0] + '"></iframe>';
+                break;
+            case 3:
+                delete config.title;
+                delete config.closeBtn;
+                config.icon === -1 && (config.icon === 0);
+                layer.closeAll('loading');
+                break;
+            case 4:
+                conType || (config.content = [config.content, 'body']);
+                config.follow = config.content[1];
+                config.content = config.content[0] + '<i class="layui-layer-TipsG"></i>';
+                delete config.title;
+                config.tips = typeof config.tips === 'object' ? config.tips : [config.tips, true];
+                config.tipsMore || layer.closeAll('tips');
+                break;
+        }
+
+        //建立容器
+        that.vessel(conType, function (html, titleHTML, moveElem) {
+            body.append(html[0]);
+            conType ? function () {
+                (config.type == 2 || config.type == 4) ? function () {
+                    $('body').append(html[1]);
+                }() : function () {
+                    if (!content.parents('.' + doms[0])[0]) {
+                        content.data('display', content.css('display')).show().addClass('layui-layer-wrap').wrap(html[1]);
+                        $('#' + doms[0] + times).find('.' + doms[5]).before(titleHTML);
+                    }
+                }();
+            }() : body.append(html[1]);
+            $('.layui-layer-move')[0] || body.append(ready.moveElem = moveElem);
+            that.layero = $('#' + doms[0] + times);
+            config.scrollbar || doms.html.css('overflow', 'hidden').attr('layer-full', times);
+        }).auto(times);
+
+        //遮罩
+        $('#layui-layer-shade' + that.index).css({
+            'background-color': config.shade[1] || '#000',
+            'opacity': config.shade[0] || config.shade
+        });
+
+        config.type == 2 && layer.ie == 6 && that.layero.find('iframe').attr('src', content[0]);
+
+        //坐标自适应浏览器窗口尺寸
+        config.type == 4 ? that.tips() : that.offset();
+        if (config.fixed) {
+            win.on('resize', function () {
+                that.offset();
+                (/^\d+%$/.test(config.area[0]) || /^\d+%$/.test(config.area[1])) && that.auto(times);
+                config.type == 4 && that.tips();
+            });
+        }
+
+        config.time <= 0 || setTimeout(function () {
+            layer.close(that.index)
+        }, config.time);
+        that.move().callback();
+
+        //为兼容jQuery3.0的css动画影响元素尺寸计算
+        if (doms.anim[config.anim]) {
+            var animClass = 'layer-anim ' + doms.anim[config.anim];
+            that.layero.addClass(animClass).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass(animClass);
+            });
+        };
+
+        //记录关闭动画
+        if (config.isOutAnim) {
+            that.layero.data('isOutAnim', true);
+        }
+    };
+
+    //自适应
+    Class.pt.auto = function (index) {
+        var that = this,
+            config = that.config,
+            layero = $('#' + doms[0] + index);
+
+        if (config.area[0] === '' && config.maxWidth > 0) {
+            //为了修复IE7下一个让人难以理解的bug
+            if (layer.ie && layer.ie < 8 && config.btn) {
+                layero.width(layero.innerWidth());
+            }
+            layero.outerWidth() > config.maxWidth && layero.width(config.maxWidth);
+        }
+
+        var area = [layero.innerWidth(), layero.innerHeight()],
+            titHeight = layero.find(doms[1]).outerHeight() || 0,
+            btnHeight = layero.find('.' + doms[6]).outerHeight() || 0,
+            setHeight = function (elem) {
+                elem = layero.find(elem);
+                elem.height(area[1] - titHeight - btnHeight - 2 * (parseFloat(elem.css('padding-top')) | 0));
+            };
+
+        switch (config.type) {
+            case 2:
+                setHeight('iframe');
+                break;
+            default:
+                if (config.area[1] === '') {
+                    if (config.maxHeight > 0 && layero.outerHeight() > config.maxHeight) {
+                        area[1] = config.maxHeight;
+                        setHeight('.' + doms[5]);
+                    } else if (config.fixed && area[1] >= win.height()) {
+                        area[1] = win.height();
+                        setHeight('.' + doms[5]);
+                    }
+                } else {
+                    setHeight('.' + doms[5]);
+                }
+                break;
+        };
+
+        return that;
+    };
+
+    //计算坐标
+    Class.pt.offset = function () {
+        var that = this,
+            config = that.config,
+            layero = that.layero;
+        var area = [layero.outerWidth(), layero.outerHeight()];
+        var type = typeof config.offset === 'object';
+        that.offsetTop = (win.height() - area[1]) / 2;
+        that.offsetLeft = (win.width() - area[0]) / 2;
+
+        if (type) {
+            that.offsetTop = config.offset[0];
+            that.offsetLeft = config.offset[1] || that.offsetLeft;
+        } else if (config.offset !== 'auto') {
+
+            if (config.offset === 't') { //上
+                that.offsetTop = 0;
+            } else if (config.offset === 'r') { //右
+                that.offsetLeft = win.width() - area[0];
+            } else if (config.offset === 'b') { //下
+                that.offsetTop = win.height() - area[1];
+            } else if (config.offset === 'l') { //左
+                that.offsetLeft = 0;
+            } else if (config.offset === 'lt') { //左上角
+                that.offsetTop = 0;
+                that.offsetLeft = 0;
+            } else if (config.offset === 'lb') { //左下角
+                that.offsetTop = win.height() - area[1];
+                that.offsetLeft = 0;
+            } else if (config.offset === 'rt') { //右上角
+                that.offsetTop = 0;
+                that.offsetLeft = win.width() - area[0];
+            } else if (config.offset === 'rb') { //右下角
+                that.offsetTop = win.height() - area[1];
+                that.offsetLeft = win.width() - area[0];
+            } else {
+                that.offsetTop = config.offset;
+            }
+
+        }
+
+        if (!config.fixed) {
+            that.offsetTop = /%$/.test(that.offsetTop) ?
+                win.height() * parseFloat(that.offsetTop) / 100 :
+                parseFloat(that.offsetTop);
+            that.offsetLeft = /%$/.test(that.offsetLeft) ?
+                win.width() * parseFloat(that.offsetLeft) / 100 :
+                parseFloat(that.offsetLeft);
+            that.offsetTop += win.scrollTop();
+            that.offsetLeft += win.scrollLeft();
+        }
+
+        if (layero.attr('minLeft')) {
+            that.offsetTop = win.height() - (layero.find(doms[1]).outerHeight() || 0);
+            that.offsetLeft = layero.css('left');
+        }
+
+        layero.css({
+            top: that.offsetTop,
+            left: that.offsetLeft
+        });
+    };
+
+    //Tips
+    Class.pt.tips = function () {
+        var that = this,
+            config = that.config,
+            layero = that.layero;
+        var layArea = [layero.outerWidth(), layero.outerHeight()],
+            follow = $(config.follow);
+        if (!follow[0]) follow = $('body');
+        var goal = {
+                width: follow.outerWidth(),
+                height: follow.outerHeight(),
+                top: follow.offset().top,
+                left: follow.offset().left
+            },
+            tipsG = layero.find('.layui-layer-TipsG');
+
+        var guide = config.tips[0];
+        config.tips[1] || tipsG.remove();
+
+        goal.autoLeft = function () {
+            if (goal.left + layArea[0] - win.width() > 0) {
+                goal.tipLeft = goal.left + goal.width - layArea[0];
+                tipsG.css({
+                    right: 12,
+                    left: 'auto'
+                });
+            } else {
+                goal.tipLeft = goal.left;
+            };
+        };
+
+        //辨别tips的方位
+        goal.where = [function () { //上
+            goal.autoLeft();
+            goal.tipTop = goal.top - layArea[1] - 10;
+            tipsG.removeClass('layui-layer-TipsB').addClass('layui-layer-TipsT').css('border-right-color', config.tips[1]);
+        }, function () { //右
+            goal.tipLeft = goal.left + goal.width + 10;
+            goal.tipTop = goal.top;
+            tipsG.removeClass('layui-layer-TipsL').addClass('layui-layer-TipsR').css('border-bottom-color', config.tips[1]);
+        }, function () { //下
+            goal.autoLeft();
+            goal.tipTop = goal.top + goal.height + 10;
+            tipsG.removeClass('layui-layer-TipsT').addClass('layui-layer-TipsB').css('border-right-color', config.tips[1]);
+        }, function () { //左
+            goal.tipLeft = goal.left - layArea[0] - 10;
+            goal.tipTop = goal.top;
+            tipsG.removeClass('layui-layer-TipsR').addClass('layui-layer-TipsL').css('border-bottom-color', config.tips[1]);
+        }];
+        goal.where[guide - 1]();
+
+        /* 8*2为小三角形占据的空间 */
+        if (guide === 1) {
+            goal.top - (win.scrollTop() + layArea[1] + 8 * 2) < 0 && goal.where[2]();
+        } else if (guide === 2) {
+            win.width() - (goal.left + goal.width + layArea[0] + 8 * 2) > 0 || goal.where[3]()
+        } else if (guide === 3) {
+            (goal.top - win.scrollTop() + goal.height + layArea[1] + 8 * 2) - win.height() > 0 && goal.where[0]();
+        } else if (guide === 4) {
+            layArea[0] + 8 * 2 - goal.left > 0 && goal.where[1]()
+        }
+
+        layero.find('.' + doms[5]).css({
+            'background-color': config.tips[1],
+            'padding-right': (config.closeBtn ? '30px' : '')
+        });
+        layero.css({
+            left: goal.tipLeft - (config.fixed ? win.scrollLeft() : 0),
+            top: goal.tipTop - (config.fixed ? win.scrollTop() : 0)
+        });
+    }
+
+    //拖拽层
+    Class.pt.move = function () {
+        var that = this,
+            config = that.config,
+            _DOC = $(document),
+            layero = that.layero,
+            moveElem = layero.find(config.move),
+            resizeElem = layero.find('.layui-layer-resize'),
+            dict = {};
+
+        if (config.move) {
+            moveElem.css('cursor', 'move');
+        }
+
+        moveElem.on('mousedown', function (e) {
+            e.preventDefault();
+            if (config.move) {
+                dict.moveStart = true;
+                dict.offset = [
+                    e.clientX - parseFloat(layero.css('left')), e.clientY - parseFloat(layero.css('top'))
+                ];
+                ready.moveElem.css('cursor', 'move').show();
+            }
+        });
+
+        resizeElem.on('mousedown', function (e) {
+            e.preventDefault();
+            dict.resizeStart = true;
+            dict.offset = [e.clientX, e.clientY];
+            dict.area = [
+                layero.outerWidth(), layero.outerHeight()
+            ];
+            ready.moveElem.css('cursor', 'se-resize').show();
+        });
+
+        _DOC.on('mousemove', function (e) {
+
+            //拖拽移动
+            if (dict.moveStart) {
+                var X = e.clientX - dict.offset[0],
+                    Y = e.clientY - dict.offset[1],
+                    fixed = layero.css('position') === 'fixed';
+
+                e.preventDefault();
+
+                dict.stX = fixed ? 0 : win.scrollLeft();
+                dict.stY = fixed ? 0 : win.scrollTop();
+
+                //控制元素不被拖出窗口外
+                if (!config.moveOut) {
+                    var setRig = win.width() - layero.outerWidth() + dict.stX,
+                        setBot = win.height() - layero.outerHeight() + dict.stY;
+                    X < dict.stX && (X = dict.stX);
+                    X > setRig && (X = setRig);
+                    Y < dict.stY && (Y = dict.stY);
+                    Y > setBot && (Y = setBot);
+                }
+
+                layero.css({
+                    left: X,
+                    top: Y
+                });
+            }
+
+            //Resize
+            if (config.resize && dict.resizeStart) {
+                var X = e.clientX - dict.offset[0],
+                    Y = e.clientY - dict.offset[1];
+
+                e.preventDefault();
+
+                layer.style(that.index, {
+                    width: dict.area[0] + X,
+                    height: dict.area[1] + Y
+                })
+                dict.isResize = true;
+                config.resizing && config.resizing(layero);
+            }
+        }).on('mouseup', function (e) {
+            if (dict.moveStart) {
+                delete dict.moveStart;
+                ready.moveElem.hide();
+                config.moveEnd && config.moveEnd(layero);
+            }
+            if (dict.resizeStart) {
+                delete dict.resizeStart;
+                ready.moveElem.hide();
+            }
+        });
+
+        return that;
+    };
+
+    Class.pt.callback = function () {
+        var that = this,
+            layero = that.layero,
+            config = that.config;
+        that.openLayer();
+        if (config.success) {
+            if (config.type == 2) {
+                layero.find('iframe').on('load', function () {
+                    config.success(layero, that.index);
+                });
+            } else {
+                config.success(layero, that.index);
+            }
+        }
+        layer.ie == 6 && that.IE6(layero);
+
+        //按钮
+        layero.find('.' + doms[6]).children('a').on('click', function () {
+            var index = $(this).index();
+            if (index === 0) {
+                if (config.yes) {
+                    config.yes(that.index, layero)
+                } else if (config['btn1']) {
+                    config['btn1'](that.index, layero)
+                } else {
+                    layer.close(that.index);
+                }
+            } else {
+                var close = config['btn' + (index + 1)] && config['btn' + (index + 1)](that.index, layero);
+                close === false || layer.close(that.index);
+            }
+        });
+
+        //取消
+        function cancel() {
+            var close = config.cancel && config.cancel(that.index, layero);
+            close === false || layer.close(that.index);
+        }
+
+        //右上角关闭回调
+        layero.find('.' + doms[7]).on('click', cancel);
+
+        //点遮罩关闭
+        if (config.shadeClose) {
+            $('#layui-layer-shade' + that.index).on('click', function () {
+                layer.close(that.index);
+            });
+        }
+
+        //最小化
+        layero.find('.layui-layer-min').on('click', function () {
+            var min = config.min && config.min(layero);
+            min === false || layer.min(that.index, config);
+        });
+
+        //全屏/还原
+        layero.find('.layui-layer-max').on('click', function () {
+            if ($(this).hasClass('layui-layer-maxmin')) {
+                layer.restore(that.index);
+                config.restore && config.restore(layero);
+            } else {
+                layer.full(that.index, config);
+                setTimeout(function () {
+                    config.full && config.full(layero);
+                }, 100);
+            }
+        });
+
+        config.end && (ready.end[that.index] = config.end);
+    };
+
+    //for ie6 恢复select
+    ready.reselect = function () {
+        $.each($('select'), function (index, value) {
+            var sthis = $(this);
+            if (!sthis.parents('.' + doms[0])[0]) {
+                (sthis.attr('layer') == 1 && $('.' + doms[0]).length < 1) && sthis.removeAttr('layer').show();
+            }
+            sthis = null;
+        });
+    };
+
+    Class.pt.IE6 = function (layero) {
+        //隐藏select
+        $('select').each(function (index, value) {
+            var sthis = $(this);
+            if (!sthis.parents('.' + doms[0])[0]) {
+                sthis.css('display') === 'none' || sthis.attr({
+                    'layer': '1'
+                }).hide();
+            }
+            sthis = null;
+        });
+    };
+
+    //需依赖原型的对外方法
+    Class.pt.openLayer = function () {
+        var that = this;
+
+        //置顶当前窗口
+        layer.zIndex = that.config.zIndex;
+        layer.setTop = function (layero) {
+            var setZindex = function () {
+                layer.zIndex++;
+                layero.css('z-index', layer.zIndex + 1);
+            };
+            layer.zIndex = parseInt(layero[0].style.zIndex);
+            layero.on('mousedown', setZindex);
+            return layer.zIndex;
+        };
+    };
+
+    ready.record = function (layero) {
+        var area = [
+            layero.width(),
+            layero.height(),
+            layero.position().top,
+            layero.position().left + parseFloat(layero.css('margin-left'))
+        ];
+        layero.find('.layui-layer-max').addClass('layui-layer-maxmin');
+        layero.attr({
+            area: area
+        });
+    };
+
+    ready.rescollbar = function (index) {
+        if (doms.html.attr('layer-full') == index) {
+            if (doms.html[0].style.removeProperty) {
+                doms.html[0].style.removeProperty('overflow');
+            } else {
+                doms.html[0].style.removeAttribute('overflow');
+            }
+            doms.html.removeAttr('layer-full');
+        }
+    };
+
+    /** 内置成员 */
+
+    window.layer = layer;
+
+    //获取子iframe的DOM
+    layer.getChildFrame = function (selector, index) {
+        index = index || $('.' + doms[4]).attr('times');
+        return $('#' + doms[0] + index).find('iframe').contents().find(selector);
+    };
+
+    //得到当前iframe层的索引，子iframe时使用
+    layer.getFrameIndex = function (name) {
+        return $('#' + name).parents('.' + doms[4]).attr('times');
+    };
+
+    //iframe层自适应宽高
+    layer.iframeAuto = function (index) {
+        if (!index) return;
+        var heg = layer.getChildFrame('html', index).outerHeight();
+        var layero = $('#' + doms[0] + index);
+        var titHeight = layero.find(doms[1]).outerHeight() || 0;
+        var btnHeight = layero.find('.' + doms[6]).outerHeight() || 0;
+        layero.css({
+            height: heg + titHeight + btnHeight
+        });
+        layero.find('iframe').css({
+            height: heg
+        });
+    };
+
+    //重置iframe url
+    layer.iframeSrc = function (index, url) {
+        $('#' + doms[0] + index).find('iframe').attr('src', url);
+    };
+
+    //设定层的样式
+    layer.style = function (index, options, limit) {
+        var layero = $('#' + doms[0] + index),
+            contElem = layero.find('.layui-layer-content'),
+            type = layero.attr('type'),
+            titHeight = layero.find(doms[1]).outerHeight() || 0,
+            btnHeight = layero.find('.' + doms[6]).outerHeight() || 0,
+            minLeft = layero.attr('minLeft');
+
+        if (type === ready.type[3] || type === ready.type[4]) {
+            return;
+        }
+
+        if (!limit) {
+            if (parseFloat(options.width) <= 260) {
+                options.width = 260;
+            };
+
+            if (parseFloat(options.height) - titHeight - btnHeight <= 64) {
+                options.height = 64 + titHeight + btnHeight;
+            };
+        }
+
+        layero.css(options);
+        btnHeight = layero.find('.' + doms[6]).outerHeight();
+
+        if (type === ready.type[2]) {
+            layero.find('iframe').css({
+                height: parseFloat(options.height) - titHeight - btnHeight
+            });
+        } else {
+            contElem.css({
+                height: parseFloat(options.height) - titHeight - btnHeight -
+                    parseFloat(contElem.css('padding-top')) -
+                    parseFloat(contElem.css('padding-bottom'))
+            })
+        }
+    };
+
+    //最小化
+    layer.min = function (index, options) {
+        var layero = $('#' + doms[0] + index),
+            titHeight = layero.find(doms[1]).outerHeight() || 0,
+            left = layero.attr('minLeft') || (181 * ready.minIndex) + 'px',
+            position = layero.css('position');
+
+        ready.record(layero);
+
+        if (ready.minLeft[0]) {
+            left = ready.minLeft[0];
+            ready.minLeft.shift();
+        }
+
+        layero.attr('position', position);
+
+        layer.style(index, {
+            width: 180,
+            height: titHeight,
+            left: left,
+            top: win.height() - titHeight,
+            position: 'fixed',
+            overflow: 'hidden'
+        }, true);
+        layero.find('.layui-layer-min').hide();
+        layero.attr('type') === 'page' && layero.find(doms[4]).hide();
+        ready.rescollbar(index);
+
+        if (!layero.attr('minLeft')) {
+            ready.minIndex++;
+        }
+        layero.attr('minLeft', left);
+    };
+
+    //还原
+    layer.restore = function (index) {
+        var layero = $('#' + doms[0] + index),
+            titHeight = layero.find(doms[1]).outerHeight() || 0,
+            area = layero.attr('area').split(',');
+        var type = layero.attr('type');
+        layer.style(index, {
+            width: parseFloat(area[0]),
+            height: parseFloat(area[1]),
+            top: parseFloat(area[2]),
+            left: parseFloat(area[3]),
+            position: layero.attr('position'),
+            overflow: 'visible'
+        }, true);
+        //iframe resize
+        $('#layui-layer-iframe' + index).css('height', parseFloat(area[1]) - titHeight)
+
+        layero.find('.layui-layer-max').removeClass('layui-layer-maxmin');
+        layero.find('.layui-layer-min').show();
+        layero.attr('type') === 'page' && layero.find(doms[4]).show();
+        ready.rescollbar(index);
+    };
+
+    //全屏
+    layer.full = function (index) {
+        var layero = $('#' + doms[0] + index),
+            titHeight = layero.find(doms[1]).outerHeight() || 0,
+            timer;
+        ready.record(layero);
+        if (!doms.html.attr('layer-full')) {
+            doms.html.css('overflow', 'hidden').attr('layer-full', index);
+        }
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            var isfix = layero.css('position') === 'fixed';
+            layer.style(index, {
+                top: isfix ? 0 : win.scrollTop(),
+                left: isfix ? 0 : win.scrollLeft(),
+                width: win.width(),
+                height: win.height()
+            }, true);
+            //iframe resize
+            $('#layui-layer-iframe' + index).css('height', win.height() - titHeight)
+            layero.find('.layui-layer-min').hide();
+        }, 100);
+    };
+
+    //改变title
+    layer.title = function (name, index) {
+        var title = $('#' + doms[0] + (index || layer.index)).find(doms[1]);
+        title.html(name);
+    };
+
+    //关闭layer总方法
+    layer.close = function (index) {
+        var layero = $('#' + doms[0] + index),
+            type = layero.attr('type'),
+            closeAnim = 'layer-anim-close';
+        if (!layero[0]) return;
+        var WRAP = 'layui-layer-wrap',
+            remove = function () {
+                if (type === ready.type[1] && layero.attr('conType') === 'object') {
+                    layero.children(':not(.' + doms[5] + ')').remove();
+                    var wrap = layero.find('.' + WRAP);
+                    for (var i = 0; i < 2; i++) {
+                        wrap.unwrap();
+                    }
+                    wrap.css('display', wrap.data('display')).removeClass(WRAP);
+                } else {
+                    //低版本IE 回收 iframe
+                    if (type === ready.type[2]) {
+                        try {
+                            var iframe = $('#' + doms[4] + index)[0];
+                            iframe.contentWindow.document.write('');
+                            iframe.contentWindow.close();
+                            layero.find('.' + doms[5])[0].removeChild(iframe);
+                        } catch (e) {}
+                    }
+                    layero[0].innerHTML = '';
+                    layero.remove();
+                }
+                typeof ready.end[index] === 'function' && ready.end[index]();
+                delete ready.end[index];
+            };
+
+        if (layero.data('isOutAnim')) {
+            layero.addClass('layer-anim ' + closeAnim);
+        }
+
+        $('#layui-layer-moves, #layui-layer-shade' + index).remove();
+        layer.ie == 6 && ready.reselect();
+        ready.rescollbar(index);
+        if (layero.attr('minLeft')) {
+            ready.minIndex--;
+            ready.minLeft.push(layero.attr('minLeft'));
+        }
+
+        if ((layer.ie && layer.ie < 10) || !layero.data('isOutAnim')) {
+            remove()
+        } else {
+            setTimeout(function () {
+                remove();
+            }, 200);
+        }
+    };
+
+    //关闭所有层
+    layer.closeAll = function (type) {
+        $.each($('.' + doms[0]), function () {
+            var othis = $(this);
+            var is = type ? (othis.attr('type') === type) : 1;
+            is && layer.close(othis.attr('times'));
+            is = null;
+        });
+    };
+
+    /**
+
+     拓展模块，layui开始合并在一起
+
+     */
+
+    var cache = layer.cache || {},
+        skin = function (type) {
+            return (cache.skin ? (' ' + cache.skin + ' ' + cache.skin + '-' + type) : '');
+        };
+
+    //仿系统prompt
+    layer.prompt = function (options, yes) {
+        var style = '';
+        options = options || {};
+
+        if (typeof options === 'function') yes = options;
+
+        if (options.area) {
+            var area = options.area;
+            style = 'style="width: ' + area[0] + '; height: ' + area[1] + ';"';
+            delete options.area;
+        }
+        var prompt, content = options.formType == 2 ? '<textarea class="layui-layer-input"' + style + '></textarea>' : function () {
+            return '<input type="' + (options.formType == 1 ? 'password' : 'text') + '" class="layui-layer-input">';
+        }();
+
+        var success = options.success;
+        delete options.success;
+
+        return layer.open($.extend({
+            type: 1,
+            btn: ['&#x786E;&#x5B9A;', '&#x53D6;&#x6D88;'],
+            content: content,
+            skin: 'layui-layer-prompt' + skin('prompt'),
+            maxWidth: win.width(),
+            success: function (layero) {
+                prompt = layero.find('.layui-layer-input');
+                prompt.val(options.value || '').focus();
+                typeof success === 'function' && success(layero);
+            },
+            resize: false,
+            yes: function (index) {
+                var value = prompt.val();
+                if (value === '') {
+                    prompt.focus();
+                } else if (value.length > (options.maxlength || 500)) {
+                    layer.tips('&#x6700;&#x591A;&#x8F93;&#x5165;' + (options.maxlength || 500) + '&#x4E2A;&#x5B57;&#x6570;', prompt, {
+                        tips: 1
+                    });
+                } else {
+                    yes && yes(value, index, prompt);
+                }
+            }
+        }, options));
+    };
+
+    //tab层
+    layer.tab = function (options) {
+        options = options || {};
+
+        var tab = options.tab || {},
+            THIS = 'layui-this',
+            success = options.success;
+
+        delete options.success;
+
+        return layer.open($.extend({
+            type: 1,
+            skin: 'layui-layer-tab' + skin('tab'),
+            resize: false,
+            title: function () {
+                var len = tab.length,
+                    ii = 1,
+                    str = '';
+                if (len > 0) {
+                    str = '<span class="' + THIS + '">' + tab[0].title + '</span>';
+                    for (; ii < len; ii++) {
+                        str += '<span>' + tab[ii].title + '</span>';
+                    }
+                }
+                return str;
+            }(),
+            content: '<ul class="layui-layer-tabmain">' + function () {
+                var len = tab.length,
+                    ii = 1,
+                    str = '';
+                if (len > 0) {
+                    str = '<li class="layui-layer-tabli ' + THIS + '">' + (tab[0].content || 'no content') + '</li>';
+                    for (; ii < len; ii++) {
+                        str += '<li class="layui-layer-tabli">' + (tab[ii].content || 'no  content') + '</li>';
+                    }
+                }
+                return str;
+            }() + '</ul>',
+            success: function (layero) {
+                var btn = layero.find('.layui-layer-title').children();
+                var main = layero.find('.layui-layer-tabmain').children();
+                btn.on('mousedown', function (e) {
+                    e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+                    var othis = $(this),
+                        index = othis.index();
+                    othis.addClass(THIS).siblings().removeClass(THIS);
+                    main.eq(index).show().siblings().hide();
+                    typeof options.change === 'function' && options.change(index);
+                });
+                typeof success === 'function' && success(layero);
+            }
+        }, options));
+    };
+
+    //相册层
+    layer.photos = function (options, loop, key) {
+        var dict = {};
+        options = options || {};
+        if (!options.photos) return;
+        var type = options.photos.constructor === Object;
+        var photos = type ? options.photos : {},
+            data = photos.data || [];
+        var start = photos.start || 0;
+        dict.imgIndex = (start | 0) + 1;
+
+        options.img = options.img || 'img';
+
+        var success = options.success;
+        delete options.success;
+
+        if (!type) { //页面直接获取
+            var parent = $(options.photos),
+                pushData = function () {
+                    data = [];
+                    parent.find(options.img).each(function (index) {
+                        var othis = $(this);
+                        othis.attr('layer-index', index);
+                        data.push({
+                            alt: othis.attr('alt'),
+                            pid: othis.attr('layer-pid'),
+                            src: othis.attr('layer-src') || othis.attr('src'),
+                            thumb: othis.attr('src')
+                        });
+                    })
+                };
+
+            pushData();
+
+            if (data.length === 0) return;
+
+            loop || parent.on('click', options.img, function () {
+                var othis = $(this),
+                    index = othis.attr('layer-index');
+                layer.photos($.extend(options, {
+                    photos: {
+                        start: index,
+                        data: data,
+                        tab: options.tab
+                    },
+                    full: options.full
+                }), true);
+                pushData();
+            })
+
+            //不直接弹出
+            if (!loop) return;
+
+        } else if (data.length === 0) {
+            return layer.msg('&#x6CA1;&#x6709;&#x56FE;&#x7247;');
+        }
+
+        //上一张
+        dict.imgprev = function (key) {
+            dict.imgIndex--;
+            if (dict.imgIndex < 1) {
+                dict.imgIndex = data.length;
+            }
+            dict.tabimg(key);
+        };
+
+        //下一张
+        dict.imgnext = function (key, errorMsg) {
+            dict.imgIndex++;
+            if (dict.imgIndex > data.length) {
+                dict.imgIndex = 1;
+                if (errorMsg) {
+                    return
+                };
+            }
+            dict.tabimg(key)
+        };
+
+        //方向键
+        dict.keyup = function (event) {
+            if (!dict.end) {
+                var code = event.keyCode;
+                event.preventDefault();
+                if (code === 37) {
+                    dict.imgprev(true);
+                } else if (code === 39) {
+                    dict.imgnext(true);
+                } else if (code === 27) {
+                    layer.close(dict.index);
+                }
+            }
+        }
+
+        //切换
+        dict.tabimg = function (key) {
+            if (data.length <= 1) return;
+            photos.start = dict.imgIndex - 1;
+            layer.close(dict.index);
+            return layer.photos(options, true, key);
+            setTimeout(function () {
+                layer.photos(options, true, key);
+            }, 200);
+        }
+
+        //一些动作
+        dict.event = function () {
+            dict.bigimg.hover(function () {
+                dict.imgsee.show();
+            }, function () {
+                dict.imgsee.hide();
+            });
+
+            dict.bigimg.find('.layui-layer-imgprev').on('click', function (event) {
+                event.preventDefault();
+                dict.imgprev();
+            });
+
+            dict.bigimg.find('.layui-layer-imgnext').on('click', function (event) {
+                event.preventDefault();
+                dict.imgnext();
+            });
+
+            $(document).on('keyup', dict.keyup);
+        };
+
+        //图片预加载
+        function loadImage(url, callback, error) {
+            var img = new Image();
+            img.src = url;
+            if (img.complete) {
+                return callback(img);
+            }
+            img.onload = function () {
+                img.onload = null;
+                callback(img);
+            };
+            img.onerror = function (e) {
+                img.onerror = null;
+                error(e);
+            };
+        };
+
+        dict.loadi = layer.load(1, {
+            shade: 'shade' in options ? false : 0.9,
+            scrollbar: false
+        });
+
+        loadImage(data[start].src, function (img) {
+            layer.close(dict.loadi);
+            dict.index = layer.open($.extend({
+                type: 1,
+                id: 'layui-layer-photos',
+                area: function () {
+                    var imgarea = [img.width, img.height];
+                    var winarea = [$(window).width() - 100, $(window).height() - 100];
+
+                    //如果 实际图片的宽或者高比 屏幕大（那么进行缩放）
+                    if (!options.full && (imgarea[0] > winarea[0] || imgarea[1] > winarea[1])) {
+                        var wh = [imgarea[0] / winarea[0], imgarea[1] / winarea[1]]; //取宽度缩放比例、高度缩放比例
+                        if (wh[0] > wh[1]) { //取缩放比例最大的进行缩放
+                            imgarea[0] = imgarea[0] / wh[0];
+                            imgarea[1] = imgarea[1] / wh[0];
+                        } else if (wh[0] < wh[1]) {
+                            imgarea[0] = imgarea[0] / wh[1];
+                            imgarea[1] = imgarea[1] / wh[1];
+                        }
+                    }
+
+                    return [imgarea[0] + 'px', imgarea[1] + 'px'];
+                }(),
+                title: false,
+                shade: 0.9,
+                shadeClose: true,
+                closeBtn: false,
+                move: '.layui-layer-phimg img',
+                moveType: 1,
+                scrollbar: false,
+                moveOut: true,
+                //anim: Math.random()*5|0,
+                isOutAnim: false,
+                skin: 'layui-layer-photos' + skin('photos'),
+                content: '<div class="layui-layer-phimg">' +
+                    '<img src="' + data[start].src + '" alt="' + (data[start].alt || '') + '" layer-pid="' + data[start].pid + '">' +
+                    '<div class="layui-layer-imgsee">' +
+                    (data.length > 1 ? '<span class="layui-layer-imguide"><a href="javascript:;" class="layui-layer-iconext layui-layer-imgprev"></a><a href="javascript:;" class="layui-layer-iconext layui-layer-imgnext"></a></span>' : '') +
+                    '<div class="layui-layer-imgbar" style="display:' + (key ? 'block' : '') + '"><span class="layui-layer-imgtit"><a href="javascript:;">' + (data[start].alt || '') + '</a><em>' + dict.imgIndex + '/' + data.length + '</em></span></div>' +
+                    '</div>' +
+                    '</div>',
+                success: function (layero, index) {
+                    dict.bigimg = layero.find('.layui-layer-phimg');
+                    dict.imgsee = layero.find('.layui-layer-imguide,.layui-layer-imgbar');
+                    dict.event(layero);
+                    options.tab && options.tab(data[start], layero);
+                    typeof success === 'function' && success(layero);
+                },
+                end: function () {
+                    dict.end = true;
+                    $(document).off('keyup', dict.keyup);
+                }
+            }, options));
+        }, function () {
+            layer.close(dict.loadi);
+            layer.msg('&#x5F53;&#x524D;&#x56FE;&#x7247;&#x5730;&#x5740;&#x5F02;&#x5E38;<br>&#x662F;&#x5426;&#x7EE7;&#x7EED;&#x67E5;&#x770B;&#x4E0B;&#x4E00;&#x5F20;&#xFF1F;', {
+                time: 30000,
+                btn: ['&#x4E0B;&#x4E00;&#x5F20;', '&#x4E0D;&#x770B;&#x4E86;'],
+                yes: function () {
+                    data.length > 1 && dict.imgnext(true, true);
+                }
+            });
+        });
+    };
+
+    //主入口
+    ready.run = function (_$) {
+        $ = _$;
+        win = $(window);
+        doms.html = $('html');
+        layer.open = function (deliver) {
+            var o = new Class(deliver);
+            return o.index;
+        };
+    };
+    //加载方式
+    window.layui && layui.define ? (
+        layer.ready(), layui.define('jquery', function (exports) { //layui加载
+            layer.path = layui.cache.dir;
+            ready.run(layui.$);
+
+            //暴露模块
+            window.layer = layer;
+            exports('layer', layer);
+        })
+    ) : (
+        (typeof define === 'function' && define.amd) ? define([], function () { //requirejs加载
+            ready.run(window.jQuery);
+            return layer;
+        }) : function () { //普通script标签加载
+            ready.run(window.jQuery);
+            layer.ready();
+        }()
+    );
+
+}(window);
+
+/**
+
+ @Name：layui.util 工具集
+ @Author：贤心
+ @License：MIT
+
+*/
+layui.define(['jquery'], function (exports) {
+    "use strict";
+
+    var $ = layui.$,
+
+        //外部接口
+        util = {
+            loadJs: function (sUrl, fCallback) {
+                var _script = document.createElement("script");
+                _script.setAttribute("type", "text/javascript");
+                _script.setAttribute("src", sUrl);
+                document.getElementsByTagName("head")[0].appendChild(_script);
+
+                if (/msie/.test(window.navigator.userAgent.toLowerCase())) {
+                    _script.onreadystatechange = function () {
+                        if (this.readyState == "loaded" || this.readyState == "complete") {
+                            fCallback();
+                        }
+                    };
+                } else if (/gecko/.test(window.navigator.userAgent.toLowerCase())) {
+                    _script.onload = function () {
+                        fCallback();
+                    };
+                } else {
+                    fCallback();
+                }
+            },
+            //固定块
+            fixbar: function (options) {
+                var ELEM = 'layui-fixbar',
+                    TOP_BAR = 'layui-fixbar-top',
+                    dom = $(document),
+                    body = $('body'),
+                    is, timer;
+
+                options = $.extend({
+                    showHeight: 200 //出现TOP的滚动条高度临界值
+                }, options);
+
+                options.bar1 = options.bar1 === true ? '&#xe606;' : options.bar1;
+                options.bar2 = options.bar2 === true ? '&#xe607;' : options.bar2;
+                options.bgcolor = options.bgcolor ? ('background-color:' + options.bgcolor) : '';
+
+                var icon = [options.bar1, options.bar2, '&#xe604;'] //图标：信息、问号、TOP
+                    ,
+                    elem = $(['<ul class="' + ELEM + '">', options.bar1 ? '<li class="fa" lay-type="bar1" style="' + options.bgcolor + '">' + icon[0] + '</li>' : '', options.bar2 ? '<li class="fa" lay-type="bar2" style="' + options.bgcolor + '">' + icon[1] + '</li>' : '', '<li class="fa ' + TOP_BAR + '" lay-type="top" style="' + options.bgcolor + '">' + icon[2] + '</li>', '</ul>'].join('')),
+                    topBar = elem.find('.' + TOP_BAR),
+                    scroll = function () {
+                        var stop = dom.scrollTop();
+                        if (stop >= (options.showHeight)) {
+                            is || (topBar.show(), is = 1);
+                        } else {
+                            is && (topBar.hide(), is = 0);
+                        }
+                    };
+                if ($('.' + ELEM)[0]) return;
+
+                typeof options.css === 'object' && elem.css(options.css);
+                body.append(elem), scroll();
+
+                //bar点击事件
+                elem.find('li').on('click', function () {
+                    var othis = $(this),
+                        type = othis.attr('lay-type');
+                    if (type === 'top') {
+                        $('html,body').animate({
+                            scrollTop: 0
+                        }, 200);
+                    }
+                    options.click && options.click.call(this, type);
+                });
+
+                //Top显示控制
+                dom.on('scroll', function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        scroll();
+                    }, 100);
+                });
+            },
+
+            //倒计时
+            countdown: function (endTime, serverTime, callback) {
+                var that = this,
+                    type = typeof serverTime === 'function',
+                    end = new Date(endTime).getTime(),
+                    now = new Date((!serverTime || type) ? new Date().getTime() : serverTime).getTime(),
+                    count = end - now,
+                    time = [
+                        Math.floor(count / (1000 * 60 * 60 * 24)) //天
+                        , Math.floor(count / (1000 * 60 * 60)) % 24 //时
+                        , Math.floor(count / (1000 * 60)) % 60 //分
+                        , Math.floor(count / 1000) % 60 //秒
+                    ];
+
+                if (type) callback = serverTime;
+
+                var timer = setTimeout(function () {
+                    that.countdown(endTime, now + 1000, callback);
+                }, 1000);
+
+                callback && callback(count > 0 ? time : [0, 0, 0, 0], serverTime, timer);
+
+                if (count <= 0) clearTimeout(timer);
+                return timer;
+            },
+
+            //某个时间在当前时间的多久前
+            timeAgo: function (time, onlyDate) {
+                var that = this,
+                    arr = [
+                        [],
+                        []
+                    ],
+                    stamp = new Date().getTime() - new Date(time).getTime();
+
+                //返回具体日期
+                if (stamp > 1000 * 60 * 60 * 24 * 8) {
+                    stamp = new Date(time);
+                    arr[0][0] = that.digit(stamp.getFullYear(), 4);
+                    arr[0][1] = that.digit(stamp.getMonth() + 1);
+                    arr[0][2] = that.digit(stamp.getDate());
+
+                    //是否输出时间
+                    if (!onlyDate) {
+                        arr[1][0] = that.digit(stamp.getHours());
+                        arr[1][1] = that.digit(stamp.getMinutes());
+                        arr[1][2] = that.digit(stamp.getSeconds());
+                    }
+                    return arr[0].join('-') + ' ' + arr[1].join(':');
+                }
+
+                //30天以内，返回“多久前”
+                if (stamp >= 1000 * 60 * 60 * 24) {
+                    return ((stamp / 1000 / 60 / 60 / 24) | 0) + '天前';
+                } else if (stamp >= 1000 * 60 * 60) {
+                    return ((stamp / 1000 / 60 / 60) | 0) + '小时前';
+                } else if (stamp >= 1000 * 60 * 2) { //2分钟以内为：刚刚
+                    return ((stamp / 1000 / 60) | 0) + '分钟前';
+                } else if (stamp < 0) {
+                    return '未来';
+                } else {
+                    return '刚刚';
+                }
+            },
+
+            //数字前置补零
+            digit: function (num, length) {
+                var str = '';
+                num = String(num);
+                length = length || 2;
+                for (var i = num.length; i < length; i++) {
+                    str += '0';
+                }
+                return num < Math.pow(10, length) ? str + (num | 0) : num;
+            },
+
+            //转化为日期格式字符
+            toDateString: function (time, format) {
+                var that = this,
+                    date = new Date(time || new Date()),
+                    ymd = [
+                        that.digit(date.getFullYear(), 4), that.digit(date.getMonth() + 1), that.digit(date.getDate())
+                    ],
+                    hms = [
+                        that.digit(date.getHours()), that.digit(date.getMinutes()), that.digit(date.getSeconds())
+                    ];
+
+                format = format || 'yyyy-MM-dd HH:mm:ss';
+
+                return format.replace(/yyyy/g, ymd[0])
+                    .replace(/MM/g, ymd[1])
+                    .replace(/dd/g, ymd[2])
+                    .replace(/HH/g, hms[0])
+                    .replace(/mm/g, hms[1])
+                    .replace(/ss/g, hms[2]);
+            },
+
+            //防 xss 攻击
+            escape: function (html) {
+                return String(html || '').replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+                    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+            },
+            formatSize: function (value) {
+                if (null == value || value == '') {
+                    return "0 Bytes";
+                }
+                var unitArr = new Array("Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB");
+                var index = 0,
+                    srcsize = parseFloat(value);
+                index = Math.floor(Math.log(srcsize) / Math.log(1024));
+                var size = srcsize / Math.pow(1024, index);
+                //  保留的小数位数
+                size = size.toFixed(2);
+                return size + unitArr[index];
+            },
+            getExtension: function (filepath) {
+                var _extidx = filepath.lastIndexOf('.');
+                if (_extidx < 0) {
+                    return ''
+                }
+                return filepath.substr(_extidx + 1, filepath.length)
+            },
+            toRmb: function (a) {
+                var b = 9.999999999999E10,
+                    f = "\u96f6",
+                    h = "\u58f9",
+                    g = "\u8d30",
+                    e = "\u53c1",
+                    k = "\u8086",
+                    p = "\u4f0d",
+                    q = "\u9646",
+                    r = "\u67d2",
+                    s = "\u634c",
+                    t = "\u7396",
+                    l = "\u62fe",
+                    d = "\u4f70",
+                    i = "\u4edf",
+                    m = "\u4e07",
+                    j = "\u4ebf",
+                    u = "人民币",
+                    o = "\u5143",
+                    c = "\u89d2",
+                    n = "\u5206",
+                    v = "\u6574";
+                a = a.toString();
+                if (a == "") {
+                    alert("转换内容不能为空!");
+                    return "";
+                }
+                if (a.match(/[^,.\d]/) != null) {
+                    alert("输入有误,请输入小数点和纯数字!");
+                    return "";
+                }
+                if (a.match(/^((\d{1,3}(,\d{3})*(.((\d{3},)*\d{1,3}))?)|(\d+(.\d+)?))$/) == null) {
+                    alert("输入有误,请输入小数点和纯数字!");
+                    return "";
+                }
+                a = a.replace(/,/g, "");
+                a = a.replace(/^0+/, "");
+                if (Number(a) > b) {
+                    alert("\u5bf9\u4e0d\u8d77,\u4f60\u8f93\u5165\u7684\u6570\u5b57\u592a\u5927\u4e86!\u6700\u5927\u6570\u5b57\u4e3a99999999999.99\uff01");
+                    return "";
+                }
+                b = a.split(".");
+                if (b.length > 1) {
+                    a = b[0];
+                    b = b[1];
+                    b = b.substr(0, 2);
+                } else {
+                    a = b[0];
+                    b = "";
+                }
+                h = new Array(f, h, g, e, k, p, q, r, s, t);
+                l = new Array("", l, d, i);
+                m = new Array("", m, j);
+                n = new Array(c, n);
+                c = "";
+                if (Number(a) > 0) {
+                    for (d = j = 0; d < a.length; d++) {
+                        e = a.length - d - 1;
+                        i = a.substr(d, 1);
+                        g = e / 4;
+                        e = e % 4;
+                        if (i == "0") j++;
+                        else {
+                            if (j > 0) c += h[0];
+                            j = 0;
+                            c += h[Number(i)] + l[e];
+                        }
+                        if (e == 0 && j < 4) c += m[g];
+                    }
+                    c += o;
+                }
+                if (b != "")
+                    for (d = 0; d < b.length; d++) {
+                        i = b.substr(d, 1);
+                        if (i != "0") c += h[Number(i)] + n[d];
+                    }
+                if (c == "") c = f + o;
+                if (b.length < 2) c += v;
+                return c;
+            }
+        }
+
+    //暴露接口
+    exports('util', util);
+});
+
+/**
+
+ @Name : layui.laytpl 模板引擎
+ @Author：贤心
+ @License：MIT
+
+ */
+
+layui.define(function (exports) {
+
+    "use strict";
+
+    var config = {
+        open: '{{',
+        close: '}}'
+    };
+
+    var tool = {
+        exp: function (str) {
+            return new RegExp(str, 'g');
+        },
+        //匹配满足规则内容
+        query: function (type, _, __) {
+            var types = [
+                '#([\\s\\S])+?', //js语句
+                '([^{#}])*?' //普通字段
+            ][type || 0];
+            return exp((_ || '') + config.open + types + config.close + (__ || ''));
+        },
+        escape: function (html) {
+            return String(html || '').replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+                .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+        },
+        error: function (e, tplog) {
+            var error = 'Laytpl Error：';
+            typeof console === 'object' && console.error(error + e + '\n' + (tplog || ''));
+            return error + e;
+        }
+    };
+
+    var exp = tool.exp,
+        Tpl = function (tpl) {
+            this.tpl = tpl;
+        };
+
+    Tpl.pt = Tpl.prototype;
+
+    window.errors = 0;
+
+    //编译模版
+    Tpl.pt.parse = function (tpl, data) {
+        var that = this,
+            tplog = tpl;
+        var jss = exp('^' + config.open + '#', ''),
+            jsse = exp(config.close + '$', '');
+
+        tpl = tpl.replace(/\s+|\r|\t|\n/g, ' ')
+            .replace(exp(config.open + '#'), config.open + '# ')
+            .replace(exp(config.close + '}'), '} ' + config.close).replace(/\\/g, '\\\\')
+
+            //不匹配指定区域的内容
+            .replace(exp(config.open + '!(.+?)!' + config.close), function (str) {
+                str = str.replace(exp('^' + config.open + '!'), '')
+                    .replace(exp('!' + config.close), '')
+                    .replace(exp(config.open + '|' + config.close), function (tag) {
+                        return tag.replace(/(.)/g, '\\$1')
+                    });
+                return str
+            })
+
+            //匹配JS规则内容
+            .replace(/(?="|')/g, '\\').replace(tool.query(), function (str) {
+                str = str.replace(jss, '').replace(jsse, '');
+                return '";' + str.replace(/\\/g, '') + ';view+="';
+            })
+
+            //匹配普通字段
+            .replace(tool.query(1), function (str) {
+                var start = '"+(';
+                if (str.replace(/\s/g, '') === config.open + config.close) {
+                    return '';
+                }
+                str = str.replace(exp(config.open + '|' + config.close), '');
+                if (/^=/.test(str)) {
+                    str = str.replace(/^=/, '');
+                    start = '"+_escape_(';
+                }
+                return start + str.replace(/\\/g, '') + ')+"';
+            });
+
+        tpl = '"use strict";var view = "' + tpl + '";return view;';
+
+        try {
+            that.cache = tpl = new Function('d, _escape_', tpl);
+            return tpl(data, tool.escape);
+        } catch (e) {
+            delete that.cache;
+            return tool.error(e, tplog);
+        }
+    };
+
+    Tpl.pt.render = function (data, callback) {
+        var that = this,
+            tpl;
+        if (!data) return tool.error('no data');
+        tpl = that.cache ? that.cache(data, tool.escape) : that.parse(that.tpl, data);
+        if (!callback) return tpl;
+        callback(tpl);
+    };
+
+    var laytpl = function (tpl) {
+        if (typeof tpl !== 'string') return tool.error('Template not found');
+        return new Tpl(tpl);
+    };
+
+    laytpl.config = function (options) {
+        options = options || {};
+        for (var i in options) {
+            config[i] = options[i];
+        }
+    };
+
+    laytpl.v = '1.2.0';
+
+    exports('laytpl', laytpl);
+
+});

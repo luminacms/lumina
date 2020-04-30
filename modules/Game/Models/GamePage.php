@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Modules\Core\Traits\HasCount;
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Traits\ResponseCacheClear;
 
 /**
  * Class GamePage.
@@ -14,7 +15,7 @@ use Modules\Core\Traits\HasCreateBy;
  */
 class GamePage extends BaseModel
 {
-    use HasCreateBy, HasCount;
+    use HasCreateBy, HasCount, ResponseCacheClear;
 
     /**
      * The attributes that are mass assignable.

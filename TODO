@@ -1,0 +1,4 @@
+全局:
+
+    ✘ openModal关闭按钮使用layer原生按钮 @created(20-04-30 09:36) @cancelled(20-04-30 10:42) // iframe原生弹窗无法监听事件
+    ☐ 导出当前列表 @created(20-04-30 09:37)

@@ -31,7 +31,7 @@
 
 <x-formItem class="layui-layout-admin">
 	<div class="layui-footer z-50 shadow" style="left:0;">
-		<button class="layui-btn" lay-submit>{{ __('main.submit') }}</button>
+		<button class="layui-btn J_ajax" lay-submit>{{ __('main.submit') }}</button>
         <button type="reset" class="layui-btn layui-btn-primary" lay-submit-cancel>{{ __('main.cancel') }}</button>
 	</div>
 </x-formItem>
