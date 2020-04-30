@@ -9,6 +9,5 @@
     "Shop": true,
     "ApiTest": true,
     "Point": true,
-    "Temp": true,
-    "Cms": true
+    "Temp": true
 }

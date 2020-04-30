@@ -3,6 +3,7 @@
 namespace Modules\Core\Exports;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Events\BeforeSheet;
@@ -37,13 +38,13 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
 
     public function query(){}
 
-    public static function beforeExport(BeforeExport $event)
-    {
-        $uinfo = var_export(auth()->user()->only(['id', 'name', 'email', 'mobile']), true);
-        Log::channel('exportlog')->info('before Export: '.get_called_class().';from:'.json_encode($uinfo));
-    }
-
+    public static function beforeExport(BeforeExport $event){}
     public static function beforeWriting(BeforeWriting $event){}
     public static function beforeSheet(BeforeSheet $event){}
-    public static function afterSheet(AfterSheet $event){}
+    public static function afterSheet(AfterSheet $event){
+        Log::channel('exportlog')->info('', [
+            'Export:' => get_called_class(),
+            'user' => Auth::user()->userid
+        ]);
+    }
 }

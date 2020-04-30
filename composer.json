@@ -28,7 +28,8 @@
         "spatie/laravel-responsecache": "6.2.*",
         "tymon/jwt-auth": "^1.0",
         "xbhub/laravel-filter": "dev-master",
-        "xbhub/laravel-socialite": "^2.0"
+        "xbhub/laravel-socialite": "^2.0",
+        "yansongda/pay": "^2.9"
     },
     "require-dev": {
         "xbhub/laravel-xgee": "dev-master",

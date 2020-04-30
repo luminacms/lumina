@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Support\Facades\Log;
-use Modules\Coupon\Exports\CouponCodeExport;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +10,6 @@ use Modules\Coupon\Exports\CouponCodeExport;
 |
 */
 Route::get('/', 'CoreController@index');
-
-
-Route::get('/b', function(){
-    $r = new CouponCodeExport(request());
-
-    dd($r);
-    Log::channel('exportlog')->info('before Export: ');
-});
 
 // 授权
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
