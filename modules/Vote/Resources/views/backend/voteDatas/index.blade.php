@@ -22,7 +22,7 @@
                 url: '{{ URL::full() }}',
                 autoShow: '{{ route('backend.vote.data.show', "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
-                export: {url: '{{ route('interface.vote.data.export', ['id'=>request('vote_id')]) }}', can: true, all: true},
+                export: {url: '{{ route('interface.vote.data.export', ['id'=>get_params('vote_id')]) }}', can: true, all: true},
                 page: true,
                 canSearch: true,
                 toolbar: ['delete'],

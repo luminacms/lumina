@@ -25,6 +25,7 @@ class VoteResource extends BaseResource
         }
         return [
             'id' => $this->id,
+            'uid' => $this->uid ?? $this->id,
             'title' =>$this->title,
             'type' => $this->type,
             'uid' =>$this->uid,

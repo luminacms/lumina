@@ -540,21 +540,24 @@
 <script>
      // 注册商品多规格组件
      var specMany = new GoodsSpec({
-            container: '.goods-spec-many'
-        }, {
-            spec_attr: [
-                {'group_id': 1, 'group_name': '颜色', 'spec_items': [
-                    {'item_id': 11, 'spec_value': '红色'},
-                    {'item_id': 12, 'spec_value': '白色'},
-                    {'item_id': 13, 'spec_value': '蓝色'},
-                ]},
-                {'group_id': 2, 'group_name': '内存', 'spec_items': [
-                    {'item_id': 21, 'spec_value': '8G'},
-                    {'item_id': 22, 'spec_value': '16G'},
-                ]}
-            ],
-            spec_list: []
-        });
+        container: '.goods-spec-many'
+     })
+    //  var specMany = new GoodsSpec({
+    //         container: '.goods-spec-many'
+    //     }, {
+    //         spec_attr: [
+    //             {'group_id': 1, 'group_name': '颜色', 'spec_items': [
+    //                 {'item_id': 11, 'spec_value': '红色'},
+    //                 {'item_id': 12, 'spec_value': '白色'},
+    //                 {'item_id': 13, 'spec_value': '蓝色'},
+    //             ]},
+    //             {'group_id': 2, 'group_name': '内存', 'spec_items': [
+    //                 {'item_id': 21, 'spec_value': '8G'},
+    //                 {'item_id': 22, 'spec_value': '16G'},
+    //             ]}
+    //         ],
+    //         spec_list: []
+    //     });
 
         // 切换单/多规格
         $('input:radio[name="goods[spec_type]"]').change(function (e) {

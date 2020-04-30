@@ -4,7 +4,7 @@
 
     <div class="m-rankC container  mt-5 px-5">
         <ul class="list">
-            <?php $icon = [1 => 'https://cdn.sxmgcm.cn/2019/01/car/first.png', 2 => 'https://cdn.sxmgcm.cn/2019/01/car/second.png', 3=>'https://cdn.sxmgcm.cn/2019/01/car/third.png'] ?>
+            <?php $icon = [1 => 'https://cdn.xaweiju.com/2019/01/car/first.png', 2 => 'https://cdn.xaweiju.com/2019/01/car/second.png', 3=>'https://cdn.xaweiju.com/2019/01/car/third.png'] ?>
             @foreach($rank as $_rank)
                 <li class="  w-full mb-3">
                     @if(!isset($icon[$loop->iteration]))

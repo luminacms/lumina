@@ -148,7 +148,7 @@ class MessageHandler implements EventHandlerInterface
             ];
             $client = new \GuzzleHttp\Client();
 
-            $bg = $client->request('get','https://cdn.sxmgcm.cn/2019/01/xnzxs/pic.png')->getBody()->getContents();
+            $bg = $client->request('get','https://cdn.xaweiju.com/2019/01/xnzxs/pic.png')->getBody()->getContents();
 
             $wechat = WechatInit::officeAccount('8ccb2a91-cfb8-4134-9a28-c1cd0b727d63');
 //            $user = $wechat->user->get('oNSeu0ZcPB_q5M2PaBbzsWFjJYrE');

@@ -44,7 +44,7 @@
 @endsection
 
 @push('script')
-<script src="https://cdn.sxmgcm.cn/libs/waterfall/waterfall.rebuild.js"></script>
+<script src="https://cdn.xaweiju.com/libs/waterfall/waterfall.rebuild.js"></script>
 <script>
     layui.use('util', function(){
         var util = layui.util;

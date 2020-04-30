@@ -37,7 +37,7 @@
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"id","title":"id","sort":"true","fixed":"left",width: 80},
+                    {"field":"uid","title":"uid","sort":"true",width: 150},
                     {"field":"title","title":"title",width: 600,templet: '#data_vote_title'},
                     {"field":"typeLabel","title":"type"},
                     {"title":"参与人数","templet":"<div><a class='cursor-pointer underline' lay-event='goVoteData'><strong class='text-red-600 text-2xl'>@{{ d.vote_data }}</strong></a>/<span>@{{ d.vote_data_valid }}</span></div>"},
@@ -79,7 +79,7 @@
 
             table.on('tool(data_vote_table)', function(obj){
                 if(obj.event == 'goVoteData') {
-                    parent.layui.admin.openTab('{{ route("backend.vote.data.index") }}?vote_id='+obj.data.id, '报名数据#'+obj.data.id)
+                    parent.layui.admin.openTab('{{ route("backend.vote.data.index") }}?search=vote_id:'+obj.data.id, '报名数据#'+obj.data.id)
                     return true;
                 }else if(obj.event == 'goVoteDemo') {
                     var tempwindow=parent.window.open('_blank');

@@ -31,7 +31,7 @@ class CouponCodeExport extends BaseExport
     {
         return [
             'code' => $row->code,
-            'status' => $row->getStatusLable(),
+            'status' => $row->getStatusLable(false),
             'owner_by' => $row->ownerBy->getName() ?? '',
             'received_at' => $row->received_at,
             'used_at' => $row->used_at,
@@ -42,11 +42,18 @@ class CouponCodeExport extends BaseExport
         ];
     }
 
+    /**
+     * query result
+     *
+     * @return void
+     */
     public function query()
     {
-        $model = CouponCode::query();
-        $model->where('coupon_id', $this->params['coupon_id']);
+        $model = CouponCode::filter($this->request);
 
+        if(is_array($this->ids)) {
+            $model->whereIn('id', $this->ids);
+        }
         return $model;
     }
 }

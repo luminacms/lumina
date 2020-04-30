@@ -128,17 +128,17 @@ class CouponCode extends BaseModel
      *
      * @return void
      */
-    public function getStatusLable()
+    public function getStatusLable($html = true)
     {
-        $_html = '<span class="layui-badge bg-gray-800">未领取</span>';
+        $default = ['bg-gray-800', '未领取'];
         if($this->used_at) {
-            $_html = '<span class="layui-badge bg-green-600">已使用</span>';
+            $default = ['bg-green-600', '已使用'];
         }else if(!$this->used_at && $this->received_at) {
-            $_html = '<span class="layui-badge bg-yellow-600">已领取</span>';
+            $default = ['bg-yellow-600', '已领取'];
         }else if(now()->isAfter($this->expired_at)) {
-            $_html = '<span class="layui-badge bg-gray-600">已过期</span>';
+            $default = ['bg-gray-600', '已过期'];
         }
-        return $_html;
+        return $html ? '<span class="layui-badge '.$default[0].'">'.$default[1].'</span>': $default[1];
     }
 
     /**

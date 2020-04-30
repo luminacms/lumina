@@ -27,6 +27,9 @@ class VoteData extends BaseModel
     protected $casts = [
         'fields' => 'array'
     ];
+    protected $fieldSearchable = [
+        'vote_id' => '='
+    ];
 
     protected static function boot()
     {

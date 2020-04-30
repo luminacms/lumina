@@ -5,13 +5,13 @@
     <title>ApiTest接口调试插件</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('assets/apitest/apitest.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.sxmgcm.cn/libs/bootstrap/3.2.0/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.sxmgcm.cn/libs/jquery/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.sxmgcm.cn/libs/jquery/jsonview/jquery.jsonview.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.xaweiju.com/libs/bootstrap/3.2.0/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.xaweiju.com/libs/jquery/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.xaweiju.com/libs/jquery/jsonview/jquery.jsonview.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 
-    <script src="https://cdn.sxmgcm.cn/libs/jquery/jquery.min.js"></script>
-    <script src="https://cdn.sxmgcm.cn/libs/bootstrap/3.2.0/bootstrap.min.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/bootstrap/3.2.0/bootstrap.min.js"></script>
     <script>$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});</script>
 </head>
 <body>
@@ -333,8 +333,8 @@
 <script src="/assets/apitest/base-dao.js"></script>
 <script src="/assets/apitest/crapApi.js"></script>
 <script src="/assets/apitest/plug-function.js"></script>
-<script src="https://cdn.sxmgcm.cn/libs/jquery/jsonview/jquery.jsonview.js"></script>
-<script type="text/javascript" src="https://cdn.sxmgcm.cn/libs/jquery/jquery-ui/jquery-ui.min.js"></script>
+<script src="https://cdn.xaweiju.com/libs/jquery/jsonview/jquery.jsonview.js"></script>
+<script type="text/javascript" src="https://cdn.xaweiju.com/libs/jquery/jquery-ui/jquery-ui.min.js"></script>
 
 </body>
 </html>

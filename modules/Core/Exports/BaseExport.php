@@ -18,12 +18,16 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
 {
     use RegistersEventListeners;
 
-    public $ids;
+    public $ids = null;
     public $params;
+    public $request;
 
-    public function __construct(string $ids = '', array $params = [])
+    public function __construct(object $request, array $params = [])
     {
-        $this->ids = $ids === 'all'?null:explode(',', $ids);
+        $_ids = $request->get('ids');
+
+        $this->request = $request;
+        $this->ids = $_ids === 'all'||'filtered' ? null : explode(',', $_ids);
         $this->params = $params;
     }
 

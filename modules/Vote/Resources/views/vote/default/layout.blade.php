@@ -7,7 +7,7 @@
     <title>首页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://cdn.sxmgcm.cn/libs/tailwind/1.0.4/tailwindcss.min.css">
+    <link rel="stylesheet" href="https://cdn.xaweiju.com/libs/tailwind/1.0.4/tailwindcss.min.css">
     <style>
         html{background-color:#fff;}
         body{overflow-x:hidden;color:#444;font-size:14px;font-family:helvetica neue,arial,sans-serif;}
@@ -211,11 +211,11 @@
 
     </style>
     @stack('style')
-    <script src="https://cdn.sxmgcm.cn/libs/jquery/jquery.min.js"></script>
-    <script src="{{ config('core.static')=='1'?asset('static').'/':'https://cdn.sxmgcm.cn/lumina/' }}lumina.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
+    <script src="{{ config('core.static')=='1'?asset('static').'/':'https://cdn.xaweiju.com/lumina/' }}lumina.js"></script>
     <script>
         $.ajaxSetup({'headers': {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}})
-        layui.config({base: '{{ config('core.static')=='1'?asset('static').'/':'https://cdn.sxmgcm.cn/lumina/' }}'})
+        layui.config({base: '{{ config('core.static')=='1'?asset('static').'/':'https://cdn.xaweiju.com/lumina/' }}'})
     </script>
 </head>
 

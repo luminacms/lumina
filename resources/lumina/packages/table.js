@@ -383,8 +383,6 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
             // 显示过滤器
             var elemToolTemp = that.layTool.find('.layui-table-tool-temp'),
                 opt = '';
-
-                console.log(xfilterLables)
             $.each(xfilterLables, function(i, n){
                 opt += '<span lay-event="clearFilter" data-name="'+i+'" class="layui-badge-rim mr-2 border-red-600">'+n.label+'：'+n.val+'<i class="fa fa-trash text-error ml-1"></i></span>'
             })
@@ -1366,7 +1364,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         list: function () {
                             var _export = [];
                             if (options.export.can) {
-                                _export.push('<li data-type="checked">导出选中</li>')
+                                _export.push('<li data-type="checked">导出选中</li><li data-type="filtered">导出当前列表</li>')
                             }
                             if (options.export.all) {
                                 _export.push('<li data-type="all">导出全部</li>')
@@ -1380,6 +1378,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                             list.on('click', function () {
                                 var type = $(this).data('type'),
                                     $self = $(this),
+                                    data = {},
                                     ids = undefined;
 
                                 if (doing === true) {
@@ -1396,6 +1395,9 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                                     }).join(',')
                                 } else if (type === 'all') {
                                     ids = 'all';
+                                } else if(type === 'filtered') {
+                                    ids = 'filtered'
+                                    data = $.extend(data, options.where)
                                 }
 
                                 doing = true;
@@ -1403,9 +1405,9 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                                 admin.request.ajax({
                                     url: options.export.url,
                                     type: 'post',
-                                    data: {
+                                    data: $.extend(data, {
                                         'ids': ids
-                                    },
+                                    }),
                                     cache: false,
                                     success: function (res) {
                                         var alink = document.createElement("a");
@@ -1435,11 +1437,10 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
 
                     delete xfilters[name]
                     delete xfilterLables[name]
+                    delete options['where'][name]
 
                     othis.parents(".filterbox ").remove();
-                    that.reload($.extend(options, {
-                        where: xfilters
-                    }))
+                    that.reload(options)
                     break;
             }
 
@@ -1860,7 +1861,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                 xfilters = $.extend(xfilters, params)
                 xfilterLables = $.extend(xfilterLables, paramLabels)
                 options = $.extend(options, {
-                    'where': xfilters
+                    where: $.extend(options.where, xfilters)
                 })
                 that.reload(options);
             })

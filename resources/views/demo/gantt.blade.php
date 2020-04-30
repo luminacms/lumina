@@ -4,10 +4,10 @@
 
     <div id="ganttChart" style="overflow: hidden;"></div>
 
-    <link rel="stylesheet" href="https://cdn.sxmgcm.cn/libs/ganttView/jquery.ganttView.css">
+    <link rel="stylesheet" href="https://cdn.xaweiju.com/libs/ganttView/jquery.ganttView.css">
 
-    <script src="https://cdn.sxmgcm.cn/libs/ganttView/date.js"></script>
-    <script src="https://cdn.sxmgcm.cn/libs/ganttView/jquery.ganttView.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/ganttView/date.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/ganttView/jquery.ganttView.js"></script>
     <script>
         var ganttData = [
             {

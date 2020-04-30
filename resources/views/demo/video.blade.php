@@ -25,7 +25,7 @@
         autoplay: true,
         playsinline: true,
         ignores: ['theme-default','cover','backward','forward','meta','next','prev', 'template'],
-        url: [{name:'',src:'https://cdn.sxmgcm.cn/media/a.mp4','poster': 'http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg'}]
+        url: [{name:'',src:'https://cdn.xaweiju.com/media/a.mp4','poster': 'http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg'}]
     });
     try {
         WeixinJSBridge && WeixinJsBridge.invoke('getNetworkType', {}, function () {

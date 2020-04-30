@@ -34,7 +34,7 @@ class VoteDatasController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $voteDatas = $this->repository->paginate($request->get('limit', 15));
+            $voteDatas = $this->repository->filter($request)->paginate($request->get('limit', 15));
             return $this->toCollection($voteDatas, VoteDataResource::class);
         }
         return view('vote::backend.voteDatas.index');

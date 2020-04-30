@@ -11,11 +11,11 @@
 </x-formItem>
 
 <x-formItem label="投票/答题规则">
-    <x-input.select name="rule" label="投票/答题规则" required :options="Modules\Vote\Models\Vote::getRules()" :value="$vote->rule ?? ''"/>
+    <x-input.select name="rule" label="投票/答题规则" :options="Modules\Vote\Models\Vote::getRules()" :value="$vote->rule ?? ''"/>
 </x-formItem>
 
 <x-formItem label="一天可以投几次">
-    <x-input type="number" name="rule_times" label="一天可以投几次" required :value="$vote->title ?? ''"/>
+    <x-input type="number" name="rule_times" label="一天可以投几次" :value="$vote->title ?? ''"/>
 </x-formItem>
 
 <x-formItem label="活动规则">
@@ -34,3 +34,9 @@
 		</div>
     </div>
 </div>
+
+<script>
+    layui.use('form', function(){
+
+    })
+</script>

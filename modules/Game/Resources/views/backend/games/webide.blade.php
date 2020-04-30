@@ -61,8 +61,8 @@
 @endsection
 
 @push('script')
-    <script src="https://cdn.sxmgcm.cn/libs/require.js"></script>
-    <script src="https://cdn.sxmgcm.cn/libs/require.config.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/require.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/require.config.js"></script>
     <script>
         require(['vs/editor/editor.main', 'jstree'], function(monaco, template) {
 

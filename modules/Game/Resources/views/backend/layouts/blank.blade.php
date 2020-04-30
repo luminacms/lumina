@@ -8,7 +8,7 @@
     <title></title>
     @stack('style')
 
-    <script src="https://cdn.sxmgcm.cn/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
 </head>
 <body>
     @yield('content')

@@ -27,10 +27,3 @@ Route::group(['prefix' => 'backend/cms', 'as' => 'backend.cms.', 'namespace' => 
     Route::resource('cms-categories', 'CmsCategoriesController');
     Route::resource('cms-pages', 'CmsPagesController');
 });
-
-Route::get('/a', function(){
-
-    $post = Post::where('id','<',10)->get();
-    dd($post);
-
-});

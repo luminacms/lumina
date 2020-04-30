@@ -20,7 +20,7 @@
                 <div class="cell_tt">好字在</div>
                 <div class="cell_value" @click="getMore($event)" data-kind="1">
                     <span class="more">更多推荐</span>
-                    <van-icon slot="right-icon" name="https://cdn.sxmgcm.cn/2019/07/bowu/jiantou.png"
+                    <van-icon slot="right-icon" name="https://cdn.xaweiju.com/2019/07/bowu/jiantou.png"
                         style="line-height: inherit; marginLeft:5px;" />
                 </div>
 
@@ -47,7 +47,7 @@
                 <div class="cell_tt">吴晓波频道</div>
                 <div class="cell_value" @click="getMore($event)" data-kind="2">
                     <span class="more">更多推荐</span>
-                    <van-icon slot="right-icon" name="https://cdn.sxmgcm.cn/2019/07/bowu/jiantou.png"
+                    <van-icon slot="right-icon" name="https://cdn.xaweiju.com/2019/07/bowu/jiantou.png"
                         style="line-height: inherit; marginLeft:5px;" />
                 </div>
 
@@ -79,7 +79,7 @@
                 <div class="cell_tt">专栏精选</div>
                 <div class="cell_value" @click="getMore($event)" data-kind="3">
                     <span class="more">更多推荐</span>
-                    <van-icon slot="right-icon" name="https://cdn.sxmgcm.cn/2019/07/bowu/jiantou.png"
+                    <van-icon slot="right-icon" name="https://cdn.xaweiju.com/2019/07/bowu/jiantou.png"
                         style="line-height: inherit; marginLeft:5px;" />
                 </div>
 
@@ -138,8 +138,8 @@
             return {
                 indexGet: {},
                 bannerList: [
-                    'https://cdn.sxmgcm.cn/2019/07/bowu/banner1.png',
-                    'https://cdn.sxmgcm.cn/2019/07/bowu/banner1.png'
+                    'https://cdn.xaweiju.com/2019/07/bowu/banner1.png',
+                    'https://cdn.xaweiju.com/2019/07/bowu/banner1.png'
                 ],
                 hzzList: [],
                 wxbList: [],

@@ -19,8 +19,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://cdn.sxmgcm.cn/libs/ieonly/html5shiv.js"></script>
-    <script src="https://cdn.sxmgcm.cn/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/ieonly/html5shiv.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -52,6 +52,6 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://cdn.sxmgcm.cn/libs/bootstrap/3.2.0/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://cdn.xaweiju.com/libs/bootstrap/3.2.0/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

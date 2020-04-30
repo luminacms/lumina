@@ -271,7 +271,7 @@
                 },
                 btnImg: {
                     type: String,
-                    default: "https://cdn.sxmgcm.cn/2020/03/xyyx/btn.png",
+                    default: "https://cdn.xaweiju.com/2020/03/xyyx/btn.png",
                     editor: {
                         label: "按钮背景图(256*68)",
                         type: "image"

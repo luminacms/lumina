@@ -1,6 +1,6 @@
-<x-FormItem label="活动标题">
+<x-formItem label="活动标题">
     <x-input name="name" />
-</x-FormItem>
+</x-formItem>
 
 <div class="layui-form-item layui-layout-admin">
     <div class="layui-input-block">

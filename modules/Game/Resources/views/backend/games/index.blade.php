@@ -58,7 +58,7 @@
                 if(obj.event == 'create') {
                     var createModal = admin.openModal('{{ route("game.games.create") }}', '创建页面', {
                         end: function(index, layero){
-                            // table.reload('data_game_table')
+                            table.reload('data_game_table')
                         }
                     })
                     return true;

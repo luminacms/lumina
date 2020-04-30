@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="email=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.sxmgcm.cn/libs/flexible/flexible.min.js"></script>
+    <script src="https://cdn.xaweiju.com/libs/flexible/flexible.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script>
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

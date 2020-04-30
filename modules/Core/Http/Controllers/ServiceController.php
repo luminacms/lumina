@@ -44,7 +44,7 @@ class ServiceController extends BaseController
     *      ],
     *      [
     *          'type' => 'img',
-    *          'value' => 'https://cdn.sxmgcm.cn/2019/01/xnzxs/pic.png'
+    *          'value' => 'https://cdn.xaweiju.com/2019/01/xnzxs/pic.png'
     *      ],
     *      [
     *          'type' => 'text',

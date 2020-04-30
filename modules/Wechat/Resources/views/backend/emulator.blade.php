@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <link rel="stylesheet" href="https://cdn.sxmgcm.cn/libs/bootstrap/3.2.0/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.xaweiju.com/libs/bootstrap/3.2.0/bootstrap.min.css">
     <style type="text/css">
         .chatPanel .left{float:left;}
         .chatPanel .right{float:right;}

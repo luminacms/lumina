@@ -173,6 +173,6 @@ class CouponCodeController extends BaseController
     {
         $request->validate(['coupon_id' => 'required']);
 
-        $this->toAjaxExport(new CouponCodeExport($request->get('ids'), ['coupon_id' => request('coupon_id')]));
+        return $this->toAjaxExport(new CouponCodeExport($request));
     }
 }

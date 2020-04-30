@@ -38,7 +38,7 @@ class GamesController extends BaseController
     {
         if($request->expectsJson()) {
 
-            $games = $this->repository->paginate($request->get('limit', 15));
+            $games = $this->repository->filter($request)->paginate($request->get('limit', 15));
             return $this->toCollection($games, GameResource::class);
         }
         return view('game::backend.games.index');

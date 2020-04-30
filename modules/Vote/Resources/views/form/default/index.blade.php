@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.sxmgcm.cn/libs/tailwind/1.0.4/tailwindcss.min.css">
+    <link rel="stylesheet" href="https://cdn.xaweiju.com/libs/tailwind/1.0.4/tailwindcss.min.css">
     <title>{{ $vote->title }}</title>
 </head>
 
@@ -21,12 +21,11 @@
 <!-- main -->
 <div class="g-wrap p-4 text-sm">
     <div class="title text-center text-xl pt-2 pb-3 border-b-2 border-gray-200">{{ $vote->title }}</div>
-
     <!-- 表单 -->
-    {{ form()->open(['route'=>['vote.form', $vote], 'method'=>'post', 'class'=>'layui-form ']) }}
+    <x-form :action="route('vote.form', $vote->uid)" method="post">
 
         @foreach(['name', 'nickname', 'mobile', 'address', 'company', 'visit_no', 'invited_by', 'score'] as $_filed)
-            <p id="q1" class="py-2 block">{{ __('main.'.$_filed, 'vote') }}</p>
+            <p id="q1" class="py-2 block">{{ __('vote::field.'.$_filed) }}</p>
             <label for="num" class="border-gray-300 border w-full block h-10">
                 <input class="w-full h-8" name="{{ $_filed }}" type="text" size="22" id="q1" /><br />
             </label>
@@ -43,11 +42,11 @@
 
         <input name="" type="submit" class="m-auto block h-8 bg-blue-500 text-white w-11/12 rounded mt-5" value="提交" />
 
-    {{ form()->close() }}
+    </x-form>
 </div>
 
 
-<script src="https://cdn.sxmgcm.cn/libs/jquery/jquery.min.js"></script>
+<script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
 <script>
 
 </script>

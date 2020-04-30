@@ -183,12 +183,12 @@ if (! function_exists('str_clearEmoji')) {
     }
 }
 
-if (! function_exists('get_search_params')) {
+if (! function_exists('get_params')) {
     /**
      * @param $search
      * @return array
      */
-    function get_search_params($k = '')
+    function get_params($k = '')
     {
         $res = [];
         $seach = \request('search');
