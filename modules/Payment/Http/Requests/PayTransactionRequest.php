@@ -19,7 +19,7 @@ class PayTransactionRequest extends BaseRequest
             case 'POST':
                 {
                     return [
-                        // CREATE ROLES
+                        'oid' => 'required'
                     ];
                 }
             // UPDATE
@@ -27,7 +27,7 @@ class PayTransactionRequest extends BaseRequest
             case 'PATCH':
                 {
                     return [
-                        // UPDATE ROLES
+
                     ];
                 }
             case 'GET':

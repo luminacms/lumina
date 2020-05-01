@@ -17,7 +17,7 @@ class Brand extends BaseModel
      * @var array
      */
     protected $table = 'shop__brands';
-    protected $fillable = [];
+    protected $fillable = ['create_by', 'name', 'logo_src', 'description', 'status'];
 
     /**
      * The attributes that are can be search =/like.

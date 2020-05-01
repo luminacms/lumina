@@ -8,5 +8,6 @@
     "Mall": true,
     "Shop": true,
     "ApiTest": true,
-    "Point": true
+    "Point": true,
+    "Payment": true
 }

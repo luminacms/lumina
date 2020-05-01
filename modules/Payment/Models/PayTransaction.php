@@ -21,6 +21,7 @@ class PayTransaction extends BaseModel
     use HasCreateBy;
 
     protected $table = 'payment__transactions';
+    private $oid = null;
 
     const STATUS_NOPAY = 'nopay';
     const STATUS_SUCCESS = 'success';
@@ -38,7 +39,7 @@ class PayTransaction extends BaseModel
     /**
      * @return array
      */
-    public static  $statusMap = [
+    public static $statusMap = [
         self::STATUS_NOPAY => '未支付',
         self::STATUS_SUCCESS => '支付成功',
         self::STATUS_FAIL => '支付失败',
@@ -69,7 +70,10 @@ class PayTransaction extends BaseModel
                 $model->transaction_id = self::getRandomByTime('transaction_id');
             }
             $model->create_ip = request()->ip();
-            $model->oid = $model->oid ?? \request('oid', request()->header('oid'));
+            // 强制要求oid
+            if(!$model->oid){
+                return false;
+            }
         });
         static::updated(function($model) {
             try{
@@ -80,10 +84,11 @@ class PayTransaction extends BaseModel
             }
         });
         static::addGlobalScope('oid', function (Builder $builder){
-            $_oid = \request('oid', request()->header('oid')) ?? session('__org.oid');
+            $_oid = \request('oid', request()->header('oid')) ?? auth()->guard('org')->oid();
             $builder->where('oid', $_oid ?? '-1'); //option使用默认组织，其他默认不存在
         });
     }
+
 
     /**
      * @param $status
@@ -101,7 +106,7 @@ class PayTransaction extends BaseModel
             self::STATUS_PAYERROR => 'bg-red-600'
         ];
         $_status_color = isset($_status_color_map[$status])?$_status_color_map[$status]:'bg-gray-600';
-        return '<span class="layui-badge '.$_status_color.'">'.(self::getStatus()[$status]??'未知').'</span>';
+        return '<span class="layui-badge '.$_status_color.'">'.(self::$statusMap[$status]??'未知').'</span>';
     }
 
     /**

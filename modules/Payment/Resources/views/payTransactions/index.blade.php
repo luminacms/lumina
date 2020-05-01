@@ -1,12 +1,12 @@
 @extends('core::layouts.master')
 
 @section('content')
-    @include('core::includes.layout.submenu', [
-        'items' => [
+    <x-submenu :items="
+        [
             ['name' => '列表管理', 'uri' => route('payment.transaction.index')],
             ['name' => '文档', 'uri' => route('core.doc', ['path'=>urlencode(module_path('payment').'/docs.md')]), 'right'=>true],
-        ]
-    ])
+       ]" />
+
 
     <table class="layui-hide" id="data_paytransaction_table" lay-filter="data_paytransaction_table"></table>
 @endsection

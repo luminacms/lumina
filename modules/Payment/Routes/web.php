@@ -14,7 +14,7 @@
 Route::any('/callback/payment/{driver}/notify/{oid}', 'CallbackController@notify');
 Route::any('/callback/payment/{driver}/return/{oid}', 'CallbackController@return');
 
-Route::group(['prefix' => 'payment', 'as' => 'payment.', 'middleware' => 'backend'], function(){
+Route::group(['prefix' => 'payment', 'as' => 'payment.', 'middleware' => 'auth:org'], function(){
 
     Route::post('/sync/{id}', 'PayTransactionsController@sync')->name('sync');
     Route::get('/detail', 'PayTransactionsController@detail')->name('detail');

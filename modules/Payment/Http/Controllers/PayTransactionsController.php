@@ -20,7 +20,7 @@ class PayTransactionsController extends BaseController
      */
     protected $repository;
 
-    public function __construct(PayTransactionRepository $repository)
+    public function __construct(Paytransaction $repository)
     {
         $this->repository = $repository;
     }
