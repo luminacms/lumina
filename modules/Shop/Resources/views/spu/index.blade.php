@@ -11,7 +11,7 @@
 
 @push('script')
     <script type="text/html" id="product_thumb">
-        <img src="@{{ d.thumb }}" alt="" height="65" class="block">
+        <img src="@{{ d.thumb }}" alt="" height="65" class="block cursor-pointer">
     </script>
     <script>
         layui.use(['table', 'element'], function(){
@@ -37,7 +37,14 @@
                     {"field":"category_id","title":"category_id"},
                     {"field":"status","title":"status"},
                     {"field":"created_at","title":"created_at","hide":"true"},
-                    {"field":"updated_at","title":"updated_at"}]]
+                    {"field":"updated_at","title":"updated_at"}
+                ]],
+                done: function(){
+                    //图片预览
+                    layer.photos({
+                        photos: "#lumina_app"
+                    })
+                }
             });
 
             //监听行工具事件
@@ -78,6 +85,8 @@
                     }
                 }
             });
+
+
 
         });
     </script>
