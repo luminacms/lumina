@@ -28,7 +28,7 @@
 
             table.render({
                 elem: '#data_usersocialite_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('core.user-socialites.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

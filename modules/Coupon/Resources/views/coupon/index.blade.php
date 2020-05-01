@@ -25,7 +25,7 @@
 
             table.render({
                 elem: '#'+tableName,
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route("coupon.coupon.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

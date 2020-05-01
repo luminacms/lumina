@@ -42,7 +42,7 @@
                 pickerUser = layui.pickerUser,
                 element = layui.element;
 
-            var currentUrl = '{{ URL::full() }}',
+            var currentUrl = '{!! URL::full() !!}',
                 $department_tree = $("#depart_tree"),
                 $role_tree = $("#role_tree"),
                 depart_id = 0,
@@ -51,7 +51,7 @@
 
             table.render({
                 elem: '#user_depart_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 autoShow: '{{ route('core.users.show', '_id_') }}',
                 page: true,
@@ -122,7 +122,7 @@
             // 角色树
             table.render({
                 elem: '#user_role_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc', 'role_id': '-1'},
                 page: true,
                 canSearch: true,

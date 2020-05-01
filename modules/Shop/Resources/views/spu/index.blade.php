@@ -21,7 +21,7 @@
 
             table.render({
                 elem: '#data_spu_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route("shop.spu.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

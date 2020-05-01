@@ -20,7 +20,7 @@
 
             table.render({
                 elem: '#data_paytransaction_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('payment.transaction.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

@@ -18,7 +18,7 @@
 
             table.render({
                 elem: '#data_qlpost_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('querylist.ql-posts.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

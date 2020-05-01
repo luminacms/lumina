@@ -39,7 +39,7 @@
 
             table.render({
                 elem: '#data_pointlog_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route("point.point-log.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

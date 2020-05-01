@@ -48,7 +48,7 @@
 
             table.render({
                 elem: '#data_gamepage_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 action: [{'text': '关联报名系统', 'event': 'connectVote'}], // 自定义方法
                 page: true,

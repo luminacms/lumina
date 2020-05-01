@@ -17,7 +17,7 @@
 
             table.render({
                 elem: '#data_paylog_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('payment.logs.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,
