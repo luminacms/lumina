@@ -39,7 +39,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Auth::extend('org', function ($app, $name, array $config) {
             // 返回一个 Illuminate\Contracts\Auth\Guard 实例...
-            return new OrgGuard(Auth::createUserProvider($config['provider'] ?? null), $app['session.store'], $app['request']);
+            $guard = new OrgGuard($name, Auth::createUserProvider($config['provider'] ?? null), $app['session.store'], $app['request']);
+            $guard->setCookieJar($app['cookie']);
+            $guard->setDispatcher($app['events']);
+            $guard->setRequest($app->refresh('request', $guard, 'setRequest'));
+
+            return $guard;
         });
 
         // Auth::provider('riak', function ($app, array $config) {

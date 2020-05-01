@@ -8,7 +8,5 @@
     "Mall": true,
     "Shop": true,
     "ApiTest": true,
-    "Point": true,
-    "Temp": true,
-    "Cms": true
+    "Point": true
 }

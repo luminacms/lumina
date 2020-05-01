@@ -32,7 +32,7 @@ Route::get('/game/upload/getTocken', function(){
 
 Route::post('game/editor/pages/detail', 'GamePageController@detail');
 
-// Route::group(['middleware' => 'interface'], function(){
+Route::group(['middleware' => 'interface'], function(){
 
     Route::post('/game-page/{id}/changestatus', 'GamePageController@changeStatus')->name('gamePage.changestatus');
 
@@ -48,5 +48,5 @@ Route::post('game/editor/pages/detail', 'GamePageController@detail');
 
     });
 
-// });
+});
 

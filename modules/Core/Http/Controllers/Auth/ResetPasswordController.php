@@ -35,7 +35,7 @@ class ResetPasswordController extends BaseController
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:org');
     }
 
     protected function rules()
