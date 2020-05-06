@@ -19,29 +19,97 @@
 	<x-input name="description" verify="required" :value="$spu->description??''"/>
 </x-formItem>
 
-<x-formItem :label="__('core::field.unit')">
-	<x-input name="unit" verify="required" :value="$spu->unit??''"/>
-</x-formItem>
-
 <x-formItem :label="__('core::field.thumb')">
-	<x-input name="thumb" verify="required" :value="$spu->thumb??''"/>
+	<x-input.imgs name="thumb" verify="required" :value="$spu->thumb??''"/>
 </x-formItem>
 
 <x-formItem :label="__('core::field.pic_url')">
 	<x-input name="pic_url" verify="required" :value="$spu->pic_url??''"/>
 </x-formItem>
 
-<x-formItem :label="__('core::field.price_fee')">
-	<x-input name="price_fee" verify="required" :value="$spu->price_fee??''"/>
-</x-formItem>
-
 <x-formItem :label="__('core::field.market_price_fee')">
 	<x-input name="market_price_fee" verify="required" :value="$spu->market_price_fee??''"/>
 </x-formItem>
 
-<x-formItem :label="__('core::field.create_by')">
-	<x-input name="create_by" verify="required" :value="$spu->create_by??''"/>
-</x-formItem>
+
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+      <li class="layui-this">单规格</li>
+      <li>多规格</li>
+    </ul>
+    <div class="layui-tab-content">
+      <div class="layui-tab-item layui-show">
+            <x-formItem :label="__('shop::field.price_fee')" inline>
+                <x-input type="number" name="price_fee" verify="required" :value="$spu->price_fee??''"/>
+                划线价：<x-input type="number" name="market_price_fee" verify="required" :value="$spu->price_fee??''"/>
+            </x-formItem>
+            <x-formItem :label="__('core::field.pic_url')">
+                <x-input type="number" name="stock[quantity]" verify="required" :value="$spu->stock->quantity??''"/>
+            </x-formItem>
+      </div>
+      <div class="layui-tab-item">
+        <div class="goods-spec-many am-form-group">
+            <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
+                <!-- 规格属性 -->
+                <div class="spec-attr"></div>
+
+                <!-- 添加规格：按钮 -->
+                <div class="spec-group-button">
+                    <button type="button" class="btn-addSpecGroup layui-btn layui-btn-sm">添加规格</button>
+                </div>
+
+                <!-- 添加规格：表单 -->
+                <div class="spec-group-add">
+                    <div class="spec-group-add-item am-form-group">
+                        <label class="am-form-label form-require">规格名 </label>
+                        <input type="text" class="input-specName tpl-form-input layui-input" placeholder="请输入规格名称">
+                    </div>
+                    <div class="spec-group-add-item am-form-group">
+                        <label class="am-form-label form-require">规格值 </label>
+                        <input type="text" class="input-specValue tpl-form-input layui-input" placeholder="请输入规格值">
+                    </div>
+                    <div class="spec-group-add-item am-margin-top">
+                        <button type="button" class="btn-addSpecName layui-btn layui-btn-sm"> 确定
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"> 取消
+                        </button>
+                    </div>
+                </div>
+                <!-- 商品多规格sku信息 -->
+                <div class="goods-sku am-scrollable-horizontal">
+                    <!-- 分割线 -->
+                    <div class="goods-spec-line my-4"></div>
+                    <!-- sku 批量设置 -->
+                    <div class="spec-batch layui-inline">
+                        <label class="layui-form-label w-48">批量设置</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                          <input type="text" data-type="goods_no" placeholder="商家编码" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" data-type="goods_price" placeholder="销售价" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" data-type="line_price" placeholder="划线价" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" data-type="stock_num" placeholder="库存数量" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" data-type="goods_weight" placeholder="重量" class="layui-input">
+                        </div>
+
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <button type="button" class="btn-specBatchBtn layui-btn">确定</button>
+                        </div>
+                    </div>
+                    <!-- sku table -->
+                    <table class="spec-sku-tabel layui-table"></table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
 
 
 <style>
@@ -79,66 +147,6 @@
 
 </style>
 
-
-<div class="goods-spec-many am-form-group">
-    <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
-        <!-- 规格属性 -->
-        <div class="spec-attr"></div>
-
-        <!-- 添加规格：按钮 -->
-        <div class="spec-group-button">
-            <button type="button" class="btn-addSpecGroup layui-btn layui-btn-sm">添加规格</button>
-        </div>
-
-        <!-- 添加规格：表单 -->
-        <div class="spec-group-add">
-            <div class="spec-group-add-item am-form-group">
-                <label class="am-form-label form-require">规格名 </label>
-                <input type="text" class="input-specName tpl-form-input layui-input" placeholder="请输入规格名称">
-            </div>
-            <div class="spec-group-add-item am-form-group">
-                <label class="am-form-label form-require">规格值 </label>
-                <input type="text" class="input-specValue tpl-form-input layui-input" placeholder="请输入规格值">
-            </div>
-            <div class="spec-group-add-item am-margin-top">
-                <button type="button" class="btn-addSpecName layui-btn layui-btn-sm"> 确定
-                </button>
-                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"> 取消
-                </button>
-            </div>
-        </div>
-        <!-- 商品多规格sku信息 -->
-        <div class="goods-sku am-scrollable-horizontal">
-            <!-- 分割线 -->
-            <div class="goods-spec-line my-4"></div>
-            <!-- sku 批量设置 -->
-            <div class="spec-batch layui-inline">
-                <label class="layui-form-label w-48">批量设置</label>
-                <div class="layui-input-inline" style="width: 100px;">
-                  <input type="text" data-type="goods_no" placeholder="商家编码" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="goods_price" placeholder="销售价" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="line_price" placeholder="划线价" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="stock_num" placeholder="库存数量" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="goods_weight" placeholder="重量" class="layui-input">
-                </div>
-
-                <div class="layui-input-inline" style="width: 100px;">
-                    <button type="button" class="btn-specBatchBtn layui-btn">确定</button>
-                </div>
-            </div>
-            <!-- sku table -->
-            <table class="spec-sku-tabel layui-table"></table>
-        </div>
-    </div>
-</div>
 
 
 <!-- 商品规格属性模板 -->
@@ -217,7 +225,7 @@
 <script>
     layui.extend({
         'attr': 'modules/shop/attr'
-    }).use('attr', function(){
+    }).use(['attr', 'form'], function(){
         var attr = layui.attr;
 
         attr.render({

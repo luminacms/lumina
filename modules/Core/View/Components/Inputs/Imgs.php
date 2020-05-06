@@ -41,7 +41,7 @@ class Imgs extends Component
     public function render()
     {
         return  <<<'blade'
-            <div class="layui-form-img" lay-filter="ximg">
+            <div class="layui-form-img" lay-filter="ximg" data-limit="{{$limit}}">
                 <input type="hidden"
                     name="{{$name}}"
                     @if($value)value="{{$value}}"@endif

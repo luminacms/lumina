@@ -51,7 +51,13 @@
             <x-input.radio name="rate" :options="['苹果','橘子']"  value="module"/>
             <x-input.checkbox name="rate" :options="['苹果','橘子']"  value="module"/>
 
-            <x-input.imgs name="rate" verify="required" />
+            <x-formItem label="上传">
+                <x-input.imgs name="rate" verify="required" />
+            </x-formItem>
+            <x-formItem label="多图上传">
+                <x-input.imgs name="rate" verify="required" limit="4"/>
+            </x-formItem>
+
             <x-input.file name="rate" verify="required" />
             <x-input.media name="rate" verify="required" />
 

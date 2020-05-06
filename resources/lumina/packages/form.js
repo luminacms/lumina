@@ -580,13 +580,22 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         imgTpl = '<li class="uploader__file" style="background-image: url(UPLOADEDFILE)"><div class="uploader__mask" style="display: none">' +
                         '<div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="UPLOADEDFILE"><i class="fa fa-close"></i></a></div>' +
                         '</div></li>',
+                        bindDelete = function(reElem) {
+                            var imgWrap = reElem.parents(".m-uploader"),
+                                _imgPicker = reElem,
+                                _imgBox = imgWrap.find('.uploader__files');
+
+                            console.log(reElem)
+
+                        },
                         events = function (reElem) {
                             var img = $(this),
-                                _imgBox = reElem.find('.uploader__files'),
-                                _imgPicker = reElem.find('.img__picker'),
+                                imgWrap = reElem.parents(".m-uploader"),
+                                _imgBox = imgWrap.find('.uploader__files'),
+                                _imgPicker = reElem,
                                 _imgVal = img.find("input[type=hidden]"),
                                 filter = img.attr('lay-filter'),
-                                upload_limit = 9;
+                                upload_limit = img.data('limit');
 
                             reElem.on('click', function () {
                                 upload.render({
@@ -594,7 +603,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                     fileNumLimit: upload_limit,
                                     done: function (res) {
                                         if (upload_limit == 1) {
-                                            _imgBox.append(imgTpl.replace('UPLOADEDFILE', res[0]))
+                                            _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), res[0]))
                                             _imgVal.val(res[0])
                                             _imgPicker.hide()
                                         } else {
@@ -612,6 +621,33 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                             })
                                             _imgVal.val(_val.join(','))
                                         }
+                                        // 删除事件
+                                        // bindDelete(reElem);
+                                        _imgBox.on("mouseenter" ,".uploader__file", function(){
+                                            $(this).find(".uploader__mask").show()
+                                        }).on("mouseleave" ,".uploader__file", function(){
+                                            $(this).find(".uploader__mask").hide()
+                                        })
+                                        _imgBox.on("click", ".j_delete", function(){
+                                            if (upload_limit == 1) {
+                                                _imgBox.remove();
+                                                _imgPicker.show();
+                                                _imgVal.val('')
+                                            } else {
+                                                $(this).parents(".uploader__file").remove();
+                                                var url = $(this).attr("data-id")
+                                                var _val = _imgVal.val();
+                                                _val = _val.length > 1 ? _val.split(',') : []
+
+                                                var _idx = _val.indexOf(url);
+                                                if (_idx > -1) {
+                                                    _val.splice(_idx, 1);
+                                                }
+
+                                                _imgPicker.show();
+                                                _imgVal.val(_val)
+                                            }
+                                        });
 
                                         // 图选事件
                                         layui.event.call(img[0], MOD_NAME, 'img(' + filter + ')', {
@@ -627,9 +663,10 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
 
                     imgs.each(function (index, radio) {
                         var othis = $(this),
+                            limit = othis.data('limit') || 1,
                         reElem = $(['<div class="m-uploader clearfix">',
                             '<ul class="uploader__files"></ul>',
-                            '<div class="img__picker" data-limit="9" ></div>',
+                            '<div class="img__picker" data-limit="'+limit+'" ></div>',
                         '</div>'].join(''));
 
                         if(othis.find('.m-uploader').length > 0) return;
