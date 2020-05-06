@@ -33,6 +33,7 @@ return [
     'sort'                      => 'Sort',
     'permisson'                 => 'Permission',
     'submit'                    => 'Submit',
+    'reset'                     => 'Reset',
     'cancel'                    => 'Cancel',
     'mode'                      => 'Mode',
     'oauth'                     => 'OAuth',
@@ -47,6 +48,7 @@ return [
     'times'                     => 'Times',
     'expired_type'              => 'Expired Type',
     'used_tag'                  => 'UsedTags',
+    'logo_src'                  => 'Logo Src',
 
     // 组织
     'organization'              => [
