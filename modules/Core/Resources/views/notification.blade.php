@@ -28,7 +28,7 @@
             var admin = layui.admin,
                 element = layui.element,
                 TYPE = 'unread',
-                currentUrl = '{{ URL::full() }}',
+                currentUrl = '{!! URL::full() !!}',
                 table = layui.table;
 
             table.render({

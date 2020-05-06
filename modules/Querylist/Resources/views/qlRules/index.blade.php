@@ -20,7 +20,7 @@
 
             table.render({
                 elem: '#data_qlrule_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('querylist.ql-rules.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 action: [{'text': '开始采集', 'event': 'startQuery'}],

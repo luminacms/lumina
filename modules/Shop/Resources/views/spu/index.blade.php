@@ -11,7 +11,7 @@
 
 @push('script')
     <script type="text/html" id="product_thumb">
-        <img src="@{{ d.thumb }}" alt="" height="65">
+        <img src="@{{ d.thumb }}" alt="" height="65" class="block cursor-pointer">
     </script>
     <script>
         layui.use(['table', 'element'], function(){
@@ -21,7 +21,7 @@
 
             table.render({
                 elem: '#data_spu_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route("shop.spu.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,
@@ -32,13 +32,19 @@
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"id","title":"id","sort":"true"},
+                    {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
+                    {"field":"name","title":"name","width":250},
                     {"field":"category_id","title":"category_id"},
                     {"field":"status","title":"status"},
-                    {"field":"name","title":"name"},
-                    {"field":"description","title":"description"},
-                    {"field":"unit","title":"unit"},
-                    {"field":"thumb","title":"thumb","templet":"#product_thumb"},{"field":"pic_url","title":"pic_url"},{"field":"price_fee","title":"price_fee"},{"field":"market_price_fee","title":"market_price_fee"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
+                    {"field":"created_at","title":"created_at","hide":"true"},
+                    {"field":"updated_at","title":"updated_at"}
+                ]],
+                done: function(){
+                    //图片预览
+                    layer.photos({
+                        photos: "#lumina_app"
+                    })
+                }
             });
 
             //监听行工具事件
@@ -79,6 +85,8 @@
                     }
                 }
             });
+
+
 
         });
     </script>

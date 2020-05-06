@@ -18,7 +18,7 @@
 
             table.render({
                 elem: '#data_vodorder_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('vod.vod-orders.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 action: [{'text': '交易详情', 'event': 'payTransaction'}],

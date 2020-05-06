@@ -22,7 +22,7 @@
 
             table.render({
                 elem: '#data_useraddress_table',
-                url: '{{ URL::full() }}?orderBy=created_at&sortedBy=desc',
+                url: '{!! URL::full() !!}?orderBy=created_at&sortedBy=desc',
                 page: true,
                 canSearch: true,
                 autoShow: '{{ route('core.user-addresses.show', '_id_') }}',

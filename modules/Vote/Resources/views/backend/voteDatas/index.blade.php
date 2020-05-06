@@ -19,7 +19,7 @@
 
             table.render({
                 elem: '#data_votedata_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('backend.vote.data.show', "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 export: {url: '{{ route('interface.vote.data.export', ['id'=>get_params('vote_id')]) }}', can: true, all: true},

@@ -110,7 +110,7 @@
         <!-- 商品多规格sku信息 -->
         <div class="goods-sku am-scrollable-horizontal">
             <!-- 分割线 -->
-            <div class="goods-spec-line am-margin-top-lg am-margin-bottom-lg"></div>
+            <div class="goods-spec-line my-4"></div>
             <!-- sku 批量设置 -->
             <div class="spec-batch layui-inline">
                 <label class="layui-form-label w-48">批量设置</label>
@@ -151,7 +151,7 @@
         </div>
         <div class="spec-list am-cf">
             @{{ each $value.spec_items item key }}
-            <div class="spec-item am-fl" data-item-index="@{{ key }}">
+            <div class="spec-item float-left" data-item-index="@{{ key }}">
                 <span>@{{ item.spec_value }}</span>
                 <i class="spec-item-delete fa fa-times-circle" title="点击删除"></i>
             </div>

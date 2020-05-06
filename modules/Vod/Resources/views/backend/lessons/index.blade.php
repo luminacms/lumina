@@ -22,7 +22,7 @@
 
             table.render({
                 elem: '#data_lesson_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('vod.lessons.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc', 'course_id': course_id},
                 page: true,

@@ -1,11 +1,9 @@
 @extends('core::layouts.master')
 
 @section('content')
-    @include('core::includes.layout.submenu', [
-        'items' => [
-            ['name' => '列表管理', 'uri' => route('payment.logs.index')]
-        ]
-    ])
+    <x-submenu :items="[
+        ['name' => '列表管理', 'uri' => route('payment.logs.index')]
+    ]" />
 
     <table class="layui-hide" id="data_paylog_table" lay-filter="data_paylog_table"></table>
 @endsection
@@ -19,7 +17,7 @@
 
             table.render({
                 elem: '#data_paylog_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('payment.logs.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

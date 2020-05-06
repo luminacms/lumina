@@ -424,7 +424,7 @@ step3: enjoy (HasPathTree会自动维护数结构，更多树方法请查看源�
                 admin = layui.admin,
                 element = layui.element;
 
-            var currentUrl = '{{ URL::full() }}',
+            var currentUrl = '{!! URL::full() !!}',
                 $department_tree = $("#depart_tree"),
                 $role_tree = $("#role_tree"),
                 depart_id = 0,
@@ -433,7 +433,7 @@ step3: enjoy (HasPathTree会自动维护数结构，更多树方法请查看源�
 
             table.render({
                 elem: '#user_depart_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 autoShow: '{{ route('core.users.show', '_id_') }}',
                 page: true,

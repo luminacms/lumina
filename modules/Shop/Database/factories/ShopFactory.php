@@ -7,11 +7,12 @@ use Modules\Core\Models\User;
 use Modules\Payment\Models\PayTransaction;
 use Ramsey\Uuid\Uuid;
 
-$factory->define(\Modules\Mall\Models\ProductSpu::class, function (Faker $faker) {
-    $cate = \Modules\Mall\Models\ProductCategory::all();
+
+$factory->define(\Modules\Shop\Models\Spu::class, function (Faker $faker) {
+    $cate = \Modules\Shop\Models\Category::all();
     return [
         'name' => $faker->text(15),
-        'thumb' => 'http://temp.im/360x300/'.Arr::random([
+        'thumb' => 'http://temp.im/300x300/'.Arr::random([
             '4CD964/fff',
             'FF9500/000',
             'FF2D55/000',
@@ -31,7 +32,7 @@ $factory->define(PayTransaction::class, function (Faker $faker) {
         'oid' => 1,
         'transaction_id' => Uuid::uuid4()->getHex(),
         'status' => Arr::random([PayTransaction::STATUS_SUCCESS, PayTransaction::STATUS_NOPAY]),
-        'model_type' => get_class(new \Modules\Mall\Models\ProductSpu()),
+        'model_type' => get_class(new \Modules\Shop\Models\Spu()),
         'model_order_id' => now()->addDays(rand(-20, 20))->format('YmdHis').now()->timestamp,
         'pay_driver' => 'Wechat',
         'pay_gateway' => 'miniapp',

@@ -17,36 +17,18 @@ class OrgGuard extends SessionGuard
      *
      * @var \Illuminate\Http\Request
      */
-    protected $request;
-    protected $session;
     protected $loggedOut = false;
 
-    /**
-     * Instantiate the class.
-     *
-     * @param  \Tymon\JWTAuth\JWT  $jwt
-     * @param  \Illuminate\Contracts\Auth\UserProvider  $provider
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return void
-     */
-    public function __construct(UserProvider $provider, Session $session, Request $request)
-    {
-        $this->provider = $provider;
-        $this->session = $session;
-        $this->request = $request;
-    }
 
     /**
      * check org
      *
      * @return void
      */
-    // public function check()
-    // {
-    //     dd(parent::check() && $this->session->exists($this->getOrgName()));
-    //     return parent::check() && $this->session->exists($this->getOrgName());
-    // }
+    public function check()
+    {
+        return parent::check() && $this->session->exists($this->getOrgName());
+    }
 
     /**
      * Attempt to authenticate the user using the given credentials and return the token.
@@ -56,9 +38,9 @@ class OrgGuard extends SessionGuard
      *
      * @return bool|string
      */
-    public function attempt(array $credentials = [], $login = true)
+    public function attempt(array $credentials = [], $remember = false)
     {
-        if(parent::attempt($credentials, $login)) {
+        if(parent::attempt($credentials, $remember)) {
             $this->session->forget($this->getOrgName());
 
             // oid参数不存在，管理员取任意oid，普通管理员取自身所在组织

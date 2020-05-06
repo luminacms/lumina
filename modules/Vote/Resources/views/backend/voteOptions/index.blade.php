@@ -18,7 +18,7 @@
 
             table.render({
                 elem: '#data_voteoption_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('backend.vote.vote-options.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,

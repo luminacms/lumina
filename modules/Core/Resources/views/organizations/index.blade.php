@@ -20,10 +20,10 @@
 
             table.render({
                 elem: '#data_organization_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 autoShow: '{{ route('core.organizations.show', '_id_') }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
-                export: {url: '{{ URL::full() }}', can: true, all: true},
+                export: {url: '{!! URL::full() !!}', can: true, all: true},
                 page: true,
                 height: 'full-100',
                 cols: [[

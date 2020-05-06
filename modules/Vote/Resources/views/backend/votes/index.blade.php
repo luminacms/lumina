@@ -28,7 +28,7 @@
 
             table.render({
                 elem: '#data_vote_table',
-                url: '{{ URL::full() }}',
+                url: '{!! URL::full() !!}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 page: true,
                 canSearch: true,
