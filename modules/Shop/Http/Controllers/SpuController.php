@@ -60,6 +60,8 @@ class SpuController extends BaseController
     {
         try {
             $spu = $this->spu->create($request->all());
+            $spu->sku()->create($request->get('sku'));
+
             flash('create success', 'create success');
 
             return !$request->expectsJson()
@@ -119,7 +121,7 @@ class SpuController extends BaseController
             }
             if($model->fill($request->all())->save()){
                 flash('update success', 'update success');
-                
+
                 return !$request->expectsJson()
                     ? redirect()->back()
                     : $this->toResponse($model, 'update success');

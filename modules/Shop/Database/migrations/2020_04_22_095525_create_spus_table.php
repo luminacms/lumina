@@ -18,6 +18,7 @@ class CreateSpusTable extends Migration
 		Schema::create('shop__spus', function(Blueprint $table) {
             $table->increments('id');
 
+            $table->char('uid', 40);
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
             $table->status();

@@ -18,7 +18,10 @@ class CreateSkusTable extends Migration
 		Schema::create('shop__skus', function(Blueprint $table) {
             $table->increments('id');
 
-            $table->bigInteger('spu_id');
+            $table->char('uid', 40);
+            $table->char('spu_id', 40);
+            $table->integer('stock')->default(0);
+
             $table->text('attrs')->nullable();
             $table->string('thumb')->nullable();
             $table->text('pics')->nullable();

@@ -580,14 +580,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         imgTpl = '<li class="uploader__file" style="background-image: url(UPLOADEDFILE)"><div class="uploader__mask" style="display: none">' +
                         '<div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="UPLOADEDFILE"><i class="fa fa-close"></i></a></div>' +
                         '</div></li>',
-                        bindDelete = function(reElem) {
-                            var imgWrap = reElem.parents(".m-uploader"),
-                                _imgPicker = reElem,
-                                _imgBox = imgWrap.find('.uploader__files');
-
-                            console.log(reElem)
-
-                        },
                         events = function (reElem) {
                             var img = $(this),
                                 imgWrap = reElem.parents(".m-uploader"),
@@ -622,7 +614,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                             _imgVal.val(_val.join(','))
                                         }
                                         // 删除事件
-                                        // bindDelete(reElem);
                                         _imgBox.on("mouseenter" ,".uploader__file", function(){
                                             $(this).find(".uploader__mask").show()
                                         }).on("mouseleave" ,".uploader__file", function(){

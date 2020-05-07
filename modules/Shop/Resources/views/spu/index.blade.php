@@ -10,13 +10,21 @@
 
 
 @push('script')
+    <script type="text/html" id="game_status">
+        <input type="checkbox" name="switch" lay-skin="switch" lay-text="上线|下线" lay-filter="updown" value="@{{ d.id }}"
+            @{{# if(d.status=='up'){ }}
+             checked
+            @{{# } }}
+        >
+    </script>
     <script type="text/html" id="product_thumb">
         <img src="@{{ d.thumb }}" alt="" height="65" class="block cursor-pointer">
     </script>
     <script>
-        layui.use(['table', 'element'], function(){
+        layui.use(['table', 'element', 'form'], function(){
             var table = layui.table,
                 admin = parent.layui.admin,
+                form = layui.form,
                 element = layui.element;
 
             table.render({
@@ -30,21 +38,16 @@
                 height: 'full-100',
                 lineHeight: 65,
                 cellMinWidth: 80,
+                done: tableDone,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
                     {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
                     {"field":"name","title":"name","width":250},
                     {"field":"category_id","title":"category_id"},
-                    {"field":"status","title":"status"},
+                    {"field":"status","title":"状态",templet: "#game_status",width:95},
                     {"field":"created_at","title":"created_at","hide":"true"},
                     {"field":"updated_at","title":"updated_at"}
-                ]],
-                done: function(){
-                    //图片预览
-                    layer.photos({
-                        photos: "#lumina_app"
-                    })
-                }
+                ]]
             });
 
             //监听行工具事件
@@ -86,8 +89,20 @@
                 }
             });
 
+            // 上下线
+            function tableDone() {
+                form.on('switch(updown)', function(e){
+                    var _status = e.elem.checked?'up':'down';
+                    admin.request.post("{{ route('interface.gamePage.changestatus', '_id_')}}".replace('_id_', e.value), {'status': _status}, function(res) {
+                        layer.msg('已'+(_status=='up'?'上线':'下线'))
+                    })
+                })
 
-
+                //图片预览
+                layer.photos({
+                    photos: "#lumina_app"
+                })
+            }
         });
     </script>
 @endpush

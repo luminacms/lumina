@@ -24,27 +24,25 @@
 </x-formItem>
 
 <x-formItem :label="__('core::field.pic_url')">
-	<x-input name="pic_url" verify="required" :value="$spu->pic_url??''"/>
+	<x-input.imgs limit="9" name="pic_url" verify="required" :value="$spu->pic_url??''"/>
 </x-formItem>
 
-<x-formItem :label="__('core::field.market_price_fee')">
-	<x-input name="market_price_fee" verify="required" :value="$spu->market_price_fee??''"/>
-</x-formItem>
-
-
-<div class="layui-tab">
+<div class="layui-tab j_attrwrap" lay-filter="spu_attr">
     <ul class="layui-tab-title">
-      <li class="layui-this">单规格</li>
-      <li>多规格</li>
+      <li class="layui-this" lay-id="single">单规格</li>
+      <li lay-id="multiple">多规格</li>
     </ul>
     <div class="layui-tab-content">
       <div class="layui-tab-item layui-show">
-            <x-formItem :label="__('shop::field.price_fee')" inline>
-                <x-input type="number" name="price_fee" verify="required" :value="$spu->price_fee??''"/>
-                划线价：<x-input type="number" name="market_price_fee" verify="required" :value="$spu->price_fee??''"/>
+            <x-formItem label="SKU">
+                <x-input name="sku[uid]" verify="required" :value="$spu->uid??''"/>
             </x-formItem>
-            <x-formItem :label="__('core::field.pic_url')">
-                <x-input type="number" name="stock[quantity]" verify="required" :value="$spu->stock->quantity??''"/>
+            <x-formItem :label="__('shop::field.price_fee')" inline>
+                <x-input type="number" name="sku[price_fee]" verify="required" :value="$spu->sku[0]->price_fee??''"/>
+                划线价：<x-input type="number" name="sku[market_price_fee]" verify="required" :value="$spu->sku[0]->price_fee??''"/>
+            </x-formItem>
+            <x-formItem :label="__('core::field.stock')">
+                <x-input type="number" name="sku[stock]" verify="required" :value="$spu->sku[0]->stock??''"/>
             </x-formItem>
       </div>
       <div class="layui-tab-item">
@@ -200,7 +198,7 @@
         </td>
         @{{ /each }}
         <td>
-            <input type="text" name="goods_no" value="@{{ item.form.goods_no }}" class="ipt-goods-no layui-input am-field-valid">
+            <input type="text" name="sku[uid]" value="@{{ item.form.goods_no }}" class="ipt-goods-no layui-input am-field-valid">
         </td>
         <td>
             <input type="number" name="goods_price" value="@{{ item.form.goods_price }}" class="am-field-valid layui-input"
@@ -225,38 +223,42 @@
 <script>
     layui.extend({
         'attr': 'modules/shop/attr'
-    }).use(['attr', 'form'], function(){
-        var attr = layui.attr;
+    }).use(['attr', 'form', 'element'], function(){
+        var attr = layui.attr,
+            element = layui.element;
 
-        attr.render({
-            container: '.goods-spec-many'
-        },{
-            spec_attr: [
-                {'group_id': 1, 'group_name': '颜色', 'spec_items': [
-                    {'item_id': 11, 'spec_value': '红色'},
-                    {'item_id': 12, 'spec_value': '白色'},
-                    {'item_id': 13, 'spec_value': '蓝色'},
-                ]},
-                {'group_id': 2, 'group_name': '内存', 'spec_items': [
-                    {'item_id': 21, 'spec_value': '8G'},
-                    {'item_id': 22, 'spec_value': '16G'},
-                ]}
-            ],
-            spec_list: []
+        element.on("tab(spu_attr)", function(res){
+            if(this.getAttribute('lay-id') == 'multiple') {
+                attr.render({
+                    container: '.goods-spec-many'
+                },{
+                    spec_attr: [],
+                    spec_list: []
+                })
+            }else{
+                $(".goods-spec-many").html();
+            }
         })
 
-    })
 
-        // 切换单/多规格
-        $('input:radio[name="goods[spec_type]"]').change(function (e) {
-            var $goodsSpecMany = $('.goods-spec-many')
-                , $goodsSpecSingle = $('.goods-spec-single');
-            if (e.currentTarget.value === '10') {
-                $goodsSpecMany.hide() && $goodsSpecSingle.show();
-            } else {
-                $goodsSpecMany.show() && $goodsSpecSingle.hide();
-            }
-        });
+        // attr.render({
+        //     container: '.goods-spec-many'
+        // },{
+        //     spec_attr: [
+        //         {'group_id': 1, 'group_name': '颜色', 'spec_items': [
+        //             {'item_id': 11, 'spec_value': '红色'},
+        //             {'item_id': 12, 'spec_value': '白色'},
+        //             {'item_id': 13, 'spec_value': '蓝色'},
+        //         ]},
+        //         {'group_id': 2, 'group_name': '内存', 'spec_items': [
+        //             {'item_id': 21, 'spec_value': '8G'},
+        //             {'item_id': 22, 'spec_value': '16G'},
+        //         ]}
+        //     ],
+        //     spec_list: []
+        // })
+
+    })
 
 </script>
 

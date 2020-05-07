@@ -28,8 +28,6 @@ class DatabaseSeeder extends Seeder
         $_user->organizations()->attach(1);
 
         // 只在开发模式下测试数据用
-
-        dd($this);
         // if(app()->isLocal() === true) {
         //     $this->call(DemoSeed::class);
         // }

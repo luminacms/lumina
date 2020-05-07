@@ -54,9 +54,9 @@ class ShopDatabaseSeeder extends Seeder
 
     protected function genSpus()
     {
-        DB::table((new Spu())->getTable())->truncate();
-        $spus = factory(Spu::class)->times(500)->make();
-        Spu::insert($spus->toArray());
+        // DB::table((new Spu())->getTable())->truncate();
+        // $spus = factory(Spu::class)->times(500)->make();
+        // Spu::insert($spus->toArray());
     }
 
     protected function genCategory()
