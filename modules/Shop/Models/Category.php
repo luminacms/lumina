@@ -17,7 +17,7 @@ class Category extends BaseModel
      * @var array
      */
     protected $table = 'shop__categories';
-    protected $fillable = ['create_by', 'status', 'name', 'parentid', 'path', 'level', 'order', 'thumb'];
+    protected $fillable = ['oid','create_by', 'status', 'name', 'parentid', 'path', 'level', 'order', 'thumb'];
 
     /**
      * The attributes that are can be search =/like.

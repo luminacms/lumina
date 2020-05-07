@@ -24,6 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('thumb', 500)->nullable();
 
+            $table->org();
             $table->sort();
             $table->pathtree();
 

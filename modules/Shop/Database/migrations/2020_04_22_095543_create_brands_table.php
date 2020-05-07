@@ -24,6 +24,7 @@ class CreateBrandsTable extends Migration
             $table->string('logo_src')->nullable();
             $table->string('description', 500)->nullable();
 
+            $table->org();
             $table->status();
 
             $table->timestamps();
