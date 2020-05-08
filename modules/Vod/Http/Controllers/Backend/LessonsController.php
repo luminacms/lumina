@@ -21,7 +21,7 @@ class LessonsController extends BaseController
      */
     protected $repository;
 
-    public function __construct(LessonRepository $repository)
+    public function __construct(Lesson $repository)
     {
         $this->repository = $repository;
     }

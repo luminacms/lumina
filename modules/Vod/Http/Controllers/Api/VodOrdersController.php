@@ -10,8 +10,6 @@ use Modules\Core\Models\Criterias\CreateByCriteria;
 use Modules\Payment\Models\PayTransaction;
 use Modules\Vod\Http\Resources\LikeResource;
 use Modules\vod\Http\Resources\VodOrderResource;
-use Modules\Vod\Models\Repositories\VodLikeRepository;
-use Modules\Vod\Models\Repositories\VodOrderRepository;
 use Modules\Vod\Models\VodOrder;
 
 class VodOrdersController extends BaseController
@@ -19,7 +17,7 @@ class VodOrdersController extends BaseController
 
     protected $repository;
 
-    public function __construct(VodOrderRepository $repository)
+    public function __construct(VodOrder $repository)
     {
         $this->repository = $repository;
     }

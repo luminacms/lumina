@@ -7,6 +7,7 @@ namespace Modules\Vod\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Modules\Core\Http\Controllers\BaseController;
 use Modules\Vod\Http\Resources\LessonApiResource;
+use Modules\Vod\Models\Lesson;
 use Modules\Vod\Models\Repositories\LessonRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -14,7 +15,7 @@ class LessonsController extends BaseController
 {
     protected $repository;
 
-    public function __construct(LessonRepository $repository)
+    public function __construct(Lesson $repository)
     {
         $this->repository = $repository;
     }

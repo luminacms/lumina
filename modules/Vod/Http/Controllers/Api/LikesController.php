@@ -17,7 +17,7 @@ class LikesController extends BaseController
 {
     protected $repository;
 
-    public function __construct(VodLikeRepository $repository)
+    public function __construct(VodLike $repository)
     {
         $this->repository = $repository;
     }

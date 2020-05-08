@@ -9,6 +9,7 @@ use Modules\Core\Http\Controllers\BaseController;
 use Modules\Vod\Http\Criterias\CourseRecommendCriteria;
 use Modules\Vod\Http\Resources\CourseApiResource;
 use Modules\Vod\Http\Resources\CourseResource;
+use Modules\Vod\Models\Course;
 use Modules\Vod\Models\Repositories\CourseRepository;
 use Modules\Vod\Models\VodLike;
 use Modules\Vod\Models\VodOrder;
@@ -18,7 +19,7 @@ class CoursesController extends BaseController
 {
     protected $repository;
 
-    public function __construct(CourseRepository $repository)
+    public function __construct(Course $repository)
     {
         $this->repository = $repository;
     }

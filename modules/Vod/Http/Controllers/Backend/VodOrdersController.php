@@ -24,7 +24,7 @@ class VodOrdersController extends BaseController
      */
     protected $repository;
 
-    public function __construct(VodOrderRepository $repository)
+    public function __construct(VodOrder $repository)
     {
         $this->repository = $repository;
     }

@@ -9,5 +9,6 @@
     "Shop": true,
     "ApiTest": true,
     "Point": true,
-    "Payment": true
+    "Payment": true,
+    "Vod": true
 }
