@@ -13,6 +13,7 @@
 
 Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], function() {
 
+    Route::resource('category', 'CategoryController');
     Route::resource('brand', 'BrandController');
     Route::resource('spu', 'SpuController');
 

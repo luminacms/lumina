@@ -58,7 +58,12 @@ class SpuController extends BaseController
      */
     public function store(SpuRequest $request)
     {
+
+        dd($request->all());
+
         try {
+
+
             $spu = $this->spu->create($request->all());
             $spu->sku()->create($request->get('sku'));
 

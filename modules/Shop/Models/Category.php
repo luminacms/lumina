@@ -3,6 +3,9 @@
 namespace Modules\Shop\Models;
 
 use Modules\Core\Models\BaseModel;
+use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Traits\HasOrg;
+use Modules\Core\Traits\HasPathTree;
 
 /**
  * Class Category.
@@ -11,6 +14,7 @@ use Modules\Core\Models\BaseModel;
  */
 class Category extends BaseModel
 {
+    use HasOrg, HasPathTree, HasCreateBy;
     /**
      * The attributes that are mass assignable.
      *

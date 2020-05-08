@@ -5,25 +5,25 @@ namespace Modules\Shop\Http\Controllers;
 use Modules\Core\Http\Controllers\BaseController;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
-use Modules\Shop\Models\Brand;
-use Modules\Shop\Http\Requests\BrandRequest;
-use Modules\Shop\Http\Resources\BrandResource;
+use Modules\Shop\Models\Category;
+use Modules\Shop\Http\Requests\CategoryRequest;
+use Modules\Shop\Http\Resources\CategoryResource;
 
 /**
- * Class BrandController.
+ * Class CategoryController.
  *
  * @package namespace Modules\Shop\Http\Controllers;
  */
-class BrandController extends BaseController
+class CategoryController extends BaseController
 {
     /**
-     * @var Brand
+     * @var Category
      */
-    protected $brand;
+    protected $category;
 
-    public function __construct(Brand $brand)
+    public function __construct(Category $category)
     {
-        $this->brand = $brand;
+        $this->category = $category;
     }
 
     /**
@@ -33,10 +33,10 @@ class BrandController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $brand = $this->brand->filter($request)->paginate($request->get('limit', 15));
-            return $this->toCollection($brand, BrandResource::class);
+            $category = $this->category->filter($request)->paginate($request->get('limit', 15));
+            return $this->toCollection($category, CategoryResource::class);
         }
-        return view('shop::brand.index');
+        return view('shop::category.index');
     }
 
     /**
@@ -44,27 +44,27 @@ class BrandController extends BaseController
      */
     public function create()
     {
-        // $this->authorize('create', Brand::class);
-        return view('shop::brand.create');
+        // $this->authorize('create', Category::class);
+        return view('shop::category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  BrandCreateRequest $request
+     * @param  CategoryCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      */
-    public function store(BrandRequest $request)
+    public function store(CategoryRequest $request)
     {
         try {
-            $brand = $this->brand->create($request->all());
-            flash('create success', 'create success');
+            $category = $this->category->create($request->all());
+            flash('create success', 'success');
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
-                    : $this->toResponse($brand, 'success');
+                    : $this->toResponse($category, 'success');
         } catch (ValidationException $e) {
             return $this->toException($e);
         }
@@ -79,9 +79,9 @@ class BrandController extends BaseController
      */
     public function show($id)
     {
-        $brand = $this->brand->findOrFail($id);
-        // $this->authorize('view', $brand);
-        return $this->toTable($brand);
+        $category = $this->category->findOrFail($id);
+        // $this->authorize('view', $category);
+        return $this->toTable($category);
     }
 
     /**
@@ -93,25 +93,25 @@ class BrandController extends BaseController
      */
     public function edit($id)
     {
-        $brand = $this->brand->findOrFail($id);
-        // $this->authorize('update', $brand);
+        $category = $this->category->findOrFail($id);
+        // $this->authorize('update', $category);
 
-        return view('shop::brand.edit', compact('brand'));
+        return view('shop::category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  BrandUpdateRequest $request
+     * @param  CategoryUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      */
-    public function update(BrandRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         try {
-            $model = $this->brand->findOrFail($id);
+            $model = $this->category->findOrFail($id);
             // $this->authorize('update', $model);
 
             $model->fill($request->all());
@@ -120,7 +120,7 @@ class BrandController extends BaseController
             }
             if($model->save()){
                 flash('update success', 'success');
-
+                
                 return !$request->expectsJson()
                     ? redirect()->back()
                     : $this->toResponse($model, 'update success');
@@ -140,7 +140,7 @@ class BrandController extends BaseController
      */
     public function destroy($id)
     {
-        $model = $this->brand->findOrFail($id);
+        $model = $this->category->findOrFail($id);
         // $this->authorize('delete', $model);
         $model->delete();
 

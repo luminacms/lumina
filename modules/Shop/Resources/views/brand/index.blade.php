@@ -58,7 +58,7 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openModal('{{route("shop.brand.edit", "_id_")}}'.replace('_id_', checked.data[0].id), 'Edit#'+checked.data[0].id, {
+                        var createModal = admin.openTab('{{route("shop.brand.edit", "_id_")}}'.replace('_id_', checked.data[0].id), 'Edit#'+checked.data[0].id, {
                             end: function(index, layero){
                                 // table.reload('data_brand_table')
                             }
