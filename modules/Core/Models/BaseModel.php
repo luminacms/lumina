@@ -17,4 +17,10 @@ class BaseModel extends LaravelModel
     use HasUnique, Filterable;
 
 //    protected $connection = 'lumina';
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+    }
+
 }
