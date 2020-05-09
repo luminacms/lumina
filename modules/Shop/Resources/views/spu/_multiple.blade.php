@@ -145,21 +145,19 @@
         </td>
         @{{ /each }}
         <td>
-            <input type="text" name="sku[uid]" value="@{{ item.form.goods_no }}" class="ipt-goods-no layui-input am-field-valid" required>
+            <input type="text" name="sku[@{{$index}}][uid]" value="@{{ item.form.uid }}" class="ipt-goods-no layui-input am-field-valid" required>
         </td>
         <td>
-            <input type="number" name="goods_price" value="@{{ item.form.goods_price }}" class="am-field-valid layui-input" required>
+            <input type="number" name="sku[@{{$index}}][price_fee]" value="@{{ item.form.price_fee }}" class="am-field-valid layui-input" required>
         </td>
         <td>
-            <input type="number" name="line_price" value="@{{ item.form.line_price }}" class="am-field-valid layui-input">
+            <input type="number" name="sku[@{{$index}}][market_price_fee]" value="@{{ item.form.market_price_fee }}" class="am-field-valid layui-input">
         </td>
         <td>
-            <input type="number" name="stock_num" value="@{{ item.form.stock_num }}" class="am-field-valid layui-input"
-                   required>
+            <input type="number" name="sku[@{{$index}}][stock]" value="@{{ item.form.stock }}" class="am-field-valid layui-input" required>
         </td>
         <td>
-            <input type="number" name="goods_weight" value="@{{ item.form.goods_weight }}" class="am-field-valid layui-input"
-                   required>
+            <input type="number" name="sku[@{{$index}}][weight]" value="@{{ item.form.weight }}" class="am-field-valid layui-input" required>
         </td>
     </tr>
     @{{ /each }}

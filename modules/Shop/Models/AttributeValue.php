@@ -16,7 +16,8 @@ class AttributeValue extends BaseModel
      *
      * @var array
      */
-    protected $fillable = [];
+    public $table = "shop__attribute_values";
+    protected $fillable = ['attr_id', 'value'];
 
     /**
      * The attributes that are can be search =/like.

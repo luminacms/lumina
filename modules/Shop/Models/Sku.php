@@ -20,7 +20,7 @@ class Sku extends BaseModel
      * @var array
      */
     protected $table = 'shop__skus';
-    protected $fillable = ['attrs', 'thumb', 'pics', 'price_fee', 'market_price_fee', 'status', 'create_by', 'uid', 'stock'];
+    protected $fillable = ['attrs', 'thumb', 'pics', 'price_fee', 'market_price_fee', 'status', 'create_by', 'uid', 'stock', 'weight'];
 
     /**
      * The attributes that are can be search =/like.

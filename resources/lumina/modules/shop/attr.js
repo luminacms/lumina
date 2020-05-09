@@ -1,6 +1,7 @@
-layui.define(['laytpl'], function (exports) {
+layui.define(['laytpl', 'admin'], function (exports) {
     var $ = layui.jquery,
         laytpl = layui.laytpl,
+        admin = layui.admin,
         layer = layui.layer;
 
     var picker_modal = '',
@@ -21,8 +22,6 @@ layui.define(['laytpl'], function (exports) {
         initialize: function () {
             // 注册html容器
             this.$container = $(options.container);
-
-            console.log(this.$container);
 
             this.$specAttr = this.$container.find('.spec-attr');
             // 显示添加规则组表单事件
@@ -77,45 +76,30 @@ layui.define(['laytpl'], function (exports) {
                 }
                 // 添加到数据库
                 var load = layer.load();
-                // $.post(STORE_URL + '/goods.spec/addSpec', {
-                //     spec_name: specNameInputValue,
-                //     spec_value: specValueInputValue
-                // }, function (result) {
-                layer.close(load);
-                // if (result.code !== 1) {
-                //     layer.msg(result.msg);
-                //     return false;
-                // }
-                // 清空输入内容
-                $specNameInput.val('') && $specValueInput.val('');
-                // 记录规格数据
-                // data.spec_attr.push({
-                //     group_id: result.data.spec_id,
-                //     group_name: specNameInputValue,
-                //     spec_items: [{
-                //         item_id: result.data
-                //             .spec_value_id,
-                //         spec_value: specValueInputValue
-                //     }]
-                // });
 
-                data.spec_attr.push({
-                    group_id: 1,
-                    group_name: specNameInputValue,
-                    spec_items: [{
-                        item_id: 2
-                            .spec_value_id,
-                        spec_value: specValueInputValue
-                    }]
-                });
-                // 渲染规格属性html
-                _this.renderHtml();
-                // 隐藏添加规格组表单
-                $specGroupAdd.hide() && $specGroupButton.show();
-                // });
+                admin.request.post('/interface/attr/create', {
+                    name: specNameInputValue,
+                    value: specValueInputValue
+                }, function(res) {
+                    var res = res.data
 
-                console.log(data)
+                    layer.close(load);
+                    // 清空输入内容
+                    $specNameInput.val('') && $specValueInput.val('');
+                    data.spec_attr.push({
+                        group_id: res.attr_id,
+                        group_name: specNameInputValue,
+                        spec_items: [{
+                            item_id: res.id,
+                            spec_value: res.value
+                        }]
+                    });
 
+                    // 渲染规格属性html
+                    _this.renderHtml();
+                    // 隐藏添加规格组表单
+                    $specGroupAdd.hide() && $specGroupButton.show();
+                })
             });
         },
 
@@ -145,29 +129,23 @@ layui.define(['laytpl'], function (exports) {
                     layer.msg('规格值不能为空');
                     return false;
                 }
-                // 添加到数据库
-                // var load = layer.load();
-                // $.post(STORE_URL + '/goods.spec/addSpecValue', {
-                //     spec_id: $specGroup.data('group-id'),
-                //     spec_value: specItemInputValue
-                // }, function (result) {
-                // layer.close(load);
-                // if (result.code !== 1) {
-                //     layer.msg(result.msg);
-                //     return false;
-                // }
-                // 记录规格数据
 
-                console.log(data)
-                console.log($specGroup.data('index'))
-                data.spec_attr[$specGroup.data('index')].spec_items
-                    .push({
-                        item_id: 22,
+
+                // 添加到数据库
+                var load = layer.load();
+                admin.request.post('/interface/attr/val/create', {
+                    attr_id: $specGroup.data('group-id'),
+                    value: specItemInputValue
+                }, function(res) {
+                    layer.close(load);
+
+                    data.spec_attr[$specGroup.data('index')].spec_items.push({
+                        item_id: res.id,
                         spec_value: specItemInputValue
                     });
-                // 渲染规格属性html
-                _this.renderHtml();
-                // });
+                    // 渲染规格属性html
+                    _this.renderHtml();
+                })
             });
         },
 

@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+        $this->mapInterfaceRoutes();
     }
 
     /**
@@ -65,5 +66,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Shop', '/Routes/api.php'));
+    }
+
+    protected function mapInterfaceRoutes()
+    {
+        Route::prefix('interface')
+            ->middleware('interface')
+            ->namespace($this->moduleNamespace.'\Interfaces')
+            ->group(module_path('Shop', '/Routes/interface.php'));
     }
 }

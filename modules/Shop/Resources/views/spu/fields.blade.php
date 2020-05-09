@@ -31,11 +31,11 @@
         </x-formItem>
 
         <x-formItem :label="__('core::main.thumb')">
-            <x-input.imgs name="thumb" verify="required" :value="$spu->thumb??''"/>
+            <x-input.imgs name="thumb"  :value="$spu->thumb??''"/>
         </x-formItem>
 
         <x-formItem :label="__('core::main.pic_url')">
-            <x-input.imgs limit="9" name="pic_url" verify="required" :value="$spu->pic_url??''"/>
+            <x-input.imgs limit="9" name="pic_url" :value="$spu->pic_url??''"/>
         </x-formItem>
 
       <div class="layui-tab-item layui-show">
