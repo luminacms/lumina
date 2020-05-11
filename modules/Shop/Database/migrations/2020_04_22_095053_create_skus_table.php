@@ -21,17 +21,25 @@ class CreateSkusTable extends Migration
             $table->char('uid', 40);
             $table->char('spu_id', 40);
             $table->integer('stock')->default(0);
+            $table->integer('weight')->default(0);
 
-            $table->text('attrs')->nullable();
             $table->string('thumb')->nullable();
             $table->text('pics')->nullable();
             $table->decimal('price_fee',10,2);
             $table->decimal('market_price_fee',10,2)->nullable();
 
+            $table->org();
             $table->status();
             $table->createby();
 
             $table->timestamps();
+        });
+
+        Schema::create('shop__skus_attribute_value', function(Blueprint $table) {
+            $table->increments('id');
+
+            $table->char('sku_id', 40);
+            $table->integer('attr_val_id');
 		});
 	}
 
@@ -43,5 +51,6 @@ class CreateSkusTable extends Migration
 	public function down()
 	{
 		Schema::drop('shop__skus');
+		Schema::drop('shop__skus_attribute_value');
 	}
 }

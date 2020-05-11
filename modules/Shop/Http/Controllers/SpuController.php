@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Modules\Shop\Models\Spu;
 use Modules\Shop\Http\Requests\SpuRequest;
 use Modules\Shop\Http\Resources\SpuResource;
+use Modules\Shop\Models\Sku;
 
 /**
  * Class SpuController.
@@ -58,14 +59,12 @@ class SpuController extends BaseController
      */
     public function store(SpuRequest $request)
     {
-
-        dd($request->all());
-
         try {
-
-
             $spu = $this->spu->create($request->all());
-            $spu->sku()->create($request->get('sku'));
+            foreach($request->get('sku') as $_skuItem) {
+                $sku = Sku::create(array_merge($_skuItem, ['spu_id' => $spu->uid]));
+                $sku->attrVals()->attach(explode(',', $_skuItem['attrs']));
+            }
 
             flash('create success', 'create success');
 

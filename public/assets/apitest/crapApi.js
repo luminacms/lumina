@@ -89,7 +89,7 @@ $(function(){
         $("#modules").removeClass("none");
         $("#historys-title").removeClass("bb3");
         $(this).addClass("bb3");
-        getLocalModules();
+        // getLocalModules();
     });
 
     var saveAs = true;
@@ -151,7 +151,7 @@ $(function(){
     $("#modules").on("click",".j_interface", function() {
         var urlInfo = $.parseJSON( $(this).attr("crap-data") );
 
-        console.log(urlInfo);
+        // console.log(urlInfo);
 
         $("#url").val(urlInfo.path);
         $("#interface-id").val(urlInfo.id);

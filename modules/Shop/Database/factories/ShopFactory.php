@@ -5,27 +5,47 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Modules\Core\Models\User;
 use Modules\Payment\Models\PayTransaction;
+use Modules\Shop\Models\AttributeValue;
+use Modules\Shop\Models\Spu;
 use Ramsey\Uuid\Uuid;
 
 
 $factory->define(\Modules\Shop\Models\Spu::class, function (Faker $faker) {
-    $cate = \Modules\Shop\Models\Category::all();
+    $cate = \Modules\Shop\Models\Category::withoutGlobalScope('oid')->get();
     return [
+        'uid' => Str::random(6),
         'name' => $faker->text(15),
-        'thumb' => 'http://temp.im/300x300/'.Arr::random([
-            '4CD964/fff',
-            'FF9500/000',
-            'FF2D55/000',
-            '007AFF/fff',
-            '3C3C3C/fff'
-        ]),
+        'thumb' => Arr::random([
+            'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1274727566,4055847375&fm=11&gp=0.jpg',
+            'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3363810843,3231664163&fm=26&gp=0.jpg',
+            'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3245626480,1182662462&fm=26&gp=0.jpg',
+        ], 1)[0],
+        'oid' => 1,
+        'type' => Spu::TYPE_MULTIPLE,
         'category_id' => $cate->random(1)->first()->id,
         'description' => $faker->realText(500),
-        'price_fee' => $faker->randomNumber(4),
         'create_by' => User::first()->userid
     ];
 });
 
+$factory->define(\Modules\Shop\Models\Sku::class, function (Faker $faker) {
+    $pf = rand(2000, 9999);
+    return [
+        'uid' => Str::random(6),
+        'price_fee' => $pf,
+        'oid' => 1,
+        'market_price_fee' => rand(500, 2000),
+        'weight' => rand(1, 100),
+        'stock' => rand(100, 500)
+    ];
+});
+
+$factory->define(\Modules\Shop\Models\AttributeValue::class, function (Faker $faker) {
+    $av = AttributeValue::all();
+    return [
+        'attr_val_id' => $av->random(1)->first()->id
+    ];
+});
 
 $factory->define(PayTransaction::class, function (Faker $faker) {
     return [

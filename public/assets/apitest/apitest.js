@@ -1308,7 +1308,7 @@ $(function(){
         $("#modules").removeClass("none");
         $("#historys-title").removeClass("bb3");
         $(this).addClass("bb3");
-        getLocalModules();
+        // getLocalModules();
     });
 
     var saveAs = true;

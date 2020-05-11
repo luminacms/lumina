@@ -16,5 +16,6 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
     Route::resource('category', 'CategoryController');
     Route::resource('brand', 'BrandController');
     Route::resource('spu', 'SpuController');
+    Route::resource('sku', 'SkuController');
 
 });

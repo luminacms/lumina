@@ -69,19 +69,19 @@
             <div class="spec-batch layui-inline">
                 <label class="layui-form-label w-48">批量设置</label>
                 <div class="layui-input-inline" style="width: 100px;">
-                  <input type="text" data-type="goods_no" placeholder="商家编码" class="layui-input">
+                  <input type="text" data-type="uid" placeholder="商家编码" class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="goods_price" placeholder="销售价" class="layui-input">
+                    <input type="number" data-type="price_fee" placeholder="销售价" class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="line_price" placeholder="划线价" class="layui-input">
+                    <input type="number" data-type="market_price_fee" placeholder="划线价" class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="stock_num" placeholder="库存数量" class="layui-input">
+                    <input type="number" data-type="stock" placeholder="库存数量" class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width: 100px;">
-                    <input type="number" data-type="goods_weight" placeholder="重量" class="layui-input">
+                    <input type="number" data-type="weight" placeholder="重量" class="layui-input">
                 </div>
 
                 <div class="layui-input-inline" style="width: 100px;">
@@ -138,7 +138,7 @@
     </thead>
     <tbody>
     @{{ each spec_list item }}
-    <tr data-index="@{{ $index }}" data-sku-id="@{{ item.spec_sku_id }}">
+    <tr data-index="@{{ $index }}" data-attr-id="@{{ item.attr_id }}">
         @{{ each item.rows td itemKey }}
         <td class="td-spec-value am-text-middle" rowspan="@{{ td.rowspan }}">
             @{{ td.spec_value }}
@@ -146,6 +146,7 @@
         @{{ /each }}
         <td>
             <input type="text" name="sku[@{{$index}}][uid]" value="@{{ item.form.uid }}" class="ipt-goods-no layui-input am-field-valid" required>
+            <input type="hidden" name="sku[@{{$index}}][attrs]" value="@{{ item.attr_id }}" />
         </td>
         <td>
             <input type="number" name="sku[@{{$index}}][price_fee]" value="@{{ item.form.price_fee }}" class="am-field-valid layui-input" required>
@@ -173,30 +174,49 @@
         var attr = layui.attr,
             element = layui.element;
 
-        attr.render({
-            container: '.goods-spec-many'
-        },{
-            spec_attr: [],
-            spec_list: []
-        })
-
-
         // attr.render({
         //     container: '.goods-spec-many'
         // },{
-        //     spec_attr: [
-        //         {'group_id': 1, 'group_name': '颜色', 'spec_items': [
-        //             {'item_id': 11, 'spec_value': '红色'},
-        //             {'item_id': 12, 'spec_value': '白色'},
-        //             {'item_id': 13, 'spec_value': '蓝色'},
-        //         ]},
-        //         {'group_id': 2, 'group_name': '内存', 'spec_items': [
-        //             {'item_id': 21, 'spec_value': '8G'},
-        //             {'item_id': 22, 'spec_value': '16G'},
-        //         ]}
-        //     ],
+        //     spec_attr: [],
         //     spec_list: []
         // })
+
+
+        attr.render({
+            container: '.goods-spec-many'
+        },{
+            spec_attr: [
+                {'group_id': 1, 'group_name': '颜色', 'spec_items': [
+                    {'item_id': 11, 'spec_value': '红色'}
+                ]},
+                {'group_id': 2, 'group_name': '内存', 'spec_items': [
+                    {'item_id': 21, 'spec_value': '8G'},
+                    {'item_id': 22, 'spec_value': '16G'},
+                ]}
+            ],
+            spec_list: [
+                {
+                    'attr_id': '2,6',
+                    form: {
+                        market_price_fee: "3",
+                        price_fee: "2",
+                        stock: "4",
+                        uid: "1",
+                        weight: "5"
+                    }
+                },
+                {
+                    'attr_id': '2,6',
+                    form: {
+                        market_price_fee: "3",
+                        price_fee: "2",
+                        stock: "4",
+                        uid: "1",
+                        weight: "5"
+                    }
+                }
+            ]
+        })
 
     })
 

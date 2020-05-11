@@ -2,7 +2,8 @@
 
 @section('content')
     <x-submenu :items="[
-        ['name' => '列表管理', 'uri' => route('shop.spu.index')]
+        ['name' => '商品列表', 'uri' => route('shop.spu.index')],
+        ['name' => 'SKU管理', 'uri' => route('shop.sku.index')],
     ]" />
 
     <table class="layui-hide" id="data_spu_table" lay-filter="data_spu_table"></table>
@@ -79,11 +80,14 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openTab('{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id), '修改数据#'+checked.data[0].id, {
-                            end: function(index, layero){
-                                // table.reload('data_game_table')
-                            }
-                        })
+                        var createModal = admin.openTab(
+                            '{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id)+'?type='+checked.data[0].type,
+                            '修改数据#'+checked.data[0].id,
+                            {
+                                end: function(index, layero){
+                                    // table.reload('data_game_table')
+                                }
+                            })
                         return true;
                     }
                 }

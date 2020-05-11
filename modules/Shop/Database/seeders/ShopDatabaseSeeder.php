@@ -9,6 +9,9 @@ use Modules\Shop\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Payment\Models\PayTransaction;
+use Modules\Shop\Models\Attribute;
+use Modules\Shop\Models\AttributeValue;
+use Modules\Shop\Models\Sku;
 
 class ShopDatabaseSeeder extends Seeder
 {
@@ -26,24 +29,41 @@ class ShopDatabaseSeeder extends Seeder
         $this->fakeProductBrand();
 
         $this->genCategory();
+        $this->genAttr();
         $this->genSpus();
         $this->genPayments();
+    }
+
+    public function genAttr()
+    {
+        DB::table((new Attribute())->getTable())->truncate();
+        Attribute::insert([
+            ["id" => 1, "name" => "颜色"],
+            ["id" => 2, "name" => "内存"]
+        ]);
+
+        DB::table((new AttributeValue())->getTable())->truncate();
+        AttributeValue::insert([
+            ["attr_id" => 1, "value" => "红色"],
+            ["attr_id" => 1, "value" => "白色"],
+            ["attr_id" => 1, "value" => "黑色"],
+            ["attr_id" => 2, "value" => "32G"],
+            ["attr_id" => 2, "value" => "64G"],
+        ]);
     }
 
     public function fakeProductBrand()
     {
         DB::table((new Brand())->getTable())->truncate();
         Brand::insert([
-            ["name" => "联想"],
+            ["name" => "苹果"],
             ["name" => "小米"],
-            ["name" => "鸿基"],
             ["name" => "华为"],
-            ["name" => "魅族"],
+            ["name" => "VIVO"],
             ["name" => 'OPPO']
         ]);
 
     }
-
 
     protected function genPayments()
     {
@@ -54,9 +74,13 @@ class ShopDatabaseSeeder extends Seeder
 
     protected function genSpus()
     {
-        // DB::table((new Spu())->getTable())->truncate();
-        // $spus = factory(Spu::class)->times(500)->make();
-        // Spu::insert($spus->toArray());
+        $attrv = AttributeValue::all();
+
+        DB::table((new Spu())->getTable())->truncate();
+        $spus = factory(Spu::class, 10)->create()->each(function($item) use($attrv){
+            $sku = $item->sku()->save(factory(Sku::class)->make());
+            $sku->attrVals()->attach($attrv->random(rand(1, 3))->pluck('id'));
+        });
     }
 
     protected function genCategory()
@@ -82,7 +106,9 @@ class ShopDatabaseSeeder extends Seeder
         ];
         DB::table((new Category())->getTable())->truncate();
         foreach ($departs as $_depart) {
-            Category::create($_depart);
+            Category::create(array_merge($_depart, [
+                'oid' => 1
+            ]));
         }
     }
 }

@@ -70,7 +70,8 @@ class RouteInfo implements Arrayable, JsonSerializable
             }
         }
         return array_merge([
-            'name'    => $this->route->getName(),
+            // 'name'    => $this->route->getName(),
+            'name'    => $this->preparePath(),
             'moduleid'=> $_moduleid,
             'methods' => $this->getMethods()[0],
             'domain'  => $this->route->domain(),

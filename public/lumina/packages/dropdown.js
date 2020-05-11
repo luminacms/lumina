@@ -1,1 +1,101 @@
-"use strict";layui.define("jquery",function(i){function n(){this.inst=null,this.currReElem=null}function r(i){e(i.target)&&e(i.target.parentElement)&&e(i.target.parentElement.parentElement)&&c.hide()}var s=layui.$,t=layui.device(),a=(t.android||t.ios,"click"),c=this,e=function(i){return i&&-1==i.className.indexOf("layui-btn-dropdown")&&-1==i.className.indexOf("layui-dropdown-menu")};n.prototype.hide=function(){c&&c.inst&&c.inst.is(":visible")&&(c.inst.css("display","none"),s("body").off(a,r))},n.prototype.render=function(){c=this,s(".layui-btn-dropdown").each(function(i,n){var l=s(n);l.data("id","dropdown-"+i),l[a](function(){var i,n,t,e,o,d;c.inst&&c.currReElem.data("id")==l.data("id")&&(c.currReElem.data("id")!=l.data("id")||c.inst.is(":visible"))||(c.hide(),i=l.find(".layui-dropdown-menu"),n=l.offset().left-s(window).scrollLeft(),t=l.offset().top+l.height()-s(window).scrollTop()-2,o=n+l.width(),d={display:"block",position:"fixed",top:t+"px",left:n+"px"},n+(e=i.width())>s(window).width()&&s.extend(!0,d,{left:o-e+"px"}),i.css(d).on("click","li",function(){i.css("display","none")}),c.inst=i,c.currReElem=l,s("body").on(a,r))})})};var o=new n;o.render(),s(window).scroll(function(){o.hide()}),i("dropdown",o)});
+/**
+
+ @Name：layui.dropdown 下拉按钮
+ @Author：First
+ @License：MIT
+
+ */
+layui.define('jquery', function (exports) {
+    var $ = layui.$,
+        device = layui.device(),
+        MOD_NAME = 'dropdown',
+        CLASS_NAME = '.layui-dropdown-menu',
+        //事件类型，默认为'mouseover'（移动端则为'click'）
+        event = (device.android || device.ios) ? 'click' : 'click',
+        //当前Dropdown对象
+        that = this,
+        Dropdown = function () {
+            //当前实例
+            this.inst = null;
+            this.currReElem = null;
+        };
+
+    //隐藏
+    var __hideDropdown = function (e) {
+        if (isClosable(e.target) &&
+            isClosable(e.target.parentElement) &&
+            isClosable(e.target.parentElement.parentElement)) {
+            that.hide();
+        }
+    };
+
+    //判断dropdown是否可以隐藏
+    var isClosable = function (elem) {
+        return elem &&
+            elem.className.indexOf('layui-btn-dropdown') == -1 &&
+            elem.className.indexOf('layui-dropdown-menu') == -1;
+    };
+
+    //修正显示位置
+    Dropdown.prototype.hide = function () {
+        if (that && that.inst && that.inst.is(':visible')) {
+            that.inst.css('display', 'none');
+            $('body').off(event, __hideDropdown);
+        }
+    };
+
+    //渲染
+    Dropdown.prototype.render = function () {
+        that = this;
+        $('.layui-btn-dropdown').each(function (index, elem) {
+            var reElem = $(elem);
+            reElem.data('id', 'dropdown-' + index);
+            reElem[event](function () {
+                if (!that.inst //第一次显示
+                    ||
+                    that.currReElem.data('id') != reElem.data('id') //切换到其他dropdown
+                    ||
+                    (that.currReElem.data('id') == reElem.data('id') && !that.inst.is(':visible'))) { //重新移动到当前dropdown
+                    //隐藏
+                    that.hide();
+                    //这里暂时采用fixed定位
+                    var dropElem = reElem.find(CLASS_NAME),
+                        left = reElem.offset().left - $(window).scrollLeft(),
+                        top = reElem.offset().top + reElem.height() - $(window).scrollTop() - 2,
+                        containerWidth = reElem.width(),
+                        dropWidth = dropElem.width(),
+                        offsetRight = left + containerWidth,
+                        overflow = (left + dropWidth) > $(window).width(),
+                        css = {
+                            'display': 'block',
+                            'position': 'fixed',
+                            'top': top + 'px',
+                            'left': left + 'px'
+                        };
+
+                    overflow && $.extend(true, css, {
+                        'left': (offsetRight - dropWidth) + 'px'
+                    });
+                    //显示
+                    dropElem.css(css).on('click', 'li', function () {
+                        dropElem.css('display', 'none');
+                    });
+
+                    that.inst = dropElem;
+                    that.currReElem = reElem;
+                    $('body').on(event, __hideDropdown);
+                }
+            });
+        });
+    };
+
+    //自动完成渲染
+    var dropdown = new Dropdown();
+    dropdown.render();
+
+    $(window).scroll(function () {
+        dropdown.hide();
+    });
+
+    exports(MOD_NAME, dropdown);
+})

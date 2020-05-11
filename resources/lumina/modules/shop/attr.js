@@ -140,7 +140,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     layer.close(load);
 
                     data.spec_attr[$specGroup.data('index')].spec_items.push({
-                        item_id: res.id,
+                        item_id: res.data.id,
                         spec_value: specItemInputValue
                     });
                     // 渲染规格属性html
@@ -205,11 +205,12 @@ layui.define(['laytpl', 'admin'], function (exports) {
                         formData[formType] = value;
                     }
                 });
+
                 if (!$.isEmptyObject(formData)) {
                     data.spec_list.forEach(function (item, index) {
-                        data.spec_list[index].form = $.extend({}, data
-                            .spec_list[index].form, formData);
+                        data.spec_list[index].form = $.extend({}, data.spec_list[index].form, formData);
                     });
+
                     // 渲染商品规格table
                     _this.renderTabelHtml();
                 }
@@ -222,6 +223,8 @@ layui.define(['laytpl', 'admin'], function (exports) {
         renderHtml: function () {
             // 渲染商品规格元素
             this.$specAttr.html(template('tpl_spec_attr', data));
+
+            console.log(data)
             // 渲染商品规格table
             this.renderTabelHtml();
         },
@@ -277,7 +280,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     specSkuIdAttr.push(skuValues[parseInt(point.toString())].item_id);
                 }
                 spec_list.push({
-                    spec_sku_id: specSkuIdAttr.join('_'),
+                    attr_id: specSkuIdAttr.join(','),
                     rows: rowData,
                     form: {}
                 });
@@ -286,7 +289,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
             if (data.spec_list.length > 0 && spec_list.length > 0) {
                 for (i = 0; i < spec_list.length; i++) {
                     var overlap = data.spec_list.filter(function (val) {
-                        return val.spec_sku_id === spec_list[i].spec_sku_id;
+                        return val.attr_id === spec_list[i].attr_id;
                     });
                     if (overlap.length > 0) spec_list[i].form = overlap[0].form;
                 }

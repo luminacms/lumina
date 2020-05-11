@@ -1,10 +1,10 @@
 <?php
-    $_type = request('type', 'single');
+    $_type = request('type', \Modules\Shop\Models\Spu::TYPE_SINGLE);
 ?>
 <div class="layui-tab2 j_attrwrap" lay-filter="spu_attr">
     <ul class="layui-tab-title">
-        <li {{ $_type=='single'?'class=layui-this':''}} lay-id="single"><a href="{{ route('shop.spu.create', ['type' => 'single']) }}" class="block">单规格</a></li>
-        <li {{ $_type=='multiple'?'class=layui-this':''}} lay-id="multiple"><a href="{{ route('shop.spu.create', ['type' => 'multiple']) }}" class="block">多规格</a></li>
+        <li {{ $_type=='1'?'class=layui-this':''}} lay-id="single"><a href="{{ route('shop.spu.create', ['type' => \Modules\Shop\Models\Spu::TYPE_SINGLE]) }}" class="block">单规格</a></li>
+        <li {{ $_type=='2'?'class=layui-this':''}} lay-id="multiple"><a href="{{ route('shop.spu.create', ['type' => \Modules\Shop\Models\Spu::TYPE_MULTIPLE]) }}" class="block">多规格</a></li>
     </ul>
     <div class="layui-tab-content pt-12">
 

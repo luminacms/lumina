@@ -114,7 +114,7 @@ return [
     'used_at_ip'                => 'usedAtIp',
     'expired_at'                => 'expiredAt',
 
-    'table_list' => 'List',
+    'table_list' => '数据列表',
     'table_select_multiple' => 'place select one!',
     'create' => 'Create',
     'table_delete_tip' => 'Are you sure!',

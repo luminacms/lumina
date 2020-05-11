@@ -22,6 +22,7 @@ class CreateSpusTable extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
             $table->status();
+            $table->tinyInteger('type')->default(1);
 
             $table->string('name');
             $table->string('description', 500)->nullable();
@@ -29,9 +30,7 @@ class CreateSpusTable extends Migration
             $table->string('thumb')->nullable();
             $table->text('pic_url')->nullable();
 
-            $table->decimal('price_fee', 10, 2)->nullable();
-            $table->decimal('market_price_fee',10,2)->nullable();
-
+            $table->org();
             $table->createby();
 
             $table->timestamps();

@@ -37,6 +37,10 @@ trait HasOrg
     public static function bootHasOrg()
     {
         static::creating(function ($model) {
+            // 命令行工具
+            if(app()->runningInConsole() && $model->oid) {
+                return true;
+            }
             // 新增数据必须要求登录
             $_oid = auth()->guard('org')->oid();
             if(\request()->is('api/*') || \request()->is('interface/*') ) {
