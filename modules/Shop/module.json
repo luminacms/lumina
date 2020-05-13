@@ -17,7 +17,6 @@
         {"sort": 502,"id": "shop_product_category", "parentid": "shop", "text": "栏目管理", "route": "shop.category.index"},
         {"sort": 503,"id": "shop_product_spu", "parentid": "shop", "text": "商品管理", "route": "shop.spu.index"},
         {"sort": 504,"id": "shop_order", "parentid": "shop", "text": "订单管理"},
-        {"sort": 505,"id": "shop_stock", "parentid": "shop", "text": "库存管理"},
         {"sort": 506,"id": "shop_ship", "parentid": "shop", "text": "发货管理"}
     ]
 }
