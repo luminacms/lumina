@@ -13,7 +13,7 @@ use Modules\Core\Traits\HasOrg;
  */
 class Sku extends BaseModel
 {
-    use HasCreateBy, HasOrg;
+    use HasCreateBy;
 
     /**
      * The attributes that are mass assignable.
@@ -34,7 +34,7 @@ class Sku extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->uid = $model->uid ?? self::getRandom('uid', 8, true);
+            $model->uid = $model->uid ?? self::getRandomNumber('uid', $model->spu->id);
         });
     }
 

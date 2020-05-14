@@ -11,6 +11,8 @@
 |
 */
 
+use Modules\Shop\Models\Sku;
+
 Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], function() {
 
     Route::resource('category', 'CategoryController');

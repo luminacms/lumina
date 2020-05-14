@@ -34,6 +34,8 @@ class CreateSpusTable extends Migration
             $table->createby();
 
             $table->timestamps();
+
+            $table->unique('uid');
 		});
 	}
 

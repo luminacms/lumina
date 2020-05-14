@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             ['id'=>5, 'name' => 'ORG_C', 'label' => '三级运营商', 'guard_name' => 'org']
         ];
         $permission = [
-            ['name' => 'module_mall', 'label' => '电商模块','guard_name' => 'org'],
+            ['name' => 'module_shop', 'label' => '电商模块','guard_name' => 'org'],
             ['name' => 'module_cms', 'label' => 'CMS模块','guard_name' => 'org'],
             ['name' => 'module_game', 'label' => '移动营销模块','guard_name' => 'org'],
             ['name' => 'module_querylist', 'label' => '采集模块','guard_name' => 'org'],

@@ -2,6 +2,7 @@
 
 return [
     'id'                        => 'ID',
+    'uid'                       => 'UID',
     'slug'                      => 'Slug',
     'name'                      => '名称',
     'pid'                       => '父级ID',
@@ -101,9 +102,13 @@ return [
     // shop
     'brand'                     => 'Brand',
     'pic_url'                   => 'PicUrl',
-    'price_fee'                 => 'PriceFee',
-    'market_price_fee'          => 'MarketPriceFee',
+    'price_fee'                 => '售卖价',
+    'market_price_fee'          => '划线价',
     'stock'                     => '库存',
+    'brand_id'                  => '品牌',
+    'spu_id'                    => 'SpuId',
+    'weight'                    => '重量',
+    'pics'                      => '主图',
 
     // Coupon
     'coupon_id'                 => 'Coupon ID',

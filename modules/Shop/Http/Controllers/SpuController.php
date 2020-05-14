@@ -63,7 +63,9 @@ class SpuController extends BaseController
             $spu = $this->spu->create($request->all());
             foreach($request->get('sku') as $_skuItem) {
                 $sku = Sku::create(array_merge($_skuItem, ['spu_id' => $spu->uid]));
-                $sku->attrVals()->attach(explode(',', $_skuItem['attrs']));
+                if(isset($_skuItem['attrs'])){
+                    $sku->attrVals()->attach(explode(',', $_skuItem['attrs']));
+                }
             }
 
             flash('create success', 'create success');

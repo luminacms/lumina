@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 $factory->define(\Modules\Shop\Models\Spu::class, function (Faker $faker) {
     $cate = \Modules\Shop\Models\Category::withoutGlobalScope('oid')->get();
     return [
-        'uid' => Str::random(6),
+        'uid' => time(),
         'name' => $faker->text(15),
         'thumb' => Arr::random([
             'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1274727566,4055847375&fm=11&gp=0.jpg',
@@ -31,7 +31,7 @@ $factory->define(\Modules\Shop\Models\Spu::class, function (Faker $faker) {
 $factory->define(\Modules\Shop\Models\Sku::class, function (Faker $faker) {
     $pf = rand(2000, 9999);
     return [
-        'uid' => Str::random(6),
+        'uid' => time(),
         'price_fee' => $pf,
         'oid' => 1,
         'market_price_fee' => rand(500, 2000),

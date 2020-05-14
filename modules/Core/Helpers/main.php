@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Modules\Core\Models\Option;
 
 require __DIR__.'/avatar.php';

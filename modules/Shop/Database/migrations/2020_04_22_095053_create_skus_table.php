@@ -28,11 +28,12 @@ class CreateSkusTable extends Migration
             $table->decimal('price_fee',10,2);
             $table->decimal('market_price_fee',10,2)->nullable();
 
-            $table->org();
             $table->status();
             $table->createby();
 
             $table->timestamps();
+
+            $table->unique('uid');
         });
 
         Schema::create('shop__skus_attribute_value', function(Blueprint $table) {

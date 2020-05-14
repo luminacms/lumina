@@ -42,6 +42,7 @@
                 done: tableDone,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
+                    {"field":"uid","title":"spuId","width":120},
                     {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
                     {"field":"name","title":"name","width":250},
                     {"field":"category_id","title":"category_id"},
