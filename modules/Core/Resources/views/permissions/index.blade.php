@@ -73,7 +73,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true","fixed":"left","width":"120"},{"field":"name","title":"name"},{"field":"guard_name","title":"guard_name"},{"field":"created_at","title":"创建时间"},{"field":"updated_at","title":"更新时间","fixed":"right"}]]
             });

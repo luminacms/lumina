@@ -25,7 +25,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: [],
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true"},{"field":"type","title":"type"},{"field":"count","title":"count"},{"field":"oid","title":"oid"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
             });

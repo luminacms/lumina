@@ -7,7 +7,7 @@
         .day-text{line-height:20px;font-size: 12px;}
         .user-info .title{font-size: 20px;margin-top: 10px;margin-bottom: 5px;}
     </style>
-    <div class="home-index">
+    <div class="home-index shadow-lg">
         <p class="day-text muted flex" id="j_quote"></p>
         <div class="header-content">
             <div class="user-info">
@@ -24,12 +24,9 @@
         <div class="layui-row layui-col-space15">
 
             <div class="layui-col-md8">
-                <div class="layui-card">
-                    <div class="layui-card-header">日程</div>
-                    <div class="layui-card-body layui-text">
-                        <x-calendar />
-                    </div>
-                </div>
+                <x-card title="日程" class="shadow-lg">
+                    <x-calendar />
+                </x-card>
             </div>
 
             <div class="layui-col-md4">

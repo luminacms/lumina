@@ -54,7 +54,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 done: tableDone,
                 cols: [[

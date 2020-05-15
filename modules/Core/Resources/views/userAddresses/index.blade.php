@@ -26,7 +26,7 @@
                 page: true,
                 canSearch: true,
                 autoShow: '{{ route('core.user-addresses.show', '_id_') }}',
-                height: 'full-100',
+                height: 'full-110',
                 toolbar: [],
                 cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true","fixed":"left"},{"field":"userid","title":"userid"},{"field":"province","title":"province"},{"field":"city","title":"city"},{"field":"district","title":"district"},{"field":"address","title":"address"},{"field":"zip","title":"zip"},{"field":"contact_name","title":"contact_name"},{"field":"contact_phone","title":"contact_phone"},{"field":"lastused_at","title":"lastused_at"},{"field":"created_at","title":"创建时间","fixed":"right"},{"field":"updated_at","title":"更新时间","fixed":"right"},{"title":"\u64cd\u4f5c","toolbar":"#data_useraddress_table","fixed":"right","width":150}]]

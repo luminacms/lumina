@@ -36,7 +36,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 lineHeight: 65,
                 cellMinWidth: 80,
                 done: tableDone,

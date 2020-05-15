@@ -24,7 +24,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true"},{"field":"create_by","title":"create_by"},{"field":"name","title":"name"},{"field":"logo_src","title":"logo_src"},{"field":"description","title":"description"},{"field":"oid","title":"oid"},{"field":"status","title":"status"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
             });

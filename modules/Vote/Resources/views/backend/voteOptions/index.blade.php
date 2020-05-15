@@ -24,7 +24,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true","fixed":"left","width":"120"},{"field":"title","title":"title"},{"field":"type","title":"type"},{"field":"isright","title":"isright"},{"field":"thumb","title":"thumb"},{"field":"cheat_count","title":"cheat_count"},{"field":"count","title":"count"},{"field":"created_at","title":"创建时间"},{"field":"updated_at","title":"更新时间","fixed":"right"}]]
             });

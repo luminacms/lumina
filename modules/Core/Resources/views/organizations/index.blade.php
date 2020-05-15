@@ -25,7 +25,7 @@
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 export: {url: '{!! URL::full() !!}', can: true, all: true},
                 page: true,
-                height: 'full-100',
+                height: 'full-110',
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
                     {"field":"oid","title":"oid","width":300},

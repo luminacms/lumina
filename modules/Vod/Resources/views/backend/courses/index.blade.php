@@ -30,7 +30,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},

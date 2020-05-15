@@ -23,7 +23,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true","fixed":"left","width":"120"},{"field":"title","title":"title"},{"field":"slug","title":"slug"},{"field":"seo_keyword","title":"seo_keyword"},{"field":"seo_desc","title":"seo_desc"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"创建时间"},{"field":"updated_at","title":"更新时间","fixed":"right"}]]
             });

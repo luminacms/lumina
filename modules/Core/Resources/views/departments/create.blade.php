@@ -1,7 +1,7 @@
 @extends('core::layouts.master')
 
 @section('content')
-    <x-card title="新增">
+    <x-card>
         <x-form :action="route('core.departments.store')" method="post">
             <div class="layui-row layui-col-space10 layui-form-item">
                 @include('core::departments.fields')

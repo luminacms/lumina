@@ -10,7 +10,7 @@ table.render({
     toolbar: 'default',
     lineHeight: 65,
     action: [{'text': '推送到微信', 'event': 'pushWx'}], // 自定义方法
-    height: 'full-100',
+    height: 'full-110',
     cols: []
 });
 

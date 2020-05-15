@@ -54,7 +54,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 export: {url: '{{ url('/interface/core/users/export') }}', can: true, all: true},
                 cols: [
                     [
@@ -121,7 +121,7 @@
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc', 'role_id': 0},
                 page: true,
                 canSearch: true,
-                height: 'full-100',
+                height: 'full-110',
                 toolbar: ['create', 'delete'],
                 cols: [
                     [

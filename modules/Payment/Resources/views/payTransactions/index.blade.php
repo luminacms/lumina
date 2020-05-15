@@ -26,7 +26,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: [],
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},

@@ -37,7 +37,7 @@
 
             //转换静态表格
             table.init('department_table', {
-                height: 'full-100',
+                height: 'full-110',
                 limit: 999999
             });
 

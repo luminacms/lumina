@@ -31,7 +31,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: 'default',
-                height: 'full-100',
+                height: 'full-110',
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
                     {"field":"id","title":"#","width":80},

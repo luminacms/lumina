@@ -31,7 +31,7 @@
                 page: true,
                 canSearch: true,
                 toolbar: ['create', 'delete'],
-                height: 'full-100',
+                height: 'full-110',
                 cellMinWidth: 80,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},

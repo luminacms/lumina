@@ -26,7 +26,7 @@
                 canSearch: true,
                 toolbar: [],
                 action: [{'text': '生成优惠码', 'event': 'makeCode'}],
-                height: 'full-100',
+                height: 'full-110',
                 filters: [
                     {'name': 'status', "value":"{{ request('status') }}", "options": {"wait":"待领取","received":"已领取","used":"已使用","expired":"已过期"}}
                 ],

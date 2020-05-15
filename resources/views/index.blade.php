@@ -26,25 +26,24 @@
 <body>
 
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if(auth()->guard('org')->check())
-                <a href="{{ route('dashboard', auth()->guard('org')->oid()) }}">进入后台</a>
-                <a class="dropdown-item" href="javascript:;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            @else
-                <a href="{{ route('login') }}">登录</a>
+    <div class="top-right links">
+        <a href="/docs">文档</a>
+        @if(auth()->guard('org')->check())
+            <a href="{{ route('dashboard', auth()->guard('org')->oid()) }}">进入后台</a>
+            <a class="dropdown-item" href="javascript:;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @else
+            <a href="{{ route('login') }}">登录</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">注册</a>
-                @endif
-            @endauth
-        </div>
-    @endif
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}">注册</a>
+            @endif
+        @endauth
+    </div>
 
     <div class="content">
 

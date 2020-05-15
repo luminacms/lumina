@@ -36,7 +36,7 @@
 
             //转换静态表格
             table.init('category_table', {
-                height: 'full-100',
+                height: 'full-110',
                 limit: 999999
             });
 

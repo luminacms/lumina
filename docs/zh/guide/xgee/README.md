@@ -42,7 +42,7 @@ Route::resource('post', 'PostController');
         page: true, // 分页
         canSearch: true, // 字段搜索
         toolbar: 'default', // 工具栏
-        height: 'full-100', // 默认表格高度自适应全屏
+        height: 'full-110', // 默认表格高度自适应全屏
         action: [{'text': '推送到微信', 'event': 'pushWx'}], // 自定义行事件
         export: {url: '{{ URL::full() }}', can: true, all: true}, // 数据导出权限及接口配置
         cols: [[

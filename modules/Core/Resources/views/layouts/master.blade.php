@@ -3,7 +3,7 @@
 <div id="lumina_app">
     @include('core::flash.default')
 
-    <x-card class="m-3">
+    <x-card class="m-4" style="min-height:500px;">
         @yield('submenu')
         @yield('content')
     </x-card>

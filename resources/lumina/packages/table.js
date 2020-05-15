@@ -490,7 +490,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         toolbar: 'default',
         searchFields: null,
         lineHeight: null,
-        height: 'full-100',
+        height: 'full-110',
         page: true,
         hasRefresh: true, // 开启table刷新，init渲染table
         export: {
