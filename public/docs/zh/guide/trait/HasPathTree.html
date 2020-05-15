@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HasPathTree</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/docs/assets/css/0.styles.c5b0a4e8.css" as="style"><link rel="preload" href="/docs/assets/js/app.62584706.js" as="script"><link rel="preload" href="/docs/assets/js/2.3e84ff28.js" as="script"><link rel="preload" href="/docs/assets/js/14.765d0edf.js" as="script"><link rel="prefetch" href="/docs/assets/js/10.f5521109.js"><link rel="prefetch" href="/docs/assets/js/11.ae5baf55.js"><link rel="prefetch" href="/docs/assets/js/12.9ca6fcfb.js"><link rel="prefetch" href="/docs/assets/js/13.f0bec748.js"><link rel="prefetch" href="/docs/assets/js/15.9dd5235a.js"><link rel="prefetch" href="/docs/assets/js/16.dbedb8e6.js"><link rel="prefetch" href="/docs/assets/js/17.8e10101a.js"><link rel="prefetch" href="/docs/assets/js/18.b1b7ecf9.js"><link rel="prefetch" href="/docs/assets/js/19.631f384b.js"><link rel="prefetch" href="/docs/assets/js/20.6a4fae73.js"><link rel="prefetch" href="/docs/assets/js/3.6fbb6568.js"><link rel="prefetch" href="/docs/assets/js/4.15147c56.js"><link rel="prefetch" href="/docs/assets/js/5.8a33d769.js"><link rel="prefetch" href="/docs/assets/js/6.94321d6c.js"><link rel="prefetch" href="/docs/assets/js/7.fae61af7.js"><link rel="prefetch" href="/docs/assets/js/8.2dcb4191.js"><link rel="prefetch" href="/docs/assets/js/9.c8152319.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.c5b0a4e8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>The Feathers guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/zh/guide/base/doc.html" class="sidebar-link">文档模块</a></li><li><a href="/docs/zh/guide/base/route.html" class="sidebar-link">路由约定</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="haspathtree"><a href="#haspathtree" class="header-anchor">#</a> HasPathTree</h1> <div class="language-php extra-class"><pre class="language-php"><code>引入后自动开启树结构维护模式，并开放了几个接口，你可以轻松开启树结构数据维护！
+在引入之前
+// 对需要开启pathtree的model,数据库设计时需要调用pathtree方法（自定义blueprint）
+Schema::create('core_departments', function(Blueprint $table) {
+    
+  ...
+  $table-&gt;pathtree();
+  ...
+  
+});
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">namespace</span> <span class="token package">Modules<span class="token punctuation">\</span>Core<span class="token punctuation">\</span>Traits</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>DB</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Modules<span class="token punctuation">\</span>Core<span class="token punctuation">\</span>Utils<span class="token punctuation">\</span>Tree</span><span class="token punctuation">;</span>
+<span class="token comment">/**
+ * Class RevisionableTrait
+ * @package Venturecraft\Revisionable
+ */</span>
+<span class="token keyword">trait</span> HasPathTree
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * Create the event listeners for the saving and saved events
+     * This lets us save revisions whenever a save is made, no matter the
+     * http method.
+     *
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">bootHasPathTree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * 获取数据结构option
+     * @param $parentid
+     * @param string $name
+     * @return string
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">getOptionsHtml</span><span class="token punctuation">(</span><span class="token variable">$parentid</span><span class="token punctuation">,</span> <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'name'</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * 获取树结构table
+     * @param string $name
+     * @param string $withCount
+     * @return string
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">getTableHtml</span><span class="token punctuation">(</span><span class="token variable">$name</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'name'</span><span class="token punctuation">,</span> <span class="token variable">$withCount</span> <span class="token operator">=</span> <span class="token boolean constant">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * 获取树
+     * @param int $level
+     * @param bool $withCount
+     * @param bool $withCascade
+     * @return array
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">getTree</span><span class="token punctuation">(</span><span class="token variable">$level</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token variable">$withCount</span> <span class="token operator">=</span> <span class="token boolean constant">false</span><span class="token punctuation">,</span> <span class="token variable">$withCascade</span> <span class="token operator">=</span> <span class="token boolean constant">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * 获取所有子集
+     * @param $path
+     * @param bool $withSelf
+     * @return mixed
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">getChildren</span><span class="token punctuation">(</span><span class="token variable">$path</span><span class="token punctuation">,</span> <span class="token variable">$withSelf</span> <span class="token operator">=</span> <span class="token boolean constant">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token number">1.</span> select下拉示例<span class="token punctuation">.</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token function">form</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'parentid'</span><span class="token punctuation">,</span> \<span class="token package">Modules<span class="token punctuation">\</span>Core<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>Department</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">getOptionsHtml</span><span class="token punctuation">(</span><span class="token variable">$department</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">parentid</span><span class="token operator">?</span><span class="token operator">?</span><span class="token single-quoted-string string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token number">2.</span> 树目录示例
+<span class="token variable">$department_tree</span><span class="token punctuation">.</span><span class="token function">jstree</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        core<span class="token punctuation">:</span> <span class="token punctuation">{</span>data<span class="token punctuation">:</span> @<span class="token function">json</span><span class="token punctuation">(</span>\<span class="token package">Modules<span class="token punctuation">\</span>Cms<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>CmsCategory</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">getTree</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'posts'</span><span class="token punctuation">,</span> <span class="token boolean constant">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'changed.jstree'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>e<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">3.</span> 树结构表格示例
+ <span class="token operator">&lt;</span>table <span class="token keyword">class</span><span class="token operator">=</span><span class="token double-quoted-string string">&quot;layui-hide&quot;</span> lay<span class="token operator">-</span>filter<span class="token operator">=</span><span class="token double-quoted-string string">&quot;department_table&quot;</span><span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span>thead<span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{type:'checkbox', fixed: 'left'}&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'id', width:80, fixed: 'left'}&quot;</span><span class="token operator">&gt;</span><span class="token constant">ID</span><span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'name', width:350}&quot;</span><span class="token operator">&gt;</span>名称<span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'path'}&quot;</span><span class="token operator">&gt;</span>路径<span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'level',width:80}&quot;</span><span class="token operator">&gt;</span>深度<span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'order',width:80}&quot;</span><span class="token operator">&gt;</span>排序<span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>th lay<span class="token operator">-</span>data<span class="token operator">=</span><span class="token double-quoted-string string">&quot;{field:'updated_at'}&quot;</span><span class="token operator">&gt;</span>更新时间<span class="token operator">&lt;</span><span class="token operator">/</span>th<span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>thead<span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span>tbody<span class="token operator">&gt;</span>
+    <span class="token punctuation">{</span><span class="token operator">!</span><span class="token operator">!</span> \<span class="token package">Modules<span class="token punctuation">\</span>Core<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>Department</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">getTableHtml</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">}</span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>tbody<span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>table<span class="token operator">&gt;</span>
+</span></code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.62584706.js" defer></script><script src="/docs/assets/js/2.3e84ff28.js" defer></script><script src="/docs/assets/js/14.765d0edf.js" defer></script>
+  </body>
+</html>

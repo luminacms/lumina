@@ -1,0 +1,45 @@
+module.exports = {
+    base: '/docs/',
+    themeConfig: {
+        sidebarDepth: 3,
+        displayAllHeaders: true, // 默认值：false
+        locales: {
+            '/': {
+                lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
+                title: 'VuePress',
+                description: 'Vue-powered Static Site Generator'
+            },
+        },
+        nav: [{
+                text: '首页',
+                link: '/'
+            },
+            {
+                text: '指南',
+                link: '/zh/guide/'
+            }
+        ],
+        sidebar: [
+            {
+                title: '基本信息',
+                path: '/zh/guide/',
+                collapsable: false,
+                children: [
+                    '/zh/guide/base/',
+                    '/zh/guide/base/route',
+                    '/zh/guide/base/user',
+                    '/zh/guide/base/doc',
+                    '/zh/guide/base/lumina.js',
+                ]
+            },
+            {
+                title: 'Group 2',
+                path: '/guide/option/',
+                children: [
+                    '/'
+                ]
+            }
+        ]
+    },
+    plugins: ['@vuepress/back-to-top']
+}

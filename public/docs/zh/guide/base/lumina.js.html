@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VuePress</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/docs/assets/css/0.styles.c5b0a4e8.css" as="style"><link rel="preload" href="/docs/assets/js/app.62584706.js" as="script"><link rel="preload" href="/docs/assets/js/2.3e84ff28.js" as="script"><link rel="preload" href="/docs/assets/js/9.c8152319.js" as="script"><link rel="prefetch" href="/docs/assets/js/10.f5521109.js"><link rel="prefetch" href="/docs/assets/js/11.ae5baf55.js"><link rel="prefetch" href="/docs/assets/js/12.9ca6fcfb.js"><link rel="prefetch" href="/docs/assets/js/13.f0bec748.js"><link rel="prefetch" href="/docs/assets/js/14.765d0edf.js"><link rel="prefetch" href="/docs/assets/js/15.9dd5235a.js"><link rel="prefetch" href="/docs/assets/js/16.dbedb8e6.js"><link rel="prefetch" href="/docs/assets/js/17.8e10101a.js"><link rel="prefetch" href="/docs/assets/js/18.b1b7ecf9.js"><link rel="prefetch" href="/docs/assets/js/19.631f384b.js"><link rel="prefetch" href="/docs/assets/js/20.6a4fae73.js"><link rel="prefetch" href="/docs/assets/js/3.6fbb6568.js"><link rel="prefetch" href="/docs/assets/js/4.15147c56.js"><link rel="prefetch" href="/docs/assets/js/5.8a33d769.js"><link rel="prefetch" href="/docs/assets/js/6.94321d6c.js"><link rel="prefetch" href="/docs/assets/js/7.fae61af7.js"><link rel="prefetch" href="/docs/assets/js/8.2dcb4191.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.c5b0a4e8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>The Feathers guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/zh/guide/base/doc.html" class="sidebar-link">文档模块</a></li><li><a href="/docs/zh/guide/base/route.html" class="sidebar-link">路由约定</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><p>前端这块要感谢layui提供完善的ui解决方案，lumina.js是基于layui进行深度开发和维护的一个js架构。
+具体使用可参见layui官方文档
+这里主要提一下不同的地方：</p> <ol><li>核心文件变更
+• lumina.js合并layer.js，所以在使用的时候可全局使用layer，无需再引入
+• lumina.js对layui原本结构重新设计，有第三方扩展的时候需要注意</li> <li>gulp工程化集成
+// 开发模式会删除旧的lumina.js工程文件，不进行压缩，即时监听文件并拷贝到外部目录下
+gulp build_dev
+// 发布命令会删除旧的lumina.js工程目录，对所有css,js进行压缩混合处理，如果不想要进行压缩处理，js文件以.min.js结尾，脚本就会跳过该文件
+gulp build_dist</li> <li>集成自主包
+3.1 上传组件
+3.2 集成wangEdit
+3.3 请求封装
+lumina.js封装了jquery ajax请求，结合lumina接口相应统一处理异常及csrf验证和其他laravel需要的请求头
+// 请求代码示例
+layui.use('admin', function(){
+var request = layui.admin.request</li></ol> <p>request.ajax(option)
+request.get(url, data, cb)
+request.post(url, data, cb)
+})
+3.4 tab页面管理
+• html代码格式
+<a lay-href="XX" lay-text="title">内容管理</a>
+• js触发模式
+layui.use('admin', function(){
+var admin = layui.admin</p> <p>admin.openTabsPage(href, title)
+})
+3.5 Drawer组件
+layui.use('admin', function(){
+var admin = layui.admin</p> <p>// option具体参数参考layer参数
+admin.openDrawer(content, title, option)
+})
+你在blade模板中不必担心如何调用，lumina已经封装成组件了，给出js的方式只是为了你能更好的使用lumina：
+<x-input name="username" verify="required"></x-input>
+&lt;x-input.date name=&quot;date&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.rate name=&quot;rate&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.select name=&quot;select&quot; :options=&quot;\Modules\Core\Models\Role::getTypes()&quot;  value=&quot;module&quot;/&gt;
+&lt;x-input.radio name=&quot;radio&quot; :options=&quot;\Modules\Core\Models\Role::getTypes()&quot;  value=&quot;module&quot;/&gt;
+&lt;x-input.checkbox name=&quot;checkbox&quot; :options=&quot;\Modules\Core\Models\Role::getTypes()&quot;  value=&quot;module&quot;/&gt;
+&lt;x-input.imgs name=&quot;imgs&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.file name=&quot;file&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.media name=&quot;media&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.editor name=&quot;editor&quot; verify=&quot;required&quot; /&gt;
+&lt;x-input.meditor name=&quot;meditor&quot; verify=&quot;required&quot; /&gt;</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.62584706.js" defer></script><script src="/docs/assets/js/2.3e84ff28.js" defer></script><script src="/docs/assets/js/9.c8152319.js" defer></script>
+  </body>
+</html>
