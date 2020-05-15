@@ -289,8 +289,12 @@ layui.extend({
         layui.router();
 
         Admin.tabsPage.elem = $this;
-        var frame = parent === self ? layui : top.layui;
-        frame.admin.openTab(_href, _text || $this.text(), _id)
+
+        if(parent === self) {
+            layer.msg('请在框架中使用改功能!', {icon:2});
+            return false;
+        }
+        top.layui.admin.openTab(_href, _text || $this.text(), _id)
     });
     $body.on("click", "*[lumina-event]", function () {
         var e = $(this),
