@@ -12,6 +12,8 @@ use Modules\Payment\Models\PayTransaction;
 use Modules\Shop\Models\Attribute;
 use Modules\Shop\Models\AttributeValue;
 use Modules\Shop\Models\Sku;
+use Modules\Shop\Models\Spec;
+use Modules\Shop\Models\SpecValue;
 
 class ShopDatabaseSeeder extends Seeder
 {
@@ -30,25 +32,25 @@ class ShopDatabaseSeeder extends Seeder
 
         $this->genCategory();
         $this->genAttr();
-        $this->genSpus();
-        $this->genPayments();
+        // $this->genSpus();
+        // $this->genPayments();
     }
 
     public function genAttr()
     {
-        DB::table((new Attribute())->getTable())->truncate();
-        Attribute::insert([
+        DB::table((new Spec())->getTable())->truncate();
+        Spec::insert([
             ["id" => 1, "name" => "颜色"],
             ["id" => 2, "name" => "内存"]
         ]);
 
-        DB::table((new AttributeValue())->getTable())->truncate();
-        AttributeValue::insert([
-            ["attr_id" => 1, "value" => "红色"],
-            ["attr_id" => 1, "value" => "白色"],
-            ["attr_id" => 1, "value" => "黑色"],
-            ["attr_id" => 2, "value" => "32G"],
-            ["attr_id" => 2, "value" => "64G"],
+        DB::table((new SpecValue())->getTable())->truncate();
+        SpecValue::insert([
+            ["spec_id" => 1, "value" => "红色"],
+            ["spec_id" => 1, "value" => "白色"],
+            ["spec_id" => 1, "value" => "黑色"],
+            ["spec_id" => 2, "value" => "32G"],
+            ["spec_id" => 2, "value" => "64G"],
         ]);
     }
 
@@ -74,7 +76,7 @@ class ShopDatabaseSeeder extends Seeder
 
     protected function genSpus()
     {
-        $attrv = AttributeValue::all();
+        $attrv = SpecValue::all();
 
         DB::table((new Spu())->getTable())->truncate();
         $spus = factory(Spu::class, 10)->create()->each(function($item) use($attrv){
@@ -106,9 +108,7 @@ class ShopDatabaseSeeder extends Seeder
         ];
         DB::table((new Category())->getTable())->truncate();
         foreach ($departs as $_depart) {
-            Category::create(array_merge($_depart, [
-                'oid' => 1
-            ]));
+            Category::create($_depart);
         }
     }
 }

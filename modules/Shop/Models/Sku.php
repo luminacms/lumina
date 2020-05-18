@@ -28,7 +28,9 @@ class Sku extends BaseModel
      *
      * @var array
      */
-    protected $fieldSearchable = [];
+    protected $fieldSearchable = [
+        'uid' => '='
+    ];
 
     protected static function boot()
     {
@@ -38,9 +40,14 @@ class Sku extends BaseModel
         });
     }
 
-    public function attrVals()
+    /**
+     * sku对应属性
+     *
+     * @return void
+     */
+    public function specVals()
     {
-        return $this->belongsToMany('Modules\Shop\Models\AttributeValue', 'shop__skus_attribute_value', 'sku_id', 'attr_val_id', 'uid', 'id');
+        return $this->belongsToMany('Modules\Shop\Models\SpecValue', 'shop__skus_spec', 'sku_id', 'spec_val_id', 'uid', 'id');
     }
 
 }

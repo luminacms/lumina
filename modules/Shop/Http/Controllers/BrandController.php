@@ -60,7 +60,7 @@ class BrandController extends BaseController
     {
         try {
             $brand = $this->brand->create($request->all());
-            flash('create success', 'create success');
+            flash('create success', 'success');
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()

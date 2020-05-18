@@ -5,15 +5,15 @@ namespace Modules\Shop\Http\Controllers\Interfaces;
 use Modules\Core\Http\Controllers\BaseController;
 use Modules\Shop\Http\Requests\AttributeRequest;
 use Modules\Shop\Http\Requests\AttributeValueRequest;
-use Modules\Shop\Models\Attribute;
-use Modules\Shop\Models\AttributeValue;
+use Modules\Shop\Models\Spec;
+use Modules\Shop\Models\SpecValue;
 
 class AttributeController extends BaseController
 {
     protected $attr;
     protected $attrVal;
 
-    public function __construct(Attribute $attr, AttributeValue $attrVal)
+    public function __construct(Spec $attr, SpecValue $attrVal)
     {
         $this->attr = $attr;
         $this->attrVal = $attrVal;
@@ -28,9 +28,9 @@ class AttributeController extends BaseController
     public function create(AttributeRequest $request)
     {
         $attr = $this->attr->firstOrCreate(['name' => $request->get('name')], $request->only('name'));
-        $val = $this->attrVal->firstOrCreate(['value' => $request->get('value')], [
+        $val = $attr->vals()->firstOrCreate(['value' => $request->get('value')], [
             'value' => $request->only('value'),
-            'attr_id' => $attr->id
+            'spec_id' => $attr->id
         ]);
 
         return $this->toResponse($val);
@@ -45,8 +45,8 @@ class AttributeController extends BaseController
     public function createVal(AttributeValueRequest $request)
     {
         $res = $this->attrVal->firstOrCreate(
-            ['attr_id' => $request->get('attr_id'), 'value'=>$request->get('value') ],
-            $request->only(['attr_id', 'value'])
+            ['spec_id' => $request->get('spec_id'), 'value'=>$request->get('value') ],
+            $request->only(['spec_id', 'value'])
         );
         return $this->toResponse($res);
 

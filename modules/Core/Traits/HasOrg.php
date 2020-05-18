@@ -43,12 +43,13 @@ trait HasOrg
             }
             // 新增数据必须要求登录
             $_oid = auth()->guard('org')->oid();
-            if(\request()->is('api/*') || \request()->is('interface/*') ) {
-                // jwt接口oid直接取路由oid
+            if(!$_oid && (\request()->is('api/*') || \request()->is('interface/*'))) {
+                // session不存在, jwt接口oid直接取路由oid
                 $_oid = \request('oid', request()->header('oid'));
             }
+
             if(!$_oid && !$model->oid) {
-                Log::error('oid缺失');
+                abort(500, 'oid缺失');
                 return false;
             }
             $model->oid = $model->oid?$model->oid:$_oid;

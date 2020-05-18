@@ -87,14 +87,13 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     // 清空输入内容
                     $specNameInput.val('') && $specValueInput.val('');
                     data.spec_attr.push({
-                        group_id: res.attr_id,
+                        group_id: res.spec_id,
                         group_name: specNameInputValue,
                         spec_items: [{
                             item_id: res.id,
                             spec_value: res.value
                         }]
                     });
-
                     // 渲染规格属性html
                     _this.renderHtml();
                     // 隐藏添加规格组表单
@@ -134,7 +133,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                 // 添加到数据库
                 var load = layer.load();
                 admin.request.post('/interface/attr/val/create', {
-                    attr_id: $specGroup.data('group-id'),
+                    spec_id: $specGroup.data('group-id'),
                     value: specItemInputValue
                 }, function(res) {
                     layer.close(load);
@@ -224,7 +223,6 @@ layui.define(['laytpl', 'admin'], function (exports) {
             // 渲染商品规格元素
             this.$specAttr.html(template('tpl_spec_attr', data));
 
-            console.log(data)
             // 渲染商品规格table
             this.renderTabelHtml();
         },
@@ -234,6 +232,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
          */
         renderTabelHtml: function () {
             var $specTabel = this.$container.find('.spec-sku-tabel'),
+                good_group_ids = [],
                 $goodsSku = $specTabel.parent();
             // 商品规格为空：隐藏sku容器
             if (data.spec_attr.length === 0) {
@@ -244,7 +243,14 @@ layui.define(['laytpl', 'admin'], function (exports) {
             // 构建规格组合列表
             this.buildSpeclist();
             // 渲染table
-            $specTabel.html(template('tpl_spec_table', data));
+            data.spec_attr.forEach(function (item, index) {
+                good_group_ids.push(item.group_id)
+            });
+            $specTabel.html(template('tpl_spec_table', $.extend(data, {
+                'spec_ids': good_group_ids.join(',')
+            })));
+
+            console.log(data)
             // 显示sku容器
             $goodsSku.show();
         },
@@ -280,7 +286,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     specSkuIdAttr.push(skuValues[parseInt(point.toString())].item_id);
                 }
                 spec_list.push({
-                    attr_id: specSkuIdAttr.join(','),
+                    spec_val_ids: specSkuIdAttr.join(','),
                     rows: rowData,
                     form: {}
                 });
@@ -289,7 +295,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
             if (data.spec_list.length > 0 && spec_list.length > 0) {
                 for (i = 0; i < spec_list.length; i++) {
                     var overlap = data.spec_list.filter(function (val) {
-                        return val.attr_id === spec_list[i].attr_id;
+                        return val.spec_val_ids === spec_list[i].spec_val_ids;
                     });
                     if (overlap.length > 0) spec_list[i].form = overlap[0].form;
                 }
@@ -328,9 +334,10 @@ layui.define(['laytpl', 'admin'], function (exports) {
 
         render: function (_option, baseData) {
             options = $.extend(true, {}, options, _option);
-            // 已存在的规格数据
+            // // 已存在的规格数据
             typeof baseData !== 'undefined' && baseData !== null && (data = baseData);
-            // 初始化
+
+            // // 初始化
             this.initialize();
 
         }

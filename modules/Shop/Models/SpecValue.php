@@ -9,15 +9,15 @@ use Modules\Core\Models\BaseModel;
  *
  * @package namespace Modules\Shop\Models;
  */
-class AttributeValue extends BaseModel
+class SpecValue extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public $table = "shop__attribute_values";
-    protected $fillable = ['attr_id', 'value'];
+    public $table = "shop__spec_values";
+    protected $fillable = ['spec_id', 'value'];
 
     /**
      * The attributes that are can be search =/like.

@@ -60,7 +60,7 @@ class SkuController extends BaseController
     {
         try {
             $sku = $this->sku->create($request->all());
-            flash('create success', 'create success');
+            flash('create success', 'success');
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
@@ -119,7 +119,7 @@ class SkuController extends BaseController
             }
             if($model->fill($request->all())->save()){
                 flash('update success', 'update success');
-                
+
                 return !$request->expectsJson()
                     ? redirect()->back()
                     : $this->toResponse($model, 'update success');

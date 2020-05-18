@@ -21,6 +21,8 @@ class CreateBrandsTable extends Migration
             $table->createby();
 
             $table->string('name');
+            $table->string('name_english')->nullable()->comment('品牌英文名');
+            $table->string('reg_num')->nullable()->comment('商标注册号');
             $table->string('logo_src')->nullable();
             $table->string('description', 500)->nullable();
 

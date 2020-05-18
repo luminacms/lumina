@@ -283,18 +283,12 @@ layui.extend({
     });
     $body.on("click", "*[lay-href]", function () {
         var $this = $(this),
-            _id = $this.parent("dd").data('id'),
             _href = $this.attr("lay-href"),
             _text = $this.attr("lay-text");
         layui.router();
 
         Admin.tabsPage.elem = $this;
-
-        if(parent === self) {
-            layer.msg('请在框架中使用改功能!', {icon:2});
-            return false;
-        }
-        top.layui.admin.openTab(_href, _text || $this.text(), _id)
+        top.layui.admin.openTab(_href, _text || $this.text())
     });
     $body.on("click", "*[lumina-event]", function () {
         var e = $(this),
@@ -326,9 +320,9 @@ layui.extend({
     };
 
     // 打开tab页面
-    Admin.openTab = function(href, title, tabid){
+    Admin.openTab = function(href, title, option){
         var hasOpened, _tabs = $($navs).find("li"),
-            tabID = tabid || href.replace(location.origin, "");
+            tabID = option.id || href.replace(location.origin, "");
 
         _tabs.each(function (idx) {
             var $this = $(this),

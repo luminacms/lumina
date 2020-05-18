@@ -1,5 +1,5 @@
 <?php
-    $_type = request('type', \Modules\Shop\Models\Spu::TYPE_SINGLE);
+    $_type = $spu->type ?? request('type', \Modules\Shop\Models\Spu::TYPE_SINGLE);
 ?>
 <div class="layui-tab2 j_attrwrap" lay-filter="spu_attr">
     <ul class="layui-tab-title">
@@ -55,7 +55,8 @@
 
 <x-formItem class="layui-layout-admin">
 	<div class="layui-footer z-50 shadow" style="left:0;">
-		<button class="layui-btn" lay-submit>提交</button>
+        <button class="layui-btn J_ajax" lay-submit>提交</button>
+        <input type="hidden" name="type" value="{{ $_type }}">
 		<button type="reset" class="layui-btn layui-btn-primary" lay-submit-cancel>重置</button>
 	</div>
 </x-formItem>

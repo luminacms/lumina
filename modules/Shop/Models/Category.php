@@ -14,14 +14,14 @@ use Modules\Core\Traits\HasPathTree;
  */
 class Category extends BaseModel
 {
-    use HasOrg, HasPathTree, HasCreateBy;
+    use HasPathTree, HasCreateBy;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $table = 'shop__categories';
-    protected $fillable = ['oid','create_by', 'status', 'name', 'parentid', 'path', 'level', 'order', 'thumb'];
+    protected $fillable = ['create_by', 'status', 'name', 'parentid', 'path', 'level', 'order', 'thumb'];
 
     /**
      * The attributes that are can be search =/like.

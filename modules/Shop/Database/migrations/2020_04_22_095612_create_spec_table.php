@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateAttributeValuesTable.
+ * Class CreateAttributesTable.
  */
-class CreateAttributeValuesTable extends Migration
+class CreateSpecTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,12 +15,15 @@ class CreateAttributeValuesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('shop__attribute_values', function(Blueprint $table) {
+		Schema::create('shop__spec', function(Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('attr_id');
-            $table->string('value', 500);
+            $table->string('name');
             $table->string('description', 500)->nullable();
+
+            $table->org();
+            $table->status();
+            $table->createby();
 
             $table->timestamps();
 		});
@@ -33,6 +36,6 @@ class CreateAttributeValuesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('shop__attribute_values');
+		Schema::drop('shop__spec');
 	}
 }

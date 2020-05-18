@@ -129,7 +129,7 @@
             @{{ each spec_attr }}
             <th>@{{ $value.group_name }}</th>
             @{{ /each }}
-            <th>商家编码</th>
+            <th>商家编码（全局唯一，不支持修改）</th>
             <th>销售价</th>
             <th>划线价</th>
             <th>库存</th>
@@ -138,15 +138,15 @@
     </thead>
     <tbody>
     @{{ each spec_list item }}
-    <tr data-index="@{{ $index }}" data-attr-id="@{{ item.attr_id }}">
+    <tr data-index="@{{ $index }}" data-attr-id="@{{ item.spec_id }}">
         @{{ each item.rows td itemKey }}
         <td class="td-spec-value am-text-middle" rowspan="@{{ td.rowspan }}">
             @{{ td.spec_value }}
         </td>
         @{{ /each }}
         <td>
-            <input type="text" name="sku[@{{$index}}][uid]" value="@{{ item.form.uid }}" class="ipt-goods-no layui-input am-field-valid" required>
-            <input type="hidden" name="sku[@{{$index}}][attrs]" value="@{{ item.attr_id }}" />
+            <input type="text" name="sku[@{{$index}}][uid]" value="@{{ item.form.uid }}" class="ipt-goods-no layui-input am-field-valid" @{{ item.form.readonly?"readonly=readonly":"" }} required>
+            <input type="hidden" name="sku[@{{$index}}][spec_val_ids]" value="@{{ item.spec_val_ids }}" />
         </td>
         <td>
             <input type="number" name="sku[@{{$index}}][price_fee]" value="@{{ item.form.price_fee }}" class="am-field-valid layui-input" required>
@@ -163,61 +163,33 @@
     </tr>
     @{{ /each }}
     </tbody>
+    <input type="hidden" name="spec_ids" value="@{{ spec_ids }}" />
 </script>
 <script src="https://cdn.jsdelivr.net/npm/art-template@4.13.2/lib/template-web.js"></script>
 
 
+<?php
+
+    // $spec = Spec $spu->spec_ids;
+
+
+    // dd($spec);
+
+?>
 <script>
     layui.extend({
         'attr': 'modules/shop/attr'
     }).use(['attr', 'form', 'element'], function(){
         var attr = layui.attr,
+            form = layui.form,
             element = layui.element;
-
-        // attr.render({
-        //     container: '.goods-spec-many'
-        // },{
-        //     spec_attr: [],
-        //     spec_list: []
-        // })
-
 
         attr.render({
             container: '.goods-spec-many'
         },{
-            spec_attr: [
-                {'group_id': 1, 'group_name': '颜色', 'spec_items': [
-                    {'item_id': 11, 'spec_value': '红色'}
-                ]},
-                {'group_id': 2, 'group_name': '内存', 'spec_items': [
-                    {'item_id': 21, 'spec_value': '8G'},
-                    {'item_id': 22, 'spec_value': '16G'},
-                ]}
-            ],
-            spec_list: [
-                {
-                    'attr_id': '2,6',
-                    form: {
-                        market_price_fee: "3",
-                        price_fee: "2",
-                        stock: "4",
-                        uid: "1",
-                        weight: "5"
-                    }
-                },
-                {
-                    'attr_id': '2,6',
-                    form: {
-                        market_price_fee: "3",
-                        price_fee: "2",
-                        stock: "4",
-                        uid: "1",
-                        weight: "5"
-                    }
-                }
-            ]
+            spec_attr: @json($spec_attr ?? []),
+            spec_list: @json($spec_list ?? [])
         })
-
     })
 
 </script>

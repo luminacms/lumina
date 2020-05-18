@@ -5,11 +5,11 @@
 </x-formItem>
 
 <x-formItem :label="__('core::main.logo_src')">
-	<x-input.imgs limit="4" name="logo_src" verify="required" :value="$brand->logo_src??''"/>
+	<x-input.imgs limit="4" name="logo_src" :value="$brand->logo_src??''"/>
 </x-formItem>
 
 <x-formItem :label="__('core::main.description')">
-	<x-input.textarea name="description" verify="required" :value="$brand->description??''"/>
+	<x-input.textarea name="description" :value="$brand->description??''"/>
 </x-formItem>
 
 

@@ -24,7 +24,7 @@ class Spu extends BaseModel
      * @var array
      */
     protected $table = 'shop__spus';
-    protected $fillable = ['uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pic_url','create_by','type'];
+    protected $fillable = ['uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pic_url','create_by','type','spec_ids'];
 
     /**
      * The attributes that are can be search =/like.
@@ -59,5 +59,10 @@ class Spu extends BaseModel
     {
         return $this->hasMany('Modules\Shop\Models\Sku', 'spu_id', 'uid');
     }
+
+    // public function getSkuField()
+    // {
+    //     return []
+    // }
 
 }

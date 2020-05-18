@@ -32,7 +32,14 @@
                     {"field":"sku_id","title":"skuId"},
                     {"field":"stock","title":"stock"},
                     {"field":"attrs","title":"attrs","templet": "#sku_attrvals"},
-                    {"field":"thumb","title":"thumb"},{"field":"pics","title":"pics"},{"field":"price_fee","title":"price_fee"},{"field":"market_price_fee","title":"market_price_fee"},{"field":"weight","title":"weight"},{"field":"status","title":"status"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
+                    {"field":"price_fee","title":"price_fee"},
+                    {"field":"market_price_fee","title":"market_price_fee"},
+                    {"field":"weight","title":"weight"},
+                    {"field":"status","title":"status"},
+                    {"field":"create_by","title":"create_by"},
+                    {"field":"created_at","title":"created_at","hide":"true"},
+                    {"field":"updated_at","title":"updated_at"}
+                ]]
             });
 
             //events

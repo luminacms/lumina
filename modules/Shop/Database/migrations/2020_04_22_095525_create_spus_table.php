@@ -23,6 +23,7 @@ class CreateSpusTable extends Migration
             $table->integer('category_id');
             $table->status();
             $table->tinyInteger('type')->default(1);
+            $table->string('spec_ids', 500)->nullable();
 
             $table->string('name');
             $table->string('description', 500)->nullable();

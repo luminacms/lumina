@@ -36,11 +36,12 @@ class CreateSkusTable extends Migration
             $table->unique('uid');
         });
 
-        Schema::create('shop__skus_attribute_value', function(Blueprint $table) {
+        Schema::create('shop__skus_spec', function(Blueprint $table) {
             $table->increments('id');
 
             $table->char('sku_id', 40);
-            $table->integer('attr_val_id');
+            $table->integer('spec_id');
+            $table->integer('spec_val_id');
 		});
 	}
 
@@ -52,6 +53,6 @@ class CreateSkusTable extends Migration
 	public function down()
 	{
 		Schema::drop('shop__skus');
-		Schema::drop('shop__skus_attribute_value');
+		Schema::drop('shop__skus_spec');
 	}
 }

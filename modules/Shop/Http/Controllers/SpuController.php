@@ -2,13 +2,15 @@
 
 namespace Modules\Shop\Http\Controllers;
 
-use Modules\Core\Http\Controllers\BaseController;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Modules\Shop\Models\Sku;
 use Modules\Shop\Models\Spu;
+use Illuminate\Support\Facades\DB;
 use Modules\Shop\Http\Requests\SpuRequest;
 use Modules\Shop\Http\Resources\SpuResource;
-use Modules\Shop\Models\Sku;
+use Illuminate\Validation\ValidationException;
+use Modules\Core\Http\Controllers\BaseController;
+use Modules\Shop\Models\Spec;
 
 /**
  * Class SpuController.
@@ -60,19 +62,30 @@ class SpuController extends BaseController
     public function store(SpuRequest $request)
     {
         try {
-            $spu = $this->spu->create($request->all());
-            foreach($request->get('sku') as $_skuItem) {
-                $sku = Sku::create(array_merge($_skuItem, ['spu_id' => $spu->uid]));
-                if(isset($_skuItem['attrs'])){
-                    $sku->attrVals()->attach(explode(',', $_skuItem['attrs']));
-                }
+            if(!$request->checkUniqueSkuid()){
+                flash('sku_id已存在', 'error');
+
+                return !$request->expectsJson()
+                ? redirect()->back()->withInput()
+                : $this->toError(-1, 'sku_id已存在');
             }
 
-            flash('create success', 'create success');
+            $res = DB::transaction(function () use($request) {
+                $spu = $this->spu->create($request->all());
+                foreach($request->get('sku') as $_skuItem) {
+                    $sku = Sku::firstOrCreate(['uid' => $_skuItem['uid']], array_merge($_skuItem, ['spu_id' => $spu->uid]));
+                    if(isset($_skuItem['spec_val_ids'])){
+                        $sku->attrVals()->attach(explode(',', $_skuItem['spec_val_ids']));
+                    }
+                }
+
+                flash('create success', 'success');
+                return $spu;
+            });
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
-                    : $this->toResponse($spu, 'success');
+                    : $this->toResponse($res, 'success');
         } catch (ValidationException $e) {
             return $this->toException($e);
         }
@@ -102,9 +115,36 @@ class SpuController extends BaseController
     public function edit($id)
     {
         $spu = $this->spu->findOrFail($id);
+
+        $spec_attr = Spec::whereIn('id', explode(',', $spu->spec_ids))->with('vals')->get()->map(function($sp) {
+            return [
+                'group_id'=> $sp['id'],
+                'group_name' => $sp['name'],
+                'spec_items' => $sp->vals->map(function($item) {
+                    return [
+                        'item_id' => $item['id'].'',
+                        'spec_value' => $item['value']
+                    ];
+                })->toArray()
+            ];
+        })->toArray();
+        $spec_list = $spu->sku->map(function($sku) {
+            return [
+                'spec_val_ids' => $sku->specVals->implode('id', ',').'',
+                'form' => [
+                    'readonly' => true,
+                    'uid'=> $sku->uid,
+                    'market_price_fee' => $sku->market_price_fee,
+                    'price_fee'=> $sku->price_fee,
+                    'stock'=> $sku->stock,
+                    'weight'=> $sku->weight,
+                ]
+            ];
+        })->toArray();
+
         // $this->authorize('update', $spu);
 
-        return view('shop::spu.edit', compact('spu'));
+        return view('shop::spu.edit', compact('spu', 'spec_attr', 'spec_list'));
     }
 
     /**
