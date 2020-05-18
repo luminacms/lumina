@@ -320,9 +320,9 @@ layui.extend({
     };
 
     // 打开tab页面
-    Admin.openTab = function(href, title, option){
+    Admin.openTab = function(href, title){
         var hasOpened, _tabs = $($navs).find("li"),
-            tabID = option.id || href.replace(location.origin, "");
+            tabID = href.replace(location.origin, "");
 
         _tabs.each(function (idx) {
             var $this = $(this),

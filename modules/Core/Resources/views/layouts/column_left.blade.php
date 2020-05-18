@@ -4,7 +4,7 @@
     @include('core::flash.default')
 
     <div class="g-layout-horizontal m-4">
-        <div id="splitLeft" class="split p-6">
+        <div id="splitLeft" class="split p-6" style="width: calc(15% - 3px);">
             @yield('leftside')
         </div>
         <div id="splitRight" class="split p-6" style="width: calc(85% - 3px);">

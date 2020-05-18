@@ -51,8 +51,6 @@
                 }
 
                 if((obj.event == 'delete'|| obj.event == 'update')) {
-
-                    console.log(checked)
                     if(checked.data.length !== 1) {
                         layer.msg('请选择一条数据!');
                         return false;

@@ -167,15 +167,6 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/art-template@4.13.2/lib/template-web.js"></script>
 
-
-<?php
-
-    // $spec = Spec $spu->spec_ids;
-
-
-    // dd($spec);
-
-?>
 <script>
     layui.extend({
         'attr': 'modules/shop/attr'
