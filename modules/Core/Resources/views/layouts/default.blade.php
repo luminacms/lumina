@@ -12,7 +12,7 @@
     <meta name="author" content="jory|jorycn@163.com">
     @stack('style')
 
-    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script>
         window.msg = {message: '{{ session('message') }}', errors: @json($errors->all())}
         window.userinfo = {!! json_encode(Auth::guest()?[]:Auth::user()) !!}

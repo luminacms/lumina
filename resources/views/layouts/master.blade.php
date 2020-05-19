@@ -20,7 +20,7 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://cdn.xaweiju.com/libs/ieonly/html5shiv.js"></script>
-    <script src="https://cdn.xaweiju.com/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <![endif]-->
 </head>
 <body>
