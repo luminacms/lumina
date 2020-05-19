@@ -1,3 +1,4 @@
+-- https://gitee.com/xany/bestshop-php
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
