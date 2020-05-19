@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
 
             $table->char('order_id', 20);
 
-            $table->smallInteger('status', 6)->default(0);
+            $table->smallInteger('status')->default(0);
             $table->decimal('pre_total_fee', 12, 2)->comment('订单金额');
             $table->decimal('total_fee', 12, 2)->comment('实付金额');
             $table->timestamp('expired_at');
@@ -36,6 +36,7 @@ class CreateOrdersTable extends Migration
             $table->ipAddress('created_at_ip');
             $table->org();
 
+            $table->unique('order_id');
             $table->timestamps();
         });
 
@@ -47,6 +48,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('order_id')->references('order_id')->on('shop__orders');
         });
         Schema::create('shop__order_address', function(Blueprint $table) {
+            $table->increments('id');
             $table->char('order_id', 20);
 
             $table->string('contact_name')->comment('收货人姓名');
