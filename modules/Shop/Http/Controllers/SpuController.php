@@ -75,7 +75,7 @@ class SpuController extends BaseController
                 foreach($request->get('sku') as $_skuItem) {
                     $sku = Sku::firstOrCreate(['uid' => $_skuItem['uid']], array_merge($_skuItem, ['spu_id' => $spu->uid]));
                     if(isset($_skuItem['spec_val_ids'])){
-                        $sku->attrVals()->attach(explode(',', $_skuItem['spec_val_ids']));
+                        $sku->specVals()->attach(explode(',', $_skuItem['spec_val_ids']));
                     }
                 }
 
