@@ -159,19 +159,59 @@ trait HasPathTree
     }
 
     /**
+     * simple tree
+     *
+     * @param integer $level
+     * @return void
+     */
+    public static function getSimpleTree($level = 1)
+    {
+        $_category = self::all()->map(function($item, $key){
+            return [
+                'id' => $item->id,
+                'label' => $item->name,
+                'value' => $item->id,
+                'parentid' => $item->parentid,
+            ];
+        });
+        $tree = new Tree($_category->toArray());
+        return array_values($tree->get_tree_array());
+    }
+
+    /**
      * @param $path
      * @param bool $withSelf
      * @return mixed
      */
     public static function getChildren($path, $withSelf = true)
     {
-        $class = get_called_class();
-        $childs = (new $class)->where('path', 'like', $path.'%')->get();
+        $childs = self::where('path', 'like', $path.'%')->get();
         $res = [];
         foreach ($childs as $_child) {
             if(!$withSelf && $_child['path']==$path) continue;
             $res[] = $_child['id'];
         }
         return $res;
+    }
+
+    /**
+     * 获取父级全路径
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public static function getFullValue($id)
+    {
+        $_category = self::all()->map(function($item, $key){
+            return [
+                'id' => $item->id,
+                'label' => $item->name,
+                'value' => $item->id,
+                'level' => $item->level,
+                'parentid' => $item->parentid,
+            ];
+        });
+        $tree = new Tree($_category->toArray());
+        return collect($tree->get_parents($id))->push($_category->firstWhere('id', $id))->sortBy('level');
     }
 }

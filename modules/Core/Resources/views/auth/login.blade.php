@@ -3,9 +3,6 @@
 @push('style')
     <style>
         .user-login-header h2{margin-bottom: 10px;font-weight: 300;font-size: 30px;color: #000}
-        .user-login-body .layui-form-item{position: relative}
-        .user-login-icon{position: absolute;left: 1px;top: 1px;width: 38px;line-height: 36px;text-align: center;color: #d2d2d2}
-        .user-login-body .layui-form-item .layui-input{padding-left: 38px}
         html{line-height: 1.15;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
         body{margin: 0;}
         header, nav, section{display: block;}
@@ -122,18 +119,18 @@
                     <div class="user-login-box user-login-body layui-form" style="width:317px;">
                         <x-form :action="route('login')" method="post">
 
-                            <div class="layui-form-item">
-                                <label class="user-login-icon fa fa-user" for="xb-user-login-username"></label>
+                            <div class="layui-form-item layui-input-icon">
+                                <label for="xb-user-login-username"><i class="fa fa-user"></i></label>
                                 <input type="text" name="email" class="layui-input" lay-verify="required|email" placeholder="邮箱" value="{{ old('email') }}">
                             </div>
-                            <div class="layui-form-item">
-                                <label class="user-login-icon fa fa-lock" for="xb-user-login-password"></label>
+                            <div class="layui-form-item layui-input-icon">
+                                <label class="layui-input-icon" for="xb-user-login-password"><i class="fa fa-lock"></i></label>
                                 <input type="password" name="password" class="layui-input" id="xb-user-login-password" lay-verify="required" placeholder="密码">
                             </div>
-                            <div class="layui-form-item">
+                            <div class="layui-form-item layui-input-icon">
                                 <div class="layui-row">
                                     <div class="layui-col-xs7">
-                                        <label class="user-login-icon fa fa-shield" for="xb-user-login-vercode"></label>
+                                        <label class="layui-input-icon" for="xb-user-login-vercode"><i class="fa fa-shield"></i></label>
                                         <input type="text" name="captcha" class="layui-input" lay-verify="required" placeholder="验证码"/>
                                     </div>
                                     <div class="layui-col-xs5">

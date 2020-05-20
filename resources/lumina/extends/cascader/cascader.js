@@ -1,16 +1,10 @@
-/**
- * @Name: 基于layui的无限级联选择器
- * @Author: 李祥
- * @License：MIT
- * 最近修改时间: 2019/06/28
- */
 
 layui.define(["jquery","laytpl","layer"], function (exports) {
     var $ = layui.jquery;
     var laytpl = layui.laytpl;
     var layer = layui.layer;
     var zIndex=3000;    // 共用一个层级
-    
+
     function Cascader(option) {
         this.option=option;     // 获取传入的数据
         this.domContent="";     // content节点
@@ -66,22 +60,30 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
         },
         // 初始化容器和标签
         init: function () {
-            $(this.elem).after('<i class="layui-icon layui-icon-down" data-cascader="icon"></i>');
-            $(this.elem).after('<div class="urp-cascader-content"></div>');
-            $(this.elem).data("cascader","elem");
+            var $this = $(this.elem),
+                self = this;
+            // $(this.elem).after('<i class="fa fa-angle-double-up" data-cascader="icon"></i>');
+            $this.after('<div class="urp-cascader-content"></div>');
+            $this.data("cascader","elem");
+
+            // $this.on("keyup", function(){
+
+            //     console.log(self.option)
+            //     console.log($this.val())
+            // })
         },
         // 初始化第一层
         initFirst: function () {
             var string =  laytpl(
                 '<ul class="urp-cascader-child">'+
                     '{{# for(var i=0;i<d.length;i++){ }}'+
-                        '<li>{{ d[i].label }}<i class="layui-icon layui-icon-right" ></i></li>'+
+                        '<li>{{ d[i].label }}<i class="fa fa-angle-double-right" ></i></li>'+
                     '{{# } }}'+
                 '</ul>'
             ).render(this.d);
             $(this.elem).siblings(".urp-cascader-content").append(string);
             this.domContent=$(this.elem).siblings(".urp-cascader-content");
-            this.domContent.find(".urp-cascader-child").hide();
+            // this.domContent.find(".urp-cascader-child").hide();
 
             // 显示隐藏第一层的标签
             for(var i=0;i<this.d.length;i++){
@@ -100,7 +102,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
 
             this.positionArr.length=this.floor;
             this.positionArr.push(index);
-            
+
             // 等同下方注释
             this.blockData = this.d[this.positionArr[0]];
             for(var i = 1; i<=this.floor; i++){
@@ -119,11 +121,11 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
             //     case 3:
             //         blockData=d[arr[0]]["children"][arr[1]]["children"][arr[2]]["children"][arr[3]];
             //         break;
-            
+
             //     default:
             //         break;
             // }
-            
+
         },
         // 若有第二层则初始化第二层
         initChild: function (triggerData) {
@@ -137,7 +139,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
             var string =  laytpl(
                 '<ul class="urp-cascader-child">'+
                     '{{# for(var i=0;i< d.length;i++){ }}'+
-                        '<li>{{ d[i].label }}<i class="layui-icon layui-icon-right"></i></li>'+
+                        '<li>{{ d[i].label }}<i class="fa fa-angle-double-right"></i></li>'+
                     '{{# } }}'+
                 '</ul>'
             ).render(this.blockData["children"]);
@@ -156,30 +158,30 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                 // 文本拼接
                 this.textStr=this.textArr.join("/");
                 $(this.elem).val(this.textStr);
-                
+
                 if(triggerData!=="initValue" && this.option.success) this.option.success(this.valueArr,this.textArr);
             }
         },
         // 结束之后拿取数据
         finishInitData: function (triggerData) {
             this.domContent.find(".urp-cascader-child:gt("+(this.floor)+")").remove();
-            
+
             this.textArr.length=this.floor;
             this.textArr.push(this.blockData.label);
             this.valueArr.length=this.floor;
             this.valueArr.push(this.blockData.value);
             // 文本拼接
-            this.textStr=this.textArr.join("/");
+            this.textStr=this.textArr.join(" > ");
 
-            (this.option.showLastLevels)?(
-                $(this.elem).val(this.textArr[this.textArr.length-1])
-            ):(
-                $(this.elem).val(this.textStr)
-            );
-            
+            // (this.option.showLastLevels)?(
+            //     $(this.elem).val(this.textArr[this.textArr.length-1])
+            // ):(
+            //     $(this.elem).val(this.textStr)
+            // );
+
             this.onOff = false;
-            $(this.elem).siblings(".urp-cascader-content").find("ul").slideUp(100);
-            $(this.elem).siblings("i").replaceWith('<i class="layui-icon layui-icon-down" data-cascader="icon"></i>');
+            // $(this.elem).siblings(".urp-cascader-content").find("ul").slideUp(100);
+            // $(this.elem).siblings("i").replaceWith('<i class="fa fa-angle-double-up" data-cascader="icon"></i>');
 
             // 如果有初始值，则第一次不回调
             if(triggerData!=="initValue" && this.option.success) this.option.success(this.valueArr,this.textArr);
@@ -199,7 +201,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                 var arrr=[];    // 保存当前在data中的位置
                 var data=self.d;     // 需要遍历的子数组
                 // 等同于下面的注释
-                
+
                 value.forEach(function(val,index){
                     // console.log(data);
                     if(!data) throw "选择器"+self.elem+"初始化数据不匹配";
@@ -270,7 +272,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                     )
                 );
             })
-                
+
             // input点击显示隐藏
             $(document).on("click",self.elem+","+self.elem+" ~ i.layui-icon", function () {
                 self.onOff = !self.onOff;
@@ -282,7 +284,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                     self.domContent.css("zIndex",zIndex);
                 } else {
                     $(self.elem).siblings(".urp-cascader-content").find("ul").slideUp(100);
-                    $(self.elem).siblings("i").replaceWith('<i class="layui-icon layui-icon-down" data-cascader="icon"></i>');
+                    $(self.elem).siblings("i").replaceWith('<i class="fa fa-angle-double-up" data-cascader="icon"></i>');
                 }
             })
             // 点击外层文档隐藏
@@ -292,7 +294,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                 self.onOff = false;
                 if(!self.onOff){
                     $(self.elem).siblings(".urp-cascader-content").find("ul").slideUp(100);
-                    $(self.elem).siblings("i").replaceWith('<i class="layui-icon layui-icon-down" data-cascader="icon"></i>');
+                    $(self.elem).siblings("i").replaceWith('<i class="fa fa-angle-double-up" data-cascader="icon"></i>');
                 }
             })
             self.initValue();
@@ -303,13 +305,13 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
             $(this.elem).off().siblings(".urp-cascader-content,.layui-icon").remove();
             this.option = $.extend({}, this.option, option);
             $(this.elem).val("");
-            this.domContent="";     
-            this.textArr=[];        
-            this.textStr="";        
-            this.valueArr=[];       
-            this.onOff=false;       
-            this.positionArr=[];    
-            this.blockData={};      
+            this.domContent="";
+            this.textArr=[];
+            this.textStr="";
+            this.valueArr=[];
+            this.onOff=false;
+            this.positionArr=[];
+            this.blockData={};
             return this.initOption()
         }
     }
@@ -322,7 +324,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
             }
         }
     }
-    
+
     exports('cascader', function(option) {
         var ins=new Cascader(option);
         return thisCas.call(ins);

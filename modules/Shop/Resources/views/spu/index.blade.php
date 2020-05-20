@@ -57,8 +57,7 @@
                 var checked = table.checkStatus('data_spu_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openModal('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
-                        area: '1200px',
+                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
                         end: function(index, layero){
                             table.reload('data_game_table')
                         }

@@ -1968,3 +1968,18 @@ html #layuicss-layer{display: none; position: absolute; width: 1989px;}
   .lumina-side-shrink-m .layui-layout-admin .layui-layout-right {
     transform: translate3d(140px, 0, 0);
   }
+
+
+
+  .layui-form-item.layui-input-icon label>i{
+    position: absolute;left: 1px;top: 1px;width: 38px;line-height: 36px;text-align: center;color: #d2d2d2
+  }
+  .layui-form-item.layui-input-icon{position: relative}
+  .layui-form-item.layui-input-icon .layui-input{padding-left: 38px}
+  .layui-form-item .j_cancel{
+    position: absolute;
+    right: 12px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+  }

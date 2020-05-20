@@ -24,6 +24,7 @@
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.1",
         "nwidart/laravel-modules": "^6.2",
+        "rap2hpoutre/fast-excel": "^1.7",
         "rap2hpoutre/laravel-log-viewer": "^1.4",
         "spatie/laravel-permission": "^3.11",
         "spatie/laravel-responsecache": "6.2.*",

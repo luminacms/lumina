@@ -34,7 +34,7 @@ class CoreBlueprint
      */
     public static function pathtree(Blueprint $table)
     {
-        $table->integer('parentid')->nullable()->comment('父级id');
+        $table->integer('parentid')->default(0)->comment('父级id');
         $table->string('path', 500)->nullable()->comment('路径');
         $table->integer('level')->nullable()->comment('路径深度');
     }
