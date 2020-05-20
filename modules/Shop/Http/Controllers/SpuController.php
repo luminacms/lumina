@@ -85,7 +85,7 @@ class SpuController extends BaseController
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
-                    : $this->toResponse($res, 'success');
+                    : $this->toResponse(['redirect' => route('shop.spu.index')], 'success');
         } catch (ValidationException $e) {
             return $this->toException($e);
         }

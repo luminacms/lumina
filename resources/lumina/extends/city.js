@@ -67,8 +67,6 @@ layui.define(['laytpl', 'form'], function(exports) {
                         });
                     }
                 }
-
-                console.log(result)
                 return result;
             },
             getAreaCodeByCode = function(options) {
@@ -155,10 +153,14 @@ layui.define(['laytpl', 'form'], function(exports) {
                     } else {
                         $picker.append(html);
                     }
+
+
                     form.on('select(' + filter + ')', function(data) {
 
                         var $sel = $(data.elem)
                         var _itemdata = _.find(DATA, {'code': data.value})
+
+                        console.log(_itemdata)
                         switch ($sel.attr('lay-filter')) {
                             case pickerFilter.province:
                                 $sel.prev("input[name="+that.config.names.province+"]").val(_itemdata.name)
@@ -176,10 +178,12 @@ layui.define(['laytpl', 'form'], function(exports) {
                     });
                     form.render('select');
                 });
+
             };
         config.vid = new Date().getTime();
         $elem.html(tempContent(config.vid));
         var $picker = $elem.find('div[data-action=picker_' + config.vid + ']');
+
         //如果需要初始化
         if (config.codeConfig) {
             var path = getAreaCodeByCode(config.codeConfig);

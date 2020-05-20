@@ -13,7 +13,7 @@
                 $category_id = request('category_id');
                 $fullPath = Modules\Shop\Models\Category::getFullValue($category_id);
             ?>
-            <div style="line-height: 37px;">{{ $fullPath->implode('label', ' > ') }}</div>
+            <div style="line-height: 37px;" class="font-bold">{{ $fullPath->implode('label', ' > ') }}</div>
             <input type="hidden" name="category_id" value="{{ $category_id }}">
         </x-formItem>
 

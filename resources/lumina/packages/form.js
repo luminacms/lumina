@@ -394,6 +394,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                             $(document).off('click', hide).on('click', hide); //点击其它元素关闭 select
                         }
 
+                        console.log(elemForm)
                     selects.each(function (index, select) {
                         var othis = $(this),
                             hasRender = othis.next('.' + CLASS),
@@ -808,6 +809,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
 
 
         // ajax提交
+        var _form = button.parents('form')
         if(!ajaxsubmit) {
             return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
                 elem: this,
@@ -815,7 +817,6 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                 field: field
             });;
         }else{
-            var _form = button.parents('form')
             admin.request.ajax({
                 type: _form.attr('method'),
                 url: _form.attr('action'),
@@ -823,12 +824,20 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                 success: function(res){
                     if(res.errcode == 0) {
                         layer.msg(res.msg);
+
+                        if(res.data.redirect) {
+                            setTimeout(function(){
+                                admin.openTab(res.data.redirect, '列表')
+                            }, 1500)
+                            return;
+                        }
                         if(parent.layer) {
                             setTimeout(function(){
                                 parent.layer.close(parent.layer.getFrameIndex(window.name));
                             }, 1500)
                         }
 
+                        _form[0].reset()
                         return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
                             elem: this,
                             form: formElem,

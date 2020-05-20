@@ -42,7 +42,7 @@
                 done: tableDone,
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"uid","title":"spuId","width":120},
+                    {"field":"uid","title":"商品ID","width":150},
                     {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
                     {"field":"name","title":"name","width":250},
                     {"field":"category_id","title":"category_id"},
@@ -57,7 +57,8 @@
                 var checked = table.checkStatus('data_spu_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
+                    var createModal = admin.openModal('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
+                        area: '1000px',
                         end: function(index, layero){
                             table.reload('data_game_table')
                         }

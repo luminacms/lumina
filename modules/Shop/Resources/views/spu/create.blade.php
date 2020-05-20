@@ -1,4 +1,4 @@
-@extends('shop::layouts.master')
+@extends('core::layouts.modal')
 
 @push('style')
     <style>
