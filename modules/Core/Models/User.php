@@ -56,6 +56,12 @@ class User extends BaseModel implements
         ];
     }
 
+    /**
+     * 获取组织下员工
+     *
+     * @param [type] $query
+     * @return void
+     */
     public function scopeOrg($query)
     {
         return $query->leftjoin('core_organzation_user', 'core_users.userid','=','core_organzation_user.userid')
@@ -208,12 +214,28 @@ class User extends BaseModel implements
     }
 
     /**
-     * @param $oid
-     * @return bool
+     * 获取可以管理的组织，可以管理自己和自己子集的组织
+     *
+     * @return void
      */
-    public function hasOrg($oid)
+    public function canAdminOrg()
     {
-        return self::organizations()->where('oid', $oid)->count() > 0;
+        if($this->isSuper()) {
+            return Organization::all();
+        }
+        $orgObj = self::organizations()->orderBy('level', 'asc')->first();
+        return Organization::getChildren($orgObj->id);
+    }
+
+    /**
+     * 检测是否有登录权限
+     *
+     * @return boolean
+     */
+    public function canLogininOrg($org)
+    {
+        $subOrg = $this->canAdminOrg()->pluck('oid');
+        return $subOrg->contains($org->oid);
     }
 
     /**

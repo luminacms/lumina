@@ -42,13 +42,11 @@ class OrgGuard extends SessionGuard
     {
         if(parent::attempt($credentials, $remember)) {
             $this->session->forget($this->getOrgName());
-
-            // oid参数不存在，管理员取任意oid，普通管理员取自身所在组织
             $user = $this->user();
-            $_oid = $user->hasRole('SUPER')?Organization::first()->oid:($user->organizations[0]->oid ?? -1);
-            if($_oid && $_oid != -1){
-                $org = Organization::where('oid', $_oid)->first();
-                $this->session->put([$this->getOrgName() => $org]);
+
+            $_org = $user->isSuper()?Organization::where('oid', '1')->first():($user->organizations[0] ?? null);
+            if($_org && $user->canLogininOrg($_org)) {
+                $this->session->put([$this->getOrgName() => $_org]);
                 return true;
             }
         }

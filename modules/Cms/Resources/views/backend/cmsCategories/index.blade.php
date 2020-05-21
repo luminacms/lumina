@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        {!! \Modules\Cms\Models\CmsCategory::getTableHtml('name', 'posts') !!}
+        {!! \Modules\Cms\Models\CmsCategory::getTableHtml('', 'posts') !!}
         </tbody>
     </table>
 @endsection

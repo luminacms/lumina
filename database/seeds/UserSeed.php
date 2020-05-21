@@ -46,8 +46,8 @@ class UserSeed extends Seeder
     protected function genOrgazation()
     {
         $departs = [
-            ['name' => '西安XX网络技术有限公司'],
-            ['name' => '北京XX信息技术有限公司']
+            ['name' => '西安XX网络技术有限公司', 'parentid'=>0],
+            ['name' => '北京XX信息技术有限公司', 'parentid'=>0]
         ];
         foreach ($departs as $_depart) {
             Organization::create($_depart);

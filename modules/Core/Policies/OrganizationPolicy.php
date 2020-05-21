@@ -16,7 +16,7 @@ class OrganizationPolicy extends BasePolicy
      */
     public function admin(User $user, Organization $organization)
     {
-        return  $user->isSuper() || $user->hasOrg($organization) && $user->hasAnyRole(['ADMIN']);
+        return  $user->isSuper() || $user->canLogininOrg($organization);
     }
 
     /**

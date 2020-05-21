@@ -81,14 +81,14 @@ trait HasPathTree
 
     /**
      * @param string $name
-     * @param string $withCount
+     * @param string $option  [withCount]
      * @return string
      */
-    public static function getTableHtml($name = 'name', $withCount = false)
+    public static function getTableHtml($query = '', $option = [])
     {
-        $items = self::all();
-        $items ->map(function($item) use($withCount) {
-            $item->posts_count = $withCount?"<span class='layui-badge ml-2 bg-green-500'>".$item->$withCount->count()."</span>":'';
+        $items = $query ? $query : self::all();
+        $items ->map(function($item) use($option) {
+            $item->_count = isset($option['withCount'])?"<span class='layui-badge ml-2 bg-green-500'>".$item->$option['withCount']->count()."</span>":'';
             $item->sort = $item->sort??50;
         });
         $tree = new Tree($items->toArray());
@@ -96,7 +96,7 @@ trait HasPathTree
         $str = "<tr data-parentid='\$parentid' data-id='\$id'>
                     <td></td>
                     <td>\$id</td>
-                    <td>\$spacer\$".$name."\$posts_count</td>
+                    <td>\$spacer\$name\$_count</td>
                     <td>\$path</td>
                     <td>\$level</td>
                     <td>\$sort</td>
@@ -133,7 +133,7 @@ trait HasPathTree
                 $item['text'] =  $item['name'];
             }else{
                 if($withCascade) {
-                    $cate_ids = self::getChildren($item->path);
+                    $cate_ids = self::getChildren($item->id)->pluck('id')->toArray();
                     $relation = $item->$withCount();
 
                     if(!$if_pivot){
@@ -183,13 +183,14 @@ trait HasPathTree
      * @param bool $withSelf
      * @return mixed
      */
-    public static function getChildren($path, $withSelf = true)
+    public static function getChildren($id, $withSelf = true)
     {
-        $childs = self::where('path', 'like', $path.'%')->get();
-        $res = [];
+        $me = self::findOrFail($id);
+        $childs = self::where('path', 'like', $me->path.'%')->get();
+        $res = collect();
         foreach ($childs as $_child) {
-            if(!$withSelf && $_child['path']==$path) continue;
-            $res[] = $_child['id'];
+            if(!$withSelf && $_child['path']==$me->path) continue;
+            $res->push($_child);
         }
         return $res;
     }
@@ -200,18 +201,12 @@ trait HasPathTree
      * @param [type] $id
      * @return void
      */
-    public static function getFullValue($id)
+    public static function getParents($id, $withSelf = true)
     {
-        $_category = self::all()->map(function($item, $key){
-            return [
-                'id' => $item->id,
-                'label' => $item->name,
-                'value' => $item->id,
-                'level' => $item->level,
-                'parentid' => $item->parentid,
-            ];
-        });
-        $tree = new Tree($_category->toArray());
-        return collect($tree->get_parents($id))->push($_category->firstWhere('id', $id))->sortBy('level');
+        $_category = self::all();
+        $res = collect((new Tree($_category->toArray()))->get_parents($id))->sortBy('level');
+        return $withSelf
+                ? $res->push($_category->firstWhere('id', $id)->toArray())
+                : $res;
     }
 }

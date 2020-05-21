@@ -19,12 +19,13 @@
 {{--                    <a href="">控制台</a>--}}
 {{--                </li>--}}
             </ul>
+
             <ul class="layui-nav layui-layout-right" lay-filter="lumina-layout-right">
-                @if(!auth()->guest() && auth()->user()->isSuper())
+                @if(!auth()->guest() && $suborg = auth()->user()->canAdminOrg())
                 <li class="layui-nav-item hidden lg:inline-block">
                     <a>{{ auth()->org()->name??''  }}</a>
                     <dl class="layui-nav-child">
-                        @foreach(\Modules\Core\Models\Organization::all() as $_org)
+                        @foreach($suborg as $_org)
                             <dd><a class="dropdown-item" href="{{ route('dashboard', $_org->oid) }}">{{ $_org->name }}</a></dd>
                         @endforeach
                     </dl>

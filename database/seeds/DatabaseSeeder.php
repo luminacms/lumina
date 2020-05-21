@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table((new Organization())->getTable())->truncate();
         $departs = [
-            ['name' => '默认组织', 'oid' => 1]
+            ['name' => '默认组织', 'oid' => 1, 'parentid' => 0]
         ];
         foreach ($departs as $_depart) {
             Organization::create($_depart);

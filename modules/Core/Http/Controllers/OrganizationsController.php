@@ -7,6 +7,7 @@ use Modules\Core\Models\Organization;
 use Illuminate\Validation\ValidationException;
 use Modules\Core\Http\Requests\OrganizationRequest;
 use Modules\Core\Http\Resources\OrganizationResource;
+use Modules\Core\Models\Department;
 use Modules\Core\Models\Repositories\OrganizationRepository;
 
 /**
@@ -33,10 +34,6 @@ class OrganizationsController extends BaseController
      */
     public function index(Request $request)
     {
-        if($request->expectsJson()) {
-            $organizations = $this->model->paginate($request->get('limit', 15));
-            return $this->toCollection($organizations, OrganizationResource::class);
-        }
         return view('core::organizations.index');
     }
 
@@ -63,7 +60,9 @@ class OrganizationsController extends BaseController
         try {
             $organization = $this->model->create($request->all());
 
-            $organization->syncPermissions(array_values($request->get('permisson')));
+            if($permission = $request->get('permisson')) {
+                $organization->syncPermissions(array_values($request->get('permisson')));
+            }
 
             // auth()->org()->switchTo(auth()->org());
 

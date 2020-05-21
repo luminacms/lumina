@@ -26,7 +26,7 @@ class UsersController extends BaseController
      */
     public function __construct(User $model)
     {
-        $this->model = $model;
+        $this->model = $model->org();
     }
 
     /**

@@ -14,7 +14,7 @@ ul.urp-cascader-child>li:hover{background-color: #f5f5f5}
 
 </style>
 
-    <?php $fullPath = Modules\Shop\Models\Category::getFullValue(467); ?>
+    <?php $fullPath = Modules\Shop\Models\Category::getParents(467); ?>
 
     <div style="min-height: 500px;width:50%;margin:0 auto;">
         <div class="layui-form-item layui-input-icon inline-block">

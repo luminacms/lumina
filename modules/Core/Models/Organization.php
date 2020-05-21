@@ -43,4 +43,13 @@ class Organization extends BaseModel
         return Permission::where('name', $name)->exists()&&(new self())->hasPermissionTo($name, 'org');
     }
 
+    /**
+     * 组织下员工
+     *
+     * @return void
+     */
+    public function users()
+    {
+        return $this->belongsToMany('Modules\Core\Models\User', 'core_organzation_user', 'oid', 'organzation_id', 'userid', 'userid');
+    }
 }
