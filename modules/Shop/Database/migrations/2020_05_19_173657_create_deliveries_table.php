@@ -15,8 +15,12 @@ class CreateDeliveriesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('deliveries', function(Blueprint $table) {
+		Schema::create('shop__deliveries', function(Blueprint $table) {
             $table->increments('id');
+
+            $table->string('name')->comment('模板名称');
+            $table->tinyInteger('type')->comment('计费方式：1按件数 2按重量');
+
 
             $table->timestamps();
 		});
@@ -29,6 +33,6 @@ class CreateDeliveriesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('deliveries');
+		Schema::drop('shop__deliveries');
 	}
 }

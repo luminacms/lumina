@@ -17,6 +17,7 @@
         {"sort": 502,"id": "shop_product_category", "parentid": "shop", "text": "分类管理", "route": "shop.category.index"},
         {"sort": 503,"id": "shop_product_spu", "parentid": "shop", "text": "商品管理", "route": "shop.spu.index"},
         {"sort": 504,"id": "shop_order", "parentid": "shop", "text": "订单管理", "route": "shop.order.index"},
+        {"sort": 504,"id": "shop_delivery", "parentid": "shop", "text": "运费模板", "route": "shop.delivery.index"},
         {"sort": 506,"id": "shop_ship", "parentid": "shop", "text": "发货管理"}
     ]
 }

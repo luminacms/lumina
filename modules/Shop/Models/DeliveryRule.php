@@ -16,7 +16,8 @@ class DeliveryRule extends BaseModel
      *
      * @var array
      */
-    protected $fillable = [];
+    public $table = 'shop__delivery_rules';
+    protected $fillable = ['delivery_id', 'region', 'first', 'first_fee', 'additional', 'additional_fee'];
 
     /**
      * The attributes that are can be search =/like.

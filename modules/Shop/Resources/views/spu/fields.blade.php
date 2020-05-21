@@ -13,7 +13,7 @@
                 $category_id = request('category_id');
                 $fullPath = Modules\Shop\Models\Category::getParents($category_id);
             ?>
-            <div style="line-height: 37px;" class="font-bold">{{ $fullPath->implode('label', ' > ') }}</div>
+            <div style="line-height: 37px;" class="font-bold">{{ $fullPath->implode('name', ' > ') }}</div>
             <input type="hidden" name="category_id" value="{{ $category_id }}">
         </x-formItem>
 
@@ -31,11 +31,17 @@
             <x-input name="description" verify="required" :value="$spu->description??''"/>
         </x-formItem>
 
+
+
+        <x-formItem label="库存扣减方式">
+            <x-input.radio name="deduct_stock_type" class="radio" :options="['1' => '下单减库存', '2' => '付款减库存']" value="1"/>
+        </x-formItem>
+
         <x-formItem :label="__('core::main.thumb')">
             <x-input.imgs name="thumb"  :value="$spu->thumb??''"/>
         </x-formItem>
 
-        <x-formItem :label="__('core::main.pic_url')">
+        <x-formItem label="主图">
             <x-input.imgs limit="9" name="pic_url" :value="$spu->pic_url??''"/>
         </x-formItem>
 

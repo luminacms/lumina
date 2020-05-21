@@ -45,6 +45,7 @@ class Radio extends Component
         return  <<<'blade'
             @foreach($options as $_k=>$_opt)
             <input id="{{$iptkey}}" type="radio"
+                {{ $attributes }}
                 name="{{$name}}"
                 title="{{$_opt}}"
                 @if($value==$_k)checked @endif

@@ -24,7 +24,7 @@ class Spu extends BaseModel
      * @var array
      */
     protected $table = 'shop__spus';
-    protected $fillable = ['uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pic_url','create_by','type','spec_ids'];
+    protected $fillable = ['uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pic_url','create_by','type','spec_ids','deduct_stock_type'];
 
     /**
      * The attributes that are can be search =/like.

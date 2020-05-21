@@ -22,6 +22,7 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
     Route::resource('spu', 'SpuController');
     Route::resource('sku', 'SkuController');
     Route::resource('order', 'OrderController');
+    Route::resource('delivery', 'DeliveryController');
 });
 
 Route::get('/a', function(){

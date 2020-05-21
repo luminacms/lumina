@@ -11,12 +11,16 @@ use Modules\Core\Models\BaseModel;
  */
 class Delivery extends BaseModel
 {
+    CONST TYPE_BYCOUNT = '1';
+    CONST TYPE_BYWEIGHT = '2';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    public $table = 'shop__deliveries';
+    protected $fillable = ['name', 'type'];
 
     /**
      * The attributes that are can be search =/like.
@@ -24,5 +28,20 @@ class Delivery extends BaseModel
      * @var array
      */
     protected $fieldSearchable = [];
+
+    /**
+     * types
+     *
+     * @var array
+     */
+    public static $types = [
+        self::TYPE_BYCOUNT => '按数量',
+        self::TYPE_BYWEIGHT => '按重量'
+    ];
+
+    public function rules()
+    {
+        return $this->hasMany('Modules\Shop\Models\DeliveryRule', 'delivery_id', 'id');
+    }
 
 }

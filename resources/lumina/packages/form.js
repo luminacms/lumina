@@ -420,7 +420,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                 ' class="layui-input' +
                                 (isSearch ? '' : ' layui-unselect') +
                                 (disabled ? (' ' + DISABLED) : '') + '">') //禁用状态
-                            , '<i class="layui-edge"></i></div>', '<dl class="layui-anim layui-anim-upbit' + (othis.find('optgroup')[0] ? ' layui-select-group' : '') + '">',
+                            , '<i class="layui-edge"></i></div>', '<dl class="fa fa-circle-o' + (othis.find('optgroup')[0] ? ' layui-select-group' : '') + '">',
                             function (options) {
                                 var arr = [];
                                 layui.each(options, function (index, item) {
@@ -515,11 +515,11 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                 //单选框
                 radio: function () {
                     var CLASS = 'layui-form-radio',
-                        ICON = ['&#xe643;', '&#xe63f;'],
                         radios = elemForm.find('input[type=radio]'),
                         events = function (reElem) {
                             var radio = $(this),
-                                ANIM = 'layui-anim-scaleSpring';
+                                ANIM_BASE = 'fa-circle-o',
+                                ANIM = 'fa-dot-circle-o';
 
                             reElem.on('click', function () {
                                 var name = radio[0].name,
@@ -533,12 +533,12 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                     var next = $(this).next('.' + CLASS);
                                     this.checked = false;
                                     next.removeClass(CLASS + 'ed');
-                                    next.find('.fa').removeClass(ANIM).html(ICON[1]);
+                                    next.find('.fa').removeClass(ANIM).addClass(ANIM_BASE);
                                 });
 
                                 radio[0].checked = true;
                                 reElem.addClass(CLASS + 'ed');
-                                reElem.find('.fa').addClass(ANIM).html(ICON[0]);
+                                reElem.find('.fa').addClass(ANIM).removeClass(ANIM_BASE);
 
                                 layui.event.call(radio[0], MOD_NAME, 'radio(' + filter + ')', {
                                     elem: radio[0],
@@ -559,7 +559,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         //替代元素
                         var reElem = $(['<div class="layui-unselect ' + CLASS, (radio.checked ? (' ' + CLASS + 'ed') : '') //选中状态
                             , (disabled ? ' layui-radio-disbaled ' + DISABLED : '') + '">' //禁用状态
-                            , '<i class="layui-anim fa">' + ICON[radio.checked ? 0 : 1] + '</i>', '<div>' + function () {
+                            , '<i class="fa '+(radio.checked ? 'fa-dot-circle-o': 'fa-circle-o')+'"></i>', '<div>' + function () {
                                 var title = radio.title || '';
                                 if (typeof othis.next().attr('lay-radio') === 'string') {
                                     title = othis.next().html();

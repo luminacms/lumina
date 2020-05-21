@@ -24,6 +24,7 @@ class CreateSpusTable extends Migration
             $table->status();
             $table->tinyInteger('type')->default(1);
             $table->string('spec_ids', 500)->nullable();
+            $table->tinyInteger('deduct_stock_type')->default(0)->comment('库存扣减方式');
 
             $table->string('name');
             $table->string('description', 500)->nullable();

@@ -132,7 +132,7 @@
                                 })
                         ).append(function () {
                             // 城市列表
-                            if (item.city) {
+                            if (item.children) {
                                 return $('<div/>', {
                                     class: 'citys'
                                 }).append(
@@ -140,7 +140,7 @@
                                         class: 'jt'
                                     }).append($('<i/>', {}))
                                 ).append(
-                                    _this.getSmallCitys(item.city)
+                                    _this.getSmallCitys(item.children)
                                 )
                             }
                         })
@@ -217,7 +217,7 @@
                     , $citys = $this.parent().next()
                     , $cityInputChecked = $citys.find('input.city:checked')
                     , cityData = []
-                    , cityTotal = Object.keys(_this.datas[province.id].city).length;
+                    , cityTotal = _.find(_this.datas, {'id': parseInt($(province).attr("id"))}).children.length;
                 // 遍历城市
                 if (cityTotal !== $cityInputChecked.length) {
                     $cityInputChecked.each(function (index, item) {
@@ -308,30 +308,31 @@
 })(window);
 
 
-(function () {
+layui.define(['layer'], function (exports) {
+    var layer = layui.layer;
 
-    /***
-     * 配送区域表格
-     * @param param
-     * @constructor
-     */
-    function Delivery(param) {
-        this.tableElement = param.table;
-        this.RegionalChoice = new RegionalChoice(param.regional, param.datas);
-        this.initCreateRegion();
-        this.clickEditEvent();
-        this.clickDeleteEvent();
-        this.clickMethodEvent();
-    }
+    var options = {
+        elem: '',
+        done: undefined
+    };
 
-    Delivery.prototype = {
 
-        /**
-         * 初始化添加区域事件
-         */
-        initCreateRegion: function () {
-            var _this = this;
-            $(_this.tableElement).find('.add-region').click(function () {
+    var DELIVERY = {
+
+        init: function(){
+            var $container = $("<div class='regional-choice' style='display:none' />")
+
+            $("body").append($container);
+            this.RegionalChoice = new RegionalChoice($container, options.data);
+
+            this.dtable = $(options.elem).parents("table");
+            this.handleEvents()
+        },
+        handleEvents: function(){
+            var _this = this,
+                $table = _this.dtable;
+
+            $table.on("click", options.elem, function(){
                 // 渲染地域
                 var str = '';
                 $(_this.tableElement).find('input[type=hidden]').each(function (index, item) {
@@ -348,46 +349,32 @@
                     var Checked = _this.RegionalChoice.getCheckedContent();
                     Checked.ids.length > 0 && _this.appendRulesTr(Checked.content, Checked.ids);
                 });
+            })
+            // 删除事件
+            $table.on('click', '.delete', function () {
+                var $delete = $(this);
+                layer.confirm('确定要删除吗？', function (index) {
+                    $delete.parents('tr').remove();
+                    layer.close(index);
+                });
+            });
+            // 编辑事件
+            $table.on('click', '.edit', function () {
+                // 渲染地域
+                var $content = $table.find('.selected-content')
+                    , $input = $table.find('input[type=hidden]');
+                _this.RegionalChoice.render([], $input.val().split(','));
+                // 显示地区选择弹窗
+                _this.showRegionalModal(function () {
+                    // 弹窗交互完成
+                    var Checked = _this.RegionalChoice.getCheckedContent();
+                    if (Checked.ids.length > 0) {
+                        $content.html(Checked.content);
+                        $input.val(Checked.ids);
+                    }
+                });
             });
         },
-
-        /**
-         * 创建可配送区域规则
-         */
-        appendRulesTr: function (regionStr, checkedIds) {
-            var $html = $(
-                '<tr>' +
-                '<td class="am-text-left">' +
-                '   <p class="selected-content am-margin-bottom-xs">' +
-                '   ' + regionStr +
-                '   </p>' +
-                '   <p class="operation am-margin-bottom-xs">' +
-                '       <a class="edit" href="javascript:;">编辑</a>' +
-                '       <a class="delete" href="javascript:;">删除</a>' +
-                '   </p>' +
-                '   <input type="hidden" name="delivery[rule][region][]" value="' + checkedIds + '">' +
-                '</td>' +
-                '<td>' +
-                '   <input type="number" name="delivery[rule][first][]" value="1" required>' +
-                '</td>' +
-                '<td>' +
-                '   <input type="number" name="delivery[rule][first_fee][]" value="0.00" required>' +
-                '</td>' +
-                '<td>' +
-                '   <input type="number" name="delivery[rule][additional][]" value="0">' +
-                '</td>' +
-                '<td>' +
-                '   <input type="number" name="delivery[rule][additional_fee][]" value="0.00">' +
-                '</td>' +
-                '</tr>'
-            );
-            $(this.tableElement).children().find('tr:last').before($html);
-        },
-
-        /**
-         * 显示区域选择窗口
-         * @param callback
-         */
         showRegionalModal: function (callback) {
             var _this = this;
             layer.open({
@@ -407,61 +394,43 @@
                 }
             });
         },
-
-        /**
-         * 编辑区域事件
-         */
-        clickEditEvent: function () {
-            var _this = this
-                , $table = $(_this.tableElement);
-            $table.on('click', '.edit', function () {
-                // 渲染地域
-                var $html = $(this).parent().parent()
-                    , $content = $html.find('.selected-content')
-                    , $input = $html.find('input[type=hidden]');
-                _this.RegionalChoice.render([], $input.val().split(','));
-                // 显示地区选择弹窗
-                _this.showRegionalModal(function () {
-                    // 弹窗交互完成
-                    var Checked = _this.RegionalChoice.getCheckedContent();
-                    if (Checked.ids.length > 0) {
-                        $content.html(Checked.content);
-                        $input.val(Checked.ids);
-                    }
-                });
-            });
+        appendRulesTr: function (regionStr, checkedIds) {
+            var count = this.dtable.find("tbody>tr").length
+            var $html = $(
+                '<tr>' +
+                '<td class="am-text-left">' +
+                '   <p class="selected-content am-margin-bottom-xs">' +
+                '   ' + regionStr +
+                '   </p>' +
+                '   <p class="operation am-margin-bottom-xs">' +
+                '       <a class="edit" href="javascript:;">编辑</a>' +
+                '       <a class="delete" href="javascript:;">删除</a>' +
+                '   </p>' +
+                '   <input type="hidden" name="rule['+count+'][region]" value="' + checkedIds + '">' +
+                '</td>' +
+                '<td>' +
+                '   <input type="number" name="rule['+count+'][first]" value="" required class="layui-input">' +
+                '</td>' +
+                '<td>' +
+                '   <input type="number" name="rule['+count+'][first_fee]" value="" required class="layui-input">' +
+                '</td>' +
+                '<td>' +
+                '   <input type="number" name="rule['+count+'][additional]" value="" class="layui-input">' +
+                '</td>' +
+                '<td>' +
+                '   <input type="number" name="rule['+count+'][additional_fee]" value="" class="layui-input">' +
+                '</td>' +
+                '</tr>'
+            );
+            $(this.dtable).find('tbody').append($html);
         },
+        render: function (_option, baseData) {
+            options = $.extend(true, {}, options, _option);
+            // // 初始化
+            this.init();
 
-        /**
-         * 删除区域事件
-         */
-        clickDeleteEvent: function () {
-            var $table = $(this.tableElement);
-            $table.on('click', '.delete', function () {
-                var $delete = $(this);
-                layer.confirm('确定要删除吗？', function (index) {
-                    $delete.parents('tr').remove();
-                    layer.close(index);
-                });
-            });
-        },
-
-        /**
-         * 切换计费方式
-         */
-        clickMethodEvent: function () {
-            $('input:radio[name="delivery[method]"]').change(function (e) {
-                var $first = $('.first')
-                    , $additional = $('.additional');
-                if (e.currentTarget.value === '20')
-                    $first.text('首重 (Kg)') && $additional.text('续重 (Kg)');
-                else
-                    $first.text('首件 (个)') && $additional.text('续件 (个)');
-            });
-        },
-
+        }
     };
 
-    window.Delivery = Delivery;
-
-})(window);
+    exports('delivery', DELIVERY);
+});
