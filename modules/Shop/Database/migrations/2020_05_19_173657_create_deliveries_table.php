@@ -22,6 +22,7 @@ class CreateDeliveriesTable extends Migration
             $table->tinyInteger('type')->comment('计费方式：1按件数 2按重量');
 
 
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

@@ -6,6 +6,7 @@
 namespace Modules\Shop\Console;
 
 use Illuminate\Console\Command;
+use Modules\Shop\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Rap2hpoutre\FastExcel\FastExcel;
 
@@ -45,30 +46,27 @@ class ImportShopCategory extends Command
      */
     public function handle()
     {
+        $file = storage_path('data/shop_category.xlsx');
 
-        $file = storage_path().'/data/industry.xlsx';
+        $data = (new FastExcel)->import($file);
 
-        $data = (new FastExcel)->import($file, function ($line) {
-            return [
-                'name' => $line['名称'],
-                'parentname' => $line['父级名称'] ?? ''
-            ];
-        });
+        $no = 0;
 
-        DB::table("industries")->truncate();
-        $data->each(function($item) {
+        DB::table("shop__category")->truncate();
+        foreach($data as $_item) {
+            if(!$_item['first_name']) continue;
 
-            $data = ['name' => $item['name']];
-
-            if($item['parentname']) {
-                $parent = DB::table("industries")->where('name', $item['parentname'])->first();
-                if($parent) {
-                    $data['parentid'] = $parent->id;
+            $first = Category::updateOrCreate(['name' => $_item['first_name']], ['parentid' => 0]);
+            if($_item['second_name']) {
+                // 二级类目
+                $secend = Category::updateOrCreate(['name' => $_item['second_name']], ['parentid' => $first->id]);
+                if($_item['third_name']) {
+                    // 三级
+                    Category::updateOrCreate(['name' => $_item['third_name']], ['parentid' => $secend->id]);
                 }
             }
-
-            DB::table("industries")->updateOrInsert(['name' => $item['name']], $data);
-        });
+            $no ++;
+        }
 
     }
 

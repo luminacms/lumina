@@ -20,6 +20,7 @@
             table.render({
                 elem: '#' + tableName,
                 url: '{!! URL::full() !!}',
+                toolbar: ['create', 'delete'],
                 autoShow: '{{ route("shop.delivery.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true"},{"field":"name","title":"name"},{"field":"type","title":"type"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]

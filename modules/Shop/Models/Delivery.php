@@ -2,6 +2,7 @@
 
 namespace Modules\Shop\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Core\Models\BaseModel;
 
 /**
@@ -11,6 +12,8 @@ use Modules\Core\Models\BaseModel;
  */
 class Delivery extends BaseModel
 {
+    use SoftDeletes;
+
     CONST TYPE_BYCOUNT = '1';
     CONST TYPE_BYWEIGHT = '2';
 

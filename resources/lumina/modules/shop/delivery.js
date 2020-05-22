@@ -320,13 +320,23 @@ layui.define(['layer'], function (exports) {
     var DELIVERY = {
 
         init: function(){
-            var $container = $("<div class='regional-choice' style='display:none' />")
+            var $container = $("<div class='regional-choice' style='display:none' />"),
+                self = this;
 
             $("body").append($container);
             this.RegionalChoice = new RegionalChoice($container, options.data);
 
             this.dtable = $(options.elem).parents("table");
             this.handleEvents()
+
+            if(options.value.length > 0) {
+                // 有初始值
+                console.log('未做更新')
+                // self.RegionalChoice.render([], options.value[0].region.split(','));
+                // // 弹窗交互完成
+                // var Checked = self.RegionalChoice.getCheckedContent();
+                // Checked.ids.length > 0 && self.appendRulesTr(Checked.content, Checked.ids);
+            }
         },
         handleEvents: function(){
             var _this = this,

@@ -101,7 +101,7 @@ class DeliveryController extends BaseController
      */
     public function edit($id)
     {
-        $delivery = $this->delivery->findOrFail($id);
+        $delivery = $this->delivery->with('rules')->findOrFail($id);
         // $this->authorize('update', $delivery);
 
         return view('shop::delivery.edit', compact('delivery'));

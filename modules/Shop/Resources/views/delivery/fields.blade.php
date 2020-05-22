@@ -26,10 +26,10 @@
 </style>
 
 <x-formItem label="模板名称">
-    <x-input name="name" required/>
+    <x-input name="name" required :value="$delivery->name ?? ''"/>
 </x-formItem>
 <x-formItem label="模板名称">
-    <x-input.radio name="type" :options="['1' => '按件数', '2' => '按重量']" value="1" lay-filter="deliveryType"/>
+    <x-input.radio name="type" :options="['1' => '按件数', '2' => '按重量']" :value="$delivery->type ?? '1'" lay-filter="deliveryType"/>
 </x-formItem>
 
 <x-formItem label="配送区域及运费">
@@ -80,7 +80,8 @@
 
         delivery.render({
             elem: '#deliveryHandle',
-            data: @json(Modules\Shop\Models\Region::regionCache())
+            data: @json(Modules\Shop\Models\Region::regionCache()),
+            value: @json($delivery->rules ?? [])
         })
 
         form.on('radio(deliveryType)', function(item){
