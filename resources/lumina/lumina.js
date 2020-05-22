@@ -55,6 +55,22 @@
             code: 'packages/code/code', //代码修饰器
             dropdown: 'packages/dropdown', //下拉按钮
             transfer: 'packages/transfer', //穿梭
+
+            // 三方组件
+            jstree: 'libs/jstree/jstree.min',
+            echarts: "libs/echarts.min",
+            split: "libs/split.min",
+            vue: "libs/vue.min",
+            // 扩展包
+            upload: "extends/upload/upload",
+            autocomplete: "extends/autocomplete/autocomplete",
+            formSelect: 'extends/formSelect/formSelect',
+            wangEditor: 'extends/wangEditor/wangEditor',
+            wangEditorLight: 'extends/wangEditor/wangEditor.light',
+            circleProgress: 'extends/circle-progress',
+            city: 'extends/city',
+            // 服务包
+            pickerUser: 'modules/picker/picker_user',
         };
 
     //记录基础数据

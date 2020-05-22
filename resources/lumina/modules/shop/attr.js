@@ -244,13 +244,16 @@ layui.define(['laytpl', 'admin'], function (exports) {
             this.buildSpeclist();
             // 渲染table
             data.spec_attr.forEach(function (item, index) {
-                good_group_ids.push(item.group_id)
+                var _vals = []
+                item.spec_items.forEach(function(val, idx){
+                    _vals.push(val.item_id)
+                })
+                good_group_ids.push(item.group_id + ':' + _vals.join(','))
             });
-            $specTabel.html(template('tpl_spec_table', $.extend(data, {
-                'spec_ids': good_group_ids.join(',')
-            })));
 
-            console.log(data)
+            $specTabel.html(template('tpl_spec_table', $.extend(data, {
+                'spec_ids': good_group_ids.join(';')
+            })));
             // 显示sku容器
             $goodsSku.show();
         },

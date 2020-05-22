@@ -33,7 +33,7 @@ class SkuController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $sku = $this->sku->filter($request)->paginate($request->get('limit', 15));
+            $sku = $this->sku->filter($request)->with('specVals')->paginate($request->get('limit', 15));
             return $this->toCollection($sku, SkuResource::class);
         }
         return view('shop::sku.index');

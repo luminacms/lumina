@@ -2,9 +2,10 @@
 
 namespace Modules\Shop\Models;
 
+use Modules\Core\Traits\HasOrg;
+use Illuminate\Support\Facades\DB;
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
-use Modules\Core\Traits\HasOrg;
 
 /**
  * Class Order.
@@ -14,6 +15,9 @@ use Modules\Core\Traits\HasOrg;
 class Order extends BaseModel
 {
     use HasOrg, HasCreateBy;
+
+    const TABLE_ORDER_SKUS = 'shop__order_skus';
+    const TABLE_ORDER_ADDRESS = 'shop__order_address';
 
     CONST STATUS_NOPAY = 1; //待确认 (用户下单未付款 或者 货到付款订单商家未确认)
     CONST STATUS_CONFIRMED = 2; //备货中 (用户已付款) 此状态商户才可执行发货操作 (货到付款的订单, 商家需要先确认订单才会进入此状态)
@@ -48,6 +52,7 @@ class Order extends BaseModel
         self::STATUS_FINISHED => '已完成'
     ];
 
+
     public static function boot()
     {
         parent::boot();
@@ -56,6 +61,64 @@ class Order extends BaseModel
             $model->order_id = $model->order_id ?? self::getRandomNumber('order_id');
             $model->created_at_ip = \request()->getClientIp();
         });
+    }
+
+    /**
+     * order skus
+     *
+     * @return void
+     */
+    public function skus()
+    {
+        return $this->belongsToMany('Modules\Shop\Models\Sku', 'shop__order_skus', 'order_id', 'sku_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne('Modules\Shop\Models\OrderAddress', 'order_id');
+    }
+
+
+    public static function makeOrder($skus = [], $pre_total_fee, $address, $option = [])
+    {
+        // 校验价格
+        $_xtotal = 0;
+        $orderSkus = collect();
+        foreach($skus as $uid=>$number) {
+            $sku = Sku::where('uid', $uid)->first();
+            if($sku) {
+                $subtotal = $sku->price_fee*$number;
+                $orderSkus->push(['sku_id' => $uid, 'number' => $number, 'subtotal' => $subtotal]);
+                $_xtotal += $subtotal;
+            }
+        }
+
+        if($_xtotal == $pre_total_fee) {
+            // 实际价格跟传值一致
+            return DB::transaction(function () use($pre_total_fee, $orderSkus, $address) {
+                $order = self::create([
+                    'status' => self::STATUS_NOPAY,
+                    'pre_total_fee' => $pre_total_fee,
+                    'expired_at' => now()->addMinutes(15)
+                ]);
+                $orderSkus = $orderSkus->map(function($item) use($order){
+                    return array_merge($item, ['order_id' => $order->order_id]);
+                })->toArray();
+                DB::table(self::TABLE_ORDER_SKUS)->insert($orderSkus);
+                DB::table(self::TABLE_ORDER_ADDRESS)->insert([
+                    "order_id" => $order->order_id,
+                    "contact_name" => $address['contact_name'],
+                    "contact_phone" => $address['contact_phone'],
+                    "province" => $address['province'],
+                    "city" => $address['city'],
+                    "district" => $address['district'],
+                    "address" => $address['address'],
+                ]);
+
+                return $order;
+            });
+        }
+        return false;
     }
 
 }

@@ -44,6 +44,7 @@ class CreateOrdersTable extends Migration
             $table->char('order_id', 20);
             $table->char('sku_id', 40);
             $table->integer('number');
+            $table->decimal('subtotal', 12, 2);
 
             $table->foreign('order_id')->references('order_id')->on('shop__orders');
         });

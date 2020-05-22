@@ -10,7 +10,7 @@
 
         <x-formItem label="已选择">
             <?php
-                $category_id = request('category_id');
+                $category_id = isset($spu) ? $spu->category_id : request('category_id');
                 $fullPath = Modules\Shop\Models\Category::getParents($category_id);
             ?>
             <div style="line-height: 37px;" class="font-bold">{{ $fullPath->implode('name', ' > ') }}</div>

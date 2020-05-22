@@ -158,20 +158,23 @@ layui.define(['laytpl', 'form'], function(exports) {
                     form.on('select(' + filter + ')', function(data) {
 
                         var $sel = $(data.elem)
-                        var _itemdata = _.find(DATA, {'code': data.value})
+                        var _itemdata = _.find(DATA, {'code': data.value}),
+                            _name = '';
 
-                        console.log(_itemdata)
                         switch ($sel.attr('lay-filter')) {
                             case pickerFilter.province:
-                                $sel.prev("input[name="+that.config.names.province+"]").val(_itemdata.name)
+                                _name = "input[name=\""+that.config.names.province+"\"]"
+                                $sel.prev(_name).val(_itemdata.name)
                                 renderData(pickerType.city, $picker, data.value, undefined, false);
                                 break;
                             case pickerFilter.city:
-                                $sel.prev("input[name="+that.config.names.city+"]").val(_itemdata.name)
+                                _name = "input[name=\""+that.config.names.city+"\"]"
+                                $sel.prev(_name).val(_itemdata.name)
                                 renderData(pickerType.area, $picker, data.value, undefined, false);
                                 break;
                             case pickerFilter.area:
-                                $sel.prev("input[name="+that.config.names.area+"]").val(_itemdata.name)
+                                _name = "input[name=\""+that.config.names.area+"\"]"
+                                $sel.prev(_name).val(_itemdata.name)
                                 //console.log('区/县');
                                 break;
                         }

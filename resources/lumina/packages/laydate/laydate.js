@@ -86,7 +86,8 @@
                     ver = '',
                     path = 'packages/laydate/laydate.css?v=' + laydate.v + ver;
 
-                layui.link(layui.cache.base + path, fn, cssname)
+
+                // layui.link(layui.cache.base + path, fn, cssname)
                 // isLayui ? layui.addcss(path, fn, cssname) : ready.link(path, fn, cssname);
                 return this;
             }
@@ -129,9 +130,10 @@
             var that = this;
             that.index = ++laydate.index;
             that.config = lay.extend({}, that.config, laydate.config, options);
-            laydate.ready(function () {
-                that.init();
-            });
+            that.init();
+            // laydate.ready(function () {
+
+            // });
         },
 
         //DOM查找

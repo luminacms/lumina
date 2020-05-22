@@ -1,20 +1,5 @@
 
-layui.extend({
-    // 第三方包
-    jstree: 'libs/jstree/jstree.min',
-    echarts: "libs/echarts.min",
-    split: "libs/split.min",
-    vue: "libs/vue.min",
-    // 扩展包
-    upload: "extends/upload/upload",
-    autocomplete: "extends/autocomplete/autocomplete",
-    formSelect: 'extends/formSelect/formSelect',
-    wangEditor: 'extends/wangEditor/wangEditor',
-    wangEditorLight: 'extends/wangEditor/wangEditor.light',
-    circleProgress: 'extends/circle-progress',
-    // 服务包
-    pickerUser: 'modules/picker/picker_user',
-}).define(["layer", "element"], function (exports) {
+layui.define(["layer", "element"], function (exports) {
     var adminConfig = {
         version: '0.0.1',
         debug: true,

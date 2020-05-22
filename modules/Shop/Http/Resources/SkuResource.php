@@ -16,7 +16,7 @@ class SkuResource extends BaseResource
             'price_fee' => $this->price_fee,
             'market_price_fee' => $this->market_price_fee,
             'stock' => $this->stock,
-            'attrs' => $this->attrVals
+            'attrs' => $this->specVals
         ];
     }
 }

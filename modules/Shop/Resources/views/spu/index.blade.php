@@ -11,8 +11,11 @@
 
 
 @push('script')
+    <script id="tpl_title">
+        <a lay-event="preview" class="layui-badge mr-1 bg-gray-900">预览</a>@{{ d.name }}
+    </script>
     <script type="text/html" id="game_status">
-        <input type="checkbox" name="switch" lay-skin="switch" lay-text="上线|下线" lay-filter="updown" value="@{{ d.id }}"
+        <input type="checkbox" name="switch" lay-skin="switch" lay-text="上架|下架" lay-filter="updown" value="@{{ d.id }}"
             @{{# if(d.status=='up'){ }}
              checked
             @{{# } }}
@@ -26,7 +29,10 @@
             var table = layui.table,
                 admin = parent.layui.admin,
                 form = layui.form,
-                element = layui.element;
+                element = layui.element,
+                url = {
+                    preview: '{{ route('shop.preview') }}'
+                };
 
             table.render({
                 elem: '#data_spu_table',
@@ -44,11 +50,11 @@
                     {"type":"checkbox","fixed":"left"},
                     {"field":"uid","title":"商品ID","width":150},
                     {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
-                    {"field":"name","title":"name","width":250},
-                    {"field":"category_id","title":"category_id"},
+                    {"field":"name","title":"name","width":250, "templet": "#tpl_title"},
+                    {"field":"category_id","title":"总库存"},
+                    {"field":"category_id","title":"销量"},
                     {"field":"status","title":"状态",templet: "#game_status",width:95},
-                    {"field":"created_at","title":"created_at","hide":"true"},
-                    {"field":"updated_at","title":"updated_at"}
+                    {"field":"created_at","title":"创建时间"},
                 ]]
             });
 
@@ -82,10 +88,11 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openTab(
+                        var createModal = admin.openModal(
                             '{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id)+'?type='+checked.data[0].type,
                             '修改数据#'+checked.data[0].id,
                             {
+                                area: '1000px',
                                 end: function(index, layero){
                                     // table.reload('data_game_table')
                                 }
@@ -93,6 +100,14 @@
                         return true;
                     }
                 }
+            });
+
+            table.on('tool(data_spu_table)', function(obj){
+                parent.layer.open({
+                    type: 2,
+                    area: ['375px', '667px'],
+                    content: url.preview + '?uid=' + obj.data.uid
+                })
             });
 
             // 上下线

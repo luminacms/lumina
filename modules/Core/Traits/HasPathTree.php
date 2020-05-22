@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Traits;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Modules\Core\Utils\Tree;
 
@@ -203,10 +204,17 @@ trait HasPathTree
      */
     public static function getParents($id, $withSelf = true)
     {
-        $_category = self::all();
-        $res = collect((new Tree($_category->toArray()))->get_parents($id))->sortBy('level');
-        return $withSelf
-                ? $res->push($_category->firstWhere('id', $id)->toArray())
-                : $res;
+        try{
+            $_category = self::all();
+            $res = collect((new Tree($_category->toArray()))->get_parents($id))->sortBy('level');
+            if($withSelf) {
+                $me = $_category->firstWhere('id', $id);
+                $res = $me ? $res->push($me) : $res;
+            }
+            return $res;
+        }catch(Exception $e){
+            return [];
+        }
+
     }
 }

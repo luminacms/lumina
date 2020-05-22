@@ -10,6 +10,7 @@ use Modules\Shop\Http\Requests\SpuRequest;
 use Modules\Shop\Http\Resources\SpuResource;
 use Illuminate\Validation\ValidationException;
 use Modules\Core\Http\Controllers\BaseController;
+use Modules\Shop\Models\Order;
 use Modules\Shop\Models\Spec;
 
 /**
@@ -85,7 +86,7 @@ class SpuController extends BaseController
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
-                    : $this->toResponse(['redirect' => route('shop.spu.index')], 'success');
+                    : $this->toResponse([], 'success');
         } catch (ValidationException $e) {
             return $this->toException($e);
         }
@@ -116,35 +117,11 @@ class SpuController extends BaseController
     {
         $spu = $this->spu->findOrFail($id);
 
-        $spec_attr = Spec::whereIn('id', explode(',', $spu->spec_ids))->with('vals')->get()->map(function($sp) {
-            return [
-                'group_id'=> $sp['id'],
-                'group_name' => $sp['name'],
-                'spec_items' => $sp->vals->map(function($item) {
-                    return [
-                        'item_id' => $item['id'].'',
-                        'spec_value' => $item['value']
-                    ];
-                })->toArray()
-            ];
-        })->toArray();
-        $spec_list = $spu->sku->map(function($sku) {
-            return [
-                'spec_val_ids' => $sku->specVals->implode('id', ',').'',
-                'form' => [
-                    'readonly' => true,
-                    'uid'=> $sku->uid,
-                    'market_price_fee' => $sku->market_price_fee,
-                    'price_fee'=> $sku->price_fee,
-                    'stock'=> $sku->stock,
-                    'weight'=> $sku->weight,
-                ]
-            ];
-        })->toArray();
+        $spec_data = $spu->getSpecData();
 
         // $this->authorize('update', $spu);
 
-        return view('shop::spu.edit', compact('spu', 'spec_attr', 'spec_list'));
+        return view('shop::spu.edit', compact('spu', 'spec_data'));
     }
 
     /**
@@ -162,10 +139,11 @@ class SpuController extends BaseController
             $model = $this->spu->findOrFail($id);
             // $this->authorize('update', $model);
 
+            $model->fill($request->all());
             if(!$model->isDirty()) {
                 return $this->toError([], 'nothing changed');
             }
-            if($model->fill($request->all())->save()){
+            if($model->save()){
                 flash('update success', 'update success');
 
                 return !$request->expectsJson()
@@ -193,5 +171,42 @@ class SpuController extends BaseController
 
         flash('delete success', 'success');
         return $this->toResponse([], '删除成功');
+    }
+
+    /**
+     * preview
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function preview(Request $request)
+    {
+        if(!$request->isMethod('post')){
+            $request->validate(['uid' => 'required']);
+
+            $spu = $this->spu->with('sku')->where('uid', $request->get('uid'))->first();
+            $spec_data = $spu->getSpecData();
+
+            return view('shop::spu.preview', compact('spu', 'spec_data'));
+        }else{
+            $request->validate([
+                'sku' => 'required',
+                'number' => 'required|numeric',
+                'pre_total_fee' => 'required',
+                'address' => 'required|array',
+            ]);
+            // 下单
+            $r = Order::makeOrder(
+                [$request->get('sku') => $request->get('number')],
+                $request->get('pre_total_fee'),
+                $request->get('address'),
+                [
+                    'msg' => $request->get('msg')
+                ]
+            );
+
+            flash('订单提交成功', 'success');
+            return redirect()->back();
+        }
     }
 }

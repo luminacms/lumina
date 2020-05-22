@@ -60,9 +60,40 @@ class Spu extends BaseModel
         return $this->hasMany('Modules\Shop\Models\Sku', 'spu_id', 'uid');
     }
 
-    // public function getSkuField()
-    // {
-    //     return []
-    // }
+    public function getSpecData()
+    {
+        $attr = collect();
+        foreach(explode(';', $this->spec_ids) as $spec) {
+            $val = explode(':', $spec);
 
+            $specObj = Spec::find($val[0]);
+            if($specObj) {
+                $attr[] = [
+                    'group_id' => $specObj->id,
+                    'group_name' => $specObj->name,
+                    'spec_items' => SpecValue::whereIn('id', explode(',', $val[1]))->get()->map(function($item){
+                        return [
+                            'item_id' => $item['id'],
+                            'spec_value' => $item['value']
+                        ];
+                    })->toArray()
+                ];
+            }
+        }
+        $data['attr'] = $attr->toArray();
+        $data['list'] = $this->sku->map(function($sku) {
+            return [
+                'spec_val_ids' => $sku->specVals->implode('id', ',').'',
+                'form' => [
+                    'readonly' => true,
+                    'uid'=> $sku->uid,
+                    'market_price_fee' => $sku->market_price_fee,
+                    'price_fee'=> $sku->price_fee,
+                    'stock'=> $sku->stock,
+                    'weight'=> $sku->weight,
+                ]
+            ];
+        })->toArray();
+        return $data;
+    }
 }

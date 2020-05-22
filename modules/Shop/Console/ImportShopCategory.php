@@ -52,7 +52,7 @@ class ImportShopCategory extends Command
 
         $no = 0;
 
-        DB::table("shop__category")->truncate();
+        DB::table("shop__categories")->truncate();
         foreach($data as $_item) {
             if(!$_item['first_name']) continue;
 

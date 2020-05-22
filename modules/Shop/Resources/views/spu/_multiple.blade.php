@@ -178,8 +178,8 @@
         attr.render({
             container: '.goods-spec-many'
         },{
-            spec_attr: @json($spec_attr ?? []),
-            spec_list: @json($spec_list ?? [])
+            spec_attr: @json($spec_data['attr'] ?? []),
+            spec_list: @json($spec_data['list'] ?? [])
         })
     })
 
