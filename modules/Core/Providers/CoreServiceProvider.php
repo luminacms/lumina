@@ -9,6 +9,12 @@ use Illuminate\Support\ServiceProvider;
 use Modules\Core\Services\CoreBlueprint;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Database\Schema\Blueprint;
+use Symfony\Component\Workflow\Registry;
+use Symfony\Component\Workflow\Workflow;
+use Symfony\Component\Workflow\Transition;
+use Symfony\Component\Workflow\DefinitionBuilder;
+use Symfony\Component\Workflow\MarkingStore\MethodMarkingStore;
+use Symfony\Component\Workflow\SupportStrategy\InstanceOfSupportStrategy;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -49,6 +55,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerWorkflow();
         if ($this->app->isLocal()) {
             // 开发模式
             // $this->app->register(TelescopeServiceProvider::class);
@@ -134,17 +141,6 @@ class CoreServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
-    }
-
-
     private function __logSql()
     {
         //sql日志记录
@@ -211,5 +207,42 @@ class CoreServiceProvider extends ServiceProvider
             \Modules\Core\View\Components\Calendar::class => 'calendar',
 
         ]);
+    }
+
+    private function registerWorkflow()
+    {
+        // 注册状态机
+        $this->app->singleton('workflow', function ($app) {
+            $registry = new Registry();
+            foreach (config('workflow') as $name => $wd) {
+
+                $definitionBuilder = new DefinitionBuilder();
+
+                $definitionBuilder->addPlaces($wd['places']);
+                foreach($wd['transitions'] as $tname => $t) {
+                    $definitionBuilder->addTransition(new Transition($tname, $t['from'], $t['to']));
+                }
+                $definition = $definitionBuilder->build();
+
+
+                $marking = new MethodMarkingStore(true, $wd['marking_store']['property']);
+                $workflow = new Workflow($definition, $marking);
+
+                foreach ($wd['supports'] as $supportedClass) {
+                    $registry->addWorkflow($workflow, new InstanceOfSupportStrategy($supportedClass));
+                }
+            }
+            return $registry;
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['workflow'];
     }
 }

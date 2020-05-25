@@ -31,6 +31,8 @@ class CreateOrdersTable extends Migration
 
             $table->timestamp('delivery_at')->nullable()->comment('发货时间');
             $table->timestamp('receipt_at')->nullable()->comment('收货时间');
+            $table->string('msg', 500)->nullable()->comment('用户留言');
+            $table->string('desc', 500)->nullable()->comment('备注');
 
             $table->createby();
             $table->ipAddress('created_at_ip');
@@ -44,6 +46,7 @@ class CreateOrdersTable extends Migration
             $table->char('order_id', 20);
             $table->char('sku_id', 40);
             $table->integer('number');
+            $table->decimal('price_fee', 12, 2);
             $table->decimal('subtotal', 12, 2);
 
             $table->foreign('order_id')->references('order_id')->on('shop__orders');

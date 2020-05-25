@@ -50,4 +50,14 @@ class Sku extends BaseModel
         return $this->belongsToMany('Modules\Shop\Models\SpecValue', 'shop__skus_spec', 'sku_id', 'spec_val_id', 'uid', 'id');
     }
 
+    /**
+     * spu
+     *
+     * @return void
+     */
+    public function spu()
+    {
+        return $this->hasOne('Modules\Shop\Models\Spu', 'uid', 'spu_id');
+    }
+
 }

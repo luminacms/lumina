@@ -79,7 +79,7 @@ class OrderController extends BaseController
      */
     public function show($id)
     {
-        $order = $this->order->where('order_id', $id)->first();
+        $order = $this->order->with('skus')->where('order_id', $id)->first();
         // $this->authorize('view', $order);
         return view('shop::order.show', compact('order'));
     }

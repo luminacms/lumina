@@ -9,7 +9,6 @@
     <table class="layui-hide" id="data_spu_table" lay-filter="data_spu_table"></table>
 @endsection
 
-
 @push('script')
     <script id="tpl_title">
         <a lay-event="preview" class="layui-badge mr-1 bg-gray-900">预览</a>@{{ d.name }}

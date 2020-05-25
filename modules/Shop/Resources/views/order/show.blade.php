@@ -31,40 +31,49 @@
                         <th>数量（件）</th>
                         <th>商品总价（元）</th>
                         <th>优惠信息</th>
-                        <th>实付款（元）</th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    @foreach($order->skus as $sku)
                     <tr>
                         <td>
                             <div class="flex">
-                                <div style="width:75px;height:75px;background-size:100% 100%;background-image: url(https://sf3-ttcdn-tos.pstatp.com/obj/temai/FqFR5rPVU0ZGhRrbhGJ1ICNioJ4dwww-);"></div>
+                                <div style="width:75px;height:75px;background-size:100% 100%;background-image: url({{ $sku->spu->thumb }});"></div>
                                 <div class="flex-1 ml-2">
-                                    <a href="">【1颗洗1桶】爆款洗衣凝珠，强效去污，持久留香！</a>
-                                    <div>规格：红色|2斤</div>
-                                    <div>SKU：3412931973390458110</div>
+                                    <a href="">{{ $sku->spu->name }}</a>
+                                    <div>规格：{{ $sku->specVals->implode('value', '|') }}</div>
+                                    <div>SKU：{{ $sku->uid }}</div>
                                 </div>
                             </div>
                         </td>
-                        <td>¥59</td>
-                        <td>1</td>
-                        <td>¥59</td>
+                        <td>¥{{ $sku->pivot->price_fee }}</td>
+                        <td>{{ $sku->pivot->number }}</td>
+                        <td>¥{{ $sku->pivot->subtotal }}</td>
                         <td>无优惠</td>
-                        <td>¥59（运费：¥0）</td>
                     </tr>
+                    @endforeach
                 </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="6" align="right">
+                            合计：￥{{ $order->pre_total_fee }},
+                            实付款：￥<strong class="text-red-600">{{ $order->total_fee }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </x-card>
 
         <x-card title="收货信息">
             <div class="flex">
-                <div class="w-1/2">收货人：赵富霞</div>
-                <div class="w-1/2">联系方式：139****6484查看</div>
+                <div class="w-1/2">收货人：{{ Arr::get($order->address, 'contact_name') }}</div>
+                <div class="w-1/2">联系方式：{{ Arr::get($order->address, 'contact_phone') }}</div>
             </div>
             <div class="flex">
-                <div class="w-1/2">收货地址：山西省 运城市 垣曲县 山西省运城垣曲县铜矿峪6栋1门10号 </div>
-                <div class="w-1/2">用户留言：-</div>
+                <div class="w-1/2">收货地址：{{ Arr::get($order->address, 'province') }} {{ Arr::get($order->address, 'city') }}{{ Arr::get($order->address, 'district') }}{{ Arr::get($order->address, 'address') }}</div>
+                <div class="w-1/2">用户留言：{{ Arr::get($order, 'msg') }}</div>
             </div>
         </x-card>
 

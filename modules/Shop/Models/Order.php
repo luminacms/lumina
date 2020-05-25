@@ -6,6 +6,7 @@ use Modules\Core\Traits\HasOrg;
 use Illuminate\Support\Facades\DB;
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Traits\HasStatus;
 
 /**
  * Class Order.
@@ -14,7 +15,9 @@ use Modules\Core\Traits\HasCreateBy;
  */
 class Order extends BaseModel
 {
-    use HasOrg, HasCreateBy;
+    use HasOrg, HasCreateBy, HasStatus;
+
+    public $statusName = 'status';
 
     const TABLE_ORDER_SKUS = 'shop__order_skus';
     const TABLE_ORDER_ADDRESS = 'shop__order_address';
@@ -32,7 +35,7 @@ class Order extends BaseModel
      */
     public $table = 'shop__orders';
     protected $fillable = [
-        'order_id', 'status', 'pre_total_fee', 'total_fee', 'expired_at', 'payed_at', 'oid',
+        'order_id', 'status', 'pre_total_fee', 'total_fee', 'expired_at', 'payed_at', 'oid', 'msg', 'desc',
         'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip'
     ];
 
@@ -52,7 +55,6 @@ class Order extends BaseModel
         self::STATUS_FINISHED => '已完成'
     ];
 
-
     public static function boot()
     {
         parent::boot();
@@ -70,15 +72,25 @@ class Order extends BaseModel
      */
     public function skus()
     {
-        return $this->belongsToMany('Modules\Shop\Models\Sku', 'shop__order_skus', 'order_id', 'sku_id');
+        return $this->belongsToMany('Modules\Shop\Models\Sku', 'shop__order_skus', 'order_id', 'sku_id', 'order_id', 'uid')
+                    ->withPivot('number', 'price_fee', 'subtotal')->with(['spu','specVals']);
     }
 
     public function address()
     {
-        return $this->hasOne('Modules\Shop\Models\OrderAddress', 'order_id');
+        return $this->hasOne('Modules\Shop\Models\OrderAddress', 'order_id', 'order_id');
     }
 
 
+    /**
+     * 下单
+     *
+     * @param array $skus
+     * @param [type] $pre_total_fee
+     * @param [type] $address
+     * @param array $option
+     * @return void
+     */
     public static function makeOrder($skus = [], $pre_total_fee, $address, $option = [])
     {
         // 校验价格
@@ -88,7 +100,12 @@ class Order extends BaseModel
             $sku = Sku::where('uid', $uid)->first();
             if($sku) {
                 $subtotal = $sku->price_fee*$number;
-                $orderSkus->push(['sku_id' => $uid, 'number' => $number, 'subtotal' => $subtotal]);
+                $orderSkus->push([
+                    'sku_id' => $uid,
+                    'number' => $number,
+                    'price_fee' => $sku->price_fee,
+                    'subtotal' => $subtotal
+                ]);
                 $_xtotal += $subtotal;
             }
         }
