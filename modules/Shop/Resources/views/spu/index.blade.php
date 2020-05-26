@@ -10,8 +10,8 @@
 @endsection
 
 @push('script')
-    <script id="tpl_title">
-        <a lay-event="preview" class="layui-badge mr-1 bg-gray-900">预览</a>@{{ d.name }}
+    <script type="text/html" id="tpl_title">
+        <a lay-event="preview" class="layui-badge mr-1 bg-gray-900">预览</a><span>@{{ d.name }}</span>
     </script>
     <script type="text/html" id="game_status">
         <input type="checkbox" name="switch" lay-skin="switch" lay-text="上架|下架" lay-filter="updown" value="@{{ d.id }}"

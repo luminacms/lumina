@@ -45,7 +45,8 @@
             <x-input.imgs limit="9" name="pic_url" :value="$spu->pic_url??''"/>
         </x-formItem>
 
-        <div class="layui-tab-item layui-show">
+        <x-formItem label="规格">
+            <div class="layui-tab-item layui-show">
                 @if($_type==\Modules\Shop\Models\Spu::TYPE_SINGLE)
                     <x-formItem label="SKU">
                         <x-input name="sku[0][uid]" verify="required" :value="$spu->sku[0]->uid??''"/>
@@ -60,7 +61,8 @@
                 @else
                     @include('shop::spu._multiple')
                 @endif
-        </div>
+            </div>
+        </x-formItem>
 
         <x-formItem label="内容" required>
             <x-input.editor name="content" required />
