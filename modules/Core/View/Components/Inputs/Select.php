@@ -15,6 +15,7 @@ class Select extends Component
     public $value;
     public $search;
     public $optionHtml;
+    public $isSimpleOption; //是否是简单options, 无键值即是
 
     public $iptkey;
 
@@ -23,12 +24,12 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($name, $options = [], $label = null, $type = 'text', $verify = null, $value = null, $search = null, $optionHtml = null)
+    public function __construct($name, $options = [], $verify = '', $value = '', $search = '', $optionHtml = '')
     {
         $this->name = $name;
-        $this->type = $type;
-        $this->options = array_merge(['' => '----'.__('main.place_select').'----'], $options);
+        $this->options = array_merge(['' => ''], $options);
         $this->verify = $verify;
+        $this->isSimpleOption = array_values($options) == $options;
 
         $this->value = $value ?? old($name);
         $this->search = $search;
@@ -54,7 +55,11 @@ class Select extends Component
                     {!! $optionHtml !!}
                 @else
                     @foreach($options as $_k=>$_opt)
-                    <option value="{{$_k}}" @if($value==$_k)selected @endif>{{$_opt}}</option>
+                        @if(!$isSimpleOption)
+                            <option value="{{$_k}}" @if($value==$_k)selected @endif>{{$_opt}}</option>
+                        @else
+                            <option value="{{$_opt}}" @if($value==$_opt)selected @endif>{{$_opt}}</option>
+                        @endif
                     @endforeach
                 @endif
             </select>

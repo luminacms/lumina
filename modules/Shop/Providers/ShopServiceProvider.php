@@ -4,6 +4,7 @@ namespace Modules\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Shop\Providers\AuthServiceProvider;
 use Modules\Shop\Console\ImportShopCategory;
 
 class ShopServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class ShopServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
 
         if ($this->app->runningInConsole()) {
             // 注册命令

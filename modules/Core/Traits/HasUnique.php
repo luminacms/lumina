@@ -83,14 +83,39 @@ trait HasUnique
         do {
             $seed = base_convert(md5(microtime().$_SERVER['DOCUMENT_ROOT']), 16, 10);
             if(!$prefix){
-                $seed = str_replace('0', '', $seed);
+                // 无前缀补非零前缀，避免数据格式场景导致数位丢失
+                $prefix = mt_rand(1,9);
             }
             $hash = '';
             $max = strlen($seed) - 1;
             for($i = 0; $i < $length; $i++) {
                 $hash .= $seed{mt_rand(0, $max)};
             }
-            $hash = $prefix ? $prefix.$hash : $hash;
+            $hash = $prefix.$hash;
+        } while (self::query()->where($key, $hash)->exists());
+        return intval($hash);
+    }
+
+    /**
+     * get auto number
+     *
+     * @param [type] $key
+     * @return void
+     */
+    public static function getAutoNumber($key)
+    {
+        do {
+            $queryCount = self::count();
+            $length = $queryCount > 1000 ? (strlen($queryCount.'') + 1) : 4;
+
+            $seed = base_convert(md5(microtime().$_SERVER['DOCUMENT_ROOT']), 16, 10);
+            $seed = str_replace('0', '', $seed);
+
+            $hash = '';
+            $max = strlen($seed) - 1;
+            for($i = 0; $i < $length; $i++) {
+                $hash .= $seed{mt_rand(0, $max)};
+            }
         } while (self::query()->where($key, $hash)->exists());
         return intval($hash);
     }

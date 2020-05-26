@@ -6,10 +6,8 @@ use Modules\Core\Models\UserAddress;
 use Ramsey\Uuid\Uuid;
 
 $factory->define(User::class, function (Faker $faker) {
-    $org = \Modules\Core\Models\Organization::where('oid', '<>', 1)->get();
     return [
         'name' => $faker->name,
-        'userid' => Str::random(8),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'mobile' => $faker->phoneNumber,

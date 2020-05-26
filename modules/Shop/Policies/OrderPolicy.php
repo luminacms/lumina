@@ -54,4 +54,17 @@ class OrderPolicy extends BasePolicy
     {
         //
     }
+
+    /**
+     * 检查订单是否可以发货
+     *
+     * @param User $user
+     * @param Order $order
+     * @return void
+     */
+    public function shipping(User $user, Order $order)
+    {
+        // 检查状态机权限
+        return app('workflow')->get($order)->can($order, 'to_shipping');
+    }
 }

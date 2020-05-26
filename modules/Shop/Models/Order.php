@@ -22,11 +22,22 @@ class Order extends BaseModel
     const TABLE_ORDER_SKUS = 'shop__order_skus';
     const TABLE_ORDER_ADDRESS = 'shop__order_address';
 
-    CONST STATUS_NOPAY = 1; //待确认 (用户下单未付款 或者 货到付款订单商家未确认)
-    CONST STATUS_CONFIRMED = 2; //备货中 (用户已付款) 此状态商户才可执行发货操作 (货到付款的订单, 商家需要先确认订单才会进入此状态)
-    CONST STATUS_SHIPPING = 3; //已发货 (商家出库、已发货)
-    CONST STATUS_CANCEL = 4; //已取消（1.用户未支付并取消订单2.或超时未支付后系统自动取消订单3.或货到付款订单用户拒收）
-    CONST STATUS_FINISHED = 5; // 已完成（在线支付订单: 商家发货后, 用户收货、拒收或者15天无物流；货到付款订单: 用户确认收货）
+    CONST STATUS_NOPAY = 10; //待确认 (用户下单未付款 或者 货到付款订单商家未确认)
+    CONST STATUS_CONFIRMED = 20; //备货中 (用户已付款) 此状态商户才可执行发货操作 (货到付款的订单, 商家需要先确认订单才会进入此状态)
+    CONST STATUS_SHIPPING = 30; //已发货 (商家出库、已发货)
+    CONST STATUS_CANCEL = 40; //已取消（1.用户未支付并取消订单2.或超时未支付后系统自动取消订单3.或货到付款订单用户拒收）
+    CONST STATUS_FINISHED = 50; // 已完成（在线支付订单: 商家发货后, 用户收货、拒收或者15天无物流；货到付款订单: 用户确认收货）
+
+    const STATUS_AFTER_REJECTED = 80; // 退货
+    const SATTUS_AFTER_REJECTED_CONFIRMED= 81; // 退货中-商家同意退货
+    const SATTUS_AFTER_REJECTED_SHIPPING= 82; // 退货中-用户填写完物流
+    const SATTUS_AFTER_REJECTED_CANCEL= 83; // 退货取消
+    const SATTUS_AFTER_REJECTED_DONE= 85; // 退货成功
+
+    const STATUS_AFTER_REFUND = 9; // 退款
+    const STATUS_AFTER_REFUND_CONFIRMED = 91; // 退款-商家已确认，退款中
+    const STATUS_AFTER_REFUND_CANCEL = 92; // 退款-申请取消
+    const STATUS_AFTER_REFUND_DONE = 95; // 退款成功
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +47,7 @@ class Order extends BaseModel
     public $table = 'shop__orders';
     protected $fillable = [
         'order_id', 'status', 'pre_total_fee', 'total_fee', 'expired_at', 'payed_at', 'oid', 'msg', 'desc',
-        'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip'
+        'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip', 'status_after'
     ];
 
     /**
@@ -112,11 +123,12 @@ class Order extends BaseModel
 
         if($_xtotal == $pre_total_fee) {
             // 实际价格跟传值一致
-            return DB::transaction(function () use($pre_total_fee, $orderSkus, $address) {
+            return DB::transaction(function () use($pre_total_fee, $orderSkus, $address, $option) {
                 $order = self::create([
                     'status' => self::STATUS_NOPAY,
                     'pre_total_fee' => $pre_total_fee,
-                    'expired_at' => now()->addMinutes(15)
+                    'expired_at' => now()->addMinutes(15),
+                    'msg' => $option['msg'] ?? ''
                 ]);
                 $orderSkus = $orderSkus->map(function($item) use($order){
                     return array_merge($item, ['order_id' => $order->order_id]);

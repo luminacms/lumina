@@ -12,6 +12,7 @@ class Text extends Component
     public $label;
     public $verify;
     public $value;
+    public $required;
 
     public $iptkey;
 
@@ -20,11 +21,11 @@ class Text extends Component
      *
      * @return void
      */
-    public function __construct($name, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'text', $verify = null, $value = null, $required = '')
     {
         $this->name = $name;
         $this->type = $type;
-        $this->verify = $verify;
+        $this->verify = $required ? implode('|', array_filter(array_merge(explode('|', $verify), ['required']))) : '';
 
         $this->value = $value ?? old($name);
 
@@ -43,7 +44,8 @@ class Text extends Component
                 type="{{$type}}"
                 name="{{$name}}"
                 @if($value)value="{{$value}}"@endif
-                @if($verify)lay-verify="{{$verify}}"@endif />
+                @if($verify)lay-verify="{{$verify}}"@endif
+            />
         blade;
     }
 

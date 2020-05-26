@@ -82,7 +82,7 @@
                     cols: [
                         [
                             {"type":"checkbox",width:80,"fixed":"left"},
-                            {"field":"id","title":"ID",width:80,"fixed":"left"},
+                            {"field":"userid","title":"员工ID",width:80,"fixed":"left"},
                             {"field":"name","title":"name",width: 250},
                             {"field":"mobile","title":"电话",width: 250},
                             {"field":"email","title":"email"},

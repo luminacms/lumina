@@ -93,7 +93,7 @@ class User extends BaseModel implements
         parent::boot();
         static::creating(function ($model) {
             $model->create_ip_at = $model->create_ip_at ?? request()->ip();
-            $model->userid = $model->userid ?? self::getRandom('userid', 8, true);
+            $model->userid = $model->userid ?? self::getAutoNumber('userid');
         });
     }
 

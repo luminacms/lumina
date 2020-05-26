@@ -20,7 +20,9 @@ class CreateOrdersTable extends Migration
 
             $table->char('order_id', 20);
 
-            $table->smallInteger('status')->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status_after')->default(0);
+
             $table->decimal('pre_total_fee', 12, 2)->comment('订单金额');
             $table->decimal('total_fee', 12, 2)->comment('实付金额');
             $table->timestamp('expired_at');

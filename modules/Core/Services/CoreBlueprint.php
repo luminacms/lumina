@@ -24,7 +24,7 @@ class CoreBlueprint
      */
     public static function createby(Blueprint $table)
     {
-        $table->char('create_by', 40)->comment('创建人');
+        $table->char('create_by', 14)->comment('创建人');
         $table->index('create_by');
     }
 
@@ -63,7 +63,7 @@ class CoreBlueprint
      */
     public static function sort(Blueprint $table)
     {
-        $table->integer('sort')->default(50)->comment('排序');
+        $table->tinyInteger('sort')->default(50)->comment('排序');
     }
 
     /**

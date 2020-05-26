@@ -31,6 +31,7 @@ class CreateSpusTable extends Migration
             $table->string('unit')->nullable();
             $table->string('thumb')->nullable();
             $table->text('pic_url')->nullable();
+            $table->text('content')->nullable();
 
             $table->org();
             $table->createby();

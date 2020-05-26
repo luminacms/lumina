@@ -2780,19 +2780,19 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                                 parent.layer.close(parent.layer.getFrameIndex(window.name));
                             }, 1500)
                         }
-
                         _form[0].reset()
-                        return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
-                            elem: this,
-                            form: formElem,
-                            field: field
-                        });
+
                     }else{
                         layer.alert(res.msg, {
                             title: '提示',
                             shadeClose: true
                         });
                     }
+                    return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
+                        elem: this,
+                        form: formElem,
+                        field: field
+                    });
                 }
             })
         }

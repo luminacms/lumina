@@ -11,14 +11,11 @@
 |
 */
 
-use Modules\Shop\Models\Category;
-use Modules\Shop\Models\Order;
-use Modules\Shop\Models\Sku;
-use Rap2hpoutre\FastExcel\FastExcel;
-use Symfony\Component\Workflow\Workflow;
+use Modules\Core\Utils\KuaiDi;
 
 Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], function() {
 
+    Route::post('shipping', 'OrderController@shipping')->name('order.shipping');
     Route::match(['get', 'post'], 'preview', 'SpuController@preview')->name('preview');
 
     Route::resource('category', 'CategoryController');
@@ -31,19 +28,22 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
 
 Route::get('/a', function(){
 
+    $a = ['信息', 's搜索'];
 
-    // $blogPost = new Post();
-    $order = Order::withoutGlobalScopes(['oid'])->find(8);
-
-
-    // dd($order->getCurrentStatus());
-
-    $workflow = app('workflow')->get($order);
-
-    $workflow->apply($order, 'to_review', ['payed_at' => now()]);
-    $r = $workflow->can($order, 'publish'); // True
-
+    $r = $a == array_values($a);
 
     dd($r);
+
+    $kuaidi = new KuaiDi();
+
+    $r = $kuaidi->guestName('YT9153969219613');
+
+    // $r = KuaiDi::numCode()->where('code', 'zhongtong')->first();
+
+    dd($r);
+
+
+
+    // dd($r);
 
 });

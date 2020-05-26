@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class Card extends Component
 {
     public $title;
+    public $btns;
 
     /**
      * Create a new component instance.
@@ -27,7 +28,12 @@ class Card extends Component
     {
         return <<<'blade'
         <div {{ $attributes->merge(['class' => 'layui-card']) }} role="card">
-            @if($title)<div class="layui-card-header">{{ $title }}</div>@endif
+            @if($title || $btns)
+                <div class="layui-card-header">
+                    {{ $title }}
+                    @if($btns)<div class="float-right">{{ $btns }}</div>@endif
+                </div>
+            @endif
             <div class="layui-card-body">{{ $slot }}</div>
         </div>
         blade;

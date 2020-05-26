@@ -2,12 +2,14 @@
 
 namespace Modules\Shop\Http\Controllers;
 
+use Exception;
 use Modules\Core\Http\Controllers\BaseController;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Modules\Shop\Models\Order;
 use Modules\Shop\Http\Requests\OrderRequest;
 use Modules\Shop\Http\Resources\OrderResource;
+use Symfony\Component\Workflow\Workflow;
 
 /**
  * Class OrderController.
@@ -146,5 +148,34 @@ class OrderController extends BaseController
 
         flash('delete success', 'success');
         return $this->toResponse([], 'delete success');
+    }
+
+    /**
+     * 订单发货
+     *
+     * @param Request $request
+     * @param Workflow $workflow
+     * @return void
+     */
+    public function shipping(Request $request)
+    {
+        $request->validate(['order_id' => 'required', 'express_company' => 'required', 'express_no' => 'required']);
+
+        $order = $this->order->where('order_id', $request->get('order_id'))->firstOrFail();
+
+        // 更新状态
+        try{
+            $workflow = app('workflow')->get($order);
+            $r = $workflow->apply($order, 'to_shipping', [
+                'delivery_at' => now(),
+                'express_company' => $request->get('express_company'),
+                'express_no' => $request->get('express_no'),
+            ]);
+        }catch(Exception $e){
+            $r = false;
+        }
+        $r ? flash('发货成功', 'success'): flash('发货失败或订单状态不允许', 'error');
+
+        return redirect()->back();
     }
 }

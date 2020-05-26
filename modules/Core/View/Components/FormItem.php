@@ -10,18 +10,20 @@ class FormItem extends Component
 
     public $label;
     public $type;
-    private $inline;
+    public $required;
+    public $inline;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label = '', $type = '', $inline = 'false')
+    public function __construct($label = '', $type = '', $inline = 'false', $required = '')
     {
         $this->label = $label;
         $this->type = $type;
         $this->inline = $inline;
+        $this->required = $required ? 'required' : '';
     }
 
     /**
@@ -40,7 +42,7 @@ class FormItem extends Component
         }else{
             $_ipt = <<<'blade'
             <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                <label for="name" class="layui-form-label">{{$label}}</label>
+                <label for="name" class="layui-form-label {{$required}}">{{$label}}</label>
                 <div class="layui-input-block">{{$slot}}</div>
             </div>
             blade;
@@ -52,7 +54,7 @@ class FormItem extends Component
     {
         return <<<'blade'
             <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                <label for="name" class="layui-form-label">{{$label}}</label>
+                <label for="name" class="layui-form-label {{$required ?? ''}}">{{$label}}</label>
                 <div class="layui-input-block">
                     <div class="layui-input-inline">{{$slot}}</div>
                 </div>

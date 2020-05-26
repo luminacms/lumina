@@ -28,14 +28,15 @@ class DatabaseSeeder extends Seeder
         $_user->organizations()->attach(1);
 
         // 只在开发模式下测试数据用
-        // if(app()->isLocal() === true) {
-        //     $this->call(DemoSeed::class);
-        // }
+        if(app()->isLocal() === true) {
+            $this->call(DemoSeed::class);
+        }
     }
 
     protected function genOrgazation()
     {
         DB::table((new Organization())->getTable())->truncate();
+        DB::table('core_organzation_user')->truncate();
         $departs = [
             ['name' => '默认组织', 'oid' => 1, 'parentid' => 0]
         ];

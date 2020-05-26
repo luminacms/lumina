@@ -40,7 +40,7 @@ return [
     'oauth'                     => 'OAuth',
     'cover'                     => 'Cover',
     'share_img'                 => 'Share Img',
-    'place_select'              => 'Place Select',
+    'place_select'              => '请选择',
     'title'                     => 'Title',
     'type'                      => 'Type',
     'range'                     => 'Range',

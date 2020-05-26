@@ -26,13 +26,14 @@ class KuaiDi
     public function guestName($num)
     {
         $query = http_build_query([
-            'key' => config('mp.express.guest_code.key'),
+            'key' => config('kuaidi100.guest_code.key'),
             'num' => $num
         ]);
         $http = new \GuzzleHttp\Client();
         $response = $http->get(self::API_GUEST_NAME, ['query' => $query]);
-        $res = json_decode($response->getBody()->getContents());
-        return $res[0];
+        $res = json_decode($response->getBody()->getContents(), true);
+        $name = self::numCode()->where('code', $res[0]['comCode'])->first();
+        return array_merge($res[0], $name);
     }
 
 
@@ -42,21 +43,33 @@ class KuaiDi
      * @param $nameCode
      * @return mixed
      */
-    public function search($num, $nameCode)
+    public static function search($num, $name)
     {
-        $post_data["param"] = json_encode([
-            'num' => $num,
-            'com' => $nameCode
-        ]);
-        $key = config('mp.express.search.key');
-        $post_data['customer'] = config('mp.express.search.customer');
+        $cache_key = 'kuaidi_'.$num;
+        $res = cache($cache_key);
 
-        $post_data["sign"] = md5($post_data["param"].$key.$post_data["customer"]);
-        $post_data["sign"] = strtoupper($post_data["sign"]);
+        if(!$res) {
+            $nameMap = self::numCode()->where('name', $name)->first();
+            if(!$nameMap) {
+                return false;
+            }
+            $post_data["param"] = json_encode([
+                'num' => $num,
+                'com' => $nameMap['code']
+            ]);
+            $key = config('kuaidi100.search.key');
+            $post_data['customer'] = config('kuaidi100.search.customer');
 
-        $http = new \GuzzleHttp\Client();
-        $response = $http->post(self::API_QUERY, ['form_params' => $post_data]);
-        return json_decode($response->getBody()->getContents(), true);
+            $post_data["sign"] = md5($post_data["param"].$key.$post_data["customer"]);
+            $post_data["sign"] = strtoupper($post_data["sign"]);
+
+            $http = new \GuzzleHttp\Client();
+            $response = $http->post(self::API_QUERY, ['form_params' => $post_data]);
+            $res = json_decode($response->getBody()->getContents(), true);
+
+            cache([$cache_key => $res], 600);
+        }
+        return $res;
     }
 
 //    public function registerPoll()
@@ -97,7 +110,14 @@ class KuaiDi
      */
     public static function numCode()
     {
-        return [
+        return collect([
+            array('name' => '中通快递','code' => 'zhongtong'),
+            array('name' => '顺丰速运','code' => 'shunfeng'),
+            array('name' => 'EMS','code' => 'ems'),
+            array('name' => '圆通速递','code' => 'yuantong'),
+            array('name' => '宅急送','code' => 'zhaijisong'),
+            array('name' => '京东物流','code' => 'jd'),
+            array('name' => '天天快递','code' => 'tiantian'),
             array('name' => '金岸物流','code' => 'jinan'),
             array('name' => '海带宝','code' => 'haidaibao'),
             array('name' => '澳通华人物流','code' => 'cllexpress'),
@@ -292,7 +312,6 @@ class KuaiDi
             array('name' => '祥龙运通物流','code' => 'xianglongyuntong'),
             array('name' => '偌亚奥国际快递','code' => 'nuoyaao'),
             array('name' => '陪行物流','code' => 'peixingwuliu'),
-            array('name' => '天天快递','code' => 'tiantian'),
             array('name' => 'CCES/国通快递','code' => 'cces'),
             array('name' => '彪记快递','code' => 'biaojikuaidi'),
             array('name' => '安信达','code' => 'anxindakuaixi'),
@@ -555,7 +574,6 @@ class KuaiDi
             array('name' => '圣安物流','code' => 'shenganwuliu'),
             array('name' => '联邦快递','code' => 'lianbangkuaidi'),
             array('name' => '飞快达','code' => 'feikuaida'),
-            array('name' => 'EMS','code' => 'ems'),
             array('name' => '天地华宇','code' => 'tiandihuayu'),
             array('name' => '煜嘉物流','code' => 'yujiawuliu'),
             array('name' => '郑州建华','code' => 'zhengzhoujianhua'),
@@ -621,7 +639,6 @@ class KuaiDi
             array('name' => '尼日利亚(Nigerian Postal)','code' => 'nigerianpost'),
             array('name' => '智利(Correos Chile)','code' => 'chile'),
             array('name' => '以色列(Israel Post)','code' => 'israelpost'),
-            array('name' => '京东物流','code' => 'jd'),
             array('name' => '奥地利(Austrian Post)','code' => 'austria'),
             array('name' => '乌克兰小包、大包(UkrPoshta)','code' => 'ukraine'),
             array('name' => '乌干达(Posta Uganda)','code' => 'uganda'),
@@ -739,7 +756,6 @@ class KuaiDi
             array('name' => '东红物流','code' => 'donghong'),
             array('name' => '增益速递','code' => 'zengyisudi'),
             array('name' => '好运来','code' => 'hlyex'),
-            array('name' => '顺丰速运','code' => 'shunfeng'),
             array('name' => '城际快递','code' => 'chengji'),
             array('name' => '程光快递','code' => 'chengguangkuaidi'),
             array('name' => '天翼快递','code' => 'tykd'),
@@ -1041,7 +1057,6 @@ class KuaiDi
             array('name' => '中邮物流','code' => 'zhongyouwuliu'),
             array('name' => 'Fedex-国际件-中文','code' => 'fedexcn'),
             array('name' => '韩国（Korea Post）','code' => 'koreapost'),
-            array('name' => '中通快递','code' => 'zhongtong'),
             array('name' => '京广速递','code' => 'jinguangsudikuaijian'),
             array('name' => 'FedEx-国际件','code' => 'fedex'),
             array('name' => '日日顺物流','code' => 'rrs'),
@@ -1123,8 +1138,6 @@ class KuaiDi
             array('name' => '淘宝订单','code' => 'taobaoorder'),
             array('name' => '盛丰物流','code' => 'shengfengwuliu'),
             array('name' => '瑞典（Sweden Post）','code' => 'ruidianyouzheng'),
-            array('name' => '圆通速递','code' => 'yuantong'),
-            array('name' => '宅急送','code' => 'zhaijisong'),
             array('name' => '新邦物流','code' => 'xinbangwuliu'),
             array('name' => '恒路物流','code' => 'hengluwuliu'),
             array('name' => '华夏龙','code' => 'huaxialongwuliu'),
@@ -1219,7 +1232,7 @@ class KuaiDi
             array('name' => 'YCG物流','code' => 'ycgglobal'),
             array('name' => '驿递汇速递','code' => 'yidihui'),
             array('name' => 'track-parcel','code' => 'trackparcel')
-        ];
+        ]);
     }
 
 

@@ -225,8 +225,9 @@ class CoreServiceProvider extends ServiceProvider
                 $definition = $definitionBuilder->build();
 
 
+                // $singleState, $property
                 $marking = new MethodMarkingStore(true, $wd['marking_store']['property']);
-                $workflow = new Workflow($definition, $marking);
+                $workflow = new Workflow($definition, $marking, null, $name);
 
                 foreach ($wd['supports'] as $supportedClass) {
                     $registry->addWorkflow($workflow, new InstanceOfSupportStrategy($supportedClass));
