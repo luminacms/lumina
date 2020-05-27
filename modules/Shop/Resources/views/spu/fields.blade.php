@@ -18,24 +18,28 @@
         </x-formItem>
 
         <x-formItem :label="__('core::main.brand_id')" required>
-            <x-input.select name="brand_id" verify="required" :value="$spu->brand_id??''" :options="\Modules\Shop\Models\Brand::all()->mapWithKeys(function($item){
+            <x-input.select name="brand_id" :value="$spu->brand_id??''" :options="\Modules\Shop\Models\Brand::all()->mapWithKeys(function($item){
                 return [$item['id'] => $item['name']];
-            })->toArray()"  search />
+            })->toArray()"  search required />
         </x-formItem>
 
         <x-formItem :label="__('core::main.name')" required >
-            <x-input name="name" :value="$spu->name??''" required />
+            <x-input name="name" :value="$spu->name??''" required placeholder="需清晰描述所售商品，包含品牌信息、商品名称、商品规格，最多30个汉字" />
         </x-formItem>
 
-        <x-formItem :label="__('core::main.description')">
-            <x-input name="description" :value="$spu->description??''"/>
+        <x-formItem label="推荐语">
+            <x-input name="description" :value="$spu->description??''" placeholder="描述商品推荐的卖点，将在用户端展示，限8~50个汉字" />
         </x-formItem>
 
-
-
-        <x-formItem label="库存扣减方式">
+        <x-formItem label="库存扣减方式" required>
             <x-input.radio name="deduct_stock_type" class="radio" :options="['1' => '下单减库存', '2' => '付款减库存']" value="1"/>
         </x-formItem>
+        <x-formItem label="支付方式" required>
+            <x-input.radio name="pay_type" class="radio" :options="Modules\Shop\Models\Spu::$pay_types" value="1"/>
+        </x-formItem>
+        {{-- <x-formItem label="同店商品推荐" required>
+            <x-input.radio name="" class="radio" :options="['1'=>'系统推荐', '2'=>'手动配置']" value="1"/>
+        </x-formItem> --}}
 
         <x-formItem :label="__('core::main.thumb')">
             <x-input.imgs name="thumb"  :value="$spu->thumb??''"/>
@@ -48,16 +52,17 @@
         <x-formItem label="规格">
             <div class="layui-tab-item layui-show">
                 @if($_type==\Modules\Shop\Models\Spu::TYPE_SINGLE)
-                    <x-formItem label="SKU">
-                        <x-input name="sku[0][uid]" verify="required" :value="$spu->sku[0]->uid??''"/>
-                    </x-formItem>
-                    <x-formItem :label="__('core::main.price_fee')" inline>
-                        <x-input type="number" name="sku[0][price_fee]" verify="required" :value="$spu->sku[0]->price_fee??''"/>
-                        划线价：<x-input type="number" name="sku[0][market_price_fee]" verify="required" :value="$spu->sku[0]->price_fee??''"/>
-                    </x-formItem>
-                    <x-formItem :label="__('core::main.stock')">
-                        <x-input type="number" name="sku[0][stock]" verify="required" :value="$spu->sku[0]->stock??''"/>
-                    </x-formItem>
+                    <div class="border border-gray-500">
+                        <x-formItem label="SKU" required inline>
+                            <x-input name="sku[0][uid]" required :value="$spu->sku[0]->uid??''" placeholder="全局唯一"/>
+                            库存：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" />
+                            重量(kg)：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" />
+                        </x-formItem>
+                        <x-formItem :label="__('core::main.price_fee')" inline required>
+                            <x-input type="number" name="sku[0][price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
+                            划线价：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
+                        </x-formItem>
+                    </div>
                 @else
                     @include('shop::spu._multiple')
                 @endif

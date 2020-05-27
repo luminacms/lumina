@@ -16,6 +16,8 @@ class Select extends Component
     public $search;
     public $optionHtml;
     public $isSimpleOption; //是否是简单options, 无键值即是
+    public $required;
+
 
     public $iptkey;
 
@@ -24,11 +26,11 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($name, $options = [], $verify = '', $value = '', $search = '', $optionHtml = '')
+    public function __construct($name, $options = [], $verify = '', $value = '', $search = '', $optionHtml = '', $required='')
     {
         $this->name = $name;
-        $this->options = array_merge(['' => ''], $options);
-        $this->verify = $verify;
+        $this->options = array_merge($options);
+        $this->verify = $required ? implode('|', array_filter(array_merge(explode('|', $verify), ['required']))) : $verify;
         $this->isSimpleOption = array_values($options) == $options;
 
         $this->value = $value ?? old($name);

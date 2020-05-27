@@ -18,6 +18,10 @@ class Spu extends BaseModel
     const TYPE_SINGLE = 1;
     CONST TYPE_MULTIPLE = 2;
 
+    const PAY_TYPE_ONLINE = 1;
+    const PAY_TYPE_OFFLINE = 2;
+    const PAY_TYPE_ALL = 3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,8 +29,8 @@ class Spu extends BaseModel
      */
     protected $table = 'shop__spus';
     protected $fillable = [
-        'uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb',
-        'pic_url','create_by','type','spec_ids','deduct_stock_type', 'content'
+        'uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pay_type',
+        'pic_url','create_by','type','spec_ids','deduct_stock_type', 'content', 'delivery_id'
     ];
 
     /**
@@ -35,9 +39,14 @@ class Spu extends BaseModel
      * @var array
      */
     protected $fieldSearchable = [];
-    public $types = [
+    public static $types = [
         self::TYPE_SINGLE => '单规格',
         self::TYPE_MULTIPLE => '多规格'
+    ];
+    public static $pay_types = [
+        self::PAY_TYPE_ONLINE => '在线支付',
+        self::PAY_TYPE_OFFLINE => '货到付款',
+        self::PAY_TYPE_ALL => '在线支付/货到付款'
     ];
 
     protected static function boot()

@@ -104,7 +104,7 @@
             table.on('tool(data_spu_table)', function(obj){
                 parent.layer.open({
                     type: 2,
-                    area: ['375px', '667px'],
+                    area: ['375px', '90%'],
                     content: url.preview + '?uid=' + obj.data.uid
                 })
             });

@@ -568,6 +568,40 @@ layui.define(['jquery', 'util'], function (exports) {
                 },
                 media: function () {
                     call.previewMedia.call({});
+                },
+                // 提示
+                tip: function() {
+                    var ELEM = '[lay-tip]';
+                    $(ELEM).each(function () {
+                        var $self = $(this),
+                            tip = undefined;
+
+                        $self.on('mouseenter', function(){
+                            tip = layer.tips($self.attr('lay-tip'), $self, {
+                                tips: 1,
+                                time: 0
+                            });
+                        }).on('mouseleave', function(){
+                            // layer.close(tip)
+                        })
+
+                        console.log($self)
+                        // elemItem.each(function () {
+                        //     var othis = $(this),
+                        //         elemTitle = othis.find('.layui-colla-title'),
+                        //         elemCont = othis.find('.layui-colla-content'),
+                        //         isNone = elemCont.css('display') === 'none';
+
+                        //     //初始状态
+                        //     elemTitle.find('.layui-colla-icon').remove();
+                        //     // elemTitle.append('<i class="fa layui-colla-icon">' + (isNone ? '&#xe602;' : '&#xe61a;') + '</i>');
+                        //     elemTitle.append('<i class="fa layui-colla-icon"></i>');
+
+                        //     //点击标题
+                        //     elemTitle.off('click', call.collapse).on('click', call.collapse);
+                        // });
+
+                    });
                 }
             };
 

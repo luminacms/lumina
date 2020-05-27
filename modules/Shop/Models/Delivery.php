@@ -4,6 +4,8 @@ namespace Modules\Shop\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Core\Models\BaseModel;
+use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Traits\HasOrg;
 
 /**
  * Class Delivery.
@@ -12,7 +14,7 @@ use Modules\Core\Models\BaseModel;
  */
 class Delivery extends BaseModel
 {
-    use SoftDeletes;
+    use SoftDeletes, HasOrg, HasCreateBy;
 
     CONST TYPE_BYCOUNT = '1';
     CONST TYPE_BYWEIGHT = '2';

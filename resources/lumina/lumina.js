@@ -1302,7 +1302,7 @@
 
         //置顶当前窗口
         layer.zIndex = that.config.zIndex;
-        layer.setTop = function (layero) {
+        layer.setTop = function (layero) { -
             var setZindex = function () {
                 layer.zIndex++;
                 layero.css('z-index', layer.zIndex + 1);
