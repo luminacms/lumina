@@ -22,6 +22,7 @@
                 url: '{!! URL::full() !!}',
                 treeMode: true,
                 cols: [[
+                    {"type":"checkbox"},
                     {"field":"id","title":"ID", "width":100},
                     {"field":"name","title":"name"},
                     {"field":"path","title":"path"},
@@ -31,34 +32,6 @@
                     {"field":"updated_at","title":"updated_at"}
                 ]]
             });
-
-            // table.render({
-            //     elem: '#' + tableName,
-            //     url: '{!! URL::full() !!}',
-            //     icon_field: 'name',
-            //     is_checkbox: true,
-            //     cols: [
-            //         {"field":"id","title":"ID", "width":100},
-            //         {"field":"name","title":"name"},
-            //         {"field":"path","title":"path"},
-            //         {"field":"level","title":"level"},
-            //         {"field":"created_at","title":"created_at"},
-            //         {"field":"updated_at","title":"updated_at"}
-            //     ]
-            // });
-
-            // table.render({
-            //     elem: '#' + tableName,
-            //     url: '{!! URL::full() !!}',
-            //     cols: [[
-            //         {"type":"checkbox","fixed":"left"},
-            //         {"field":"id","title":"ID", "width":100},
-            //         {"field":"name","title":"name"},
-            //         {"field":"path","title":"path"},
-            //         {"field":"level","title":"level"},
-            //         {"field":"created_at","title":"created_at"},
-            //         {"field":"updated_at","title":"updated_at"}]]
-            // });
 
             //events
             table.on('toolbar('+tableName+')', function(obj){

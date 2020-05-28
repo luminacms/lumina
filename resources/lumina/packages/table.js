@@ -1234,7 +1234,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                             //渲染不同风格的列
                             switch (item3.type) {
                                 case 'checkbox':
-                                    return '<input type="checkbox" name="layTableCheckbox" data-id="' + tplData.id + '" lay-skin="primary" ' + function () {
+                                    return '<input type="checkbox" name="layTableCheckbox" data-id="' + item1.id + '" lay-skin="primary" ' + function () {
                                         //如果是全选
                                         if (item3[checkName]) {
                                             item1[checkName] = item3[checkName];
@@ -2276,7 +2276,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
 
                     that.layBody.find('tr[data-path*=\''+$tr.data('path')+'\']').each(function(){
                         var $self = $(this),
-                            $icon = $self.find("i");
+                            $icon = $self.find("td[data-down] i");
 
                         if($tr.data('path') != $self.data('path')){
                             if(is_open) {
