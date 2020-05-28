@@ -54,10 +54,10 @@
     </script>
 
     <script>
-        layui.use(['table', 'element', 'jstree', 'pickerUser', 'admin'], function(){
+        layui.use(['table', 'element', 'tree', 'pickerUser', 'admin'], function(){
             var table = layui.table,
                 admin = parent.layui == layui?layui.admin:parent.layui.admin,
-                jstree = layui.jstree,
+                tree = layui.tree,
                 pickerUser = layui.pickerUser,
                 element = layui.element;
 
@@ -124,32 +124,30 @@
                 });
 
                 // 部门树
-                $department_tree.jstree({
-                    core: {data: @json(\Modules\Core\Models\Department::getTree(2, 'users', true))}
-                }).on('changed.jstree', function (e, data) {
-                    if(data && data.selected && data.selected.length) {
-                        var _depart_id = data.node.parent=='#'?'':data.selected[0];
+                tree.render({
+                    elem: '#depart_tree',
+                    onlyIconControl: true,
+                    data:  @json(\Modules\Core\Models\Department::getTree(2, 'users', true)),
+                    click: function(obj){
+                        var data = obj.data
 
-                        $title.text(data.node.text)
+                        $title.text(data.text)
                         table.reload("user_depart_table", {
                             url: currentUrl,
-                            where: {'depart_id': _depart_id},
+                            where: {'depart_id': data.id},
                             page: {curr: 1}
                         })
                     }
                 });
             }
 
-
-
-            $role_tree.jstree({
-                core: {
-                    data: @json(\Modules\Core\Models\Role::getTree(1, 'web'))
-                }
-            }).on('changed.jstree', function (e, data) {
-                if(data && data.selected && data.selected.length) {
-                    role_id = data.selected[0]
-                    $title.text(data.node.text)
+            tree.render({
+                elem: '#role_tree',
+                onlyIconControl: true,
+                data: @json(\Modules\Core\Models\Role::getTree(1, 'web')),
+                click: function(obj){
+                    role_id = obj.data.id
+                    $title.text(obj.data.text)
                     $("#role_user").find(".tip").hide();
 
                     // 角色树
@@ -174,6 +172,7 @@
                     });
                 }
             });
+
             table.on('toolbar(user_role_table)', function(obj){
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch(obj.event){

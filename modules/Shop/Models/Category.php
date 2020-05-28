@@ -28,6 +28,8 @@ class Category extends BaseModel
      *
      * @var array
      */
-    protected $fieldSearchable = [];
+    protected $fieldSearchable = [
+        'name' => 'like'
+    ];
 
 }

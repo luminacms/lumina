@@ -471,6 +471,12 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
             var that = this;
             WD = '';
             that.index = ++table.index;
+
+            // treeMode关闭分页
+            if(options.treeMode) {
+                options.tree = $.extend({}, that.config.tree, options.tree);
+                options = $.extend({'page': false}, options);
+            }
             that.config = $.extend({}, that.config, table.config, options);
             that.render();
         };
@@ -483,14 +489,24 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         defaultToolbar: ['filter', 'exports'], //工具栏右侧图标
         action: null, //可操作函数
         autoSort: false, //是否前端自动排序。如果否，则需自主排序（通常为服务端处理好排序）
-        canSearch: true,
-        autoShow: null,
+        canSearch: true, // 开启搜索
+        autoShow: null, // 开启自动视图
         autoShowWidth: '800px',
         autoShowWidthMobile: '300px',
         toolbar: 'default',
         searchFields: null,
         lineHeight: null,
         height: 'full-110',
+        treeMode: false,  //树table模式
+        tree: {
+            top_value: 0,
+            primary_field: 'id',
+            parent_field: 'parentid',
+            icon_field: 'name',
+            is_checkbox: true,
+            icon_close: 'fa-caret-right',
+            icon_open: 'fa-caret-down'
+        },
         page: true,
         hasRefresh: true, // 开启table刷新，init渲染table
         export: {
@@ -1035,6 +1051,10 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                 dataType: 'json',
                 headers: options.headers || {},
                 success: function (res) {
+                    // tree数据解析
+                    if(options.treeMode) {
+                        res = that.parseTreeData(res)
+                    }
                     //如果有数据解析的回调，则获得其返回的数据
                     if (typeof options.parseData === 'function') {
                         res = options.parseData(res) || res;
@@ -1086,6 +1106,44 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
         typeof options.done === 'function' && options.done(res, curr, countName);
     };
 
+    // treeMode 数据解析
+    Class.prototype.parseTreeData = function(res) {
+        var that = this,
+            options = that.config,
+            o = jQuery,
+            e = options.tree;
+
+        var data = function(e) {
+            var lists = [],
+                childs = [];
+            o.each(e.data, function(idx, item) {
+                lists[item[e.primary_field]] = item;
+                if(!childs[item[e.parent_field]]) {
+                    childs[item[e.parent_field]] = [];
+                }
+                childs[item[e.parent_field]][item[e.primary_field]] = item;
+            });
+            e.childs = childs;
+            return tree_data(e, lists, e.top_value, []);
+        };
+        var tree_data = function(e, lists, pid, data) {
+            var t = this;
+            if(lists[pid]) {
+                data.push(lists[pid]);
+                delete lists[pid]
+            }
+            o.each(e.data, function(index, item) {
+                if(item[e.parent_field] == pid) {
+                    data.concat(tree_data(e, lists, item[e.primary_field], data))
+                }
+            });
+            return data;
+        };
+
+        e.data = res.data
+        return $.extend({}, res, {'data': data(e)})
+    };
+
     //遍历表头
     Class.prototype.eachCols = function (callback) {
         var that = this;
@@ -1102,12 +1160,14 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
             trs_fixed = [],
             trs_fixed_r = [],
 
+
             //渲染视图=
             render = function () { //后续性能提升的重点
                 var thisCheckedRowIndex;
                 // if (!sort && that.sortKey) {
                 //     return that.sort(that.sortKey.field, that.sortKey.sort, true);
                 // }
+
                 layui.each(data, function (i1, item1) {
                     var tds = [],
                         tds_fixed = [],
@@ -1115,6 +1175,11 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         numbers = i1 + options.limit * (curr - 1) + 1; //序号
 
                     if (item1.length === 0) return;
+
+
+                    // 树模式下最后一级
+                    var is_tree_end = options.treeMode ? !options.tree.childs[item1[options.tree.primary_field]] : false;
+
                     // if (!sort) {
                     //     item1[table.config.indexName] = i1;
                     // }
@@ -1122,10 +1187,17 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                     that.eachCols(function (i3, item3) {
                         var field = item3.field || i3,
                             key = options.index + '-' + item3.key,
+                            treeMode = options.treeMode && field == options.tree.icon_field,
                             content = item1[field];
 
                         if (content === undefined || content === null) content = '';
                         if (item3.colGroup) return;
+
+                        // tree mode
+                        if(treeMode) {
+                            var ml = 4*item1.level
+                            content = (is_tree_end ? '<span class="ml-'+ml+'"></span>' : '<i class="ml-'+(ml)+' mr-1 fa '+options.tree.icon_close+'"></i>') + content
+                        }
 
                         //td内容
                         var td = ['<td data-field="' + field + '" data-key="' + key + '" ' + function () { //追加各种属性
@@ -1138,6 +1210,9 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                             if (item3.style) attr.push('style="' + item3.style + '"'); //自定义样式
                             if (item3.minWidth) attr.push('data-minwidth="' + item3.minWidth + '"'); //单元格最小宽度
                             if (item3.downoff) attr.push('data-downoff="true"'); // 关闭单元格下拉
+
+                            // tree mode
+                            if(treeMode) attr.push('data-down'); //tree事件绑定
                             return attr.join(' ');
                         }() + ' class="' + function () { //追加样式
                             var classNames = [];
@@ -1146,7 +1221,7 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                             return classNames.join(' ');
                         }() + '">' + function () {
                             var _style = options['lineHeight'] ? 'style="height: ' + options['lineHeight'] + 'px;line-height: ' + options['lineHeight'] + 'px;"' : ''
-                            return '<div ' + _style + ' class="layui-table-cell laytable-cell-';
+                            return '<div ' + _style+' class="'+(treeMode?'cursor-pointer':'')+' layui-table-cell laytable-cell-';
                         }() + function () { //返回对应的CSS类标识
                             return item3.type === 'normal' ? key :
                                 (key + ' laytable-cell-' + item3.type);
@@ -1196,7 +1271,12 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                         if (item3.fixed === 'right') tds_fixed_r.push(td);
                     });
 
-                    trs.push('<tr data-index="' + i1 + '">' + tds.join('') + '</tr>');
+                    if(!options.treeMode) {
+                        trs.push('<tr data-index="' + i1 + '">' + tds.join('') + '</tr>');
+                    }else{
+                        trs.push('<tr data-index="' + i1 + '" data-id="'+item1.id+'" data-pid="'+item1.parentid+'" data-path="'+item1.path+'" '+(item1.parentid != options.tree.top_value ?'class="layui-hide"':"")+'>' + tds.join('') + '</tr>');
+                    }
+
                     trs_fixed.push('<tr data-index="' + i1 + '">' + tds_fixed.join('') + '</tr>');
                     trs_fixed_r.push('<tr data-index="' + i1 + '">' + tds_fixed_r.join('') + '</tr>');
                 });
@@ -2129,26 +2209,31 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
             form.on('submit(*)', function (data) {
                 var _wd = data.field.wd,
                     _opt = {},
+                    _where = {},
                     data_type = $(data.elem).attr("data-type"),
                     table_id = $(data.elem).attr("data-table");
 
                 if(data_type == 'cancel') {
+                    _where = $.extend(options.where, {
+                        search: ''
+                    });
                     _opt = {
-                        where: $.extend(options.where, {
-                            search: ''
-                        }),
-                        page: {
-                            curr: 1
+                        where: options.treeMode ? {where: _where} : {
+                           where: _where,
+                            page: {
+                                curr: 1
+                            }
                         }
                     }
                 }else{
                     if (WD != _wd || _wd.length > 0) {
                         WD = _wd
-                        _opt = {
-                            where: $.extend(options.where, {
-                                search: data.field.wd,
-                                searchFields: options.searchFields
-                            }),
+                        _where = $.extend(options.where, {
+                            search: data.field.wd,
+                            searchFields: options.searchFields
+                        });
+                        _opt = options.treeMode ? {where: _where} : {
+                            where: _where,
                             page: {
                                 curr: 1
                             }
@@ -2179,6 +2264,38 @@ layui.define(['admin', 'laytpl', 'laypage', 'form', 'dropdown'], function (expor
                     where: $.extend(options.where, xfilters)
                 })
                 that.reload(options);
+            })
+        }
+
+        // treeMode
+        if(options.treeMode) {
+            that.layBody.off('click', '[data-down]').on('click', '[data-down]', function(){
+                var $td = $(this),
+                    $tr = $td.parent("tr"),
+                    is_open = $td.find('i').hasClass(options.tree.icon_open);
+
+                    that.layBody.find('tr[data-path*=\''+$tr.data('path')+'\']').each(function(){
+                        var $self = $(this),
+                            $icon = $self.find("i");
+
+                        if($tr.data('path') != $self.data('path')){
+                            if(is_open) {
+                                $self.addClass('layui-hide')
+                                $icon.removeClass(options.tree.icon_open).addClass(options.tree.icon_close)
+                            }else{
+                                if($self.data('pid') == $tr.data('id')) {
+                                    $self.removeClass('layui-hide')
+                                }
+                            }
+                        }else{
+                            if(is_open) {
+                                $icon.removeClass(options.tree.icon_open).addClass(options.tree.icon_close)
+                            }else{
+                                $icon.removeClass(options.tree.icon_close).addClass(options.tree.icon_open)
+                            }
+                        }
+
+                    })
             })
         }
     };

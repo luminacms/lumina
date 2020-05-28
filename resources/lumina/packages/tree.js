@@ -82,8 +82,8 @@ layui.define('form', function (exports) {
         ELEM_VIEW = 'layui-tree',
         ELEM_SET = 'layui-tree-set',
         ICON_CLICK = 'layui-tree-iconClick',
-        ICON_ADD = 'layui-icon-addition',
-        ICON_SUB = 'layui-icon-subtraction',
+        ICON_ADD = 'fa-plus-square-o',
+        ICON_SUB = 'fa-minus-square-o',
         ELEM_ENTRY = 'layui-tree-entry',
         ELEM_MAIN = 'layui-tree-main',
         ELEM_TEXT = 'layui-tree-txt',
@@ -220,9 +220,9 @@ layui.define('form', function (exports) {
                     function () {
                         if (options.showLine) {
                             if (hasChild) {
-                                return '<span class="layui-tree-iconClick layui-tree-icon"><i class="layui-icon ' + (item.spread ? "layui-icon-subtraction" : "layui-icon-addition") + '"></i></span>';
+                                return '<span class="layui-tree-iconClick layui-tree-icon"><i class="fa ' + (item.spread ? "fa-minus-square-o" : "fa-plus-square-o") + '"></i></span>';
                             } else {
-                                return '<span class="layui-tree-iconClick"><i class="layui-icon layui-icon-file"></i></span>';
+                                return '<span class="layui-tree-iconClick"><i class="fa fa-file"></i></span>';
                             };
                         } else {
                             return '<span class="layui-tree-iconClick"><i class="layui-tree-iconArrow ' + (hasChild ? "" : HIDE) + '"></i></span>';
@@ -239,9 +239,9 @@ layui.define('form', function (exports) {
                     ,
                     function () {
                         if (options.isJump && item.href) {
-                            return '<a href="' + item.href + '" target="_blank" class="' + ELEM_TEXT + '">' + (item.title || item.label || options.text.defaultNodeName) + '</a>';
+                            return '<a href="' + item.href + '" target="_blank" class="' + ELEM_TEXT + '">' + (item.text || item.label || options.text.defaultNodeName) + '</a>';
                         } else {
-                            return '<span class="' + ELEM_TEXT + (item.disabled ? ' ' + DISABLED : '') + '">' + (item.title || item.label || options.text.defaultNodeName) + '</span>';
+                            return '<span class="' + ELEM_TEXT + (item.disabled ? ' ' + DISABLED : '') + '">' + (item.text || item.label || options.text.defaultNodeName) + '</span>';
                         }
                     }(), '</div>'
 
@@ -251,9 +251,9 @@ layui.define('form', function (exports) {
                         if (!options.edit) return '';
 
                         var editIcon = {
-                                add: '<i class="layui-icon layui-icon-add-1"  data-type="add"></i>',
-                                update: '<i class="layui-icon layui-icon-edit" data-type="update"></i>',
-                                del: '<i class="layui-icon layui-icon-delete" data-type="del"></i>'
+                                add: '<i class="fa fa-add-1"  data-type="add"></i>',
+                                update: '<i class="fa fa-edit" data-type="update"></i>',
+                                del: '<i class="fa fa-delete" data-type="del"></i>'
                             },
                             arr = ['<div class="layui-btn-group layui-tree-btnGroup">'];
 
@@ -317,7 +317,7 @@ layui.define('form', function (exports) {
         //展开收缩
         touchOpen.on('click', function (e) {
             var packCont = elem.children('.' + ELEM_PACK),
-                iconClick = touchOpen.children('.layui-icon')[0] ? touchOpen.children('.layui-icon') : touchOpen.find('.layui-tree-icon').children('.layui-icon');
+                iconClick = touchOpen.children('.fa')[0] ? touchOpen.children('.fa') : touchOpen.find('.layui-tree-icon').children('.fa');
 
             //若没有子节点
             if (!packCont[0]) {
@@ -337,7 +337,7 @@ layui.define('form', function (exports) {
                         var sibls = elem.siblings('.' + ELEM_SET);
                         sibls.removeClass(ELEM_SPREAD);
                         sibls.children('.' + ELEM_PACK).slideUp(200);
-                        sibls.find('.layui-tree-icon').children('.layui-icon').removeClass(ICON_SUB).addClass(ICON_ADD);
+                        sibls.find('.layui-tree-icon').children('.fa').removeClass(ICON_SUB).addClass(ICON_ADD);
                     };
                 };
             };
@@ -447,7 +447,7 @@ layui.define('form', function (exports) {
             entry = elem.children('.' + ELEM_ENTRY),
             elemMain = entry.children('.' + ELEM_MAIN);
 
-        entry.children('.layui-tree-btnGroup').on('click', '.layui-icon', function (e) {
+        entry.children('.layui-tree-btnGroup').on('click', '.fa', function (e) {
             layui.stope(e); //阻止节点操作
 
             var type = $(this).data("type"),
@@ -464,7 +464,7 @@ layui.define('form', function (exports) {
                     //若开启连接线，更改图标样式
                     if (options.showLine) {
                         elemMain.find('.' + ICON_CLICK).addClass('layui-tree-icon');
-                        elemMain.find('.' + ICON_CLICK).children('.layui-icon').addClass(ICON_ADD).removeClass('layui-icon-file');
+                        elemMain.find('.' + ICON_CLICK).children('.fa').addClass(ICON_ADD).removeClass('fa-file');
                         //若未开启连接线，显示箭头
                     } else {
                         elemMain.find('.layui-tree-iconArrow').removeClass(HIDE);
@@ -476,7 +476,7 @@ layui.define('form', function (exports) {
                 //新增节点
                 var key = options.operate && options.operate(returnObj),
                     obj = {};
-                obj.title = options.text.defaultNodeName;
+                obj.text = options.text.defaultNodeName;
                 obj.id = key;
                 that.tree(elem.children('.' + ELEM_PACK), [obj]);
 
@@ -553,7 +553,7 @@ layui.define('form', function (exports) {
                     elemMain.children('.' + ELEM_TEXT).html(textNew);
 
                     //同步数据
-                    returnObj.data.title = textNew;
+                    returnObj.data.text = textNew;
 
                     //节点修改的回调
                     options.operate && options.operate(returnObj);
@@ -663,7 +663,7 @@ layui.define('form', function (exports) {
                     //若开启了连接线
                     if (options.showLine) {
                         prevDiv.find('.' + ICON_CLICK).removeClass('layui-tree-icon');
-                        prevDiv.find('.' + ICON_CLICK).children('.layui-icon').removeClass(ICON_SUB).addClass('layui-icon-file');
+                        prevDiv.find('.' + ICON_CLICK).children('.fa').removeClass(ICON_SUB).addClass('fa-file');
                         //父节点所在层添加延伸线
                         var pare = prevDiv.parents('.' + ELEM_PACK).eq(0);
                         pare.addClass(ELEM_EXTEND);
@@ -740,7 +740,7 @@ layui.define('form', function (exports) {
                 if (num == 1) {
                     if (options.showLine) {
                         parentSet.find('.' + ICON_CLICK).removeClass('layui-tree-icon');
-                        parentSet.find('.' + ICON_CLICK).children('.layui-icon').removeClass(ICON_SUB).addClass('layui-icon-file');
+                        parentSet.find('.' + ICON_CLICK).children('.fa').removeClass(ICON_SUB).addClass('fa-file');
                         warpPack.addClass(ELEM_EXTEND);
                         warpPack.children('.' + ELEM_SET).children('.' + ELEM_PACK).each(function () {
                             $(this).children('.' + ELEM_SET).last().addClass(ELEM_LINE_SHORT);
@@ -848,7 +848,7 @@ layui.define('form', function (exports) {
                         if (!$(this).children('.' + ELEM_PACK)[0]) {
                             if (options.showLine) {
                                 $(this).find('.' + ICON_CLICK).eq(0).addClass('layui-tree-icon');
-                                $(this).find('.' + ICON_CLICK).eq(0).children('.layui-icon').addClass(ICON_ADD).removeClass('layui-icon-file');
+                                $(this).find('.' + ICON_CLICK).eq(0).children('.fa').addClass(ICON_ADD).removeClass('fa-file');
                             } else {
                                 $(this).find(".layui-tree-iconArrow").removeClass(HIDE);
                             };

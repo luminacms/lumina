@@ -59,9 +59,8 @@
 
 @push('script')
     <script>
-        layui.use(['table', 'jstree'], function(){
+        layui.use(['table'], function(){
             var table = layui.table,
-                jstree = layui.jstree,
                 admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 $department_tree = $("#depart_tree");
 

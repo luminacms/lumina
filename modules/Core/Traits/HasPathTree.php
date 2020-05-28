@@ -153,7 +153,7 @@ trait HasPathTree
                 }
                 $item['text'] = $item['name'].'('.$r.')';
             }
-            $item['state'] = ['opened'=> $item['level'] <= $level?true:false];
+            $item['spread'] = $item['level'] <= $level?true:false;
         });
         $tree = new Tree($_category->toArray());
         return array_values($tree->get_tree_array());

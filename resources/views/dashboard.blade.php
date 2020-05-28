@@ -2,9 +2,9 @@
 
 @section('dashboard')
 
-    <div class="flex flex-wrap mb-8">
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+    <div class="flex mb-8 space-x-4">
+        <div class="lg:w-6/12 xl:w-3/12 ">
+            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -13,7 +13,7 @@
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow rounded-full bg-red-500">
                                 <i class="fa fa-bar-chart"></i></div>
                         </div>
                     </div>
@@ -22,8 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+        <div class="w-full lg:w-6/12 xl:w-3/12 ">
+            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500">
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow rounded-full bg-orange-500">
                                 <i class="fa fa-pie-chart"></i></div>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+        <div class="w-full lg:w-6/12 xl:w-3/12 ">
+            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-500">
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow rounded-full bg-pink-500">
                                 <i class="fa fa-users"></i></div>
                         </div>
                     </div>
@@ -61,8 +61,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+        <div class="w-full lg:w-6/12 xl:w-3/12 ">
+            <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow rounded-full bg-blue-500">
                                 <i class="fa fa-percent"></i></div>
                         </div>
                     </div>

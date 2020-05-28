@@ -5172,7 +5172,6 @@ body .layui-util-face .layui-layer-content {
     line-height: 12px;
     width: 12px;
     text-align: center;
-    border: 1px solid #c0c4cc;
 }
 
 .layui-tree-iconClick .layui-icon {
@@ -6843,7 +6842,7 @@ html #layuicss-layer {
     text-decoration: underline !important;
 }
 
-.layui-form-label.required:after {
+label.required:after {
     content: '*';
     color: red;
     margin-left: 2px;

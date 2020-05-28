@@ -5,22 +5,7 @@
         ['name' => __('core::main.table_list'), 'uri' => route('shop.category.index')]
     ]" />
 
-    <table class="layui-hide" lay-filter="data_category_table">
-        <thead>
-        <tr>
-            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'id', width:80, fixed: 'left'}">ID</th>
-            <th lay-data="{field:'name', width:350}">名称</th>
-            <th lay-data="{field:'path'}">路径</th>
-            <th lay-data="{field:'level',width:80}">深度</th>
-            <th lay-data="{field:'order',width:80}">排序</th>
-            <th lay-data="{field:'updated_at'}">更新时间</th>
-        </tr>
-        </thead>
-        <tbody>
-            {!! \Modules\Shop\Models\Category::getTableHtml() !!}
-        </tbody>
-    </table>
+    <table id="data_category_table" lay-filter="data_category_table" class="layui-table"></table>
 @endsection
 
 
@@ -32,10 +17,48 @@
                 admin = parent.layui.admin,
                 element = layui.element;
 
-            table.init(tableName, {
-                height: 'full-110',
-                limit: 999999
+            table.render({
+                elem: '#' + tableName,
+                url: '{!! URL::full() !!}',
+                treeMode: true,
+                cols: [[
+                    {"field":"id","title":"ID", "width":100},
+                    {"field":"name","title":"name"},
+                    {"field":"path","title":"path"},
+                    {"field":"level","title":"level"},
+                    {"field":"parentid","title":"parentid"},
+                    {"field":"created_at","title":"created_at"},
+                    {"field":"updated_at","title":"updated_at"}
+                ]]
             });
+
+            // table.render({
+            //     elem: '#' + tableName,
+            //     url: '{!! URL::full() !!}',
+            //     icon_field: 'name',
+            //     is_checkbox: true,
+            //     cols: [
+            //         {"field":"id","title":"ID", "width":100},
+            //         {"field":"name","title":"name"},
+            //         {"field":"path","title":"path"},
+            //         {"field":"level","title":"level"},
+            //         {"field":"created_at","title":"created_at"},
+            //         {"field":"updated_at","title":"updated_at"}
+            //     ]
+            // });
+
+            // table.render({
+            //     elem: '#' + tableName,
+            //     url: '{!! URL::full() !!}',
+            //     cols: [[
+            //         {"type":"checkbox","fixed":"left"},
+            //         {"field":"id","title":"ID", "width":100},
+            //         {"field":"name","title":"name"},
+            //         {"field":"path","title":"path"},
+            //         {"field":"level","title":"level"},
+            //         {"field":"created_at","title":"created_at"},
+            //         {"field":"updated_at","title":"updated_at"}]]
+            // });
 
             //events
             table.on('toolbar('+tableName+')', function(obj){

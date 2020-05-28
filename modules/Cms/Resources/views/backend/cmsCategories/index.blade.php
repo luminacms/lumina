@@ -27,11 +27,11 @@
 
 @push('script')
     <script>
-        layui.use(['table', 'element', 'jstree'], function(){
+        layui.use(['table', 'element', 'tree'], function(){
             var table = layui.table,
                 $ = layui.jquery,
                 admin = layui.admin,
-                jstree = layui.jstree,
+                tree = layui.tree,
                 element = layui.element;
 
             //转换静态表格

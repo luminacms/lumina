@@ -55,12 +55,12 @@
                     <div class="border border-gray-500">
                         <x-formItem label="SKU" required inline>
                             <x-input name="sku[0][uid]" required :value="$spu->sku[0]->uid??''" placeholder="全局唯一"/>
-                            库存：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" />
-                            重量(kg)：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" />
+                            <label class="required mr-4">库存</label>：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" />
+                            <label class="required mr-4">重量(kg)</label>：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" />
                         </x-formItem>
                         <x-formItem :label="__('core::main.price_fee')" inline required>
                             <x-input type="number" name="sku[0][price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
-                            划线价：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
+                            <label class="required mr-4">划线价</label>：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
                         </x-formItem>
                     </div>
                 @else

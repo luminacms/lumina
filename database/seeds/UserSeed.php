@@ -38,7 +38,7 @@ class UserSeed extends Seeder
 
         // 地址
         DB::table((new UserAddress())->getTable())->truncate();
-        $address = factory(UserAddress::class)->times(1000)->make();
+        $address = factory(UserAddress::class)->times(500)->make();
         UserAddress::insert($address->toArray());
 
     }

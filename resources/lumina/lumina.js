@@ -57,7 +57,6 @@
             transfer: 'packages/transfer', //穿梭
 
             // 三方组件
-            jstree: 'libs/jstree/jstree.min',
             echarts: "libs/echarts.min",
             split: "libs/split.min",
             vue: "libs/vue.min",
@@ -69,6 +68,7 @@
             wangEditorLight: 'extends/wangEditor/wangEditor.light',
             circleProgress: 'extends/circle-progress',
             city: 'extends/city',
+
             // 服务包
             pickerUser: 'modules/picker/picker_user',
         };
@@ -1302,7 +1302,7 @@
 
         //置顶当前窗口
         layer.zIndex = that.config.zIndex;
-        layer.setTop = function (layero) { -
+        layer.setTop = function (layero) {
             var setZindex = function () {
                 layer.zIndex++;
                 layero.css('z-index', layer.zIndex + 1);

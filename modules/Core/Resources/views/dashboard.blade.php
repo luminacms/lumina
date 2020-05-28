@@ -7,7 +7,7 @@
         .day-text{line-height:20px;font-size: 12px;}
         .user-info .title{font-size: 20px;margin-top: 10px;margin-bottom: 5px;}
     </style>
-    <div class="home-index shadow-lg">
+    <div class="home-index shadow">
         <p class="day-text muted flex" id="j_quote"></p>
         <div class="header-content">
             <div class="user-info">
@@ -21,46 +21,31 @@
     <div class="layui-fluid">
         @section('dashboard')
 
-        <div class="layui-row layui-col-space15">
-
-            <div class="layui-col-md8">
-                <x-card title="日程" class="shadow-lg">
+        <div class="flex space-x-4">
+            <div class="w-8/12">
+                <x-card title="日程" class="shadow">
                     <x-calendar />
                 </x-card>
             </div>
-
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-header">服务器信息</div>
-                    <div class="layui-card-body layui-text">
-                        <table class="layui-table">
-                            <tbody>
-                                <tr><td>服务器IP地址</td><td>{{ $_SERVER['SERVER_NAME'] }}</td></tr>
-                                <tr><td>服务器域名</td><td>{{ $_SERVER['HTTP_HOST'] }}</td></tr>
-                                <tr><td>服务器端口</td><td>{{ $_SERVER['SERVER_PORT'] }}</td></tr>
-                                <tr><td>服务器操作系统</td><td>{{ $_SERVER['HTTP_USER_AGENT'] }}</td></tr>
-                                <tr><td>PHP版本</td><td>{{ PHP_VERSION }}</td></tr>
-                                <tr><td>获取Zend版本</td><td>{{ Zend_Version() }}</td></tr>
-                                <tr><td>Laravel版本</td><td>{{ app()->version() }}</td></tr>
-                                <tr><td>最大上传限制</td><td>{{ get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许" }}</td></tr>
-                                <tr><td>最大执行时间</td><td>{{ get_cfg_var("max_execution_time")."秒 " }}</td></tr>
-                                <tr><td>脚本运行占用最大内存</td><td>{{ get_cfg_var ("memory_limit")?get_cfg_var("memory_limit"):"无"}}</td></tr>
-                                <tr><td>服务器当前时间</td><td>{{ now() }}</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="w-4/12">
+                <x-card title="服务器信息">
+                    <table class="layui-table">
+                        <tbody>
+                            <tr><td>服务器IP地址</td><td>{{ $_SERVER['SERVER_NAME'] }}</td></tr>
+                            <tr><td>服务器域名</td><td>{{ $_SERVER['HTTP_HOST'] }}</td></tr>
+                            <tr><td>服务器端口</td><td>{{ $_SERVER['SERVER_PORT'] }}</td></tr>
+                            <tr><td>服务器操作系统</td><td>{{ $_SERVER['HTTP_USER_AGENT'] }}</td></tr>
+                            <tr><td>PHP版本</td><td>{{ PHP_VERSION }}</td></tr>
+                            <tr><td>获取Zend版本</td><td>{{ Zend_Version() }}</td></tr>
+                            <tr><td>Laravel版本</td><td>{{ app()->version() }}</td></tr>
+                            <tr><td>最大上传限制</td><td>{{ get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许" }}</td></tr>
+                            <tr><td>最大执行时间</td><td>{{ get_cfg_var("max_execution_time")."秒 " }}</td></tr>
+                            <tr><td>脚本运行占用最大内存</td><td>{{ get_cfg_var ("memory_limit")?get_cfg_var("memory_limit"):"无"}}</td></tr>
+                            <tr><td>服务器当前时间</td><td>{{ now() }}</td></tr>
+                        </tbody>
+                    </table>
+                </x-card>
             </div>
-
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-header">动态图表</div>
-                    <div class="layui-card-body layui-text">
-                        @widget('\Modules\Core\Widgets\DemoWidget')
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         @show

@@ -33,7 +33,7 @@ class CategoryController extends BaseController
     public function index(Request $request)
     {
         if($request->expectsJson()) {
-            $category = $this->category->filter($request)->paginate($request->get('limit', 15));
+            $category = $this->category->filter($request)->get();
             return $this->toCollection($category, CategoryResource::class);
         }
         return view('shop::category.index');
@@ -120,7 +120,7 @@ class CategoryController extends BaseController
             }
             if($model->save()){
                 flash('update success', 'success');
-                
+
                 return !$request->expectsJson()
                     ? redirect()->back()
                     : $this->toResponse($model, 'update success');
