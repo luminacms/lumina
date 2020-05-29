@@ -18,9 +18,7 @@
         </x-formItem>
 
         <x-formItem :label="__('core::main.brand_id')" required>
-            <x-input.select name="brand_id" :value="$spu->brand_id??''" :options="\Modules\Shop\Models\Brand::all()->mapWithKeys(function($item){
-                return [$item['id'] => $item['name']];
-            })->toArray()"  search required />
+            <x-input.select name="brand_id" :value="$spu->brand_id??''" :options="\Modules\Shop\Models\Brand::getOptions()"  search required />
         </x-formItem>
 
         <x-formItem :label="__('core::main.name')" required >
@@ -36,6 +34,9 @@
         </x-formItem>
         <x-formItem label="支付方式" required>
             <x-input.radio name="pay_type" class="radio" :options="Modules\Shop\Models\Spu::$pay_types" value="1"/>
+        </x-formItem>
+        <x-formItem label="运费选择" required>
+            <x-input.select name="delivery_id" class="radio" :options="Modules\Shop\Models\Delivery::getOptions('id', 'name')" search required />
         </x-formItem>
         {{-- <x-formItem label="同店商品推荐" required>
             <x-input.radio name="" class="radio" :options="['1'=>'系统推荐', '2'=>'手动配置']" value="1"/>
@@ -53,14 +54,14 @@
             <div class="layui-tab-item layui-show">
                 @if($_type==\Modules\Shop\Models\Spu::TYPE_SINGLE)
                     <div class="border border-gray-500">
-                        <x-formItem label="SKU" required inline>
-                            <x-input name="sku[0][uid]" required :value="$spu->sku[0]->uid??''" placeholder="全局唯一"/>
-                            <label class="required mr-4">库存</label>：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" />
-                            <label class="required mr-4">重量(kg)</label>：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" />
+                        <x-formItem required inline>
+                            <label class="layui-form-label required mr-4"><span>*</span>SKU：<x-input name="sku[0][uid]" required :value="$spu->sku[0]->uid??''" placeholder="全局唯一"/></label>
+                            <label class="layui-form-label required mr-4"><span>*</span>库存：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" /></label>
+                            <label class="layui-form-label required mr-4"><span>*</span>重量(kg)：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" /></label>
                         </x-formItem>
                         <x-formItem :label="__('core::main.price_fee')" inline required>
                             <x-input type="number" name="sku[0][price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
-                            <label class="required mr-4">划线价</label>：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
+                            <label class="layui-form-label required mr-4"><span>*</span>划线价：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/></label>
                         </x-formItem>
                     </div>
                 @else

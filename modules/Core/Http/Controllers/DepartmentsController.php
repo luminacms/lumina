@@ -7,6 +7,7 @@ use Modules\Core\Models\Department;
 use Modules\Core\Models\Departments;
 use Illuminate\Validation\ValidationException;
 use Modules\Core\Http\Requests\DepartmentsRequest;
+use Modules\Core\Http\Resources\DepartmentResource;
 
 /**
  * Class DepartmentsController.
@@ -39,6 +40,10 @@ class DepartmentsController extends BaseController
      */
     public function index(Request $request)
     {
+        if($request->expectsJson()) {
+            $category = $this->model->filter($request)->get();
+            return $this->toCollection($category, DepartmentResource::class);
+        }
         return view('core::departments.index');
     }
 

@@ -63,7 +63,7 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
             var $this = $(this.elem),
                 self = this;
             // $(this.elem).after('<i class="fa fa-angle-double-up" data-cascader="icon"></i>');
-            $this.after('<div class="urp-cascader-content"></div>');
+            $this.append('<div class="urp-cascader-content"></div>');
             $this.data("cascader","elem");
 
             // $this.on("keyup", function(){
@@ -81,8 +81,8 @@ layui.define(["jquery","laytpl","layer"], function (exports) {
                     '{{# } }}'+
                 '</ul>'
             ).render(this.d);
-            $(this.elem).siblings(".urp-cascader-content").append(string);
-            this.domContent=$(this.elem).siblings(".urp-cascader-content");
+            $(this.elem).find(".urp-cascader-content").append(string);
+            this.domContent=$(this.elem).find(".urp-cascader-content");
             // this.domContent.find(".urp-cascader-child").hide();
 
             // 显示隐藏第一层的标签

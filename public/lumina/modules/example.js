@@ -1,1 +1,66 @@
-"use strict";layui.define("jquery",function(n){function t(n){var t=this;t.config=e.extend({},t.config,i.config,n),t.render()}var e=layui.jquery,o="upload",i={config:{},set:function(n){var t=this;return t.config=e.extend({},t.config,n),t},on:function(n,t){return layui.onevent.call(this,o,n,t)}};t.prototype.config={},t.prototype.event=function(n,t){return layui.event.call(this,o,"btn("+n+")",t)},t.prototype.on=function(n,t){return layui.onevent.call(this,o,n,t)},t.prototype.render=function(){},t.prototype.events=function(n){this.config},i.render=function(n){return function(){return{config:this.config}}.call(new t(n))},n(o,i)});
+
+layui.define('jquery', function (exports) {
+    "use strict";
+    var $ = layui.jquery,
+
+        //字符常量
+        MOD_NAME = 'upload',
+
+        //外部接口
+        ExportClass = {
+            config: {},
+            set: function (options) {
+                var self = this;
+                self.config = $.extend({}, self.config, options);
+                return self;
+            },
+            on: function (events, callback) {
+                return layui.onevent.call(this, MOD_NAME, events, callback);
+            }
+        },
+        //操作当前实例
+        thisClass = function () {
+            var self = this, options = self.config;
+            return {
+                config: options
+            }
+        },
+        //构造器
+        Class = function (options) {
+            var self = this;
+            self.config = $.extend({}, self.config, ExportClass.config, options);
+            self.render();
+        };
+
+    //默认配置
+    Class.prototype.config = {
+
+    };
+    Class.prototype.event = function(name, param){
+        return layui.event.call(this, MOD_NAME, 'btn(' + name + ')', param)
+    };
+    Class.prototype.on = function(name, callback){
+        return layui.onevent.call(this, MOD_NAME, name, callback)
+    };
+
+    //评分渲染
+    Class.prototype.render = function () {
+
+        console.log(this.config)
+
+    };
+
+    //事件处理
+    Class.prototype.events = function (name) {
+        var self = this,
+            options = self.config;
+
+        console.log(name)
+    };
+
+
+    ExportClass.render = function (options) {
+        return thisClass.call(new Class(options));
+    }
+    exports(MOD_NAME, ExportClass);
+})

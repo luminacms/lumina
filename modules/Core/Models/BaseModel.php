@@ -23,4 +23,18 @@ class BaseModel extends LaravelModel
         return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
     }
 
+    /**
+     * 获取对象键值对
+     *
+     * @param [type] $val
+     * @param [type] $label
+     * @return void
+     */
+    public static function getOptions($val = 'id', $label = 'name')
+    {
+        return self::all()->mapWithKeys(function($item) use($val, $label){
+            return [$item[$val] => $item[$label]];
+        })->all();
+    }
+
 }

@@ -99,7 +99,7 @@
             el: '#specWrap',
             data: function(){
                 return {
-                    name: 'jory',
+                    spu: @json($spu),
                     checked: {},
                     actived: {},
                     spec_attr: @json($spec_data['attr'] ?? []),
@@ -116,13 +116,18 @@
             },
             methods: {
                 resetActived: function(){
-                    this.actived = {
-                        uid: '',
-                        price_fee: 0,
-                        market_price_fee: 0,
-                        stock: 0,
-                        pre_total_fee: 0,
-                        number: 1,
+                    if(this.spu.type == 1) {
+                        // 单规格
+                        this.actived = this.spec_list[0].form
+                    }else{
+                        this.actived = {
+                            uid: '',
+                            price_fee: 0,
+                            market_price_fee: 0,
+                            stock: 0,
+                            pre_total_fee: 0,
+                            number: 1,
+                        }
                     }
                 },
                 specChange: function(group, item){

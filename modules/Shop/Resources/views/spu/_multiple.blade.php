@@ -67,7 +67,6 @@
             <div class="goods-spec-line my-4"></div>
             <!-- sku 批量设置 -->
             <div class="spec-batch layui-inline">
-                <label class="layui-form-label w-48">批量设置</label>
                 <div class="layui-input-inline" style="width: 100px;">
                   <input type="text" data-type="uid" placeholder="商家编码" class="layui-input">
                 </div>
@@ -85,7 +84,7 @@
                 </div>
 
                 <div class="layui-input-inline" style="width: 100px;">
-                    <button type="button" class="btn-specBatchBtn layui-btn">确定</button>
+                    <button type="button" class="btn-specBatchBtn layui-btn">批量设置</button>
                 </div>
             </div>
             <!-- sku table -->

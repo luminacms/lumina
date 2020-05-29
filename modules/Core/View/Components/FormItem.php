@@ -42,7 +42,9 @@ class FormItem extends Component
         }else{
             $_ipt = <<<'blade'
             <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                <label for="name" class="layui-form-label {{$required}}">{{$label}}</label>
+                <label for="name" class="layui-form-label {{$required}}">
+                    @if($required)<span>*</span> @endif{{$label}}
+                </label>
                 <div class="layui-input-block">{{$slot}}</div>
             </div>
             blade;
@@ -54,10 +56,14 @@ class FormItem extends Component
     {
         return <<<'blade'
             <div {{ $attributes->merge(["class" => "layui-form-item"]) }}>
-                <label for="name" class="layui-form-label {{$required ?? ''}}">{{$label}}</label>
-                <div class="layui-input-block">
+                @if($label)<label for="name" class="layui-form-label {{$required ?? ''}}">@if($required)<span>*</span> @endif{{$label}}</label>@endif
+                @if($label)
+                    <div class="layui-input-block">
+                        <div class="layui-input-inline">{{$slot}}</div>
+                    </div>
+                @else
                     <div class="layui-input-inline">{{$slot}}</div>
-                </div>
+                @endif
             </div>
         blade;
     }

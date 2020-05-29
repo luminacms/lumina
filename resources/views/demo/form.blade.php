@@ -22,6 +22,34 @@
 
         <div class="layui-tab-item layui-show layui-form">
 
+
+            <x-formItem inline>
+                
+            </x-formItem>
+
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                  <label class="layui-form-label">范围</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">
+                  </div>
+                  <div class="layui-form-mid">-</div>
+                  <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+
+                <div class="layui-inline">
+                  <label class="layui-form-label">密码</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                    <input type="password" name="" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+
+              </div>
+
+
             <x-formItem label="input">
                 <x-input name="username" verify="required" />
             </x-formItem>

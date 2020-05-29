@@ -1,1 +1,2825 @@
-"use strict";function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}!function(){function s(e){this.index=++f.index,this.config=_.extend({},this.config,f.config,e),this.init()}var e,t,n=window.layui&&layui.define,l={getPath:(e=document.currentScript?document.currentScript.src:function(){for(var e,t=document.scripts,n=t.length-1,a=n;0<a;a--)if("interactive"===t[a].readyState){e=t[a].src;break}return e||t[n].src}()).substring(0,e.lastIndexOf("/")+1),getStyle:function(e,t){var n=e.currentStyle?e.currentStyle:window.getComputedStyle(e,null);return n[n.getPropertyValue?"getPropertyValue":"getAttribute"](t)},link:function(e,t,n){var a,i,r,o;f.path&&(a=document.getElementsByTagName("head")[0],i=document.createElement("link"),"string"==typeof t&&(n=t),r="layuicss-"+(n||e).replace(/\.|\//g,""),o=0,i.rel="stylesheet",i.href=f.path+e,i.id=r,document.getElementById(r)||a.appendChild(i),"function"==typeof t&&function e(){return 80<++o?window.console&&void 0:void(1989===parseInt(l.getStyle(document.getElementById(r),"width"))?t():setTimeout(e,100))}())}},f={v:"5.0.9",config:{},index:window.laydate&&window.laydate.v?1e5:0,path:l.getPath,set:function(e){var t=this;return t.config=_.extend({},t.config,e),t},ready:function(){f.v;return this}},T="layui-this",b="laydate-disabled",d="开始日期超出了结束日期<br>建议重新选择",y=[100,2e5],c="layui-laydate-static",k="layui-laydate-list",u="laydate-selected",a="layui-laydate-hint",M=".laydate-btns-confirm",E="laydate-time-text",S=".laydate-btns-time",_=function(e){return new i(e)},i=function(e){for(var t=0,n="object"===_typeof(e)?[e]:(this.selector=e,document.querySelectorAll(e||null));t<n.length;t++)this.push(n[t])};i.prototype=[],i.prototype.constructor=i,_.extend=function(){var e=1,t=arguments;for(t[0]="object"===_typeof(t[0])?t[0]:{};e<t.length;e++)"object"===_typeof(t[e])&&!function e(t,n){for(var a in t=t||(n.constructor===Array?[]:{}),n)t[a]=n[a]&&n[a].constructor===Object?e(t[a],n[a]):n[a];return t}(t[0],t[e]);return t[0]},_.ie=(t=navigator.userAgent.toLowerCase(),!!(window.ActiveXObject||"ActiveXObject"in window)&&((t.match(/msie\s(\d+)/)||[])[1]||"11")),_.stope=function(e){(e=e||window.event).stopPropagation?e.stopPropagation():e.cancelBubble=!0},_.each=function(e,t){var n;if("function"!=typeof t)return this;if((e=e||[]).constructor===Object){for(n in e)if(t.call(e[n],n,e[n]))break}else for(n=0;n<e.length&&!t.call(e[n],n,e[n]);n++);return this},_.digit=function(e,t,n){var a="";t=t||2;for(var i=(e=String(e)).length;i<t;i++)a+="0";return e<Math.pow(10,t)?a+(0|e):e},_.elem=function(e,t){var n=document.createElement(e);return _.each(t||{},function(e,t){n.setAttribute(e,t)}),n},i.addStr=function(n,e){return n=n.replace(/\s+/," "),e=e.replace(/\s+/," ").split(" "),_.each(e,function(e,t){new RegExp("\\b"+t+"\\b").test(n)||(n=n+" "+t)}),n.replace(/^\s|\s$/,"")},i.removeStr=function(a,e){return a=a.replace(/\s+/," "),e=e.replace(/\s+/," ").split(" "),_.each(e,function(e,t){var n=new RegExp("\\b"+t+"\\b");n.test(a)&&(a=a.replace(n,""))}),a.replace(/\s+/," ").replace(/^\s|\s$/,"")},i.prototype.find=function(a){var i=this,r=0,o=[],l="object"===_typeof(a);return this.each(function(e,t){for(var n=l?[a]:t.querySelectorAll(a||null);r<n.length;r++)o.push(n[r]);i.shift()}),l||(i.selector=(i.selector?i.selector+" ":"")+a),_.each(o,function(e,t){i.push(t)}),i},i.prototype.each=function(e){return _.each.call(this,this,e)},i.prototype.addClass=function(n,a){return this.each(function(e,t){t.className=i[a?"removeStr":"addStr"](t.className,n)})},i.prototype.removeClass=function(e){return this.addClass(e,!0)},i.prototype.hasClass=function(n){var a=!1;return this.each(function(e,t){new RegExp("\\b"+n+"\\b").test(t.className)&&(a=!0)}),a},i.prototype.attr=function(n,a){var e=this;return void 0===a?function(){if(0<e.length)return e[0].getAttribute(n)}():e.each(function(e,t){t.setAttribute(n,a)})},i.prototype.removeAttr=function(n){return this.each(function(e,t){t.removeAttribute(n)})},i.prototype.html=function(n){return this.each(function(e,t){t.innerHTML=n})},i.prototype.val=function(n){return this.each(function(e,t){t.value=n})},i.prototype.append=function(n){return this.each(function(e,t){"object"===_typeof(n)?t.appendChild(n):t.innerHTML=t.innerHTML+n})},i.prototype.remove=function(n){return this.each(function(e,t){n?t.removeChild(n):t.parentNode.removeChild(t)})},i.prototype.on=function(n,a){return this.each(function(e,t){t.attachEvent?t.attachEvent("on"+n,function(e){e.target=e.srcElement,a.call(t,e)}):t.addEventListener(n,a,!1)})},i.prototype.off=function(n,a){return this.each(function(e,t){t.detachEvent?t.detachEvent("on"+n,a):t.removeEventListener(n,a,!1)})},s.isLeapYear=function(e){return e%4==0&&e%100!=0||e%400==0},s.prototype.config={type:"date",range:!1,format:"yyyy-MM-dd",value:null,isInitValue:!0,min:"1900-1-1",max:"2099-12-31",trigger:"focus",show:!1,showBottom:!0,btns:["clear","now","confirm"],lang:"cn",theme:"default",position:null,calendar:!1,mark:{},zIndex:null,done:null,change:null},s.prototype.lang=function(){var e={cn:{weeks:["日","一","二","三","四","五","六"],time:["时","分","秒"],timeTips:"选择时间",startTime:"开始时间",endTime:"结束时间",dateTips:"返回日期",month:["一","二","三","四","五","六","七","八","九","十","十一","十二"],tools:{confirm:"确定",clear:"清空",now:"现在"}},en:{weeks:["Su","Mo","Tu","We","Th","Fr","Sa"],time:["Hours","Minutes","Seconds"],timeTips:"Select Time",startTime:"Start Time",endTime:"End Time",dateTips:"Select Date",month:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],tools:{confirm:"Confirm",clear:"Clear",now:"Now"}}};return e[this.config.lang]||e.cn},s.prototype.init=function(){var a=this,l=a.config,i="yyyy|y|MM|M|dd|d|HH|H|mm|m|ss|s",e="static"===l.position,t={year:"yyyy",month:"yyyy-MM",date:"yyyy-MM-dd",time:"HH:mm:ss",datetime:"yyyy-MM-dd HH:mm:ss"};l.elem=_(l.elem),l.eventElem=_(l.eventElem),l.elem[0]&&(!0===l.range&&(l.range="-"),l.format===t.date&&(l.format=t[l.type]),a.format=l.format.match(new RegExp(i+"|.","g"))||[],a.EXP_IF="",a.EXP_SPLIT="",_.each(a.format,function(e,t){var n=new RegExp(i).test(t)?"\\d{"+(new RegExp(i).test(a.format[0===e?e+1:e-1]||"")?/^yyyy|y$/.test(t)?4:t.length:/^yyyy$/.test(t)?"1,4":/^y$/.test(t)?"1,308":"1,2")+"}":"\\"+t;a.EXP_IF=a.EXP_IF+n,a.EXP_SPLIT=a.EXP_SPLIT+"("+n+")"}),a.EXP_IF=new RegExp("^"+(l.range?a.EXP_IF+"\\s\\"+l.range+"\\s"+a.EXP_IF:a.EXP_IF)+"$"),a.EXP_SPLIT=new RegExp("^"+a.EXP_SPLIT+"$",""),a.isInput(l.elem[0])||"focus"===l.trigger&&(l.trigger="click"),l.elem.attr("lay-key")||(l.elem.attr("lay-key",a.index),l.eventElem.attr("lay-key",a.index)),l.mark=_.extend({},l.calendar&&"cn"===l.lang?{"0-1-1":"元旦","0-2-14":"情人","0-3-8":"妇女","0-3-12":"植树","0-4-1":"愚人","0-5-1":"劳动","0-5-4":"青年","0-6-1":"儿童","0-9-10":"教师","0-9-18":"国耻","0-10-1":"国庆","0-12-25":"圣诞"}:{},l.mark),_.each(["min","max"],function(e,t){var n,a,i,r=[],o=[];"number"==typeof l[t]?(n=l[t],a=(new Date).getTime(),r=[(i=new Date(n?n<864e5?a+864e5*n:n:a)).getFullYear(),i.getMonth()+1,i.getDate()],n<864e5||(o=[i.getHours(),i.getMinutes(),i.getSeconds()])):(r=(l[t].match(/\d+-\d+-\d+/)||[""])[0].split("-"),o=(l[t].match(/\d+:\d+:\d+/)||[""])[0].split(":")),l[t]={year:0|r[0]||(new Date).getFullYear(),month:r[1]?(0|r[1])-1:(new Date).getMonth(),date:0|r[2]||(new Date).getDate(),hours:0|o[0],minutes:0|o[1],seconds:0|o[2]}}),a.elemID="layui-laydate"+l.elem.attr("lay-key"),(l.show||e)&&a.render(),e||a.events(),l.value&&l.isInitValue&&(l.value.constructor===Date?a.setValue(a.parse(0,a.systemDate(l.value))):a.setValue(l.value)))},s.prototype.render=function(){var e,a,t,n,i=this,f=i.config,y=i.lang(),r="static"===f.position,o=i.elem=_.elem("div",{id:i.elemID,class:["layui-laydate",f.range?" layui-laydate-range":"",r?" "+c:"",f.theme&&"default"!==f.theme&&!/^#/.test(f.theme)?" laydate-theme-"+f.theme:""].join("")}),p=i.elemMain=[],v=i.elemHeader=[],g=i.elemCont=[],D=i.table=[],l=i.footer=_.elem("div",{class:"layui-laydate-footer"});f.zIndex&&(o.style.zIndex=f.zIndex),_.each(new Array(2),function(e){if(!f.range&&0<e)return!0;var t,n,a,i,r,o,l,s=_.elem("div",{class:"layui-laydate-header"}),d=[((l=_.elem("i",{class:"fa laydate-icon fa-angle-double-left"})).innerHTML="",l),((o=_.elem("i",{class:"fa laydate-icon fa-angle-left"})).innerHTML="",o),(a=_.elem("div",{class:"laydate-set-ym"}),i=_.elem("span"),r=_.elem("span"),a.appendChild(i),a.appendChild(r),a),((n=_.elem("i",{class:"fa laydate-icon fa-angle-right"})).innerHTML="",n),((t=_.elem("i",{class:"fa laydate-icon fa-angle-double-right ml-3"})).innerHTML="",t)],c=_.elem("div",{class:"layui-laydate-content"}),u=_.elem("table"),m=_.elem("thead"),h=_.elem("tr");_.each(d,function(e,t){s.appendChild(t)}),m.appendChild(h),_.each(new Array(6),function(n){var a=u.insertRow(0);_.each(new Array(7),function(e){var t;0===n&&((t=_.elem("th")).innerHTML=y.weeks[e],h.appendChild(t)),a.insertCell(e)})}),u.insertBefore(m,u.children[0]),c.appendChild(u),p[e]=_.elem("div",{class:"layui-laydate-main laydate-main-list-"+e}),p[e].appendChild(s),p[e].appendChild(c),v.push(d),g.push(c),D.push(u)}),_(l).html((e=[],a=[],"datetime"===f.type&&e.push('<span lay-type="datetime" class="laydate-btns-time">'+y.timeTips+"</span>"),_.each(f.btns,function(e,t){var n=y.tools[t]||"btn";f.range&&"now"===t||(r&&"clear"===t&&(n="cn"===f.lang?"重置":"Reset"),a.push('<span lay-type="'+t+'" class="laydate-btns-'+t+'">'+n+"</span>"))}),e.push('<div class="laydate-footer-btns">'+a.join("")+"</div>"),e.join(""))),_.each(p,function(e,t){o.appendChild(t)}),f.showBottom&&o.appendChild(l),/^#/.test(f.theme)&&(t=_.elem("style"),n=["#{{id}} .layui-laydate-header{background-color:{{theme}};}","#{{id}} .layui-this{background-color:{{theme}} !important;}"].join("").replace(/{{id}}/g,i.elemID).replace(/{{theme}}/g,f.theme),"styleSheet"in t?(t.setAttribute("type","text/css"),t.styleSheet.cssText=n):t.innerHTML=n,_(o).addClass("laydate-theme-molv"),o.appendChild(t)),i.remove(s.thisElemDate),r?f.elem.append(o):(document.body.appendChild(o),i.position()),i.checkDate().calendar(),i.changeEvent(),s.thisElemDate=i.elemID,"function"==typeof f.ready&&f.ready(_.extend({},f.dateTime,{month:f.dateTime.month+1}))},s.prototype.remove=function(e){this.config;var t=_("#"+(e||this.elemID));return t.hasClass(c)||this.checkDate(function(){t.remove()}),this},s.prototype.position=function(){function e(e){return e=e?"scrollLeft":"scrollTop",document.body[e]|document.documentElement[e]}function t(e){return document.documentElement[e?"clientWidth":"clientHeight"]}var n=this,a=n.config,i=(n.bindElem||a.elem[0]).getBoundingClientRect(),r=n.elem.offsetWidth,o=n.elem.offsetHeight,l=i.left,s=i.bottom;l+r+5>t("width")&&(l=t("width")-r-5),s+o+5>t()&&(s=i.top>o?i.top-o:t()-o,s-=10),a.position&&(n.elem.style.position=a.position),n.elem.style.left=l+("fixed"===a.position?0:e(1))+"px",n.elem.style.top=s+("fixed"===a.position?0:e())+"px"},s.prototype.hint=function(e){var t=this,n=(t.config,_.elem("div",{class:a}));t.elem&&(n.innerHTML=e||"",_(t.elem).find("."+a).remove(),t.elem.appendChild(n),clearTimeout(t.hinTimer),t.hinTimer=setTimeout(function(){_(t.elem).find("."+a).remove()},3e3))},s.prototype.getAsYM=function(e,t,n){return n?t--:t++,t<0&&(t=11,e--),11<t&&(t=0,e++),[e,t]},s.prototype.systemDate=function(e){var t=e||new Date;return{year:t.getFullYear(),month:t.getMonth(),date:t.getDate(),hours:e?e.getHours():0,minutes:e?e.getMinutes():0,seconds:e?e.getSeconds():0}},s.prototype.checkDate=function(e){function t(e){e.year>y[1]&&(e.year=y[1],l=!0),11<e.month&&(e.month=11,l=!0),23<e.hours&&(e.hours=0,l=!0),59<e.minutes&&(e.minutes=0,e.hours++,l=!0),59<e.seconds&&(e.seconds=0,e.minutes++,l=!0),a=f.getEndDate(e.month+1,e.year),e.date>a&&(e.date=a,l=!0)}function n(a,i,r){var o=["startTime","endTime"];i=(i.match(s.EXP_SPLIT)||[]).slice(1),r=r||0,d.range&&(s[o[r]]=s[o[r]]||{}),_.each(s.format,function(e,t){var n=parseFloat(i[e]);i[e].length<t.length&&(l=!0),/yyyy|y/.test(t)?(n<y[0]&&(n=y[0],l=!0),a.year=n):/MM|M/.test(t)?(n<1&&(n=1,l=!0),a.month=n-1):/dd|d/.test(t)?(n<1&&(n=1,l=!0),a.date=n):/HH|H/.test(t)?(n<1&&(l=!(n=0)),a.hours=n,d.range&&(s[o[r]].hours=n)):/mm|m/.test(t)?(n<1&&(l=!(n=0)),a.minutes=n,d.range&&(s[o[r]].minutes=n)):/ss|s/.test(t)&&(n<1&&(l=!(n=0)),a.seconds=n,d.range&&(s[o[r]].seconds=n))}),t(a)}var a,l,s=this,d=(new Date,s.config),i=d.dateTime=d.dateTime||s.systemDate(),r=s.bindElem||d.elem[0],o=(s.isInput(r),s.isInput(r)?r.value:"static"===d.position?"":r.innerHTML);return"limit"===e?t(i):("string"==typeof(o=o||d.value)&&(o=o.replace(/\s+/g," ").replace(/^\s|\s$/g,"")),s.startState&&!s.endState&&(delete s.startState,s.endState=!0),"string"==typeof o&&o?s.EXP_IF.test(o)?d.range?(o=o.split(" "+d.range+" "),s.startDate=s.startDate||s.systemDate(),s.endDate=s.endDate||s.systemDate(),d.dateTime=_.extend({},s.startDate),_.each([s.startDate,s.endDate],function(e,t){n(t,o[e],e)})):n(i,o):(s.hint("日期格式不合法<br>必须遵循下述格式：<br>"+(d.range?d.format+" "+d.range+" "+d.format:d.format)+"<br>已为你重置"),l=!0):o&&o.constructor===Date?d.dateTime=s.systemDate(o):(d.dateTime=s.systemDate(),delete s.startState,delete s.endState,delete s.startDate,delete s.endDate,delete s.startTime,delete s.endTime),t(i),l&&o&&s.setValue(!d.range||s.endDate?s.parse():""),e&&e()),s},s.prototype.mark=function(e,a){var i,t=this.config;return _.each(t.mark,function(e,t){var n=e.split("-");n[0]!=a[0]&&0!=n[0]||n[1]!=a[1]&&0!=n[1]||n[2]!=a[2]||(i=t||a[2])}),i&&e.html('<span class="laydate-day-mark">'+i+"</span>"),this},s.prototype.limit=function(e,t,n,i){var a,r=this,o=r.config,l={},s=o[41<n?"endDate":"dateTime"],d=_.extend({},s,t||{});return _.each({now:d,min:o.min,max:o.max},function(e,n){var a;l[e]=r.newDate(_.extend({year:n.year,month:n.month,date:n.date},(a={},_.each(i,function(e,t){a[t]=n[t]}),a))).getTime()}),a=l.now<l.min||l.now>l.max,e&&e[a?"addClass":"removeClass"](b),a},s.prototype.calendar=function(e){var i,r,o,t,l=this,s=l.config,d=e||s.dateTime,n=new Date,a=l.lang(),c="date"!==s.type&&"datetime"!==s.type,u=e?1:0,m=_(l.table[u]).find("td"),h=_(l.elemHeader[u][2]).find("span");return d.year<y[0]&&(d.year=y[0],l.hint("最低只能支持到公元"+y[0]+"年")),d.year>y[1]&&(d.year=y[1],l.hint("最高只能支持到公元"+y[1]+"年")),l.firstDate||(l.firstDate=_.extend({},d)),n.setFullYear(d.year,d.month,1),i=n.getDay(),r=f.getEndDate(d.month||12,d.year),o=f.getEndDate(d.month+1,d.year),_.each(m,function(e,t){var n=[d.year,d.month],a=0;(t=_(t)).removeAttr("class"),e<i?(a=r-i+e,t.addClass("laydate-day-prev"),n=l.getAsYM(d.year,d.month,"sub")):i<=e&&e<o+i?(a=e-i,s.range||a+1===d.date&&t.addClass(T)):(a=e-o-i,t.addClass("laydate-day-next"),n=l.getAsYM(d.year,d.month)),n[1]++,n[2]=a+1,t.attr("lay-ymd",n.join("-")).html(n[2]),l.mark(t,n).limit(t,{year:n[0],month:n[1]-1,date:n[2]},e)}),_(h[0]).attr("lay-ym",d.year+"-"+(d.month+1)),_(h[1]).attr("lay-ym",d.year+"-"+(d.month+1)),"cn"===s.lang?(_(h[0]).attr("lay-type","year").html(d.year+"年"),_(h[1]).attr("lay-type","month").html(d.month+1+"月")):(_(h[0]).attr("lay-type","month").html(a.month[d.month]),_(h[1]).attr("lay-type","year").html(d.year)),c&&(s.range&&(e?l.endDate=l.endDate||{year:d.year+("year"===s.type?1:0),month:d.month+("month"===s.type?0:-1)}:l.startDate=l.startDate||{year:d.year,month:d.month},e&&(l.listYM=[[l.startDate.year,l.startDate.month+1],[l.endDate.year,l.endDate.month+1]],l.list(s.type,0).list(s.type,1),"time"===s.type?l.setBtnStatus("时间",_.extend({},l.systemDate(),l.startTime),_.extend({},l.systemDate(),l.endTime)):l.setBtnStatus(!0))),s.range||(l.listYM=[[d.year,d.month+1]],l.list(s.type,0))),s.range&&!e&&(t=l.getAsYM(d.year,d.month),l.calendar(_.extend({},d,{year:t[0],month:t[1]}))),s.range||l.limit(_(l.footer).find(M),null,0,["hours","minutes","seconds"]),s.range&&e&&!c&&l.stampRange(),l},s.prototype.list=function(n,a){var i,e,r,t,o,l,s=this,d=s.config,c=d.dateTime,u=s.lang(),m=d.range&&"date"!==d.type&&"datetime"!==d.type,h=_.elem("ul",{class:k+" "+{year:"laydate-year-list",month:"laydate-month-list",time:"laydate-time-list"}[n]}),f=s.elemHeader[a],y=_(f[2]).find("span"),p=s.elemCont[a||0],v=_(p).find("."+k)[0],g="cn"===d.lang,D=g?"年":"",x=s.listYM[a]||{},C=["hours","minutes","seconds"],w=["startTime","endTime"][a];return x[0]<1&&(x[0]=1),"year"===n?((e=i=x[0]-7)<1&&(e=i=1),_.each(new Array(15),function(e){var t=_.elem("li",{"lay-ym":i}),n={year:i};i==x[0]&&_(t).addClass(T),t.innerHTML=i+D,h.appendChild(t),i<s.firstDate.year?(n.month=d.min.month,n.date=d.min.date):i>=s.firstDate.year&&(n.month=d.max.month,n.date=d.max.date),s.limit(_(t),n,a),i++}),_(y[g?0:1]).attr("lay-ym",i-8+"-"+x[1]).html(e+D+" - "+(i-1)+D)):"month"===n?(_.each(new Array(12),function(e){var t=_.elem("li",{"lay-ym":e}),n={year:x[0],month:e};e+1==x[1]&&_(t).addClass(T),t.innerHTML=u.month[e]+(g?"月":""),h.appendChild(t),x[0]<s.firstDate.year?n.date=d.min.date:x[0]>=s.firstDate.year&&(n.date=d.max.date),s.limit(_(t),n,a)}),_(y[g?0:1]).attr("lay-ym",x[0]+"-"+x[1]).html(x[0]+D)):"time"===n&&(r=function(){_(h).find("ol").each(function(n,e){_(e).find("li").each(function(e,t){s.limit(_(t),[{hours:e},{hours:s[w].hours,minutes:e},{hours:s[w].hours,minutes:s[w].minutes,seconds:e}][n],a,[["hours"],["hours","minutes"],["hours","minutes","seconds"]][n])})}),d.range||s.limit(_(s.footer).find(M),s[w],0,["hours","minutes","seconds"])},d.range?s[w]||(s[w]={hours:0,minutes:0,seconds:0}):s[w]=c,_.each([24,60,60],function(t,e){var n=_.elem("li"),a=["<p>"+u.time[t]+"</p><ol>"];_.each(new Array(e),function(e){a.push("<li"+(s[w][C[t]]===e?' class="'+T+'"':"")+">"+_.digit(e,2)+"</li>")}),n.innerHTML=a.join("")+"</ol>",h.appendChild(n)}),r()),v&&p.removeChild(v),p.appendChild(h),"year"===n||"month"===n?(_(s.elemMain[a]).addClass("laydate-ym-show"),_(h).find("li").on("click",function(){var e,t=0|_(this).attr("lay-ym");_(this).hasClass(b)||(0===a?(c[n]=t,m&&(s.startDate[n]=t),s.limit(_(s.footer).find(M),null,0)):m?s.endDate[n]=t:(e="year"===n?s.getAsYM(t,x[1]-1,"sub"):s.getAsYM(x[0],t,"sub"),_.extend(c,{year:e[0],month:e[1]})),"year"===d.type||"month"===d.type?(_(h).find("."+T).removeClass(T),_(this).addClass(T),"month"===d.type&&"year"===n&&(s.listYM[a][0]=t,m&&(s[["startDate","endDate"][a]].year=t),s.list("month",a))):(s.checkDate("limit").calendar(),s.closeList()),s.setBtnStatus(),d.range||s.done(null,"change"),_(s.footer).find(S).removeClass(b))})):(t=_.elem("span",{class:E}),o=function(){_(h).find("ol").each(function(e){var n=this,t=_(n).find("li");n.scrollTop=30*(s[w][C[e]]-2),n.scrollTop<=0&&t.each(function(e,t){if(!_(this).hasClass(b))return n.scrollTop=30*(e-2),!0})})},l=_(f[2]).find("."+E),o(),t.innerHTML=d.range?[u.startTime,u.endTime][a]:u.timeTips,_(s.elemMain[a]).addClass("laydate-time-show"),l[0]&&l.remove(),f[2].appendChild(t),_(h).find("ol").each(function(t){var n=this;_(n).find("li").on("click",function(){var e=0|this.innerHTML;_(this).hasClass(b)||(d.range?s[w][C[t]]=e:c[C[t]]=e,_(n).find("."+T).removeClass(T),_(this).addClass(T),r(),o(),!s.endDate&&"time"!==d.type||s.done(null,"change"),s.setBtnStatus())})})),s},s.prototype.listYM=[],s.prototype.closeList=function(){var n=this;n.config;_.each(n.elemCont,function(e,t){_(this).find("."+k).remove(),_(n.elemMain[e]).removeClass("laydate-ym-show laydate-time-show")}),_(n.elem).find("."+E).remove()},s.prototype.setBtnStatus=function(e,t,n){var a,i=this,r=i.config,o=_(i.footer).find(M);r.range&&"date"!==r.type&&"time"!==r.type&&(t=t||i.startDate,n=n||i.endDate,a=i.newDate(t).getTime()>i.newDate(n).getTime(),i.limit(null,t)||i.limit(null,n)?o.addClass(b):o[a?"addClass":"removeClass"](b),e&&a&&i.hint("string"==typeof e?d.replace(/日期/g,e):d))},s.prototype.parse=function(e,t){var n=this,a=n.config,i=t||(e?_.extend({},n.endDate,n.endTime):a.range?_.extend({},n.startDate,n.startTime):a.dateTime),r=n.format.concat();return _.each(r,function(e,t){/yyyy|y/.test(t)?r[e]=_.digit(i.year,t.length):/MM|M/.test(t)?r[e]=_.digit(i.month+1,t.length):/dd|d/.test(t)?r[e]=_.digit(i.date,t.length):/HH|H/.test(t)?r[e]=_.digit(i.hours,t.length):/mm|m/.test(t)?r[e]=_.digit(i.minutes,t.length):/ss|s/.test(t)&&(r[e]=_.digit(i.seconds,t.length))}),a.range&&!e?r.join("")+" "+a.range+" "+n.parse(1):r.join("")},s.prototype.newDate=function(e){return e=e||{},new Date(e.year||1,e.month||0,e.date||1,e.hours||0,e.minutes||0,e.seconds||0)},s.prototype.setValue=function(e){var t=this.config,n=this.bindElem||t.elem[0],a=this.isInput(n)?"val":"html";return"static"===t.position||_(n)[a](e||""),this},s.prototype.stampRange=function(){var i,r,o=this,e=o.config,t=_(o.elem).find("td");if(e.range&&!o.endDate&&_(o.footer).find(M).addClass(b),o.endDate){if(i=o.newDate({year:o.startDate.year,month:o.startDate.month,date:o.startDate.date}).getTime(),(r=o.newDate({year:o.endDate.year,month:o.endDate.month,date:o.endDate.date}).getTime())<i)return o.hint(d);_.each(t,function(e,t){var n=_(t).attr("lay-ymd").split("-"),a=o.newDate({year:n[0],month:n[1]-1,date:n[2]}).getTime();_(t).removeClass(u+" "+T),a!==i&&a!==r||_(t).addClass(_(t).hasClass("fa-prev")||_(t).hasClass("fa-next")?u:T),i<a&&a<r&&_(t).addClass(u)})}},s.prototype.done=function(e,t){var n=this,a=n.config,i=_.extend({},n.startDate?_.extend(n.startDate,n.startTime):a.dateTime),r=_.extend({},_.extend(n.endDate,n.endTime));return _.each([i,r],function(e,t){"month"in t&&_.extend(t,{month:t.month+1})}),e=e||[n.parse(),i,r],"function"==typeof a[t||"done"]&&a[t||"done"].apply(a,e),n},s.prototype.choose=function(e){function t(e){new Date,e&&_.extend(r,l),i.range&&(a.startDate?_.extend(a.startDate,l):a.startDate=_.extend({},l,a.startTime),a.startYMD=l)}var n,a=this,i=a.config,r=i.dateTime,o=_(a.elem).find("td"),l={year:0|(l=e.attr("lay-ymd").split("-"))[0],month:(0|l[1])-1,date:0|l[2]};e.hasClass(b)||(i.range?(_.each(["startTime","endTime"],function(e,t){a[t]=a[t]||{hours:0,minutes:0,seconds:0}}),a.endState?(t(),delete a.endState,delete a.endDate,a.startState=!0,o.removeClass(T+" "+u),e.addClass(T)):a.startState?(e.addClass(T),a.endDate?_.extend(a.endDate,l):a.endDate=_.extend({},l,a.endTime),a.newDate(l).getTime()<a.newDate(a.startYMD).getTime()&&(n=_.extend({},a.endDate,{hours:a.startDate.hours,minutes:a.startDate.minutes,seconds:a.startDate.seconds}),_.extend(a.endDate,a.startDate,{hours:a.endDate.hours,minutes:a.endDate.minutes,seconds:a.endDate.seconds}),a.startDate=n),i.showBottom||a.done(),a.stampRange(),a.endState=!0,a.done(null,"change")):(e.addClass(T),t(),a.startState=!0),_(a.footer).find(M)[a.endDate?"removeClass":"addClass"](b)):"static"===i.position?(t(!0),a.calendar().done().done(null,"change")):"date"===i.type?(t(!0),a.setValue(a.parse()).remove().done()):"datetime"===i.type&&(t(!0),a.calendar().done(null,"change")))},s.prototype.tool=function(e,t){var n=this,a=n.config,i=a.dateTime,r="static"===a.position,o={datetime:function(){_(e).hasClass(b)||(n.list("time",0),a.range&&n.list("time",1),_(e).attr("lay-type","date").html(n.lang().dateTips))},date:function(){n.closeList(),_(e).attr("lay-type","datetime").html(n.lang().timeTips)},clear:function(){n.setValue("").remove(),r&&(_.extend(i,n.firstDate),n.calendar()),a.range&&(delete n.startState,delete n.endState,delete n.endDate,delete n.startTime,delete n.endTime),n.done(["",{},{}])},now:function(){var e=new Date;_.extend(i,n.systemDate(),{hours:e.getHours(),minutes:e.getMinutes(),seconds:e.getSeconds()}),n.setValue(n.parse()).remove(),r&&n.calendar(),n.done()},confirm:function(){if(a.range){if(!n.endDate)return n.hint("请先选择日期范围");if(_(e).hasClass(b))return n.hint("time"===a.type?d.replace(/日期/g,"时间"):d)}else if(_(e).hasClass(b))return n.hint("不在有效日期或时间范围内");n.done(),n.setValue(n.parse()).remove()}};o[t]&&o[t]()},s.prototype.change=function(i){function e(e){var t=["startDate","endDate"][i],n=_(d).find(".laydate-year-list")[0],a=_(d).find(".laydate-month-list")[0];return n&&(c[0]=e?c[0]-15:c[0]+15,r.list("year",i)),a&&(e?c[0]--:c[0]++,r.list("month",i)),(n||a)&&(_.extend(l,{year:c[0]}),s&&(r[t].year=c[0]),o.range||r.done(null,"change"),r.setBtnStatus(),o.range||r.limit(_(r.footer).find(M),{year:c[0]})),n||a}var r=this,o=r.config,l=o.dateTime,s=o.range&&("year"===o.type||"month"===o.type),d=r.elemCont[i||0],c=r.listYM[i];return{prevYear:function(){e("sub")||(l.year--,r.checkDate("limit").calendar(),o.range||r.done(null,"change"))},prevMonth:function(){var e=r.getAsYM(l.year,l.month,"sub");_.extend(l,{year:e[0],month:e[1]}),r.checkDate("limit").calendar(),o.range||r.done(null,"change")},nextMonth:function(){var e=r.getAsYM(l.year,l.month);_.extend(l,{year:e[0],month:e[1]}),r.checkDate("limit").calendar(),o.range||r.done(null,"change")},nextYear:function(){e()||(l.year++,r.checkDate("limit").calendar(),o.range||r.done(null,"change"))}}},s.prototype.changeEvent=function(){var r=this;r.config;_(r.elem).on("click",function(e){_.stope(e)}),_.each(r.elemHeader,function(i,e){_(e[0]).on("click",function(e){r.change(i).prevYear()}),_(e[1]).on("click",function(e){r.change(i).prevMonth()}),_(e[2]).find("span").on("click",function(e){var t=_(this),n=t.attr("lay-ym"),a=t.attr("lay-type");n&&(n=n.split("-"),r.listYM[i]=[0|n[0],0|n[1]],r.list(a,i),_(r.footer).find(S).addClass(b))}),_(e[3]).on("click",function(e){r.change(i).nextMonth()}),_(e[4]).on("click",function(e){r.change(i).nextYear()})}),_.each(r.table,function(e,t){_(t).find("td").on("click",function(){r.choose(_(this))})}),_(r.footer).find("span").on("click",function(){var e=_(this).attr("lay-type");r.tool(this,e)})},s.prototype.isInput=function(e){return/input|textarea/.test(e.tagName.toLocaleLowerCase())},s.prototype.events=function(){function e(e,t){e.on(a.trigger,function(){t&&(n.bindElem=this),n.render()})}var n=this,a=n.config;a.elem[0]&&!a.elem[0].eventHandler&&(e(a.elem,"bind"),e(a.eventElem),_(document).on("click",function(e){e.target!==a.elem[0]&&e.target!==a.eventElem[0]&&e.target!==_(a.closeStop)[0]&&n.remove()}).on("keydown",function(e){13===e.keyCode&&_("#"+n.elemID)[0]&&n.elemID===s.thisElem&&(e.preventDefault(),_(n.footer).find(M)[0].click())}),_(window).on("resize",function(){return!(!n.elem||!_(".layui-laydate")[0])&&void n.position()}),a.elem[0].eventHandler=!0)},f.render=function(e){var t=new s(e);return function(){var t=this;return{hint:function(e){t.hint.call(t,e)},config:t.config}}.call(t)},f.getEndDate=function(e,t){var n=new Date;return n.setFullYear(t||n.getFullYear(),e||n.getMonth()+1,1),new Date(n.getTime()-864e5).getDate()},window.lay=window.lay||_,n?(f.ready(),layui.define(function(e){f.path=layui.cache.dir,e("laydate",f)})):"function"==typeof define&&define.amd?define(function(){return f}):(f.ready(),window.laydate=f)}(),layui.define(["laydate","upload","admin"],function(e){function t(){this.config={verify:{required:[/[\S]+/,"必填项不能为空"],phone:[/^1\d{10}$/,"请输入正确的手机号"],email:[/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,"邮箱格式不正确"],url:[/(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/,"链接格式不正确"],number:function(e){if(!e||isNaN(e))return"只能填写数字"},date:[/^(\d{4})[-\/](\d{1}|0\d{1}|1[0-2])([-\/](\d{1}|0\d{1}|[1-2][0-9]|3[0-1]))*$/,"日期格式不正确"],identity:[/(^\d{15}$)|(^\d{17}(x|X|\d)$)/,"请输入正确的身份证号"]}}}var C=layui.$,o=layui.laydate,c=layui.upload,h=layui.layer,f=layui.admin,i=layui.hint(),y=layui.device(),w="form",p=".layui-form",T="layui-this",b="layui-hide",k="layui-disabled";t.prototype.set=function(e){return C.extend(!0,this.config,e),this},t.prototype.verify=function(e){return C.extend(!0,this.config.verify,e),this},t.prototype.on=function(e,t){return layui.onevent.call(this,w,e,t)},t.prototype.val=function(e,n){C(p+'[lay-filter="'+e+'"]').each(function(e,t){var i=C(this);layui.each(n,function(e,t){var n,a=i.find('[name="'+e+'"]');a[0]&&("checkbox"===(n=a[0].type)?a[0].checked=t:"radio"===n?a.each(function(){this.value===t&&(this.checked=!0)}):a.val(t))})}),v.render(null,e)},t.prototype.render=function(e,t){var n=C(p+(t?'[lay-filter="'+t+'"]':"")),a={select:function(){function f(e,t){C(e.target).parent().hasClass(g)&&!t||(C("."+v).removeClass(v+"ed "+v+"up"),y&&x&&y.val(x)),y=null}function h(a,e,t){var l,n,i,s,r,o=C(this),d=a.find("."+g),c=d.find("input"),u=a.find("dl"),m=u.children("dd"),h=this.selectedIndex;e||(n=function(){var e=a.offset().top+a.outerHeight()+5-M.scrollTop(),t=u.outerHeight();h=o[0].selectedIndex,a.addClass(v+"ed"),m.removeClass(b),l=null,m.eq(h).addClass(T).siblings().removeClass(T),e+t>M.height()&&t<=e&&a.addClass(v+"up"),s()},i=function(e){a.removeClass(v+"ed "+v+"up"),c.blur(),l=null,e||r(c.val(),function(e){var t=o[0].selectedIndex;e&&(x=C(o[0].options[t]).html(),0===t&&x===c.attr("placeholder")&&(x=""),c.val(x||""))})},s=function(){var e,t,n,a=u.children("dd."+T);a[0]&&(e=a.position().top,t=u.height(),n=a.height(),t<e&&u.scrollTop(e+u.scrollTop()-t+n-5),e<0&&u.scrollTop(e+u.scrollTop()-5))},d.on("click",function(e){a.hasClass(v+"ed")?i():(f(e,!0),n()),u.find("."+D).remove()}),d.find(".layui-edge").on("click",function(){c.focus()}),c.on("keyup",function(e){9===e.keyCode&&n()}).on("keydown",function(r){var e=r.keyCode;9===e&&i();function o(a,i){r.preventDefault();var e=function(){var e=u.children("dd."+T);if(u.children("dd."+b)[0]&&"next"===a){var t=u.children("dd:not(."+b+",."+k+")"),n=t.eq(0).index();if(0<=n&&n<e.index()&&!t.hasClass(T))return t.eq(0).prev()[0]?t.eq(0).prev():u.children(":last")}return i&&i[0]?i:l&&l[0]?l:e}(),t=e[a](),n=e[a]("dd:not(."+b+")");return t[0]?(l=e[a](),n[0]&&!n.hasClass(k)||!l[0]?(n.addClass(T).siblings().removeClass(T),void s()):o(a,l)):l=null}38===e&&o("prev"),40===e&&o("next"),13===e&&(r.preventDefault(),u.children("dd."+T).trigger("click"))}),r=function(a,e,i){var r=0;layui.each(m,function(){var e=C(this),t=e.text(),n=-1===t.indexOf(a);(""===a||"blur"===i?a!==t:n)&&r++,"keyup"===i&&e[n?"addClass":"removeClass"](b)});var t=r===m.length;return e(t),t},t&&c.on("keyup",function(e){var t=this.value,n=e.keyCode;if(9===n||13===n||37===n||38===n||39===n||40===n)return!1;r(t,function(e){e?u.find("."+D)[0]||u.append('<p class="'+D+'">无匹配项</p>'):u.find("."+D).remove()},"keyup"),""===t&&u.find("."+D).remove(),s()}).on("blur",function(e){var t=o[0].selectedIndex;y=c,x=C(o[0].options[t]).html(),0===t&&x===c.attr("placeholder")&&(x=""),setTimeout(function(){r(c.val(),function(e){x||c.val("")},"blur")},200)}),m.on("click",function(){var e=C(this),t=e.attr("lay-value"),n=o.attr("lay-filter");return e.hasClass(k)||(e.hasClass("layui-select-tips")?c.val(""):(c.val(e.text()),e.addClass(T)),e.siblings().removeClass(T),o.val(t).removeClass("layui-form-danger"),layui.event.call(this,w,"select("+n+")",{elem:o[0],value:t,othis:a}),i(!0)),!1}),a.find("dl>dt").on("click",function(e){return!1}),C(document).off("click",f).on("click",f))}var y,p="请选择",v="layui-form-select",g="layui-select-title",D="layui-select-none",x="",e=n.find("select");e.each(function(e,t){var n=C(this),a=n.next("."+v),i=this.disabled,r=t.value,o=C(t.options[t.selectedIndex]),l=t.options[0];if("string"==typeof n.attr("lay-ignore"))return n.show();var s,d,c="string"==typeof n.attr("lay-search"),u=l&&!l.value&&l.innerHTML||p,m=C(['<div class="'+(c?"":"layui-unselect ")+v,(i?" layui-select-disabled":"")+'">','<div class="'+g+'">','<input type="text" placeholder="'+u+'" value="'+(r?o.html():"")+'"'+(c?"":" readonly")+' class="layui-input'+(c?"":" layui-unselect")+(i?" "+k:"")+'">','<i class="layui-edge"></i></div>','<dl class="fa'+(n.find("optgroup")[0]?" layui-select-group":"")+'">',(s=n.find("*"),d=[],layui.each(s,function(e,t){0!==e||t.value?"optgroup"===t.tagName.toLowerCase()?d.push("<dt>"+t.label+"</dt>"):d.push('<dd lay-value="'+t.value+'" class="'+(r===t.value?T:"")+(t.disabled?" "+k:"")+'">'+t.innerHTML+"</dd>"):d.push('<dd lay-value="" class="layui-select-tips">'+(t.innerHTML||p)+"</dd>")}),0===d.length&&d.push('<dd lay-value="" class="'+k+'">没有选项</dd>'),d.join("")+"</dl>"),"</div>"].join(""));a[0]&&a.remove(),n.after(m),h.call(this,m,i,c)})},checkbox:function(){var c={checkbox:["layui-form-checkbox","layui-form-checked","checkbox"],_switch:["layui-form-switch","layui-form-onswitch","switch"]},e=n.find("input[type=checkbox]");e.each(function(e,t){var n=C(this),a=n.attr("lay-skin"),i=(n.attr("lay-text")||"").split("|"),r=this.disabled;"switch"===a&&(a="_"+a);var o=c[a]||c.checkbox;if("string"==typeof n.attr("lay-ignore"))return n.show();var l,s=n.next("."+o[0]),d=C(['<div class="layui-unselect '+o[0],t.checked?" "+o[1]:"",r?" layui-checkbox-disbaled "+k:"",'"',a?' lay-skin="'+a+'"':"",">",(l={checkbox:[t.title.replace(/\s/g,"")?"<span>"+t.title+"</span>":"",'<i class="fa fa-check"></i>'].join(""),_switch:"<em>"+((t.checked?i[0]:i[1])||"")+"</em><i></i>"})[a]||l.checkbox,"</div>"].join(""));s[0]&&s.remove(),n.after(d),function(n,a){var i=C(this);n.on("click",function(){var e=i.attr("lay-filter"),t=(i.attr("lay-text")||"").split("|");i[0].disabled||(i[0].checked?(i[0].checked=!1,n.removeClass(a[1]).find("em").text(t[1])):(i[0].checked=!0,n.addClass(a[1]).find("em").text(t[0])),layui.event.call(i[0],w,a[2]+"("+e+")",{elem:i[0],value:i[0].value,othis:n}))})}.call(this,d,o)})},radio:function(){var s="layui-form-radio",e=n.find("input[type=radio]");e.each(function(e,t){var n=C(this),a=n.next("."+s),i=this.disabled;if("string"==typeof n.attr("lay-ignore"))return n.show();a[0]&&a.remove();var r,o=C(['<div class="layui-unselect '+s,t.checked?" "+s+"ed":"",(i?" layui-radio-disbaled "+k:"")+'">','<i class="fa '+(t.checked?"fa-dot-circle-o":"fa-circle-o")+'"></i>',"<div>"+(r=t.title||"","string"==typeof n.next().attr("lay-radio")&&(r=n.next().html(),n.next().remove()),r)+"</div>","</div>"].join(""));n.after(o),function(i){var r=C(this),o="fa-circle-o",l="fa-dot-circle-o";i.on("click",function(){var e=r[0].name,t=r.parents(p),n=r.attr("lay-filter"),a=t.find("input[name="+e.replace(/(\.|#|\[|\])/g,"\\$1")+"]");r[0].disabled||(layui.each(a,function(){var e=C(this).next("."+s);this.checked=!1,e.removeClass(s+"ed"),e.find(".fa").removeClass(l).addClass(o)}),r[0].checked=!0,i.addClass(s+"ed"),i.find(".fa").addClass(l).removeClass(o),layui.event.call(r[0],w,"radio("+n+")",{elem:r[0],value:r[0].value,othis:i}))})}.call(this,o)})},img:function(){var e=n.find(".layui-form-img"),d='<li class="uploader__file" style="background-image: url(UPLOADEDFILE)"><div class="uploader__mask" style="display: none"><div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="UPLOADEDFILE"><i class="fa fa-close"></i></a></div></div></li>';e.each(function(e,t){var n=C(this),a=n.data("limit")||1,i=C(['<div class="m-uploader clearfix">','<ul class="uploader__files"></ul>','<div class="img__picker" data-limit="'+a+'" ></div>',"</div>"].join(""));0<n.find(".m-uploader").length||(n.append(i),function(t){var a=C(this),i=t.parents(".m-uploader").find(".uploader__files"),r=t,o=a.find("input[type=hidden]"),l=a.attr("lay-filter"),s=a.data("limit");t.on("click",function(){c.render({url:"/interface/core/upload",fileNumLimit:s,done:function(e){if(1==s)i.append(d.replace(new RegExp(/(UPLOADEDFILE)/g),e[0])),o.val(e[0]),r.hide();else{var n=o.val();if((n=1<n.length?n.split(","):[]).length>=s)return;C.each(e,function(e,t){n.push(t),n.length>=s&&r.hide(),i.append(d.replace(new RegExp(/(UPLOADEDFILE)/g),t))}),o.val(n.join(","))}i.on("mouseenter",".uploader__file",function(){C(this).find(".uploader__mask").show()}).on("mouseleave",".uploader__file",function(){C(this).find(".uploader__mask").hide()}),i.on("click",".j_delete",function(){var e,t,n;1==s?(i.remove(),r.show(),o.val("")):(C(this).parents(".uploader__file").remove(),e=C(this).attr("data-id"),-1<(n=(t=1<(t=o.val()).length?t.split(","):[]).indexOf(e))&&t.splice(n,1),r.show(),o.val(t))}),layui.event.call(a[0],w,"img("+l+")",{elem:a[0],value:o.val(),othis:t})}})})}.call(this,i.find(".img__picker")))})},date:function(){n.find(".layui-form-date").each(function(e,t){o.render({elem:t,type:C(t).attr("date-type")||"date"})}),n.find(".layui-form-daterange").each(function(e,t){var n=C(this),a="",i="",r=n.data("options"),a=o.render({elem:n.find(".start_at")[0],min:r.min||"1900-1-1",max:r.max||"2999-12-31",type:r.type||"date",value:n.find(".start_at")[0].value,done:function(e,t){i.config.min=lay.extend({},t,{month:t.month-1})}}),i=o.render({elem:n.find(".end_at")[0],min:r.min||"1900-1-1",max:r.max||"2999-12-31",type:r.type||"date",value:n.find(".end_at")[0].value,done:function(e,t){a.config.max=lay.extend({},t,{month:t.month-1})}})})}};return e?a[e]?a[e]():i.error("不支持的"+e+"表单渲染"):layui.each(a,function(e,t){t()}),this};function n(){var e=C(this),d=v.config.verify,c=null,u="layui-form-danger",a={},t=e.parents(p),n=t.find("*[lay-verify]"),i=e.parents("form")[0],r=t.find("input,select,textarea"),o=e.attr("lay-filter"),l=e.hasClass("J_ajax");if(layui.each(n,function(e,r){var o=C(this),t=o.attr("lay-verify").split("|"),l=o.attr("lay-verType"),s=o.val();if(o.removeClass(u),layui.each(t,function(e,t){var n="",a="function"==typeof d[t];if(d[t]){var i=a?n=d[t](s,r):!d[t][0].test(s),n=n||d[t][1];if(i)return"tips"===l?h.tips(n,"string"==typeof o.attr("lay-ignore")||"select"!==r.tagName.toLowerCase()&&!/^checkbox|radio$/.test(r.type)?o:o.next(),{tips:1}):"alert"===l?h.alert(n,{title:"提示",shadeClose:!0}):h.msg(n,{icon:5,shift:6}),y.android||y.ios||r.focus(),o.addClass(u),c=!0}}),c)return c}),c)return!1;var s={};layui.each(r,function(e,t){var n;t.name=(t.name||"").replace(/^\s*|\s*&/,""),t.name&&(/^.*\[\]$/.test(t.name)&&(n=t.name.match(/^(.*)\[\]$/g)[0],s[n]=0|s[n],t.name=t.name.replace(/^(.*)\[\]$/,"$1["+s[n]+++"]")),/^checkbox|radio$/.test(t.type)&&!t.checked||(a[t.name]=t.value))});var m=e.parents("form");return l?(f.request.ajax({type:m.attr("method"),url:m.attr("action"),data:a,success:function(e){if(0==e.errcode){if(h.msg(e.msg),e.data.redirect)return void setTimeout(function(){f.openTab(e.data.redirect,"列表")},1500);parent.layer&&setTimeout(function(){parent.layer.close(parent.layer.getFrameIndex(window.name))},1500),m[0].reset()}else h.alert(e.msg,{title:"提示",shadeClose:!0});return layui.event.call(this,w,"submit("+o+")",{elem:this,form:i,field:a})}}),!1):layui.event.call(this,w,"submit("+o+")",{elem:this,form:i,field:a})}var v=new t,a=C("body"),M=C(window);v.render(),a.on("reset",p,function(){var e=C(this).attr("lay-filter");setTimeout(function(){v.render(null,e)},50)}),a.on("submit",p,n).on("click","*[lay-submit]",n),a.on("click","*[lay-submit-cancel]",function(){parent.layer.close(parent.layer.getFrameIndex(window.name))}),e(w,v)});
+/**
+
+ @Name : layDate 5.0.9 日期时间控件
+ @Site：http://www.layui.com/laydate/
+
+ */
+
+;
+! function () {
+    "use strict";
+
+    var isLayui = window.layui && layui.define,
+        ready = {
+            getPath: function () {
+                    var jsPath = document.currentScript ? document.currentScript.src : function () {
+                        var js = document.scripts,
+                            last = js.length - 1,
+                            src;
+                        for (var i = last; i > 0; i--) {
+                            if (js[i].readyState === 'interactive') {
+                                src = js[i].src;
+                                break;
+                            }
+                        }
+                        return src || js[last].src;
+                    }();
+                    return jsPath.substring(0, jsPath.lastIndexOf('/') + 1);
+                }(),
+
+                //获取节点的style属性值
+            getStyle: function (node, name) {
+                    var style = node.currentStyle ? node.currentStyle : window.getComputedStyle(node, null);
+                    return style[style.getPropertyValue ? 'getPropertyValue' : 'getAttribute'](name);
+                },
+
+                //载入CSS配件
+            link: function (href, fn, cssname) {
+
+                //未设置路径，则不主动加载css
+                if (!laydate.path) return;
+
+                var head = document.getElementsByTagName("head")[0],
+                    link = document.createElement('link');
+                if (typeof fn === 'string') cssname = fn;
+                var app = (cssname || href).replace(/\.|\//g, '');
+                var id = 'layuicss-' + app,
+                    timeout = 0;
+
+                link.rel = 'stylesheet';
+                link.href = laydate.path + href;
+                link.id = id;
+
+                if (!document.getElementById(id)) {
+                    head.appendChild(link);
+                }
+
+                if (typeof fn !== 'function') return;
+
+                //轮询css是否加载完毕
+                (function poll() {
+                    if (++timeout > 8 * 1000 / 100) {
+                        return window.console && console.error('laydate.css: Invalid');
+                    };
+                    parseInt(ready.getStyle(document.getElementById(id), 'width')) === 1989 ? fn() : setTimeout(poll, 100);
+                }());
+            }
+        }
+
+        ,
+        laydate = {
+            v: '5.0.9',
+            config: {}, //全局配置项
+            index: (window.laydate && window.laydate.v) ? 100000 : 0,
+            path: ready.getPath,
+
+            //设置全局项
+            set: function (options) {
+                var that = this;
+                that.config = lay.extend({}, that.config, options);
+                return that;
+            },
+
+            //主体CSS等待事件
+            ready: function (fn) {
+                var cssname = 'laydate',
+                    ver = '',
+                    path = 'packages/laydate/laydate.css?v=' + laydate.v + ver;
+
+
+                // layui.link(layui.cache.base + path, fn, cssname)
+                // isLayui ? layui.addcss(path, fn, cssname) : ready.link(path, fn, cssname);
+                return this;
+            }
+        },
+
+        //操作当前实例
+        thisDate = function () {
+            var that = this;
+            return {
+                //提示框
+                hint: function (content) {
+                    that.hint.call(that, content);
+                },
+                config: that.config
+            };
+        },
+
+        //字符常量
+        MOD_NAME = 'laydate',
+        ELEM = '.layui-laydate',
+        THIS = 'layui-this',
+        SHOW = 'layui-show',
+        HIDE = 'layui-hide',
+        DISABLED = 'laydate-disabled',
+        TIPS_OUT = '开始日期超出了结束日期<br>建议重新选择',
+        LIMIT_YEAR = [100, 200000],
+        ELEM_STATIC = 'layui-laydate-static',
+        ELEM_LIST = 'layui-laydate-list',
+        ELEM_SELECTED = 'laydate-selected',
+        ELEM_HINT = 'layui-laydate-hint',
+        ELEM_PREV = 'fa-prev',
+        ELEM_NEXT = 'fa-next',
+        ELEM_FOOTER = 'layui-laydate-footer',
+        ELEM_CONFIRM = '.laydate-btns-confirm',
+        ELEM_TIME_TEXT = 'laydate-time-text',
+        ELEM_TIME_BTN = '.laydate-btns-time',
+
+        //组件构造器
+        Class = function (options) {
+            var that = this;
+            that.index = ++laydate.index;
+            that.config = lay.extend({}, that.config, laydate.config, options);
+            that.init();
+            // laydate.ready(function () {
+
+            // });
+        },
+
+        //DOM查找
+        lay = function (selector) {
+            return new LAY(selector);
+        },
+
+        //DOM构造器
+        LAY = function (selector) {
+            var index = 0,
+                nativeDOM = typeof selector === 'object' ? [selector] : (
+                    this.selector = selector, document.querySelectorAll(selector || null)
+                );
+            for (; index < nativeDOM.length; index++) {
+                this.push(nativeDOM[index]);
+            }
+        };
+
+
+    /*
+      lay对象操作
+    */
+
+    LAY.prototype = [];
+    LAY.prototype.constructor = LAY;
+
+    //普通对象深度扩展
+    lay.extend = function () {
+        var ai = 1,
+            args = arguments,
+            clone = function (target, obj) {
+                target = target || (obj.constructor === Array ? [] : {});
+                for (var i in obj) {
+                    //如果值为对象，则进入递归，继续深度合并
+                    target[i] = (obj[i] && (obj[i].constructor === Object)) ?
+                        clone(target[i], obj[i]) :
+                        obj[i];
+                }
+                return target;
+            }
+
+        args[0] = typeof args[0] === 'object' ? args[0] : {};
+
+        for (; ai < args.length; ai++) {
+            if (typeof args[ai] === 'object') {
+                clone(args[0], args[ai])
+            }
+        }
+        return args[0];
+    };
+
+    //ie版本
+    lay.ie = function () {
+        var agent = navigator.userAgent.toLowerCase();
+        return (!!window.ActiveXObject || "ActiveXObject" in window) ? (
+            (agent.match(/msie\s(\d+)/) || [])[1] || '11' //由于ie11并没有msie的标识
+        ) : false;
+    }();
+
+    //中止冒泡
+    lay.stope = function (e) {
+        e = e || window.event;
+        e.stopPropagation ?
+            e.stopPropagation() :
+            e.cancelBubble = true;
+    };
+
+    //对象遍历
+    lay.each = function (obj, fn) {
+        var key, that = this;
+        if (typeof fn !== 'function') return that;
+        obj = obj || [];
+        if (obj.constructor === Object) {
+            for (key in obj) {
+                if (fn.call(obj[key], key, obj[key])) break;
+            }
+        } else {
+            for (key = 0; key < obj.length; key++) {
+                if (fn.call(obj[key], key, obj[key])) break;
+            }
+        }
+        return that;
+    };
+
+    //数字前置补零
+    lay.digit = function (num, length, end) {
+        var str = '';
+        num = String(num);
+        length = length || 2;
+        for (var i = num.length; i < length; i++) {
+            str += '0';
+        }
+        return num < Math.pow(10, length) ? str + (num | 0) : num;
+    };
+
+    //创建元素
+    lay.elem = function (elemName, attr) {
+        var elem = document.createElement(elemName);
+        lay.each(attr || {}, function (key, value) {
+            elem.setAttribute(key, value);
+        });
+        return elem;
+    };
+
+    //追加字符
+    LAY.addStr = function (str, new_str) {
+        str = str.replace(/\s+/, ' ');
+        new_str = new_str.replace(/\s+/, ' ').split(' ');
+        lay.each(new_str, function (ii, item) {
+            if (!new RegExp('\\b' + item + '\\b').test(str)) {
+                str = str + ' ' + item;
+            }
+        });
+        return str.replace(/^\s|\s$/, '');
+    };
+
+    //移除值
+    LAY.removeStr = function (str, new_str) {
+        str = str.replace(/\s+/, ' ');
+        new_str = new_str.replace(/\s+/, ' ').split(' ');
+        lay.each(new_str, function (ii, item) {
+            var exp = new RegExp('\\b' + item + '\\b')
+            if (exp.test(str)) {
+                str = str.replace(exp, '');
+            }
+        });
+        return str.replace(/\s+/, ' ').replace(/^\s|\s$/, '');
+    };
+
+    //查找子元素
+    LAY.prototype.find = function (selector) {
+        var that = this;
+        var index = 0,
+            arr = [],
+            isObject = typeof selector === 'object';
+
+        this.each(function (i, item) {
+            var nativeDOM = isObject ? [selector] : item.querySelectorAll(selector || null);
+            for (; index < nativeDOM.length; index++) {
+                arr.push(nativeDOM[index]);
+            }
+            that.shift();
+        });
+
+        if (!isObject) {
+            that.selector = (that.selector ? that.selector + ' ' : '') + selector
+        }
+
+        lay.each(arr, function (i, item) {
+            that.push(item);
+        });
+
+        return that;
+    };
+
+    //DOM遍历
+    LAY.prototype.each = function (fn) {
+        return lay.each.call(this, this, fn);
+    };
+
+    //添加css类
+    LAY.prototype.addClass = function (className, type) {
+        return this.each(function (index, item) {
+            item.className = LAY[type ? 'removeStr' : 'addStr'](item.className, className)
+        });
+    };
+
+    //移除css类
+    LAY.prototype.removeClass = function (className) {
+        return this.addClass(className, true);
+    };
+
+    //是否包含css类
+    LAY.prototype.hasClass = function (className) {
+        var has = false;
+        this.each(function (index, item) {
+            if (new RegExp('\\b' + className + '\\b').test(item.className)) {
+                has = true;
+            }
+        });
+        return has;
+    };
+
+    //添加或获取属性
+    LAY.prototype.attr = function (key, value) {
+        var that = this;
+        return value === undefined ? function () {
+            if (that.length > 0) return that[0].getAttribute(key);
+        }() : that.each(function (index, item) {
+            item.setAttribute(key, value);
+        });
+    };
+
+    //移除属性
+    LAY.prototype.removeAttr = function (key) {
+        return this.each(function (index, item) {
+            item.removeAttribute(key);
+        });
+    };
+
+    //设置HTML内容
+    LAY.prototype.html = function (html) {
+        return this.each(function (index, item) {
+            item.innerHTML = html;
+        });
+    };
+
+    //设置值
+    LAY.prototype.val = function (value) {
+        return this.each(function (index, item) {
+            item.value = value;
+        });
+    };
+
+    //追加内容
+    LAY.prototype.append = function (elem) {
+        return this.each(function (index, item) {
+            typeof elem === 'object' ?
+                item.appendChild(elem) :
+                item.innerHTML = item.innerHTML + elem;
+        });
+    };
+
+    //移除内容
+    LAY.prototype.remove = function (elem) {
+        return this.each(function (index, item) {
+            elem ? item.removeChild(elem) : item.parentNode.removeChild(item);
+        });
+    };
+
+    //事件绑定
+    LAY.prototype.on = function (eventName, fn) {
+        return this.each(function (index, item) {
+            item.attachEvent ? item.attachEvent('on' + eventName, function (e) {
+                e.target = e.srcElement;
+                fn.call(item, e);
+            }) : item.addEventListener(eventName, fn, false);
+        });
+    };
+
+    //解除事件
+    LAY.prototype.off = function (eventName, fn) {
+        return this.each(function (index, item) {
+            item.detachEvent ?
+                item.detachEvent('on' + eventName, fn) :
+                item.removeEventListener(eventName, fn, false);
+        });
+    };
+
+
+    /*
+      组件操作
+    */
+
+
+    //是否闰年
+    Class.isLeapYear = function (year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    };
+
+    //默认配置
+    Class.prototype.config = {
+        type: 'date' //控件类型，支持：year/month/date/time/datetime
+            ,
+        range: false //是否开启范围选择，即双控件
+            ,
+        format: 'yyyy-MM-dd' //默认日期格式
+            ,
+        value: null //默认日期，支持传入new Date()，或者符合format参数设定的日期格式字符
+            ,
+        isInitValue: true //用于控制是否自动向元素填充初始值（需配合 value 参数使用）
+            ,
+        min: '1900-1-1' //有效最小日期，年月日必须用“-”分割，时分秒必须用“:”分割。注意：它并不是遵循 format 设定的格式。
+            ,
+        max: '2099-12-31' //有效最大日期，同上
+            ,
+        trigger: 'focus' //呼出控件的事件
+            ,
+        show: false //是否直接显示，如果设置true，则默认直接显示控件
+            ,
+        showBottom: true //是否显示底部栏
+            ,
+        btns: ['clear', 'now', 'confirm'] //右下角显示的按钮，会按照数组顺序排列
+            ,
+        lang: 'cn' //语言，只支持cn/en，即中文和英文
+            ,
+        theme: 'default' //主题
+            ,
+        position: null //控件定位方式定位, 默认absolute，支持：fixed/absolute/static
+            ,
+        calendar: false //是否开启公历重要节日，仅支持中文版
+            ,
+        mark: {} //日期备注，如重要事件或活动标记
+        ,
+        zIndex: null //控件层叠顺序
+            ,
+        done: null //控件选择完毕后的回调，点击清空/现在/确定也均会触发
+            ,
+        change: null //日期时间改变后的回调
+    };
+
+    //多语言
+    Class.prototype.lang = function () {
+        var that = this,
+            options = that.config,
+            text = {
+                cn: {
+                    weeks: ['日', '一', '二', '三', '四', '五', '六'],
+                    time: ['时', '分', '秒'],
+                    timeTips: '选择时间',
+                    startTime: '开始时间',
+                    endTime: '结束时间',
+                    dateTips: '返回日期',
+                    month: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+                    tools: {
+                        confirm: '确定',
+                        clear: '清空',
+                        now: '现在'
+                    }
+                },
+                en: {
+                    weeks: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    time: ['Hours', 'Minutes', 'Seconds'],
+                    timeTips: 'Select Time',
+                    startTime: 'Start Time',
+                    endTime: 'End Time',
+                    dateTips: 'Select Date',
+                    month: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    tools: {
+                        confirm: 'Confirm',
+                        clear: 'Clear',
+                        now: 'Now'
+                    }
+                }
+            };
+        return text[options.lang] || text['cn'];
+    };
+
+    //初始准备
+    Class.prototype.init = function () {
+        var that = this,
+            options = that.config,
+            dateType = 'yyyy|y|MM|M|dd|d|HH|H|mm|m|ss|s',
+            isStatic = options.position === 'static',
+            format = {
+                year: 'yyyy',
+                month: 'yyyy-MM',
+                date: 'yyyy-MM-dd',
+                time: 'HH:mm:ss',
+                datetime: 'yyyy-MM-dd HH:mm:ss'
+            };
+
+        options.elem = lay(options.elem);
+        options.eventElem = lay(options.eventElem);
+
+        if (!options.elem[0]) return;
+
+        //日期范围分隔符
+        if (options.range === true) options.range = '-';
+
+        //根据不同type，初始化默认format
+        if (options.format === format.date) {
+            options.format = format[options.type];
+        }
+
+        //将日期格式转化成数组
+        that.format = options.format.match(new RegExp(dateType + '|.', 'g')) || [];
+
+
+        //生成正则表达式
+        that.EXP_IF = '';
+        that.EXP_SPLIT = '';
+        lay.each(that.format, function (i, item) {
+            var EXP = new RegExp(dateType).test(item) ?
+                '\\d{' + function () {
+                    if (new RegExp(dateType).test(that.format[i === 0 ? i + 1 : i - 1] || '')) {
+                        if (/^yyyy|y$/.test(item)) return 4;
+                        return item.length;
+                    }
+                    if (/^yyyy$/.test(item)) return '1,4';
+                    if (/^y$/.test(item)) return '1,308';
+                    return '1,2';
+                }() + '}' :
+                '\\' + item;
+            that.EXP_IF = that.EXP_IF + EXP;
+            that.EXP_SPLIT = that.EXP_SPLIT + '(' + EXP + ')';
+        });
+        that.EXP_IF = new RegExp('^' + (
+            options.range ?
+            that.EXP_IF + '\\s\\' + options.range + '\\s' + that.EXP_IF :
+            that.EXP_IF
+        ) + '$');
+        that.EXP_SPLIT = new RegExp('^' + that.EXP_SPLIT + '$', '');
+
+        //如果不是input|textarea元素，则默认采用click事件
+        if (!that.isInput(options.elem[0])) {
+            if (options.trigger === 'focus') {
+                options.trigger = 'click';
+            }
+        }
+
+        //设置唯一KEY
+        if (!options.elem.attr('lay-key')) {
+            options.elem.attr('lay-key', that.index);
+            options.eventElem.attr('lay-key', that.index);
+        }
+
+        //记录重要日期
+        options.mark = lay.extend({}, (options.calendar && options.lang === 'cn') ? {
+            '0-1-1': '元旦',
+            '0-2-14': '情人',
+            '0-3-8': '妇女',
+            '0-3-12': '植树',
+            '0-4-1': '愚人',
+            '0-5-1': '劳动',
+            '0-5-4': '青年',
+            '0-6-1': '儿童',
+            '0-9-10': '教师',
+            '0-9-18': '国耻',
+            '0-10-1': '国庆',
+            '0-12-25': '圣诞'
+        } : {}, options.mark);
+
+        //获取限制内日期
+        lay.each(['min', 'max'], function (i, item) {
+            var ymd = [],
+                hms = [];
+            if (typeof options[item] === 'number') { //如果为数字
+                var day = options[item],
+                    time = new Date().getTime(),
+                    STAMP = 86400000 //代表一天的时间戳
+                    ,
+                    thisDate = new Date(
+                        day ? (
+                            day < STAMP ? time + day * STAMP : day //如果数字小于一天的时间戳，则数字为天数，否则为时间戳
+                        ) : time
+                    );
+                ymd = [thisDate.getFullYear(), thisDate.getMonth() + 1, thisDate.getDate()];
+                day < STAMP || (hms = [thisDate.getHours(), thisDate.getMinutes(), thisDate.getSeconds()]);
+            } else {
+                ymd = (options[item].match(/\d+-\d+-\d+/) || [''])[0].split('-');
+                hms = (options[item].match(/\d+:\d+:\d+/) || [''])[0].split(':');
+            }
+            options[item] = {
+                year: ymd[0] | 0 || new Date().getFullYear(),
+                month: ymd[1] ? (ymd[1] | 0) - 1 : new Date().getMonth(),
+                date: ymd[2] | 0 || new Date().getDate(),
+                hours: hms[0] | 0,
+                minutes: hms[1] | 0,
+                seconds: hms[2] | 0
+            };
+        });
+
+        that.elemID = 'layui-laydate' + options.elem.attr('lay-key');
+
+        if (options.show || isStatic) that.render();
+        isStatic || that.events();
+
+        //默认赋值
+        if (options.value && options.isInitValue) {
+            if (options.value.constructor === Date) {
+                that.setValue(that.parse(0, that.systemDate(options.value)));
+            } else {
+                that.setValue(options.value);
+            }
+        }
+    };
+
+    //控件主体渲染
+    Class.prototype.render = function () {
+        var that = this,
+            options = that.config,
+            lang = that.lang(),
+            isStatic = options.position === 'static'
+
+            //主面板
+            ,
+            elem = that.elem = lay.elem('div', {
+                id: that.elemID,
+                'class': [
+                    'layui-laydate', options.range ? ' layui-laydate-range' : '', isStatic ? (' ' + ELEM_STATIC) : '', options.theme && options.theme !== 'default' && !/^#/.test(options.theme) ? (' laydate-theme-' + options.theme) : ''
+                ].join('')
+            })
+
+            //主区域
+            ,
+            elemMain = that.elemMain = [],
+            elemHeader = that.elemHeader = [],
+            elemCont = that.elemCont = [],
+            elemTable = that.table = []
+
+            //底部区域
+            ,
+            divFooter = that.footer = lay.elem('div', {
+                'class': ELEM_FOOTER
+            });
+
+        if (options.zIndex) elem.style.zIndex = options.zIndex;
+
+        //单双日历区域
+        lay.each(new Array(2), function (i) {
+            if (!options.range && i > 0) {
+                return true;
+            }
+
+            //头部区域
+            var divHeader = lay.elem('div', {
+                    'class': 'layui-laydate-header'
+                })
+
+                //左右切换
+                ,
+                headerChild = [function () { //上一年
+                    var elem = lay.elem('i', {
+                        'class': 'fa laydate-icon fa-angle-double-left'
+                    });
+                    elem.innerHTML = '';
+                    return elem;
+                }(), function () { //上一月
+                    var elem = lay.elem('i', {
+                        'class': 'fa laydate-icon fa-angle-left'
+                    });
+                    elem.innerHTML = '';
+                    return elem;
+                }(), function () { //年月选择
+                    var elem = lay.elem('div', {
+                            'class': 'laydate-set-ym'
+                        }),
+                        spanY = lay.elem('span'),
+                        spanM = lay.elem('span');
+                    elem.appendChild(spanY);
+                    elem.appendChild(spanM);
+                    return elem;
+                }(), function () { //下一月
+                    var elem = lay.elem('i', {
+                        'class': 'fa laydate-icon fa-angle-right'
+                    });
+                    elem.innerHTML = '';
+                    return elem;
+                }(), function () { //下一年
+                    var elem = lay.elem('i', {
+                        'class': 'fa laydate-icon fa-angle-double-right ml-3'
+                    });
+                    elem.innerHTML = '';
+                    return elem;
+                }()]
+
+                //日历内容区域
+                ,
+                divContent = lay.elem('div', {
+                    'class': 'layui-laydate-content'
+                }),
+                table = lay.elem('table'),
+                thead = lay.elem('thead'),
+                theadTr = lay.elem('tr');
+
+            //生成年月选择
+            lay.each(headerChild, function (i, item) {
+                divHeader.appendChild(item);
+            });
+
+            //生成表格
+            thead.appendChild(theadTr);
+            lay.each(new Array(6), function (i) { //表体
+                var tr = table.insertRow(0);
+                lay.each(new Array(7), function (j) {
+                    if (i === 0) {
+                        var th = lay.elem('th');
+                        th.innerHTML = lang.weeks[j];
+                        theadTr.appendChild(th);
+                    }
+                    tr.insertCell(j);
+                });
+            });
+            table.insertBefore(thead, table.children[0]); //表头
+            divContent.appendChild(table);
+
+            elemMain[i] = lay.elem('div', {
+                'class': 'layui-laydate-main laydate-main-list-' + i
+            });
+
+            elemMain[i].appendChild(divHeader);
+            elemMain[i].appendChild(divContent);
+
+            elemHeader.push(headerChild);
+            elemCont.push(divContent);
+            elemTable.push(table);
+        });
+
+        //生成底部栏
+        lay(divFooter).html(function () {
+            var html = [],
+                btns = [];
+            if (options.type === 'datetime') {
+                html.push('<span lay-type="datetime" class="laydate-btns-time">' + lang.timeTips + '</span>');
+            }
+            lay.each(options.btns, function (i, item) {
+                var title = lang.tools[item] || 'btn';
+                if (options.range && item === 'now') return;
+                if (isStatic && item === 'clear') title = options.lang === 'cn' ? '重置' : 'Reset';
+                btns.push('<span lay-type="' + item + '" class="laydate-btns-' + item + '">' + title + '</span>');
+            });
+            html.push('<div class="laydate-footer-btns">' + btns.join('') + '</div>');
+            return html.join('');
+        }());
+
+        //插入到主区域
+        lay.each(elemMain, function (i, main) {
+            elem.appendChild(main);
+        });
+        options.showBottom && elem.appendChild(divFooter);
+
+        //生成自定义主题
+        if (/^#/.test(options.theme)) {
+            var style = lay.elem('style'),
+                styleText = [
+                    '#{{id}} .layui-laydate-header{background-color:{{theme}};}', '#{{id}} .layui-this{background-color:{{theme}} !important;}'
+                ].join('').replace(/{{id}}/g, that.elemID).replace(/{{theme}}/g, options.theme);
+
+            if ('styleSheet' in style) {
+                style.setAttribute('type', 'text/css');
+                style.styleSheet.cssText = styleText;
+            } else {
+                style.innerHTML = styleText;
+            }
+
+            lay(elem).addClass('laydate-theme-molv');
+            elem.appendChild(style);
+        }
+
+        //移除上一个控件
+        that.remove(Class.thisElemDate);
+
+        //如果是静态定位，则插入到指定的容器中，否则，插入到body
+        isStatic ? options.elem.append(elem) : (
+            document.body.appendChild(elem), that.position() //定位
+        );
+
+        that.checkDate().calendar(); //初始校验
+        that.changeEvent(); //日期切换
+
+        Class.thisElemDate = that.elemID;
+
+        typeof options.ready === 'function' && options.ready(lay.extend({}, options.dateTime, {
+            month: options.dateTime.month + 1
+        }));
+    };
+
+    //控件移除
+    Class.prototype.remove = function (prev) {
+        var that = this,
+            options = that.config,
+            elem = lay('#' + (prev || that.elemID));
+        if (!elem.hasClass(ELEM_STATIC)) {
+            that.checkDate(function () {
+                elem.remove();
+            });
+        }
+        return that;
+    };
+
+    //定位算法
+    Class.prototype.position = function () {
+        var that = this,
+            options = that.config,
+            elem = that.bindElem || options.elem[0],
+            rect = elem.getBoundingClientRect() //绑定元素的坐标
+            ,
+            elemWidth = that.elem.offsetWidth //控件的宽度
+            ,
+            elemHeight = that.elem.offsetHeight //控件的高度
+
+            //滚动条高度
+            ,
+            scrollArea = function (type) {
+                type = type ? 'scrollLeft' : 'scrollTop';
+                return document.body[type] | document.documentElement[type];
+            },
+            winArea = function (type) {
+                return document.documentElement[type ? 'clientWidth' : 'clientHeight']
+            },
+            margin = 5,
+            left = rect.left,
+            top = rect.bottom;
+
+        //如果右侧超出边界
+        if (left + elemWidth + margin > winArea('width')) {
+            left = winArea('width') - elemWidth - margin;
+        }
+
+        //如果底部超出边界
+        if (top + elemHeight + margin > winArea()) {
+            top = rect.top > elemHeight //顶部是否有足够区域显示完全
+                ?
+                rect.top - elemHeight :
+                winArea() - elemHeight;
+            top = top - margin * 2;
+        }
+
+        if (options.position) {
+            that.elem.style.position = options.position;
+        }
+        that.elem.style.left = left + (options.position === 'fixed' ? 0 : scrollArea(1)) + 'px';
+        that.elem.style.top = top + (options.position === 'fixed' ? 0 : scrollArea()) + 'px';
+    };
+
+    //提示
+    Class.prototype.hint = function (content) {
+        var that = this,
+            options = that.config,
+            div = lay.elem('div', {
+                'class': ELEM_HINT
+            });
+
+        if (!that.elem) return;
+
+        div.innerHTML = content || '';
+        lay(that.elem).find('.' + ELEM_HINT).remove();
+        that.elem.appendChild(div);
+
+        clearTimeout(that.hinTimer);
+        that.hinTimer = setTimeout(function () {
+            lay(that.elem).find('.' + ELEM_HINT).remove();
+        }, 3000);
+    };
+
+    //获取递增/减后的年月
+    Class.prototype.getAsYM = function (Y, M, type) {
+        type ? M-- : M++;
+        if (M < 0) {
+            M = 11;
+            Y--;
+        }
+        if (M > 11) {
+            M = 0;
+            Y++;
+        }
+        return [Y, M];
+    };
+
+    //系统消息
+    Class.prototype.systemDate = function (newDate) {
+        var thisDate = newDate || new Date();
+        return {
+            year: thisDate.getFullYear() //年
+                ,
+            month: thisDate.getMonth() //月
+                ,
+            date: thisDate.getDate() //日
+                ,
+            hours: newDate ? newDate.getHours() : 0 //时
+                ,
+            minutes: newDate ? newDate.getMinutes() : 0 //分
+                ,
+            seconds: newDate ? newDate.getSeconds() : 0 //秒
+        }
+    };
+
+    //日期校验
+    Class.prototype.checkDate = function (fn) {
+        var that = this,
+            thisDate = new Date(),
+            options = that.config,
+            dateTime = options.dateTime = options.dateTime || that.systemDate(),
+            thisMaxDate, error
+
+            , elem = that.bindElem || options.elem[0],
+            valType = that.isInput(elem) ? 'val' : 'html',
+            value = that.isInput(elem) ? elem.value : (options.position === 'static' ? '' : elem.innerHTML)
+
+            //校验日期有效数字
+            ,
+            checkValid = function (dateTime) {
+                if (dateTime.year > LIMIT_YEAR[1]) dateTime.year = LIMIT_YEAR[1], error = true; //不能超过20万年
+                if (dateTime.month > 11) dateTime.month = 11, error = true;
+                if (dateTime.hours > 23) dateTime.hours = 0, error = true;
+                if (dateTime.minutes > 59) dateTime.minutes = 0, dateTime.hours++, error = true;
+                if (dateTime.seconds > 59) dateTime.seconds = 0, dateTime.minutes++, error = true;
+
+                //计算当前月的最后一天
+                thisMaxDate = laydate.getEndDate(dateTime.month + 1, dateTime.year);
+                if (dateTime.date > thisMaxDate) dateTime.date = thisMaxDate, error = true;
+            }
+
+            //获得初始化日期值
+            ,
+            initDate = function (dateTime, value, index) {
+                var startEnd = ['startTime', 'endTime'];
+                value = (value.match(that.EXP_SPLIT) || []).slice(1);
+                index = index || 0;
+                if (options.range) {
+                    that[startEnd[index]] = that[startEnd[index]] || {};
+                }
+                lay.each(that.format, function (i, item) {
+                    var thisv = parseFloat(value[i]);
+                    if (value[i].length < item.length) error = true;
+                    if (/yyyy|y/.test(item)) { //年
+                        if (thisv < LIMIT_YEAR[0]) thisv = LIMIT_YEAR[0], error = true; //年不能低于100年
+                        dateTime.year = thisv;
+                    } else if (/MM|M/.test(item)) { //月
+                        if (thisv < 1) thisv = 1, error = true;
+                        dateTime.month = thisv - 1;
+                    } else if (/dd|d/.test(item)) { //日
+                        if (thisv < 1) thisv = 1, error = true;
+                        dateTime.date = thisv;
+                    } else if (/HH|H/.test(item)) { //时
+                        if (thisv < 1) thisv = 0, error = true;
+                        dateTime.hours = thisv;
+                        options.range && (that[startEnd[index]].hours = thisv);
+                    } else if (/mm|m/.test(item)) { //分
+                        if (thisv < 1) thisv = 0, error = true;
+                        dateTime.minutes = thisv;
+                        options.range && (that[startEnd[index]].minutes = thisv);
+                    } else if (/ss|s/.test(item)) { //秒
+                        if (thisv < 1) thisv = 0, error = true;
+                        dateTime.seconds = thisv;
+                        options.range && (that[startEnd[index]].seconds = thisv);
+                    }
+                });
+                checkValid(dateTime)
+            };
+
+        if (fn === 'limit') return checkValid(dateTime), that;
+
+        value = value || options.value;
+        if (typeof value === 'string') {
+            value = value.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
+        }
+
+        //如果点击了开始，单未选择结束就关闭，则重新选择开始
+        if (that.startState && !that.endState) {
+            delete that.startState;
+            that.endState = true;
+        };
+
+        if (typeof value === 'string' && value) {
+            if (that.EXP_IF.test(value)) { //校验日期格式
+                if (options.range) {
+                    value = value.split(' ' + options.range + ' ');
+                    that.startDate = that.startDate || that.systemDate();
+                    that.endDate = that.endDate || that.systemDate();
+                    options.dateTime = lay.extend({}, that.startDate);
+                    lay.each([that.startDate, that.endDate], function (i, item) {
+                        initDate(item, value[i], i);
+                    });
+                } else {
+                    initDate(dateTime, value)
+                }
+            } else {
+                that.hint('日期格式不合法<br>必须遵循下述格式：<br>' + (
+                    options.range ? (options.format + ' ' + options.range + ' ' + options.format) : options.format
+                ) + '<br>已为你重置');
+                error = true;
+            }
+        } else if (value && value.constructor === Date) { //如果值为日期对象时
+            options.dateTime = that.systemDate(value);
+        } else {
+            options.dateTime = that.systemDate();
+            delete that.startState;
+            delete that.endState;
+            delete that.startDate;
+            delete that.endDate;
+            delete that.startTime;
+            delete that.endTime;
+        }
+
+        checkValid(dateTime);
+
+        if (error && value) {
+            that.setValue(
+                options.range ? (that.endDate ? that.parse() : '') : that.parse()
+            );
+        }
+        fn && fn();
+        return that;
+    };
+
+    //公历重要日期与自定义备注
+    Class.prototype.mark = function (td, YMD) {
+        var that = this,
+            mark, options = that.config;
+        lay.each(options.mark, function (key, title) {
+            var keys = key.split('-');
+            if ((keys[0] == YMD[0] || keys[0] == 0) //每年的每月
+                &&
+                (keys[1] == YMD[1] || keys[1] == 0) //每月的每日
+                &&
+                keys[2] == YMD[2]) { //特定日
+                mark = title || YMD[2];
+            }
+        });
+        mark && td.html('<span class="laydate-day-mark">' + mark + '</span>');
+
+        return that;
+    };
+
+    //无效日期范围的标记
+    Class.prototype.limit = function (elem, date, index, time) {
+        var that = this,
+            options = that.config,
+            timestrap = {},
+            dateTime = options[index > 41 ? 'endDate' : 'dateTime'],
+            isOut, thisDateTime = lay.extend({}, dateTime, date || {});
+        lay.each({
+            now: thisDateTime,
+            min: options.min,
+            max: options.max
+        }, function (key, item) {
+            timestrap[key] = that.newDate(lay.extend({
+                year: item.year,
+                month: item.month,
+                date: item.date
+            }, function () {
+                var hms = {};
+                lay.each(time, function (i, keys) {
+                    hms[keys] = item[keys];
+                });
+                return hms;
+            }())).getTime(); //time：是否比较时分秒
+        });
+
+        isOut = timestrap.now < timestrap.min || timestrap.now > timestrap.max;
+        elem && elem[isOut ? 'addClass' : 'removeClass'](DISABLED);
+        return isOut;
+    };
+
+    //日历表
+    Class.prototype.calendar = function (value) {
+        var that = this,
+            options = that.config,
+            dateTime = value || options.dateTime,
+            thisDate = new Date(),
+            startWeek, prevMaxDate, thisMaxDate, lang = that.lang()
+
+            ,
+            isAlone = options.type !== 'date' && options.type !== 'datetime',
+            index = value ? 1 : 0,
+            tds = lay(that.table[index]).find('td'),
+            elemYM = lay(that.elemHeader[index][2]).find('span');
+
+        if (dateTime.year < LIMIT_YEAR[0]) dateTime.year = LIMIT_YEAR[0], that.hint('最低只能支持到公元' + LIMIT_YEAR[0] + '年');
+        if (dateTime.year > LIMIT_YEAR[1]) dateTime.year = LIMIT_YEAR[1], that.hint('最高只能支持到公元' + LIMIT_YEAR[1] + '年');
+
+        //记录初始值
+        if (!that.firstDate) {
+            that.firstDate = lay.extend({}, dateTime);
+        }
+
+        //计算当前月第一天的星期
+        thisDate.setFullYear(dateTime.year, dateTime.month, 1);
+        startWeek = thisDate.getDay();
+
+        prevMaxDate = laydate.getEndDate(dateTime.month || 12, dateTime.year); //计算上个月的最后一天
+        thisMaxDate = laydate.getEndDate(dateTime.month + 1, dateTime.year); //计算当前月的最后一天
+
+        //赋值日
+        lay.each(tds, function (index, item) {
+            var YMD = [dateTime.year, dateTime.month],
+                st = 0;
+            item = lay(item);
+            item.removeAttr('class');
+            if (index < startWeek) {
+                st = prevMaxDate - startWeek + index;
+                item.addClass('laydate-day-prev');
+                YMD = that.getAsYM(dateTime.year, dateTime.month, 'sub');
+            } else if (index >= startWeek && index < thisMaxDate + startWeek) {
+                st = index - startWeek;
+                if (!options.range) {
+                    st + 1 === dateTime.date && item.addClass(THIS);
+                }
+            } else {
+                st = index - thisMaxDate - startWeek;
+                item.addClass('laydate-day-next');
+                YMD = that.getAsYM(dateTime.year, dateTime.month);
+            }
+            YMD[1]++;
+            YMD[2] = st + 1;
+            item.attr('lay-ymd', YMD.join('-')).html(YMD[2]);
+            that.mark(item, YMD).limit(item, {
+                year: YMD[0],
+                month: YMD[1] - 1,
+                date: YMD[2]
+            }, index);
+        });
+
+        //同步头部年月
+        lay(elemYM[0]).attr('lay-ym', dateTime.year + '-' + (dateTime.month + 1));
+        lay(elemYM[1]).attr('lay-ym', dateTime.year + '-' + (dateTime.month + 1));
+
+        if (options.lang === 'cn') {
+            lay(elemYM[0]).attr('lay-type', 'year').html(dateTime.year + '年')
+            lay(elemYM[1]).attr('lay-type', 'month').html((dateTime.month + 1) + '月');
+        } else {
+            lay(elemYM[0]).attr('lay-type', 'month').html(lang.month[dateTime.month]);
+            lay(elemYM[1]).attr('lay-type', 'year').html(dateTime.year);
+        }
+
+        //初始默认选择器
+        if (isAlone) {
+            if (options.range) {
+                value ? that.endDate = (that.endDate || {
+                    year: dateTime.year + (options.type === 'year' ? 1 : 0),
+                    month: dateTime.month + (options.type === 'month' ? 0 : -1)
+                }) : (that.startDate = that.startDate || {
+                    year: dateTime.year,
+                    month: dateTime.month
+                });
+                if (value) {
+                    that.listYM = [
+                        [that.startDate.year, that.startDate.month + 1],
+                        [that.endDate.year, that.endDate.month + 1]
+                    ];
+                    that.list(options.type, 0).list(options.type, 1);
+                    //同步按钮可点状态
+                    options.type === 'time' ? that.setBtnStatus('时间', lay.extend({}, that.systemDate(), that.startTime), lay.extend({}, that.systemDate(), that.endTime)) : that.setBtnStatus(true);
+                }
+            }
+            if (!options.range) {
+                that.listYM = [
+                    [dateTime.year, dateTime.month + 1]
+                ];
+                that.list(options.type, 0);
+            }
+        }
+
+        //赋值双日历
+        if (options.range && !value) {
+            var EYM = that.getAsYM(dateTime.year, dateTime.month)
+            that.calendar(lay.extend({}, dateTime, {
+                year: EYM[0],
+                month: EYM[1]
+            }));
+        }
+
+        //通过检测当前有效日期，来设定确定按钮是否可点
+        if (!options.range) that.limit(lay(that.footer).find(ELEM_CONFIRM), null, 0, ['hours', 'minutes', 'seconds']);
+
+        //标记选择范围
+        if (options.range && value && !isAlone) that.stampRange();
+        return that;
+    };
+
+    //生成年月时分秒列表
+    Class.prototype.list = function (type, index) {
+        var that = this,
+            options = that.config,
+            dateTime = options.dateTime,
+            lang = that.lang(),
+            isAlone = options.range && options.type !== 'date' && options.type !== 'datetime' //独立范围选择器
+
+            ,
+            ul = lay.elem('ul', {
+                'class': ELEM_LIST + ' ' + ({
+                    year: 'laydate-year-list',
+                    month: 'laydate-month-list',
+                    time: 'laydate-time-list'
+                })[type]
+            }),
+            elemHeader = that.elemHeader[index],
+            elemYM = lay(elemHeader[2]).find('span'),
+            elemCont = that.elemCont[index || 0],
+            haveList = lay(elemCont).find('.' + ELEM_LIST)[0],
+            isCN = options.lang === 'cn',
+            text = isCN ? '年' : ''
+
+            ,
+            listYM = that.listYM[index] || {},
+            hms = ['hours', 'minutes', 'seconds'],
+            startEnd = ['startTime', 'endTime'][index];
+
+        if (listYM[0] < 1) listYM[0] = 1;
+
+        if (type === 'year') { //年列表
+            var yearNum, startY = yearNum = listYM[0] - 7;
+            if (startY < 1) startY = yearNum = 1;
+            lay.each(new Array(15), function (i) {
+                var li = lay.elem('li', {
+                        'lay-ym': yearNum
+                    }),
+                    ymd = {
+                        year: yearNum
+                    };
+                yearNum == listYM[0] && lay(li).addClass(THIS);
+                li.innerHTML = yearNum + text;
+                ul.appendChild(li);
+                if (yearNum < that.firstDate.year) {
+                    ymd.month = options.min.month;
+                    ymd.date = options.min.date;
+                } else if (yearNum >= that.firstDate.year) {
+                    ymd.month = options.max.month;
+                    ymd.date = options.max.date;
+                }
+                that.limit(lay(li), ymd, index);
+                yearNum++;
+            });
+            lay(elemYM[isCN ? 0 : 1]).attr('lay-ym', (yearNum - 8) + '-' + listYM[1])
+                .html((startY + text) + ' - ' + (yearNum - 1 + text));
+        } else if (type === 'month') { //月列表
+            lay.each(new Array(12), function (i) {
+                var li = lay.elem('li', {
+                        'lay-ym': i
+                    }),
+                    ymd = {
+                        year: listYM[0],
+                        month: i
+                    };
+                i + 1 == listYM[1] && lay(li).addClass(THIS);
+                li.innerHTML = lang.month[i] + (isCN ? '月' : '');
+                ul.appendChild(li);
+                if (listYM[0] < that.firstDate.year) {
+                    ymd.date = options.min.date;
+                } else if (listYM[0] >= that.firstDate.year) {
+                    ymd.date = options.max.date;
+                }
+                that.limit(lay(li), ymd, index);
+            });
+            lay(elemYM[isCN ? 0 : 1]).attr('lay-ym', listYM[0] + '-' + listYM[1])
+                .html(listYM[0] + text);
+        } else if (type === 'time') { //时间列表
+            //检测时分秒状态是否在有效日期时间范围内
+            var setTimeStatus = function () {
+                lay(ul).find('ol').each(function (i, ol) {
+                    lay(ol).find('li').each(function (ii, li) {
+                        that.limit(lay(li), [{
+                            hours: ii
+                        }, {
+                            hours: that[startEnd].hours,
+                            minutes: ii
+                        }, {
+                            hours: that[startEnd].hours,
+                            minutes: that[startEnd].minutes,
+                            seconds: ii
+                        }][i], index, [
+                            ['hours'],
+                            ['hours', 'minutes'],
+                            ['hours', 'minutes', 'seconds']
+                        ][i]);
+                    });
+                });
+                if (!options.range) that.limit(lay(that.footer).find(ELEM_CONFIRM), that[startEnd], 0, ['hours', 'minutes', 'seconds']);
+            };
+            if (options.range) {
+                if (!that[startEnd]) that[startEnd] = {
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0
+                };
+            } else {
+                that[startEnd] = dateTime;
+            }
+            lay.each([24, 60, 60], function (i, item) {
+                var li = lay.elem('li'),
+                    childUL = ['<p>' + lang.time[i] + '</p><ol>'];
+                lay.each(new Array(item), function (ii) {
+                    childUL.push('<li' + (that[startEnd][hms[i]] === ii ? ' class="' + THIS + '"' : '') + '>' + lay.digit(ii, 2) + '</li>');
+                });
+                li.innerHTML = childUL.join('') + '</ol>';
+                ul.appendChild(li);
+            });
+            setTimeStatus();
+        }
+
+        //插入容器
+        if (haveList) elemCont.removeChild(haveList);
+        elemCont.appendChild(ul);
+
+        //年月
+        if (type === 'year' || type === 'month') {
+            //显示切换箭头
+            lay(that.elemMain[index]).addClass('laydate-ym-show');
+
+            //选中
+            lay(ul).find('li').on('click', function () {
+                var ym = lay(this).attr('lay-ym') | 0;
+                if (lay(this).hasClass(DISABLED)) return;
+
+                if (index === 0) {
+                    dateTime[type] = ym;
+                    if (isAlone) that.startDate[type] = ym;
+                    that.limit(lay(that.footer).find(ELEM_CONFIRM), null, 0);
+                } else { //范围选择
+                    if (isAlone) { //非date/datetime类型
+                        that.endDate[type] = ym;
+                    } else { //date/datetime类型
+                        var YM = type === 'year' ?
+                            that.getAsYM(ym, listYM[1] - 1, 'sub') :
+                            that.getAsYM(listYM[0], ym, 'sub');
+                        lay.extend(dateTime, {
+                            year: YM[0],
+                            month: YM[1]
+                        });
+                    }
+                }
+
+                if (options.type === 'year' || options.type === 'month') {
+                    lay(ul).find('.' + THIS).removeClass(THIS);
+                    lay(this).addClass(THIS);
+
+                    //如果为年月选择器，点击了年列表，则切换到月选择器
+                    if (options.type === 'month' && type === 'year') {
+                        that.listYM[index][0] = ym;
+                        isAlone && (that[['startDate', 'endDate'][index]].year = ym);
+                        that.list('month', index);
+                    }
+                } else {
+                    that.checkDate('limit').calendar();
+                    that.closeList();
+                }
+
+                that.setBtnStatus(); //同步按钮可点状态
+                options.range || that.done(null, 'change');
+                lay(that.footer).find(ELEM_TIME_BTN).removeClass(DISABLED);
+            });
+        } else {
+            var span = lay.elem('span', {
+                    'class': ELEM_TIME_TEXT
+                }),
+                scroll = function () { //滚动条定位
+                    lay(ul).find('ol').each(function (i) {
+                        var ol = this,
+                            li = lay(ol).find('li')
+                        ol.scrollTop = 30 * (that[startEnd][hms[i]] - 2);
+                        if (ol.scrollTop <= 0) {
+                            li.each(function (ii, item) {
+                                if (!lay(this).hasClass(DISABLED)) {
+                                    ol.scrollTop = 30 * (ii - 2);
+                                    return true;
+                                }
+                            });
+                        }
+                    });
+                },
+                haveSpan = lay(elemHeader[2]).find('.' + ELEM_TIME_TEXT);
+            scroll()
+            span.innerHTML = options.range ? [lang.startTime, lang.endTime][index] : lang.timeTips
+            lay(that.elemMain[index]).addClass('laydate-time-show');
+            if (haveSpan[0]) haveSpan.remove();
+            elemHeader[2].appendChild(span);
+
+            lay(ul).find('ol').each(function (i) {
+                var ol = this;
+                //选择时分秒
+                lay(ol).find('li').on('click', function () {
+                    var value = this.innerHTML | 0;
+                    if (lay(this).hasClass(DISABLED)) return;
+                    if (options.range) {
+                        that[startEnd][hms[i]] = value;
+                    } else {
+                        dateTime[hms[i]] = value;
+                    }
+                    lay(ol).find('.' + THIS).removeClass(THIS);
+                    lay(this).addClass(THIS);
+
+                    setTimeStatus();
+                    scroll();
+                    (that.endDate || options.type === 'time') && that.done(null, 'change');
+
+                    //同步按钮可点状态
+                    that.setBtnStatus();
+                });
+            });
+        }
+
+        return that;
+    };
+
+    //记录列表切换后的年月
+    Class.prototype.listYM = [];
+
+    //关闭列表
+    Class.prototype.closeList = function () {
+        var that = this,
+            options = that.config;
+
+        lay.each(that.elemCont, function (index, item) {
+            lay(this).find('.' + ELEM_LIST).remove();
+            lay(that.elemMain[index]).removeClass('laydate-ym-show laydate-time-show');
+        });
+        lay(that.elem).find('.' + ELEM_TIME_TEXT).remove();
+    };
+
+    //检测结束日期是否超出开始日期
+    Class.prototype.setBtnStatus = function (tips, start, end) {
+        var that = this,
+            options = that.config,
+            isOut, elemBtn = lay(that.footer).find(ELEM_CONFIRM),
+            isAlone = options.range && options.type !== 'date' && options.type !== 'time';
+        if (isAlone) {
+            start = start || that.startDate;
+            end = end || that.endDate;
+            isOut = that.newDate(start).getTime() > that.newDate(end).getTime();
+
+            //如果不在有效日期内，直接禁用按钮，否则比较开始和结束日期
+            (that.limit(null, start) || that.limit(null, end)) ?
+            elemBtn.addClass(DISABLED): elemBtn[isOut ? 'addClass' : 'removeClass'](DISABLED);
+
+            //是否异常提示
+            if (tips && isOut) that.hint(
+                typeof tips === 'string' ? TIPS_OUT.replace(/日期/g, tips) : TIPS_OUT
+            );
+        }
+    };
+
+    //转义为规定格式的日期字符
+    Class.prototype.parse = function (state, date) {
+        var that = this,
+            options = that.config,
+            dateTime = date || (state ?
+                lay.extend({}, that.endDate, that.endTime) :
+                (options.range ? lay.extend({}, that.startDate, that.startTime) : options.dateTime)),
+            format = that.format.concat();
+
+        //转义为规定格式
+        lay.each(format, function (i, item) {
+            if (/yyyy|y/.test(item)) { //年
+                format[i] = lay.digit(dateTime.year, item.length);
+            } else if (/MM|M/.test(item)) { //月
+                format[i] = lay.digit(dateTime.month + 1, item.length);
+            } else if (/dd|d/.test(item)) { //日
+                format[i] = lay.digit(dateTime.date, item.length);
+            } else if (/HH|H/.test(item)) { //时
+                format[i] = lay.digit(dateTime.hours, item.length);
+            } else if (/mm|m/.test(item)) { //分
+                format[i] = lay.digit(dateTime.minutes, item.length);
+            } else if (/ss|s/.test(item)) { //秒
+                format[i] = lay.digit(dateTime.seconds, item.length);
+            }
+        });
+
+        //返回日期范围字符
+        if (options.range && !state) {
+            return format.join('') + ' ' + options.range + ' ' + that.parse(1);
+        }
+
+        return format.join('');
+    };
+
+    //创建指定日期时间对象
+    Class.prototype.newDate = function (dateTime) {
+        dateTime = dateTime || {};
+        return new Date(
+            dateTime.year || 1, dateTime.month || 0, dateTime.date || 1, dateTime.hours || 0, dateTime.minutes || 0, dateTime.seconds || 0
+        );
+    };
+
+    //赋值
+    Class.prototype.setValue = function (value) {
+        var that = this,
+            options = that.config,
+            elem = that.bindElem || options.elem[0],
+            valType = that.isInput(elem) ? 'val' : 'html'
+
+        options.position === 'static' || lay(elem)[valType](value || '');
+        return this;
+    };
+
+    //标记范围内的日期
+    Class.prototype.stampRange = function () {
+        var that = this,
+            options = that.config,
+            startTime, endTime, tds = lay(that.elem).find('td');
+
+        if (options.range && !that.endDate) lay(that.footer).find(ELEM_CONFIRM).addClass(DISABLED);
+        if (!that.endDate) return;
+
+        startTime = that.newDate({
+            year: that.startDate.year,
+            month: that.startDate.month,
+            date: that.startDate.date
+        }).getTime();
+
+        endTime = that.newDate({
+            year: that.endDate.year,
+            month: that.endDate.month,
+            date: that.endDate.date
+        }).getTime();
+
+        if (startTime > endTime) return that.hint(TIPS_OUT);
+
+        lay.each(tds, function (i, item) {
+            var ymd = lay(item).attr('lay-ymd').split('-'),
+                thisTime = that.newDate({
+                    year: ymd[0],
+                    month: ymd[1] - 1,
+                    date: ymd[2]
+                }).getTime();
+            lay(item).removeClass(ELEM_SELECTED + ' ' + THIS);
+            if (thisTime === startTime || thisTime === endTime) {
+                lay(item).addClass(
+                    lay(item).hasClass(ELEM_PREV) || lay(item).hasClass(ELEM_NEXT) ?
+                    ELEM_SELECTED :
+                    THIS
+                );
+            }
+            if (thisTime > startTime && thisTime < endTime) {
+                lay(item).addClass(ELEM_SELECTED);
+            }
+        });
+    };
+
+    //执行done/change回调
+    Class.prototype.done = function (param, type) {
+        var that = this,
+            options = that.config,
+            start = lay.extend({}, that.startDate ? lay.extend(that.startDate, that.startTime) : options.dateTime),
+            end = lay.extend({}, lay.extend(that.endDate, that.endTime))
+
+        lay.each([start, end], function (i, item) {
+            if (!('month' in item)) return;
+            lay.extend(item, {
+                month: item.month + 1
+            });
+        });
+
+        param = param || [that.parse(), start, end];
+        typeof options[type || 'done'] === 'function' && options[type || 'done'].apply(options, param);
+
+        return that;
+    };
+
+    //选择日期
+    Class.prototype.choose = function (td) {
+        var that = this,
+            options = that.config,
+            dateTime = options.dateTime
+
+            ,
+            tds = lay(that.elem).find('td'),
+            YMD = td.attr('lay-ymd').split('-')
+
+            ,
+            setDateTime = function (one) {
+                var thisDate = new Date();
+
+                //同步dateTime
+                one && lay.extend(dateTime, YMD);
+
+                //记录开始日期
+                if (options.range) {
+                    that.startDate ? lay.extend(that.startDate, YMD) : (
+                        that.startDate = lay.extend({}, YMD, that.startTime)
+                    );
+                    that.startYMD = YMD;
+                }
+            };
+
+        YMD = {
+            year: YMD[0] | 0,
+            month: (YMD[1] | 0) - 1,
+            date: YMD[2] | 0
+        };
+
+        if (td.hasClass(DISABLED)) return;
+
+        //范围选择
+        if (options.range) {
+
+            lay.each(['startTime', 'endTime'], function (i, item) {
+                that[item] = that[item] || {
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0
+                };
+            });
+
+            if (that.endState) { //重新选择
+                setDateTime();
+                delete that.endState;
+                delete that.endDate;
+                that.startState = true;
+                tds.removeClass(THIS + ' ' + ELEM_SELECTED);
+                td.addClass(THIS);
+            } else if (that.startState) { //选中截止
+                td.addClass(THIS);
+
+                that.endDate ? lay.extend(that.endDate, YMD) : (
+                    that.endDate = lay.extend({}, YMD, that.endTime)
+                );
+
+                //判断是否顺时或逆时选择
+                if (that.newDate(YMD).getTime() < that.newDate(that.startYMD).getTime()) {
+                    var startDate = lay.extend({}, that.endDate, {
+                        hours: that.startDate.hours,
+                        minutes: that.startDate.minutes,
+                        seconds: that.startDate.seconds
+                    });
+                    lay.extend(that.endDate, that.startDate, {
+                        hours: that.endDate.hours,
+                        minutes: that.endDate.minutes,
+                        seconds: that.endDate.seconds
+                    });
+                    that.startDate = startDate;
+                }
+
+                options.showBottom || that.done();
+                that.stampRange(); //标记范围内的日期
+                that.endState = true;
+                that.done(null, 'change');
+            } else { //选中开始
+                td.addClass(THIS);
+                setDateTime();
+                that.startState = true;
+            }
+            lay(that.footer).find(ELEM_CONFIRM)[that.endDate ? 'removeClass' : 'addClass'](DISABLED);
+        } else if (options.position === 'static') { //直接嵌套的选中
+            setDateTime(true);
+            that.calendar().done().done(null, 'change');
+        } else if (options.type === 'date') {
+            setDateTime(true);
+            that.setValue(that.parse()).remove().done();
+        } else if (options.type === 'datetime') {
+            setDateTime(true);
+            that.calendar().done(null, 'change');
+        }
+    };
+
+    //底部按钮
+    Class.prototype.tool = function (btn, type) {
+        var that = this,
+            options = that.config,
+            dateTime = options.dateTime,
+            isStatic = options.position === 'static',
+            active = {
+                //选择时间
+                datetime: function () {
+                        if (lay(btn).hasClass(DISABLED)) return;
+                        that.list('time', 0);
+                        options.range && that.list('time', 1);
+                        lay(btn).attr('lay-type', 'date').html(that.lang().dateTips);
+                    }
+
+                    //选择日期
+                    ,
+                date: function () {
+                        that.closeList();
+                        lay(btn).attr('lay-type', 'datetime').html(that.lang().timeTips);
+                    }
+
+                    //清空、重置
+                    ,
+                clear: function () {
+                        that.setValue('').remove();
+                        isStatic && (
+                            lay.extend(dateTime, that.firstDate), that.calendar()
+                        )
+                        options.range && (
+                            delete that.startState, delete that.endState, delete that.endDate, delete that.startTime, delete that.endTime
+                        );
+                        that.done(['', {}, {}]);
+                    }
+
+                    //现在
+                    ,
+                now: function () {
+                        var thisDate = new Date();
+                        lay.extend(dateTime, that.systemDate(), {
+                            hours: thisDate.getHours(),
+                            minutes: thisDate.getMinutes(),
+                            seconds: thisDate.getSeconds()
+                        });
+                        that.setValue(that.parse()).remove();
+                        isStatic && that.calendar();
+                        that.done();
+                    }
+
+                    //确定
+                    ,
+                confirm: function () {
+                    if (options.range) {
+                        if (!that.endDate) return that.hint('请先选择日期范围');
+                        if (lay(btn).hasClass(DISABLED)) return that.hint(
+                            options.type === 'time' ? TIPS_OUT.replace(/日期/g, '时间') : TIPS_OUT
+                        );
+                    } else {
+                        if (lay(btn).hasClass(DISABLED)) return that.hint('不在有效日期或时间范围内');
+                    }
+                    that.done();
+                    that.setValue(that.parse()).remove()
+                }
+            };
+        active[type] && active[type]();
+    };
+
+    //统一切换处理
+    Class.prototype.change = function (index) {
+        var that = this,
+            options = that.config,
+            dateTime = options.dateTime,
+            isAlone = options.range && (options.type === 'year' || options.type === 'month')
+
+            ,
+            elemCont = that.elemCont[index || 0],
+            listYM = that.listYM[index],
+            addSubYeay = function (type) {
+                var startEnd = ['startDate', 'endDate'][index],
+                    isYear = lay(elemCont).find('.laydate-year-list')[0],
+                    isMonth = lay(elemCont).find('.laydate-month-list')[0];
+
+                //切换年列表
+                if (isYear) {
+                    listYM[0] = type ? listYM[0] - 15 : listYM[0] + 15;
+                    that.list('year', index);
+                }
+
+                if (isMonth) { //切换月面板中的年
+                    type ? listYM[0]-- : listYM[0]++;
+                    that.list('month', index);
+                }
+
+                if (isYear || isMonth) {
+                    lay.extend(dateTime, {
+                        year: listYM[0]
+                    });
+                    if (isAlone) that[startEnd].year = listYM[0];
+                    options.range || that.done(null, 'change');
+                    that.setBtnStatus();
+                    options.range || that.limit(lay(that.footer).find(ELEM_CONFIRM), {
+                        year: listYM[0]
+                    });
+                }
+                return isYear || isMonth;
+            };
+
+        return {
+            prevYear: function () {
+                if (addSubYeay('sub')) return;
+                dateTime.year--;
+                that.checkDate('limit').calendar();
+                options.range || that.done(null, 'change');
+            },
+            prevMonth: function () {
+                var YM = that.getAsYM(dateTime.year, dateTime.month, 'sub');
+                lay.extend(dateTime, {
+                    year: YM[0],
+                    month: YM[1]
+                });
+                that.checkDate('limit').calendar();
+                options.range || that.done(null, 'change');
+            },
+            nextMonth: function () {
+                var YM = that.getAsYM(dateTime.year, dateTime.month);
+                lay.extend(dateTime, {
+                    year: YM[0],
+                    month: YM[1]
+                });
+                that.checkDate('limit').calendar();
+                options.range || that.done(null, 'change');
+            },
+            nextYear: function () {
+                if (addSubYeay()) return;
+                dateTime.year++
+                that.checkDate('limit').calendar();
+                options.range || that.done(null, 'change');
+            }
+        };
+    };
+
+    //日期切换事件
+    Class.prototype.changeEvent = function () {
+        var that = this,
+            options = that.config;
+
+        //日期选择事件
+        lay(that.elem).on('click', function (e) {
+            lay.stope(e);
+        });
+
+        //年月切换
+        lay.each(that.elemHeader, function (i, header) {
+            //上一年
+            lay(header[0]).on('click', function (e) {
+                that.change(i).prevYear();
+            });
+
+            //上一月
+            lay(header[1]).on('click', function (e) {
+                that.change(i).prevMonth();
+            });
+
+            //选择年月
+            lay(header[2]).find('span').on('click', function (e) {
+                var othis = lay(this),
+                    layYM = othis.attr('lay-ym'),
+                    layType = othis.attr('lay-type');
+
+                if (!layYM) return;
+
+                layYM = layYM.split('-');
+
+                that.listYM[i] = [layYM[0] | 0, layYM[1] | 0];
+                that.list(layType, i);
+                lay(that.footer).find(ELEM_TIME_BTN).addClass(DISABLED);
+            });
+
+            //下一月
+            lay(header[3]).on('click', function (e) {
+                that.change(i).nextMonth();
+            });
+
+            //下一年
+            lay(header[4]).on('click', function (e) {
+                that.change(i).nextYear();
+            });
+        });
+
+        //点击日期
+        lay.each(that.table, function (i, table) {
+            var tds = lay(table).find('td');
+            tds.on('click', function () {
+                that.choose(lay(this));
+            });
+        });
+
+        //点击底部按钮
+        lay(that.footer).find('span').on('click', function () {
+            var type = lay(this).attr('lay-type');
+            that.tool(this, type);
+        });
+    };
+
+    //是否输入框
+    Class.prototype.isInput = function (elem) {
+        return /input|textarea/.test(elem.tagName.toLocaleLowerCase());
+    };
+
+    //绑定的元素事件处理
+    Class.prototype.events = function () {
+        var that = this,
+            options = that.config,
+
+            //绑定呼出控件事件
+            showEvent = function (elem, bind) {
+                elem.on(options.trigger, function () {
+                    bind && (that.bindElem = this);
+                    that.render();
+                });
+            };
+
+        if (!options.elem[0] || options.elem[0].eventHandler) return;
+
+        showEvent(options.elem, 'bind');
+        showEvent(options.eventElem);
+
+        //绑定关闭控件事件
+        lay(document).on('click', function (e) {
+            if (e.target === options.elem[0] ||
+                e.target === options.eventElem[0] ||
+                e.target === lay(options.closeStop)[0]) {
+                return;
+            }
+            that.remove();
+        }).on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                if (lay('#' + that.elemID)[0] && that.elemID === Class.thisElem) {
+                    e.preventDefault();
+                    lay(that.footer).find(ELEM_CONFIRM)[0].click();
+                }
+            }
+        });
+
+        //自适应定位
+        lay(window).on('resize', function () {
+            if (!that.elem || !lay(ELEM)[0]) {
+                return false;
+            }
+            that.position();
+        });
+
+        options.elem[0].eventHandler = true;
+    };
+
+
+    //核心接口
+    laydate.render = function (options) {
+        var inst = new Class(options);
+        return thisDate.call(inst);
+    };
+
+    //得到某月的最后一天
+    laydate.getEndDate = function (month, year) {
+        var thisDate = new Date();
+        //设置日期为下个月的第一天
+        thisDate.setFullYear(
+            year || thisDate.getFullYear(), month || (thisDate.getMonth() + 1), 1);
+        //减去一天，得到当前月最后一天
+        return new Date(thisDate.getTime() - 1000 * 60 * 60 * 24).getDate();
+    };
+
+    //暴露lay
+    window.lay = window.lay || lay;
+
+    //加载方式
+    isLayui ? (
+        laydate.ready(), layui.define(function (exports) { //layui加载
+            laydate.path = layui.cache.dir;
+            exports(MOD_NAME, laydate);
+        })
+    ) : (
+        (typeof define === 'function' && define.amd) ? define(function () { //requirejs加载
+            return laydate;
+        }) : function () { //普通script标签加载
+            laydate.ready();
+            window.laydate = laydate
+        }()
+    );
+
+}();
+
+
+/**
+
+ @Name：layui.form 表单组件
+ @Author：贤心
+ @License：MIT
+
+ */
+
+layui.define(['laydate', 'upload', 'admin'], function (exports) {
+    "use strict";
+
+    var $ = layui.$,
+        laydate = layui.laydate,
+        upload = layui.upload,
+        layer = layui.layer,
+        admin = layui.admin,
+        hint = layui.hint(),
+        device = layui.device(),
+        MOD_NAME = 'form',
+        ELEM = '.layui-form',
+        THIS = 'layui-this',
+        SHOW = 'layui-show',
+        HIDE = 'layui-hide',
+        DISABLED = 'layui-disabled';
+
+    var Form = function () {
+        this.config = {
+            verify: {
+                required: [
+                    /[\S]+/, '必填项不能为空'
+                ],
+                phone: [
+                    /^1\d{10}$/, '请输入正确的手机号'
+                ],
+                email: [
+                    /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/, '邮箱格式不正确'
+                ],
+                url: [
+                    /(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/, '链接格式不正确'
+                ],
+                number: function (value) {
+                    if (!value || isNaN(value)) return '只能填写数字'
+                },
+                date: [
+                    /^(\d{4})[-\/](\d{1}|0\d{1}|1[0-2])([-\/](\d{1}|0\d{1}|[1-2][0-9]|3[0-1]))*$/, '日期格式不正确'
+                ],
+                identity: [
+                    /(^\d{15}$)|(^\d{17}(x|X|\d)$)/, '请输入正确的身份证号'
+                ]
+            }
+        };
+    };
+
+    //全局设置
+    Form.prototype.set = function (options) {
+        var that = this;
+        $.extend(true, that.config, options);
+        return that;
+    };
+
+    //验证规则设定
+    Form.prototype.verify = function (settings) {
+        var that = this;
+        $.extend(true, that.config.verify, settings);
+        return that;
+    };
+
+    //表单事件监听
+    Form.prototype.on = function (events, callback) {
+        return layui.onevent.call(this, MOD_NAME, events, callback);
+    };
+
+    //初始赋值
+    Form.prototype.val = function (filter, object) {
+        var that = this,
+            formElem = $(ELEM + '[lay-filter="' + filter + '"]');
+        formElem.each(function (index, item) {
+            var itemFrom = $(this);
+            layui.each(object, function (key, value) {
+                var itemElem = itemFrom.find('[name="' + key + '"]'),
+                    type;
+
+                //如果对应的表单不存在，则不执行
+                if (!itemElem[0]) return;
+                type = itemElem[0].type;
+
+                //如果为复选框
+                if (type === 'checkbox') {
+                    itemElem[0].checked = value;
+                } else if (type === 'radio') { //如果为单选框
+                    itemElem.each(function () {
+                        if (this.value === value) {
+                            this.checked = true
+                        }
+                    });
+                } else { //其它类型的表单
+                    itemElem.val(value);
+                }
+            });
+        });
+        form.render(null, filter);
+    };
+
+    //表单控件渲染
+    Form.prototype.render = function (type, filter) {
+        var that = this,
+            elemForm = $(ELEM + function () {
+                return filter ? ('[lay-filter="' + filter + '"]') : '';
+            }()),
+            items = {
+                //下拉选择框
+                select: function () {
+                    var TIPS = '请选择',
+                        CLASS = 'layui-form-select',
+                        TITLE = 'layui-select-title',
+                        NONE = 'layui-select-none',
+                        initValue = '',
+                        thatInput, selects = elemForm.find('select'),
+
+                        //隐藏 select
+                        hide = function (e, clear) {
+                            if (!$(e.target).parent().hasClass(TITLE) || clear) {
+                                $('.' + CLASS).removeClass(CLASS + 'ed ' + CLASS + 'up');
+                                thatInput && initValue && thatInput.val(initValue);
+                            }
+                            thatInput = null;
+                        },
+
+                        //各种事件
+                        events = function (reElem, disabled, isSearch) {
+                            var select = $(this),
+                                title = reElem.find('.' + TITLE),
+                                input = title.find('input'),
+                                dl = reElem.find('dl'),
+                                dds = dl.children('dd'),
+                                index = this.selectedIndex //当前选中的索引
+                                ,
+                                nearElem; //select 组件当前选中的附近元素，用于辅助快捷键功能
+
+                            if (disabled) return;
+
+                            //展开下拉
+                            var showDown = function () {
+                                    var top = reElem.offset().top + reElem.outerHeight() + 5 - $win.scrollTop(),
+                                        dlHeight = dl.outerHeight();
+
+                                    index = select[0].selectedIndex; //获取最新的 selectedIndex
+                                    reElem.addClass(CLASS + 'ed');
+                                    dds.removeClass(HIDE);
+                                    nearElem = null;
+
+                                    //初始选中样式
+                                    dds.eq(index).addClass(THIS).siblings().removeClass(THIS);
+
+                                    //上下定位识别
+                                    if (top + dlHeight > $win.height() && top >= dlHeight) {
+                                        reElem.addClass(CLASS + 'up');
+                                    }
+
+                                    followScroll();
+                                }
+
+                                //隐藏下拉
+                                ,
+                                hideDown = function (choose) {
+                                    reElem.removeClass(CLASS + 'ed ' + CLASS + 'up');
+                                    input.blur();
+                                    nearElem = null;
+
+                                    if (choose) return;
+
+                                    notOption(input.val(), function (none) {
+                                        var selectedIndex = select[0].selectedIndex;
+
+                                        //未查询到相关值
+                                        if (none) {
+                                            initValue = $(select[0].options[selectedIndex]).html(); //重新获得初始选中值
+
+                                            //如果是第一项，且文本值等于 placeholder，则清空初始值
+                                            if (selectedIndex === 0 && initValue === input.attr('placeholder')) {
+                                                initValue = '';
+                                            };
+
+                                            //如果有选中值，则将输入框纠正为该值。否则清空输入框
+                                            input.val(initValue || '');
+                                        }
+                                    });
+                                }
+
+                                //定位下拉滚动条
+                                ,
+                                followScroll = function () {
+                                    var thisDd = dl.children('dd.' + THIS);
+
+                                    if (!thisDd[0]) return;
+
+                                    var posTop = thisDd.position().top,
+                                        dlHeight = dl.height(),
+                                        ddHeight = thisDd.height();
+
+                                    //若选中元素在滚动条不可见底部
+                                    if (posTop > dlHeight) {
+                                        dl.scrollTop(posTop + dl.scrollTop() - dlHeight + ddHeight - 5);
+                                    }
+
+                                    //若选择玄素在滚动条不可见顶部
+                                    if (posTop < 0) {
+                                        dl.scrollTop(posTop + dl.scrollTop() - 5);
+                                    }
+                                };
+
+                            //点击标题区域
+                            title.on('click', function (e) {
+                                reElem.hasClass(CLASS + 'ed') ? (
+                                    hideDown()
+                                ) : (
+                                    hide(e, true),
+                                    showDown()
+                                );
+                                dl.find('.' + NONE).remove();
+                            });
+
+                            //点击箭头获取焦点
+                            title.find('.layui-edge').on('click', function () {
+                                input.focus();
+                            });
+
+                            //select 中 input 键盘事件
+                            input.on('keyup', function (e) { //键盘松开
+                                var keyCode = e.keyCode;
+
+                                //Tab键展开
+                                if (keyCode === 9) {
+                                    showDown();
+                                }
+                            }).on('keydown', function (e) { //键盘按下
+                                var keyCode = e.keyCode;
+
+                                //Tab键隐藏
+                                if (keyCode === 9) {
+                                    hideDown();
+                                }
+
+                                //标注 dd 的选中状态
+                                var setThisDd = function (prevNext, thisElem1) {
+                                    var nearDd, cacheNearElem
+                                    e.preventDefault();
+
+                                    //得到当前队列元素
+                                    var thisElem = function () {
+                                        var thisDd = dl.children('dd.' + THIS);
+
+                                        //如果是搜索状态，且按 Down 键，且当前可视 dd 元素在选中元素之前，
+                                        //则将当前可视 dd 元素的上一个元素作为虚拟的当前选中元素，以保证递归不中断
+                                        if (dl.children('dd.' + HIDE)[0] && prevNext === 'next') {
+                                            var showDd = dl.children('dd:not(.' + HIDE + ',.' + DISABLED + ')'),
+                                                firstIndex = showDd.eq(0).index();
+                                            if (firstIndex >= 0 && firstIndex < thisDd.index() && !showDd.hasClass(THIS)) {
+                                                return showDd.eq(0).prev()[0] ? showDd.eq(0).prev() : dl.children(':last');
+                                            }
+                                        }
+
+                                        if (thisElem1 && thisElem1[0]) {
+                                            return thisElem1;
+                                        }
+                                        if (nearElem && nearElem[0]) {
+                                            return nearElem;
+                                        }
+
+                                        return thisDd;
+                                        //return dds.eq(index);
+                                    }();
+
+                                    cacheNearElem = thisElem[prevNext](); //当前元素的附近元素
+                                    nearDd = thisElem[prevNext]('dd:not(.' + HIDE + ')'); //当前可视元素的 dd 元素
+
+                                    //如果附近的元素不存在，则停止执行，并清空 nearElem
+                                    if (!cacheNearElem[0]) return nearElem = null;
+
+                                    //记录附近的元素，让其成为下一个当前元素
+                                    nearElem = thisElem[prevNext]();
+
+                                    //如果附近不是 dd ，或者附近的 dd 元素是禁用状态，则进入递归查找
+                                    if ((!nearDd[0] || nearDd.hasClass(DISABLED)) && nearElem[0]) {
+                                        return setThisDd(prevNext, nearElem);
+                                    }
+
+                                    nearDd.addClass(THIS).siblings().removeClass(THIS); //标注样式
+                                    followScroll(); //定位滚动条
+                                };
+
+                                if (keyCode === 38) setThisDd('prev'); //Up 键
+                                if (keyCode === 40) setThisDd('next'); //Down 键
+
+                                //Enter 键
+                                if (keyCode === 13) {
+                                    e.preventDefault();
+                                    dl.children('dd.' + THIS).trigger('click');
+                                }
+                            });
+
+                            //检测值是否不属于 select 项
+                            var notOption = function (value, callback, origin) {
+                                var num = 0;
+                                layui.each(dds, function () {
+                                    var othis = $(this),
+                                        text = othis.text(),
+                                        not = text.indexOf(value) === -1;
+                                    if (value === '' || (origin === 'blur') ? value !== text : not) num++;
+                                    origin === 'keyup' && othis[not ? 'addClass' : 'removeClass'](HIDE);
+                                });
+                                var none = num === dds.length;
+                                return callback(none), none;
+                            };
+
+                            //搜索匹配
+                            var search = function (e) {
+                                var value = this.value,
+                                    keyCode = e.keyCode;
+
+                                if (keyCode === 9 || keyCode === 13 ||
+                                    keyCode === 37 || keyCode === 38 ||
+                                    keyCode === 39 || keyCode === 40
+                                ) {
+                                    return false;
+                                }
+
+                                notOption(value, function (none) {
+                                    if (none) {
+                                        dl.find('.' + NONE)[0] || dl.append('<p class="' + NONE + '">无匹配项</p>');
+                                    } else {
+                                        dl.find('.' + NONE).remove();
+                                    }
+                                }, 'keyup');
+
+                                if (value === '') {
+                                    dl.find('.' + NONE).remove();
+                                }
+
+                                followScroll(); //定位滚动条
+                            };
+
+                            if (isSearch) {
+                                input.on('keyup', search).on('blur', function (e) {
+                                    var selectedIndex = select[0].selectedIndex;
+
+                                    thatInput = input; //当前的 select 中的 input 元素
+                                    initValue = $(select[0].options[selectedIndex]).html(); //重新获得初始选中值
+
+                                    //如果是第一项，且文本值等于 placeholder，则清空初始值
+                                    if (selectedIndex === 0 && initValue === input.attr('placeholder')) {
+                                        initValue = '';
+                                    };
+
+                                    setTimeout(function () {
+                                        notOption(input.val(), function (none) {
+                                            initValue || input.val(''); //none && !initValue
+                                        }, 'blur');
+                                    }, 200);
+                                });
+                            }
+
+                            //选择
+                            dds.on('click', function () {
+                                var othis = $(this),
+                                    value = othis.attr('lay-value');
+                                var filter = select.attr('lay-filter'); //获取过滤器
+
+                                if (othis.hasClass(DISABLED)) return false;
+
+                                if (othis.hasClass('layui-select-tips')) {
+                                    input.val('');
+                                } else {
+                                    input.val(othis.text());
+                                    othis.addClass(THIS);
+                                }
+
+                                othis.siblings().removeClass(THIS);
+                                select.val(value).removeClass('layui-form-danger')
+                                layui.event.call(this, MOD_NAME, 'select(' + filter + ')', {
+                                    elem: select[0],
+                                    value: value,
+                                    othis: reElem
+                                });
+
+                                hideDown(true);
+                                return false;
+                            });
+
+                            reElem.find('dl>dt').on('click', function (e) {
+                                return false;
+                            });
+
+                            $(document).off('click', hide).on('click', hide); //点击其它元素关闭 select
+                        }
+
+                    selects.each(function (index, select) {
+                        var othis = $(this),
+                            hasRender = othis.next('.' + CLASS),
+                            disabled = this.disabled,
+                            value = select.value,
+                            selected = $(select.options[select.selectedIndex]) //获取当前选中项
+                            ,
+                            optionsFirst = select.options[0];
+
+                        if (typeof othis.attr('lay-ignore') === 'string') return othis.show();
+
+                        var isSearch = typeof othis.attr('lay-search') === 'string',
+                            placeholder = optionsFirst ? (
+                                optionsFirst.value ? TIPS : (optionsFirst.innerHTML || TIPS)
+                            ) : TIPS;
+
+                        //替代元素
+                        var reElem = $(['<div class="' + (isSearch ? '' : 'layui-unselect ') + CLASS, (disabled ? ' layui-select-disabled' : '') + '">', '<div class="' + TITLE + '">', ('<input type="text" placeholder="' + placeholder + '" ' +
+                                ('value="' + (value ? selected.html() : '') + '"') //默认值
+                                +
+                                (isSearch ? '' : ' readonly') //是否开启搜索
+                                +
+                                ' class="layui-input' +
+                                (isSearch ? '' : ' layui-unselect') +
+                                (disabled ? (' ' + DISABLED) : '') + '">') //禁用状态
+                            , '<i class="layui-edge"></i></div>', '<dl class="fa' + (othis.find('optgroup')[0] ? ' layui-select-group' : '') + '">',
+                            function (options) {
+                                var arr = [];
+                                layui.each(options, function (index, item) {
+                                    if (index === 0 && !item.value) {
+                                        arr.push('<dd lay-value="" class="layui-select-tips">' + (item.innerHTML || TIPS) + '</dd>');
+                                    } else if (item.tagName.toLowerCase() === 'optgroup') {
+                                        arr.push('<dt>' + item.label + '</dt>');
+                                    } else {
+                                        arr.push('<dd lay-value="' + item.value + '" class="' + (value === item.value ? THIS : '') + (item.disabled ? (' ' + DISABLED) : '') + '">' + item.innerHTML + '</dd>');
+                                    }
+                                });
+                                arr.length === 0 && arr.push('<dd lay-value="" class="' + DISABLED + '">没有选项</dd>');
+                                return arr.join('');
+                            }(othis.find('*')) + '</dl>', '</div>'
+                        ].join(''));
+
+                        hasRender[0] && hasRender.remove(); //如果已经渲染，则Rerender
+                        othis.after(reElem);
+                        events.call(this, reElem, disabled, isSearch);
+                    });
+                },
+
+                //复选框/开关
+                checkbox: function () {
+                    var CLASS = {
+                            checkbox: ['layui-form-checkbox', 'layui-form-checked', 'checkbox'],
+                            _switch: ['layui-form-switch', 'layui-form-onswitch', 'switch']
+                        },
+                        checks = elemForm.find('input[type=checkbox]'),
+                        events = function (reElem, RE_CLASS) {
+                            var check = $(this);
+                            //勾选
+                            reElem.on('click', function () {
+                                var filter = check.attr('lay-filter') //获取过滤器
+                                    ,
+                                    text = (check.attr('lay-text') || '').split('|');
+
+                                if (check[0].disabled) return;
+
+                                check[0].checked ? (
+                                    check[0].checked = false, reElem.removeClass(RE_CLASS[1]).find('em').text(text[1])
+                                ) : (
+                                    check[0].checked = true, reElem.addClass(RE_CLASS[1]).find('em').text(text[0])
+                                );
+
+                                layui.event.call(check[0], MOD_NAME, RE_CLASS[2] + '(' + filter + ')', {
+                                    elem: check[0],
+                                    value: check[0].value,
+                                    othis: reElem
+                                });
+                            });
+                        }
+
+                    checks.each(function (index, check) {
+                        var othis = $(this),
+                            skin = othis.attr('lay-skin'),
+                            text = (othis.attr('lay-text') || '').split('|'),
+                            disabled = this.disabled;
+                        if (skin === 'switch') skin = '_' + skin;
+                        var RE_CLASS = CLASS[skin] || CLASS.checkbox;
+
+                        if (typeof othis.attr('lay-ignore') === 'string') return othis.show();
+
+                        //替代元素
+                        var hasRender = othis.next('.' + RE_CLASS[0]),
+                            reElem = $(['<div class="layui-unselect ' + RE_CLASS[0], (check.checked ? (' ' + RE_CLASS[1]) : '') //选中状态
+                                , (disabled ? ' layui-checkbox-disbaled ' + DISABLED : '') //禁用状态
+                                , '"', (skin ? ' lay-skin="' + skin + '"' : '') //风格
+                                , '>',
+                                function () { //不同风格的内容
+                                    var title = check.title.replace(/\s/g, ''),
+                                        type = {
+                                            //复选框
+                                            checkbox: [
+                                                    (title ? ('<span>' + check.title + '</span>') : ''), '<i class="fa fa-check"></i>'
+                                                ].join('')
+
+                                                //开关
+                                                ,
+                                            _switch: '<em>' + ((check.checked ? text[0] : text[1]) || '') + '</em><i></i>'
+                                        };
+                                    return type[skin] || type['checkbox'];
+                                }(), '</div>'
+                            ].join(''));
+
+                        hasRender[0] && hasRender.remove(); //如果已经渲染，则Rerender
+                        othis.after(reElem);
+                        events.call(this, reElem, RE_CLASS);
+                    });
+                },
+
+                //单选框
+                radio: function () {
+                    var CLASS = 'layui-form-radio',
+                        radios = elemForm.find('input[type=radio]'),
+                        events = function (reElem) {
+                            var radio = $(this),
+                                ANIM_BASE = 'fa-circle-o',
+                                ANIM = 'fa-dot-circle-o';
+
+                            reElem.on('click', function () {
+                                var name = radio[0].name,
+                                    forms = radio.parents(ELEM);
+                                var filter = radio.attr('lay-filter'); //获取过滤器
+                                var sameRadio = forms.find('input[name=' + name.replace(/(\.|#|\[|\])/g, '\\$1') + ']'); //找到相同name的兄弟
+
+                                if (radio[0].disabled) return;
+
+                                layui.each(sameRadio, function () {
+                                    var next = $(this).next('.' + CLASS);
+                                    this.checked = false;
+                                    next.removeClass(CLASS + 'ed');
+                                    next.find('.fa').removeClass(ANIM).addClass(ANIM_BASE);
+                                });
+
+                                radio[0].checked = true;
+                                reElem.addClass(CLASS + 'ed');
+                                reElem.find('.fa').addClass(ANIM).removeClass(ANIM_BASE);
+
+                                layui.event.call(radio[0], MOD_NAME, 'radio(' + filter + ')', {
+                                    elem: radio[0],
+                                    value: radio[0].value,
+                                    othis: reElem
+                                });
+                            });
+                        };
+
+                    radios.each(function (index, radio) {
+                        var othis = $(this),
+                            hasRender = othis.next('.' + CLASS),
+                            disabled = this.disabled;
+
+                        if (typeof othis.attr('lay-ignore') === 'string') return othis.show();
+                        hasRender[0] && hasRender.remove(); //如果已经渲染，则Rerender
+
+                        //替代元素
+                        var reElem = $(['<div class="layui-unselect ' + CLASS, (radio.checked ? (' ' + CLASS + 'ed') : '') //选中状态
+                            , (disabled ? ' layui-radio-disbaled ' + DISABLED : '') + '">' //禁用状态
+                            , '<i class="fa '+(radio.checked ? 'fa-dot-circle-o': 'fa-circle-o')+'"></i>', '<div>' + function () {
+                                var title = radio.title || '';
+                                if (typeof othis.next().attr('lay-radio') === 'string') {
+                                    title = othis.next().html();
+                                    othis.next().remove();
+                                }
+                                return title
+                            }() + '</div>', '</div>'
+                        ].join(''));
+
+                        othis.after(reElem);
+                        events.call(this, reElem);
+                    });
+                },
+
+                //上传
+                img: function () {
+                    var CLASS = 'layui-form-img',
+                        imgs = elemForm.find('.' + CLASS),
+                        imgTpl = '<li class="uploader__file" style="background-image: url(UPLOADEDFILE)"><div class="uploader__mask" style="display: none">' +
+                        '<div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="UPLOADEDFILE"><i class="fa fa-close"></i></a></div>' +
+                        '</div></li>',
+                        events = function (reElem) {
+                            var img = $(this),
+                                imgWrap = reElem.parents(".m-uploader"),
+                                _imgBox = imgWrap.find('.uploader__files'),
+                                _imgPicker = reElem,
+                                _imgVal = img.find("input[type=hidden]"),
+                                filter = img.attr('lay-filter'),
+                                upload_limit = img.data('limit');
+
+                            reElem.on('click', function () {
+                                upload.render({
+                                    url: '/interface/core/upload',
+                                    fileNumLimit: upload_limit,
+                                    done: function (res) {
+                                        if (upload_limit == 1) {
+                                            _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), res[0]))
+                                            _imgVal.val(res[0])
+                                            _imgPicker.hide()
+                                        } else {
+                                            var _val = _imgVal.val()
+                                            _val = _val.length > 1 ? _val.split(',') : []
+                                            if (_val.length >= upload_limit) return;
+
+                                            $.each(res, function (i, n) {
+                                                _val.push(n)
+                                                if (_val.length >= upload_limit) {
+                                                    // 数量限制
+                                                    _imgPicker.hide();
+                                                }
+                                                _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), n))
+                                            })
+                                            _imgVal.val(_val.join(','))
+                                        }
+                                        // 删除事件
+                                        _imgBox.on("mouseenter" ,".uploader__file", function(){
+                                            $(this).find(".uploader__mask").show()
+                                        }).on("mouseleave" ,".uploader__file", function(){
+                                            $(this).find(".uploader__mask").hide()
+                                        })
+                                        _imgBox.on("click", ".j_delete", function(){
+                                            if (upload_limit == 1) {
+                                                _imgBox.remove();
+                                                _imgPicker.show();
+                                                _imgVal.val('')
+                                            } else {
+                                                $(this).parents(".uploader__file").remove();
+                                                var url = $(this).attr("data-id")
+                                                var _val = _imgVal.val();
+                                                _val = _val.length > 1 ? _val.split(',') : []
+
+                                                var _idx = _val.indexOf(url);
+                                                if (_idx > -1) {
+                                                    _val.splice(_idx, 1);
+                                                }
+
+                                                _imgPicker.show();
+                                                _imgVal.val(_val)
+                                            }
+                                        });
+
+                                        // 图选事件
+                                        layui.event.call(img[0], MOD_NAME, 'img(' + filter + ')', {
+                                            elem: img[0],
+                                            value: _imgVal.val(),
+                                            othis: reElem
+                                        });
+                                    }
+                                })
+
+                            });
+                        };
+
+                    imgs.each(function (index, radio) {
+                        var othis = $(this),
+                            limit = othis.data('limit') || 1,
+                        reElem = $(['<div class="m-uploader clearfix">',
+                            '<ul class="uploader__files"></ul>',
+                            '<div class="img__picker" data-limit="'+limit+'" ></div>',
+                        '</div>'].join(''));
+
+                        if(othis.find('.m-uploader').length > 0) return;
+
+                        othis.append(reElem);
+                        events.call(this, reElem.find(".img__picker"));
+                    });
+                },
+
+                // date
+                date: function () {
+                    var CLASS_DATE = 'layui-form-date',
+                        CLASS_DATERANGE = 'layui-form-daterange';
+
+                    elemForm.find('.' + CLASS_DATE).each(function (i, n) {
+                        laydate.render({elem: n,type: $(n).attr("date-type") || 'date'});
+                    });
+
+                    // dateRange render
+                    elemForm.find('.' + CLASS_DATERANGE).each(function (i, n) {
+                        var othis = $(this),
+                            insStart = '',
+                            insEnd = '',
+                            option = othis.data('options');
+
+                        insStart = laydate.render({
+                            elem: othis.find(".start_at")[0],
+                            min: option.min || '1900-1-1',
+                            max: option.max || '2999-12-31',
+                            type: option.type || 'date',
+                            value: othis.find(".start_at")[0].value,
+                            done: function(value, date){
+                            insEnd.config.min = lay.extend({}, date, {
+                                month: date.month - 1
+                            });
+                            }
+                        });
+                        insEnd = laydate.render({
+                            elem: othis.find(".end_at")[0],
+                            min: option.min || '1900-1-1',
+                            max: option.max || '2999-12-31',
+                            type: option.type || 'date',
+                            value: othis.find(".end_at")[0].value,
+                            done: function(value, date){
+                                insStart.config.max = lay.extend({}, date, {
+                                    month: date.month - 1
+                                });
+                            }
+                        });
+                    });
+                },
+            };
+        type ? (
+            items[type] ? items[type]() : hint.error('不支持的' + type + '表单渲染')
+        ) : layui.each(items, function (index, item) {
+            item();
+        });
+        return that;
+    };
+
+    //表单提交校验
+    var submit = function () {
+        var button = $(this),
+            verify = form.config.verify,
+            stop = null,
+            DANGER = 'layui-form-danger',
+            field = {},
+            elem = button.parents(ELEM),
+
+            verifyElem = elem.find('*[lay-verify]'), //获取需要校验的元素
+            formElem = button.parents('form')[0], //获取当前所在的form元素，如果存在的话
+            fieldElem = elem.find('input,select,textarea'), //获取所有表单域
+            filter = button.attr('lay-filter'), //获取过滤器
+            ajaxsubmit = button.hasClass('J_ajax'); // 是否ajax提交
+
+        //开始校验
+        layui.each(verifyElem, function (_, item) {
+            var othis = $(this),
+                vers = othis.attr('lay-verify').split('|'),
+                verType = othis.attr('lay-verType') //提示方式
+                ,
+                value = othis.val();
+
+            othis.removeClass(DANGER);
+            layui.each(vers, function (_, thisVer) {
+                var isTrue //是否命中校验
+                    , errorText = '' //错误提示文本
+                    ,
+                    isFn = typeof verify[thisVer] === 'function';
+
+                //匹配验证规则
+                if (verify[thisVer]) {
+                    var isTrue = isFn ? errorText = verify[thisVer](value, item) : !verify[thisVer][0].test(value);
+                    errorText = errorText || verify[thisVer][1];
+
+                    //如果是必填项或者非空命中校验，则阻止提交，弹出提示
+                    if (isTrue) {
+                        //提示层风格
+                        if (verType === 'tips') {
+                            layer.tips(errorText, function () {
+                                if (typeof othis.attr('lay-ignore') !== 'string') {
+                                    if (item.tagName.toLowerCase() === 'select' || /^checkbox|radio$/.test(item.type)) {
+                                        return othis.next();
+                                    }
+                                }
+                                return othis;
+                            }(), {
+                                tips: 1
+                            });
+                        } else if (verType === 'alert') {
+                            layer.alert(errorText, {
+                                title: '提示',
+                                shadeClose: true
+                            });
+                        } else {
+                            layer.msg(errorText, {
+                                icon: 5,
+                                shift: 6
+                            });
+                        }
+                        if (!device.android && !device.ios) item.focus(); //非移动设备自动定位焦点
+                        othis.addClass(DANGER);
+                        return stop = true;
+                    }
+                }
+            });
+            if (stop) return stop;
+        });
+
+        if (stop) return false;
+
+        var nameIndex = {}; //数组 name 索引
+        layui.each(fieldElem, function (_, item) {
+            item.name = (item.name || '').replace(/^\s*|\s*&/, '');
+
+            if (!item.name) return;
+
+            //用于支持数组 name
+            if (/^.*\[\]$/.test(item.name)) {
+                var key = item.name.match(/^(.*)\[\]$/g)[0];
+                nameIndex[key] = nameIndex[key] | 0;
+                item.name = item.name.replace(/^(.*)\[\]$/, '$1[' + (nameIndex[key]++) + ']');
+            }
+
+            if (/^checkbox|radio$/.test(item.type) && !item.checked) return;
+            field[item.name] = item.value;
+        });
+
+
+        // ajax提交
+        var _form = button.parents('form')
+        if(!ajaxsubmit) {
+            return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
+                elem: this,
+                form: formElem,
+                field: field
+            });;
+        }else{
+            admin.request.ajax({
+                type: _form.attr('method'),
+                url: _form.attr('action'),
+                data: field,
+                success: function(res){
+                    if(res.errcode == 0) {
+                        layer.msg(res.msg);
+
+                        if(res.data.redirect) {
+                            setTimeout(function(){
+                                admin.openTab(res.data.redirect, '列表')
+                            }, 1500)
+                            return;
+                        }
+                        if(parent.layer) {
+                            setTimeout(function(){
+                                parent.layer.close(parent.layer.getFrameIndex(window.name));
+                            }, 1500)
+                        }
+                        _form[0].reset()
+
+                    }else{
+                        layer.alert(res.msg, {
+                            title: '提示',
+                            shadeClose: true
+                        });
+                    }
+                    return layui.event.call(this, MOD_NAME, 'submit(' + filter + ')', {
+                        elem: this,
+                        form: formElem,
+                        field: field
+                    });
+                }
+            })
+        }
+
+        return false;
+    };
+
+    //自动完成渲染
+    var form = new Form(),
+        $dom = $("body"),
+        $win = $(window);
+
+    form.render();
+
+    //表单reset重置渲染
+    $dom.on('reset', ELEM, function () {
+        var filter = $(this).attr('lay-filter');
+        setTimeout(function () {
+            form.render(null, filter);
+        }, 50);
+    });
+
+    //表单提交事件
+    $dom.on('submit', ELEM, submit).on('click', '*[lay-submit]', submit);
+    $dom.on('click', '*[lay-submit-cancel]', function(){
+        parent.layer.close(parent.layer.getFrameIndex(window.name))
+    });
+
+    exports(MOD_NAME, form);
+});
