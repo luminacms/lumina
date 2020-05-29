@@ -1,5 +1,6 @@
 <?php
 
+use RegionTableSeeder;
 use Modules\Core\Models\Role;
 use Modules\Core\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(RegionTableSeeder::class);
-die;
+
         $this->genOrgazation();
         $this->genRole();
 
