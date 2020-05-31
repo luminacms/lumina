@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>验证规则</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/docs/assets/css/0.styles.1e9583d0.css" as="style"><link rel="preload" href="/docs/assets/js/app.95e50ac7.js" as="script"><link rel="preload" href="/docs/assets/js/2.ff0fbd64.js" as="script"><link rel="preload" href="/docs/assets/js/13.781824db.js" as="script"><link rel="prefetch" href="/docs/assets/js/10.9cd9353d.js"><link rel="prefetch" href="/docs/assets/js/11.4dc82a56.js"><link rel="prefetch" href="/docs/assets/js/12.4aca9401.js"><link rel="prefetch" href="/docs/assets/js/14.60d5b178.js"><link rel="prefetch" href="/docs/assets/js/15.00f2f7e7.js"><link rel="prefetch" href="/docs/assets/js/16.646d7957.js"><link rel="prefetch" href="/docs/assets/js/17.2fb2c0be.js"><link rel="prefetch" href="/docs/assets/js/18.9730fe56.js"><link rel="prefetch" href="/docs/assets/js/19.1de829f4.js"><link rel="prefetch" href="/docs/assets/js/20.3a178d61.js"><link rel="prefetch" href="/docs/assets/js/21.540e6776.js"><link rel="prefetch" href="/docs/assets/js/3.f3a5bcc4.js"><link rel="prefetch" href="/docs/assets/js/4.d5c8b3c5.js"><link rel="prefetch" href="/docs/assets/js/5.c199d697.js"><link rel="prefetch" href="/docs/assets/js/6.d87abf8d.js"><link rel="prefetch" href="/docs/assets/js/7.219c9582.js"><link rel="prefetch" href="/docs/assets/js/8.add6c85e.js"><link rel="prefetch" href="/docs/assets/js/9.c9703ca6.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.1e9583d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link">
+  主站
+</a></div><div class="nav-item"><a href="/docs/docs.html" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link">
+  主站
+</a></div><div class="nav-item"><a href="/docs/docs.html" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/docs/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">模块</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/zh/payment/" class="nav-link">
+  交易模块
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>使用指南</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/zh/guide/base/doc.html" class="sidebar-link">文档模块</a></li><li><a href="/docs/zh/guide/base/route.html" class="sidebar-link">路由约定</a></li><li><a href="/docs/zh/guide/base/user.html" class="sidebar-link">人员管理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/zh/guide/base/user.html#基础概况" class="sidebar-link">基础概况</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="验证规则"><a href="#验证规则" class="header-anchor">#</a> 验证规则</h2> <div class="language-html extra-class"><pre class="language-html"><code>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text<span class="token punctuation">&quot;</span></span> <span class="token attr-name">lay-verify</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>required|phone|number<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+组件式用法：
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>x-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>username<span class="token punctuation">&quot;</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>x-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>username<span class="token punctuation">&quot;</span></span> <span class="token attr-name">required</span> <span class="token attr-name">lay-verify</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>phone<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+</code></pre></div><h3 id="自定义规则验证"><a href="#自定义规则验证" class="header-anchor">#</a> 自定义规则验证</h3> <div class="language-script extra-class"><pre class="language-text"><code>
+form.verify({
+  username: function(value, item){ //value：表单的值、item：表单的DOM对象
+    if(!new RegExp(&quot;^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$&quot;).test(value)){
+      return '用户名不能有特殊字符';
+    }
+    if(/(^\_)|(\__)|(\_+$)/.test(value)){
+      return '用户名首尾不能出现下划线\'_\'';
+    }
+    if(/^\d+\d+\d$/.test(value)){
+      return '用户名不能全为数字';
+    }
+  },
+  
+  //我们既支持上述函数式的方式，也支持下述数组的形式
+  //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+  pass: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
+});     
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/docs/assets/js/app.95e50ac7.js" defer></script><script src="/docs/assets/js/2.ff0fbd64.js" defer></script><script src="/docs/assets/js/13.781824db.js" defer></script>
+  </body>
+</html>

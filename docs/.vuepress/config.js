@@ -10,9 +10,14 @@ module.exports = {
                 description: 'Vue-powered Static Site Generator'
             },
         },
-        nav: [{
-                text: '首页',
+        nav: [
+            {
+                text: '主站',
                 link: '/'
+            },
+            {
+                text: '首页',
+                link: '/docs'
             },
             {
                 text: '指南',
@@ -28,11 +33,12 @@ module.exports = {
         ],
         sidebar: {
             '/zh/guide/': [{
-                title: 'The Feathers guide',
+                title: '使用指南',
                 collapsable: false,
                 children: [
                     'base/doc.md',
-                    'base/route.md'
+                    'base/route.md',
+                    'base/user'
                 ]
             }],
             '/zh/payment/': [{
