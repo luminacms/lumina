@@ -3,9 +3,11 @@
 ## 配置读取
 
 使用方式  
-`function option($key = null, $default = null)`
+```php
+function option($key = null, $default = null)
+```
 
-*优先级* 
+**优先级**
 
 优先数据库保存值 > 传参默认值 > 配置文件默认值
 
@@ -36,3 +38,7 @@ return [
     ...
 ];
 ```
+
+**实际效果**
+
+![](http://cdn.xbhub.com/luminaQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E6%88%AA%E5%9B%BE20200602201836.png)
