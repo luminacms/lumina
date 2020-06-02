@@ -23,7 +23,8 @@
                 {{-- <i class="j_cancel fa fa-times-circle"></i>
 
                 <label class=""><i class="fa fa-search"></i></label> --}}
-                <input type="hidden" id="a" class="layui-input" placeholder="输入关键词搜索分类" >
+                <input type="hidden" class="layui-input" placeholder="输入关键词搜索分类" >
+                <div id="a"></div>
 
                 <div id="j_selected" class="mt-4"></div>
             </div>
@@ -34,6 +35,7 @@
                     <button type="submit" class="layui-btn layui-btn-success">下一步</button>
                 </form>
             </div>
+            @push('script')
             <script>
 
                 layui.extend({
@@ -56,6 +58,7 @@
 
                 })
             </script>
+            @endpush
         @endif
     </x-card>
 @endsection

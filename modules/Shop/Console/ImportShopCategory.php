@@ -56,13 +56,13 @@ class ImportShopCategory extends Command
         foreach($data as $_item) {
             if(!$_item['first_name']) continue;
 
-            $first = Category::updateOrCreate(['name' => $_item['first_name']], ['parentid' => 0]);
+            $first = Category::firstOrCreate(['name' => $_item['first_name']], ['parentid' => 0]);
             if($_item['second_name']) {
                 // 二级类目
-                $secend = Category::updateOrCreate(['name' => $_item['second_name']], ['parentid' => $first->id]);
+                $secend = Category::firstOrCreate(['name' => $_item['second_name']], ['parentid' => $first->id]);
                 if($_item['third_name']) {
                     // 三级
-                    Category::updateOrCreate(['name' => $_item['third_name']], ['parentid' => $secend->id]);
+                    Category::firstOrCreate(['name' => $_item['third_name']], ['parentid' => $secend->id]);
                 }
             }
             $no ++;

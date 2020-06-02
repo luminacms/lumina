@@ -58,7 +58,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app",
-            "Modules\\": "modules/"
+            "Modules\\": "modules/",
+            "Xbhub\\ShopDouyin\\": "/data/php/packages/Xbhub/ShopDouyin/src"
         },
         "classmap": [
             "database/seeds"
