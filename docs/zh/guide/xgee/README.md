@@ -1,22 +1,30 @@
-# 快速生成器
+# XGEE生成器
 
+## 使用
 ```php
 
 安装生成器：
 composer require xbhub/laravel-xgee --dev
-以下需要按步骤生成
+以下需要按步骤生成:
+
 // step1:生成model,migrate,repository,policy
 php artisan biu:make-model Post --fillable=string:title,text:content --module=Ticket
+
 // step2:生成数据库，在此步之前可自行修改migrate和model内的fillable字段
 php artisan migrate
+
 // step3:生成controller,request,resource
 php artisan biu:make-controller Post --module=Ticket
+
 // step4:生成视图['create', 'edit', 'fields', 'index'];
 php artisan biu:make-view Post --module=Ticket
+
 以上步骤已经完成了一套curd，下面配置好路由和后台菜单就跑起来了~
-// 添加资源路由：
+
+// step5: 添加资源路由：
 Route::resource('post', 'PostController');
-// 配置后台菜单，打开module.json => 添加menus选项
+
+// step6:配置后台菜单，打开module.json => 添加menus选项
 "menus": [
   ...
     {"name": "ticket_post", "icon": "", "label": "内容管理", "route": "ticket.post.index"}
@@ -25,10 +33,10 @@ Route::resource('post', 'PostController');
 
 ```
 
-
 接下来，你就可以在菜单中找到刚才配置的路由，点开路由看到下图说明一切顺利~
-到此，一套CURD就结束了！lumina有很多内置的字段，请参考：
 
+## 数据表格
+到此，一套CURD就结束了！lumina有很多内置的字段，请参考：
 ```html
 <script>
     layui.use(['table', 'element'], function(){
@@ -37,6 +45,7 @@ Route::resource('post', 'PostController');
     table.render({
         elem: '#data_post_table', // 表格渲染div
         url: '{{ URL::full() }}', // 列表接口
+        treeMode: false, //开启树模式
         autoShow: '{{ route("ticket.post.show", ":id") }}', // 自动详情接口，不配置则关闭
         where: {'orderBy': 'created_at', 'sortedBy': 'desc'}, // 初始化查询接口参数
         page: true, // 分页
@@ -85,7 +94,7 @@ Route::resource('post', 'PostController');
 ```
 
 
-表格扩展功能
+## 表格扩展功能
 autoShow
 系统会默认开启autoShow，当然，你也可以关闭。
 

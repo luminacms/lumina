@@ -97,21 +97,24 @@ class Option extends BaseModel
                 $val = $option->value;
             }
             if(!$val) {
-                // 数据库不存在时取配置文件
-                $_config_options = collect();
-                foreach(Module::getOrdered() as $module){
-                    $_config = config($module->getAlias().'.options') ?? [];
-                    $_config_options = $_config_options->merge($_config);
-                }
-                $_option_collect = $_config_options->pluck('default', 'name');
-                $val = $_option_collect->get($key, $default);
-                // 解析:oid
-                if(Str::contains($val, ':oid')) {
-                    $_oid = $this->_getOid();
-                    if(!$_oid) {
-                        abort(400, 'param missing: oid');
+                 // 数据库不存在取默认值
+                 $val = $default;
+                // 数据库不存在,也无默认值时取配置文件
+                if(!$val) {
+                    $_config_options = collect();
+                    foreach(Module::getOrdered() as $module){
+                        $_config = config($module->getAlias().'.options') ?? [];
+                        $_config_options = $_config_options->merge($_config);
                     }
-                    $val = Str::replaceFirst(':oid', $_oid, $val);
+                    $val = $_config_options->pluck('default', 'name')->get($key);
+                    // 解析:oid
+                    if(Str::contains($val, ':oid')) {
+                        $_oid = $this->_getOid();
+                        if(!$_oid) {
+                            abort(400, 'param missing: oid');
+                        }
+                        $val = Str::replaceFirst(':oid', $_oid, $val);
+                    }
                 }
             }
             $cache->set($_cacheKey, $val);

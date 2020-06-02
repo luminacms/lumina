@@ -1,16 +1,19 @@
 module.exports = {
     base: '/docs/',
+    title: 'Lumina文档',
+    description: '新生代PHP快速开发框架',
     themeConfig: {
         sidebarDepth: 3,
         displayAllHeaders: true, // 默认值：false
         locales: {
             '/': {
                 lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
-                title: 'VuePress',
-                description: 'Vue-powered Static Site Generator'
+                title: 'Lumina文档',
+                description: '新生代PHP快速开发框架'
             },
         },
-        nav: [{
+        nav: [
+            {
                 text: '首页',
                 link: '/'
             },
@@ -24,15 +27,30 @@ module.exports = {
                 items: [
                   { text: '交易模块', link: '/zh/payment/' }
                 ]
+            },
+            {
+                text: 'Github',
+                link: 'https://github.com/luminacms/lumina',
+                target:'_blank',
+                rel:''
             }
+
         ],
         sidebar: {
             '/zh/guide/': [{
-                title: 'The Feathers guide',
+                title: '使用指南',
                 collapsable: false,
                 children: [
-                    'base/doc.md',
-                    'base/route.md'
+                    '',
+                    'xgee.md',
+                    'option.md',
+                    'component.md',
+                    'mvc.md',
+                    'datatable.md',
+                    'trait.md',
+                    'export.md',
+                    'workflow.md',
+                    'lumina.js.md'
                 ]
             }],
             '/zh/payment/': [{

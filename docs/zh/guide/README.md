@@ -1,14 +1,7 @@
 
+# 介绍
 
-# guide
+## lumina的故事
 
+## 起步
 
-## seed
-
-```php
-
-php artisan db:seed
-php artisan db:seed --env=local
-
-
-```
