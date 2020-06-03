@@ -3,7 +3,7 @@ module.exports = {
     title: 'Lumina文档',
     description: '新生代PHP快速开发框架',
     themeConfig: {
-        sidebarDepth: 3,
+        sidebarDepth: 2,
         displayAllHeaders: true, // 默认值：false
         locales: {
             '/': {
@@ -57,11 +57,14 @@ module.exports = {
                 title: '交易模块',
                 collapsable: false,
                 children: [
-                    'start.md',
-                    'use.md'
+                    ''
                 ]
             }],
         }
     },
-    plugins: ['@vuepress/back-to-top']
+    plugins: [
+        '@vuepress/back-to-top',
+        '@vuepress/medium-zoom',
+        '@vuepress/active-header-links'
+    ]
 }
