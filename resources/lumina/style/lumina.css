@@ -423,7 +423,7 @@ a.layui-btn{color: #fff !important;}
 .layui-input-inline .layui-form-label{width: auto;float: inherit;display: inline-block;}
 .layui-form-text .layui-input-inline{width: auto;}
 .layui-form-item .layui-input-inline .layui-input,
-.layui-form-item .layui-input-inline .layui-form-select{display: inline-block;width: auto;margin-right: 10px;}
+.layui-form-item .layui-input-inline .layui-form-select{display: inline-block;width: auto;margin-right: 10px;margin-bottom: 10px;}
 
 /* 分割块*/.layui-form-mid{position: relative;float: left;display: block;padding: 9px 0 !important;line-height: 20px;margin-right: 10px;}
 /* 警告域*/.layui-form-danger:focus,
@@ -579,7 +579,8 @@ a.layui-btn{color: #fff !important;}
 /** 表格 **/.layui-table{width: 100%;margin: 10px 0;background-color: #fff;color: #666;}
 .layui-table tr{transition: all .3s;-webkit-transition: all .3s;}
 .layui-table th{text-align: left;font-weight: 400;}
-.layui-table thead tr,
+
+.layui-table:not(.static) thead tr,
 .layui-table-header,
 .layui-table-tool,
 .layui-table-total,
@@ -587,9 +588,11 @@ a.layui-btn{color: #fff !important;}
 .layui-table-patch,
 .layui-table-mend,
 .layui-table[lay-even] tr:nth-child(even),
-.layui-table tbody tr:hover,
+.layui-table:not(.static) tbody tr:hover,
 .layui-table-hover,
 .layui-table-click{background-color: #f2f2f2;}
+
+
 .layui-table th,
 .layui-table td,
 .layui-table[lay-skin="line"],
@@ -1366,7 +1369,8 @@ to{-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0)
 .lumina-side-shrink-m .layui-layout-admin .layui-footer,
 .lumina-side-shrink-m .layui-layout-admin .layui-layout-left{left: 0;transform: translate3d(140px, 0, 0);}
 .lumina-side-shrink-m .layui-layout-admin .layui-layout-right{transform: translate3d(140px, 0, 0);}
-.layui-form-item.layui-input-icon label>i{position: absolute;left: 1px;top: 1px;width: 38px;line-height: 36px;text-align: center;color: #d2d2d2}
+.layui-form-item.layui-input-icon label{position: relative;}
+.layui-form-item.layui-input-icon label>i{position: absolute;left: 1px;width: 38px;line-height: 38px;text-align: center;color: #d2d2d2}
 .layui-form-item.layui-input-icon{position: relative}
-.layui-form-item.layui-input-icon .layui-input{padding-left: 38px}
+.layui-form-item.layui-input-icon input{padding-left: 42px;}
 .layui-form-item .j_cancel{position: absolute;right: 12px;line-height: 36px;text-align: center;cursor: pointer;}

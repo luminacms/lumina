@@ -51,7 +51,7 @@
             Lumina
         </div>
         <div>
-            The Last PHP Framework!
+            新生代PHP快速开发框架!
         </div>
 
         <ul class="border-gray-400 mx-auto">

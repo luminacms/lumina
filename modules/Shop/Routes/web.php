@@ -1,5 +1,7 @@
 <?php
 
+use Xbhub\ShopDouyin\ShopDouyin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,7 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
     Route::post('shipping', 'OrderController@shipping')->name('order.shipping');
     Route::match(['get', 'post'], 'preview', 'SpuController@preview')->name('preview');
 
+    Route::resource('spec', 'SpecController');
     Route::resource('category', 'CategoryController');
     Route::resource('brand', 'BrandController');
     Route::resource('spu', 'SpuController');
