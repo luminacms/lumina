@@ -25,3 +25,11 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
     Route::resource('order', 'OrderController');
     Route::resource('delivery', 'DeliveryController');
 });
+
+// Route::get('/a', function(){
+
+//     $a = ShopDouyin::product()->getGoodsCategory(383);
+
+//     dd($a);
+
+// });

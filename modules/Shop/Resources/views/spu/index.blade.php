@@ -62,12 +62,7 @@
                 var checked = table.checkStatus('data_spu_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
-                        area: '1000px',
-                        end: function(index, layero){
-                            table.reload('data_game_table')
-                        }
-                    })
+                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据')
                     return true;
                 }
 
@@ -87,15 +82,9 @@
                             layer.close(index);
                         });
                     }else if(obj.event === 'update') {
-                        var createModal = admin.openModal(
+                        var createModal = admin.openTab(
                             '{{route("shop.spu.edit", "_id_")}}'.replace('_id_', checked.data[0].id)+'?type='+checked.data[0].type,
-                            '修改数据#'+checked.data[0].id,
-                            {
-                                area: '1000px',
-                                end: function(index, layero){
-                                    // table.reload('data_game_table')
-                                }
-                            })
+                            '修改数据#'+checked.data[0].id)
                         return true;
                     }
                 }

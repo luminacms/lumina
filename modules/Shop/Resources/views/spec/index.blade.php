@@ -24,6 +24,7 @@
             table.render({
                 elem: '#' + tableName,
                 url: '{!! URL::full() !!}',
+                toolbar: ['create', 'delete'],
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
