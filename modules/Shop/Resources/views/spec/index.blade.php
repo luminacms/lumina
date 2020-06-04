@@ -4,12 +4,16 @@
     <x-submenu :items="[
         ['name' => __('core::main.table_list'), 'uri' => route('shop.spec.index')]
     ]" />
-    
+
     <table class="layui-hide" id="data_spec_table" lay-filter="data_spec_table"></table>
 @endsection
 
 
 @push('script')
+    <script type="text/html" id="tpl_action">
+        <a class="layui-btn layui-btn-xs" lay-event="show">查看</a>
+    </script>
+
     <script>
         layui.use(['table', 'element'], function(){
             var table = layui.table,
@@ -20,9 +24,19 @@
             table.render({
                 elem: '#' + tableName,
                 url: '{!! URL::full() !!}',
-                autoShow: '{{ route("shop.spec.show", "_id_") }}',
                 where: {'orderBy': 'created_at', 'sortedBy': 'desc'},
-                cols: [[{"type":"checkbox","fixed":"left"},{"field":"id","title":"id","sort":"true"},{"field":"name","title":"name"},{"field":"description","title":"description"},{"field":"oid","title":"oid"},{"field":"status","title":"status"},{"field":"create_by","title":"create_by"},{"field":"created_at","title":"created_at","hide":"true"},{"field":"updated_at","title":"updated_at"}]]
+                cols: [[
+                    {"type":"checkbox","fixed":"left"},
+                    {"field":"id","title":"id","sort":"true"},
+                    {"field":"name","title":"name"},
+                    {"field":"description","title":"description"},
+                    {"field":"oid","title":"oid"},
+                    {"field":"status","title":"status"},
+                    {"field":"create_by","title":"create_by"},
+                    {"field":"created_at","title":"created_at","hide":"true"},
+                    {"field":"updated_at","title":"updated_at"},
+                    {"title":"操作","fixed":"right","templet":"#tpl_action"}
+                ]]
             });
 
             //events
@@ -63,6 +77,13 @@
                     }
                 }
             });
+
+            table.on('tool('+tableName+')', function(obj) {
+                if(obj.event === 'show') {
+                    admin.openModal('{{ route("shop.spec.show", "_id_") }}'.replace('_id_', obj.data.id), '{{ __("core::main.show") }}')
+                    return;
+                }
+            })
 
         });
     </script>

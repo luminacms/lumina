@@ -36,7 +36,7 @@
             <x-input.radio name="pay_type" class="radio" :options="Modules\Shop\Models\Spu::$pay_types" value="1"/>
         </x-formItem>
         <x-formItem label="运费选择" required>
-            <x-input.select name="delivery_id" class="radio" :options="Modules\Shop\Models\Delivery::getOptions('id', 'name')" search required />
+            <x-input.select name="delivery_id" class="radio" :options="Modules\Shop\Models\Delivery::getOptions('id', 'name')" search required :value="$spu->delivery_id??''"/>
         </x-formItem>
         {{-- <x-formItem label="同店商品推荐" required>
             <x-input.radio name="" class="radio" :options="['1'=>'系统推荐', '2'=>'手动配置']" value="1"/>

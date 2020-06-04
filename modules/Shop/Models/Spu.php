@@ -30,7 +30,7 @@ class Spu extends BaseModel
     protected $table = 'shop__spus';
     protected $fillable = [
         'uid', 'brand_id', 'category_id', 'status', 'name', 'description', 'unit', 'thumb', 'pay_type',
-        'pic_url','create_by','type','spec_ids','deduct_stock_type', 'content', 'delivery_id'
+        'pic_url','create_by','type','spec_id','deduct_stock_type', 'content', 'delivery_id'
     ];
 
     /**
@@ -72,40 +72,40 @@ class Spu extends BaseModel
         return $this->hasMany('Modules\Shop\Models\Sku', 'spu_id', 'uid');
     }
 
-    public function getSpecData()
+    /**
+     * 获得规格和sku
+     *
+     * @param [type] $spec_id
+     * @param integer $spu_id
+     * @return void
+     */
+    public static function getSpecData($spec_id = '', $spu_id = '')
     {
-        $attr = collect();
-        foreach(explode(';', $this->spec_ids) as $spec) {
-            $val = explode(':', $spec);
+        $data = [
+            'attr' => [],
+            'list' => []
+        ];
+        $spu = $spu_id ? self::where('uid', $spu_id)->first() : new self();
 
-            $specObj = Spec::find($val[0]);
-            if($specObj) {
-                $attr[] = [
-                    'group_id' => $specObj->id,
-                    'group_name' => $specObj->name,
-                    'spec_items' => SpecValue::whereIn('id', explode(',', $val[1]))->get()->map(function($item){
-                        return [
-                            'item_id' => $item['id'],
-                            'spec_value' => $item['value']
-                        ];
-                    })->toArray()
+        $spec = Spec::findOrFail($spu_id?$spu->spec_id:$spec_id);
+        $data['attr'] = $spec->getValOptions();
+
+        if($spu_id > 0) {
+            $data['list'] = $spu->sku->map(function($sku) {
+                return [
+                    'spec_val_ids' => $sku->specVals->implode('id', ',').'',
+                    'form' => [
+                        'readonly' => true,
+                        'uid'=> $sku->uid,
+                        'market_price_fee' => $sku->market_price_fee,
+                        'price_fee'=> $sku->price_fee,
+                        'stock'=> $sku->stock,
+                        'weight'=> $sku->weight,
+                    ]
                 ];
-            }
+            })->toArray();
         }
-        $data['attr'] = $attr->toArray();
-        $data['list'] = $this->sku->map(function($sku) {
-            return [
-                'spec_val_ids' => $sku->specVals->implode('id', ',').'',
-                'form' => [
-                    'readonly' => true,
-                    'uid'=> $sku->uid,
-                    'market_price_fee' => $sku->market_price_fee,
-                    'price_fee'=> $sku->price_fee,
-                    'stock'=> $sku->stock,
-                    'weight'=> $sku->weight,
-                ]
-            ];
-        })->toArray();
+
         return $data;
     }
 }

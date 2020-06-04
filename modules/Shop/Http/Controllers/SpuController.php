@@ -76,11 +76,9 @@ class SpuController extends BaseController
                 foreach($request->get('sku') as $_skuItem) {
                     $sku = Sku::firstOrCreate(['uid' => $_skuItem['uid']], array_merge($_skuItem, ['spu_id' => $spu->uid]));
                     if(isset($_skuItem['spec_val_ids'])){
-                        $sku->specVals()->attach(explode(',', $_skuItem['spec_val_ids']));
+                        $sku->specVals()->sync(explode(',', $_skuItem['spec_val_ids']));
                     }
                 }
-
-                flash('create success', 'success');
                 return $spu;
             });
 
@@ -116,12 +114,9 @@ class SpuController extends BaseController
     public function edit($id)
     {
         $spu = $this->spu->findOrFail($id);
-
-        $spec_data = $spu->getSpecData();
-
         // $this->authorize('update', $spu);
 
-        return view('shop::spu.edit', compact('spu', 'spec_data'));
+        return view('shop::spu.edit', compact('spu'));
     }
 
     /**
@@ -140,16 +135,21 @@ class SpuController extends BaseController
             // $this->authorize('update', $model);
 
             $model->fill($request->all());
-            if(!$model->isDirty()) {
-                return $this->toError([], 'nothing changed');
-            }
-            if($model->save()){
-                flash('update success', 'update success');
+            $res = DB::transaction(function () use($model, $request) {
+                $spu = $model->save();
+                foreach($request->get('sku') as $_skuItem) {
+                    $sku = Sku::updateOrCreate(['uid' => $_skuItem['uid']], array_merge($_skuItem, ['spu_id' => $model->uid]));
+                    if(isset($_skuItem['spec_val_ids'])){
+                        $sku->specVals()->sync(explode(',', $_skuItem['spec_val_ids']));
+                    }
+                }
+                return $spu;
+            });
 
-                return !$request->expectsJson()
-                    ? redirect()->back()
-                    : $this->toResponse($model, 'update success');
-            }
+            return !$request->expectsJson()
+                ? redirect()->back()
+                : $this->toResponse($res, 'update success');
+
         } catch (ValidationException $e) {
             return $this->toException($e);
         }

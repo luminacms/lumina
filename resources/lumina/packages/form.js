@@ -2525,72 +2525,79 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         imgTpl = '<li class="uploader__file" style="background-image: url(UPLOADEDFILE)"><div class="uploader__mask" style="display: none">' +
                         '<div class="mask__delete"><a href="javascript:;" class="j_delete" data-id="UPLOADEDFILE"><i class="fa fa-close"></i></a></div>' +
                         '</div></li>',
+                        renderImgs = function(imgs, reElem){
+                            var imgWrap = reElem.parents('.'+CLASS),
+                            _imgBox = reElem.find('.uploader__files'),
+                            _imgPicker = reElem.find(".img__picker"),
+                            _imgVal = imgWrap.find("input[type=hidden]"),
+                            _limit = _imgPicker.data('limit')
+                            filter = imgWrap.attr('lay-filter');
+
+                            if (_limit == 1) {
+                                _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), imgs[0]))
+                                _imgVal.val(imgs[0])
+                                _imgPicker.hide()
+                            } else {
+                                var _val = _imgVal.val()
+                                _val = _val!==undefined&&_val.length > 1 ? _val.split(',') : []
+                                if (_val.length >= _limit) return;
+
+                                $.each(imgs, function (i, n) {
+                                    _val.push(n)
+                                    if (_val.length >= _limit) {
+                                        // 数量限制
+                                        _imgPicker.hide();
+                                    }
+                                    _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), n))
+                                })
+                                _imgVal.val(_val.join(','))
+                            }
+                            // 删除事件
+                            _imgBox.on("mouseenter" ,".uploader__file", function(){
+                                $(this).find(".uploader__mask").show()
+                            }).on("mouseleave" ,".uploader__file", function(){
+                                $(this).find(".uploader__mask").hide()
+                            })
+
+                            _imgBox.on("click", ".j_delete", function(){
+                                if (_limit == 1) {
+                                    _imgBox.remove();
+                                    _imgPicker.show();
+                                    _imgVal.val('')
+                                } else {
+                                    $(this).parents(".uploader__file").remove();
+                                    var url = $(this).attr("data-id")
+                                    var _val = _imgVal.val();
+                                    _val = _val.length > 1 ? _val.split(',') : []
+
+                                    var _idx = _val.indexOf(url);
+                                    if (_idx > -1) {
+                                        _val.splice(_idx, 1);
+                                    }
+
+                                    _imgPicker.show();
+                                    _imgVal.val(_val)
+                                }
+                            });
+
+                            // 图选事件
+                            layui.event.call(imgs[0], MOD_NAME, 'img(' + filter + ')', {
+                                elem: imgs[0],
+                                value: _imgVal.val(),
+                                othis: reElem
+                            });
+                        },
                         events = function (reElem) {
                             var img = $(this),
-                                imgWrap = reElem.parents(".m-uploader"),
-                                _imgBox = imgWrap.find('.uploader__files'),
-                                _imgPicker = reElem,
-                                _imgVal = img.find("input[type=hidden]"),
-                                filter = img.attr('lay-filter'),
+                                picker = reElem.find(".img__picker"),
                                 upload_limit = img.data('limit');
 
-                            reElem.on('click', function () {
+                            picker.on('click', function () {
                                 upload.render({
                                     url: '/interface/core/upload',
                                     fileNumLimit: upload_limit,
                                     done: function (res) {
-                                        if (upload_limit == 1) {
-                                            _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), res[0]))
-                                            _imgVal.val(res[0])
-                                            _imgPicker.hide()
-                                        } else {
-                                            var _val = _imgVal.val()
-                                            _val = _val.length > 1 ? _val.split(',') : []
-                                            if (_val.length >= upload_limit) return;
-
-                                            $.each(res, function (i, n) {
-                                                _val.push(n)
-                                                if (_val.length >= upload_limit) {
-                                                    // 数量限制
-                                                    _imgPicker.hide();
-                                                }
-                                                _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), n))
-                                            })
-                                            _imgVal.val(_val.join(','))
-                                        }
-                                        // 删除事件
-                                        _imgBox.on("mouseenter" ,".uploader__file", function(){
-                                            $(this).find(".uploader__mask").show()
-                                        }).on("mouseleave" ,".uploader__file", function(){
-                                            $(this).find(".uploader__mask").hide()
-                                        })
-                                        _imgBox.on("click", ".j_delete", function(){
-                                            if (upload_limit == 1) {
-                                                _imgBox.remove();
-                                                _imgPicker.show();
-                                                _imgVal.val('')
-                                            } else {
-                                                $(this).parents(".uploader__file").remove();
-                                                var url = $(this).attr("data-id")
-                                                var _val = _imgVal.val();
-                                                _val = _val.length > 1 ? _val.split(',') : []
-
-                                                var _idx = _val.indexOf(url);
-                                                if (_idx > -1) {
-                                                    _val.splice(_idx, 1);
-                                                }
-
-                                                _imgPicker.show();
-                                                _imgVal.val(_val)
-                                            }
-                                        });
-
-                                        // 图选事件
-                                        layui.event.call(img[0], MOD_NAME, 'img(' + filter + ')', {
-                                            elem: img[0],
-                                            value: _imgVal.val(),
-                                            othis: reElem
-                                        });
+                                        renderImgs(res, reElem)
                                     }
                                 })
 
@@ -2599,6 +2606,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
 
                     imgs.each(function (index, radio) {
                         var othis = $(this),
+                            value = othis.find('input[type=hidden]').val(),
                             limit = othis.data('limit') || 1,
                         reElem = $(['<div class="m-uploader clearfix">',
                             '<ul class="uploader__files"></ul>',
@@ -2608,7 +2616,9 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         if(othis.find('.m-uploader').length > 0) return;
 
                         othis.append(reElem);
-                        events.call(this, reElem.find(".img__picker"));
+                        // 渲染默认值
+                        renderImgs(value!==undefined&&value.length>0?value.split(','):[], reElem);
+                        events.call(this, reElem);
                     });
                 },
 

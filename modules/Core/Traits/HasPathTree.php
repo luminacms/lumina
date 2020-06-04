@@ -165,9 +165,10 @@ trait HasPathTree
      * @param integer $level
      * @return void
      */
-    public static function getSimpleTree($level = 1)
+    public static function getSimpleTree($query = null)
     {
-        $_category = self::all()->map(function($item, $key){
+        $object = $query ?? self::all();
+        $_category = $object->map(function($item, $key){
             return [
                 'id' => $item->id,
                 'label' => $item->name,

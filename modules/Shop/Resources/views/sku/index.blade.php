@@ -12,7 +12,7 @@
 @push('script')
     <script type="text/html" id="sku_attrvals">
         @{{# layui.each(d.attrs, function(index, item){ }}
-            <span class="layui-badge">@{{ item.value }}</span>
+            <span class="layui-badge">@{{ item.name }}</span>
         @{{# }); }}
     </script>
     <script>

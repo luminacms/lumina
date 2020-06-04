@@ -59,7 +59,7 @@ class SpecController extends BaseController
     public function store(SpecRequest $request)
     {
         try {
-            $spec = $this->spec->create($request->all());
+            $spec = $this->spec->saveSpecValues($request);
 
             if($request->expectsJson()) {
                 return $this->toResponse($spec, 'success');
@@ -81,9 +81,9 @@ class SpecController extends BaseController
      */
     public function show($id)
     {
-        $spec = $this->spec->findOrFail($id);
+        $spec = $this->spec->with('vals')->findOrFail($id);
         // $this->authorize('view', $spec);
-        return $this->toTable($spec);
+        return view('shop::spec.edit', compact('spec'));
     }
 
     /**
@@ -95,7 +95,7 @@ class SpecController extends BaseController
      */
     public function edit($id)
     {
-        $spec = $this->spec->findOrFail($id);
+        $spec = $this->spec->with('vals')->findOrFail($id);
         // $this->authorize('update', $spec);
 
         return view('shop::spec.edit', compact('spec'));
@@ -120,7 +120,7 @@ class SpecController extends BaseController
             if(!$model->isDirty()) {
                 return $this->toError(-1, 'nothing changed');
             }
-            $model->save();
+            $model->saveSpecValues($request);
             if($request->expectsJson()) {
                 return $this->toResponse($model, 'update success');
             }

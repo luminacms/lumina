@@ -32,7 +32,7 @@ class ShopDatabaseSeeder extends Seeder
         $this->fakeProductBrand();
 
         $this->genCategory();
-        $this->genAttr();
+        // $this->genAttr();
         // $this->genSpus();
         // $this->genPayments();
     }

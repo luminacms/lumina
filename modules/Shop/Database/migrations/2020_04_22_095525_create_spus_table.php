@@ -24,7 +24,7 @@ class CreateSpusTable extends Migration
             $table->integer('delivery_id')->comment('物流模板');
             $table->status();
             $table->tinyInteger('type')->default(1);
-            $table->string('spec_ids', 500)->nullable();
+            $table->integer('spec_id')->comment('规格组id');
             $table->tinyInteger('deduct_stock_type')->default(0)->comment('库存扣减方式');
             $table->tinyInteger('pay_type')->default(1)->comment('支付方式');
 

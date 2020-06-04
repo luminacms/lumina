@@ -50,6 +50,7 @@ return [
     'expired_type'              => '过期类型',
     'used_tag'                  => 'UsedTags',
     'logo_src'                  => 'Logo',
+    'show'                      => '展示',
 
     // 组织
     'organization'              => [

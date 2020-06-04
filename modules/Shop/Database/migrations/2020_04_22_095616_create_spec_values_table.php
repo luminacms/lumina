@@ -19,9 +19,10 @@ class CreateSpecValuesTable extends Migration
             $table->increments('id');
 
             $table->integer('spec_id');
-            $table->string('value', 500);
+            $table->string('name');
             $table->string('description', 500)->nullable();
 
+            $table->pathtree();
             $table->timestamps();
 		});
 	}

@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapInterfaceRoutes()
     {
-        Route::prefix('interface')
+        Route::prefix('interface/shop')
             ->middleware('auth:interface')
             ->namespace($this->moduleNamespace.'\Interfaces')
             ->group(module_path('Shop', '/Routes/interface.php'));

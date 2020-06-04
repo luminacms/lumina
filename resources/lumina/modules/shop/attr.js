@@ -23,19 +23,19 @@ layui.define(['laytpl', 'admin'], function (exports) {
             // 注册html容器
             this.$container = $(options.container);
 
-            this.$specAttr = this.$container.find('.spec-attr');
+            // this.$specAttr = this.$container.find('.spec-attr');
             // 显示添加规则组表单事件
-            this.showAddSpecGroupEvent();
+            // this.showAddSpecGroupEvent();
             // 确认新增规则组事件
-            this.submitAddSpecGroupEvent();
+            // this.submitAddSpecGroupEvent();
             // 取消新增规则组事件
-            this.cancelAddSpecGroupEvent();
+            // this.cancelAddSpecGroupEvent();
             // 注册添加规格元素事件
-            this.addSpecItemEvent();
+            // this.addSpecItemEvent();
             // 注册删除规则组事件
-            this.deleteSpecGroupEvent();
+            // this.deleteSpecGroupEvent();
             // 注册删除规则元素事件
-            this.deleteSpecItemEvent();
+            // this.deleteSpecItemEvent();
             // 注册批量设置sku事件
             this.batchUpdateSku();
             // 注册表格input数据修改事件
@@ -49,12 +49,12 @@ layui.define(['laytpl', 'admin'], function (exports) {
          */
         showAddSpecGroupEvent: function () {
             // 显示添加规则组表单
-            this.$container.on('click', '.btn-addSpecGroup', function () {
-                var $specGroupButton = $(this).parent(),
-                    $specGroupAdd = $specGroupButton.next();
-                $specGroupButton.hide();
-                $specGroupAdd.show();
-            });
+            // this.$container.on('click', '.btn-addSpecGroup', function () {
+            //     var $specGroupButton = $(this).parent(),
+            //         $specGroupAdd = $specGroupButton.next();
+            //     $specGroupButton.hide();
+            //     $specGroupAdd.show();
+            // });
         },
 
         /**
@@ -78,7 +78,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                 var load = layer.load();
 
                 admin.request.post('/interface/attr/create', {
-                    name: specNameInputValue,
+                    label: specNameInputValue,
                     value: specValueInputValue
                 }, function(res) {
                     var res = res.data
@@ -87,11 +87,11 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     // 清空输入内容
                     $specNameInput.val('') && $specValueInput.val('');
                     data.spec_attr.push({
-                        group_id: res.spec_id,
-                        group_name: specNameInputValue,
-                        spec_items: [{
-                            item_id: res.id,
-                            spec_value: res.value
+                        id: res.spec_id,
+                        label: specNameInputValue,
+                        children: [{
+                            id: res.id,
+                            label: res.value
                         }]
                     });
                     // 渲染规格属性html
@@ -138,9 +138,9 @@ layui.define(['laytpl', 'admin'], function (exports) {
                 }, function(res) {
                     layer.close(load);
 
-                    data.spec_attr[$specGroup.data('index')].spec_items.push({
-                        item_id: res.data.id,
-                        spec_value: specItemInputValue
+                    data.spec_attr[$specGroup.data('index')].children.push({
+                        id: res.data.id,
+                        label: specItemInputValue
                     });
                     // 渲染规格属性html
                     _this.renderHtml();
@@ -178,7 +178,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     itemIndex = $item.attr('data-item-index');
                 layer.confirm('确定要删除该规则吗？确认后不可恢复请谨慎操作', function (layerIndex) {
                     // 删除指定规则组
-                    data.spec_attr[groupIndex].spec_items.splice(itemIndex,
+                    data.spec_attr[groupIndex].children.splice(itemIndex,
                         1);
                     // 重新渲染规格属性html
                     _this.renderHtml();
@@ -221,7 +221,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
          */
         renderHtml: function () {
             // 渲染商品规格元素
-            this.$specAttr.html(template('tpl_spec_attr', data));
+            // this.$specAttr.html(template('tpl_spec_attr', data));
 
             // 渲染商品规格table
             this.renderTabelHtml();
@@ -232,7 +232,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
          */
         renderTabelHtml: function () {
             var $specTabel = this.$container.find('.spec-sku-tabel'),
-                good_group_ids = [],
+                good_ids = [],
                 $goodsSku = $specTabel.parent();
             // 商品规格为空：隐藏sku容器
             if (data.spec_attr.length === 0) {
@@ -243,17 +243,15 @@ layui.define(['laytpl', 'admin'], function (exports) {
             // 构建规格组合列表
             this.buildSpeclist();
             // 渲染table
-            data.spec_attr.forEach(function (item, index) {
-                var _vals = []
-                item.spec_items.forEach(function(val, idx){
-                    _vals.push(val.item_id)
-                })
-                good_group_ids.push(item.group_id + ':' + _vals.join(','))
-            });
+            // data.spec_attr.forEach(function (item, index) {
+            //     var _vals = []
+            //     item.children.forEach(function(val, idx){
+            //         _vals.push(val.id)
+            //     })
+            //     good_ids.push(item.id + ':' + _vals.join(','))
+            // });
 
-            $specTabel.html(template('tpl_spec_table', $.extend(data, {
-                'spec_ids': good_group_ids.join(';')
-            })));
+            $specTabel.html(template('tpl_spec_table', data));
             // 显示sku容器
             $goodsSku.show();
         },
@@ -265,7 +263,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
             // 规格组合总数 (table行数)
             var totalRow = 1;
             for (var i = 0; i < data.spec_attr.length; i++) {
-                totalRow *= data.spec_attr[i].spec_items.length;
+                totalRow *= data.spec_attr[i].children.length;
             }
             // 遍历tr 行
             var spec_list = [];
@@ -275,18 +273,18 @@ layui.define(['laytpl', 'admin'], function (exports) {
                     specSkuIdAttr = [];
                 // 遍历td 列
                 for (var j = 0; j < data.spec_attr.length; j++) {
-                    var skuValues = data.spec_attr[j].spec_items;
+                    var skuValues = data.spec_attr[j].children;
                     rowCount *= skuValues.length;
                     var anInterBankNum = (totalRow / rowCount),
                         point = ((i / anInterBankNum) % skuValues.length);
                     if (0 === (i % anInterBankNum)) {
                         rowData.push({
                             rowspan: anInterBankNum,
-                            item_id: skuValues[point].item_id,
-                            spec_value: skuValues[point].spec_value
+                            id: skuValues[point].id,
+                            label: skuValues[point].label
                         });
                     }
-                    specSkuIdAttr.push(skuValues[parseInt(point.toString())].item_id);
+                    specSkuIdAttr.push(skuValues[parseInt(point.toString())].id);
                 }
                 spec_list.push({
                     spec_val_ids: specSkuIdAttr.join(','),
@@ -314,7 +312,7 @@ layui.define(['laytpl', 'admin'], function (exports) {
             _this.$container.find('.spec-sku-tabel').on('propertychange change', 'input',
                 function () {
                     var $this = $(this),
-                        dataType = $this.attr('name'),
+                        dataType = $this.attr('label'),
                         specIndex = $this.parent().parent().data('index');
                     data.spec_list[specIndex].form[dataType] = $this.val();
                 });

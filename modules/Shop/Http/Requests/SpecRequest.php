@@ -19,7 +19,7 @@ class SpecRequest extends BaseRequest
             case 'POST':
                 {
                     return [
-                        // CREATE ROLES
+                        'name' => 'required|unique:shop__spec',
                     ];
                 }
             // UPDATE

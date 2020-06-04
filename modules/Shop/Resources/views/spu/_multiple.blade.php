@@ -16,7 +16,7 @@
 .goods-spec-many .spec-group-item .spec-list .spec-item .fa { position: absolute; width: 20px; top: -9px; right: -9px; visibility: hidden; }
 .goods-spec-many .spec-group-item .spec-item-add input { width: 110px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
 .goods-spec-many .spec-group-item .spec-item-add button { display: table-cell; height: 32px; font-size: 1.3rem; border-color: #e3e2e5; border-left: none; border-top-right-radius: 4px; border-bottom-right-radius: 4px; outline: none; }
-.goods-spec-many .fa { cursor: pointer; text-align: center; color: #ababab; font-size: 1.3rem; }
+/* .goods-spec-many .fa { cursor: pointer; text-align: center; color: #ababab; font-size: 1.3rem; } */
 .goods-spec-many .fa:hover { color: #6b6b6b; }
 .goods-spec-many .spec-group-add { display: none; }
 .goods-spec-many .spec-group-add .spec-group-add-item { margin-bottom: 10px; }
@@ -35,32 +35,10 @@
 </style>
 
 <div class="goods-spec-many am-form-group">
+
     <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
-        <!-- 规格属性 -->
-        <div class="spec-attr"></div>
+        <x-input.select name="spec_id" :options="Modules\Shop\Models\Spec::getOptions()" search lay-filter="spec" :value="$spu->spec_id ?? ''"/>
 
-        <!-- 添加规格：按钮 -->
-        <div class="spec-group-button">
-            <button type="button" class="btn-addSpecGroup layui-btn layui-btn-sm">添加规格</button>
-        </div>
-
-        <!-- 添加规格：表单 -->
-        <div class="spec-group-add">
-            <div class="spec-group-add-item am-form-group">
-                <label class="am-form-label form-require">规格名 </label>
-                <input type="text" class="input-specName tpl-form-input layui-input" placeholder="请输入规格名称">
-            </div>
-            <div class="spec-group-add-item am-form-group">
-                <label class="am-form-label form-require">规格值 </label>
-                <input type="text" class="input-specValue tpl-form-input layui-input" placeholder="请输入规格值">
-            </div>
-            <div class="spec-group-add-item am-margin-top">
-                <button type="button" class="btn-addSpecName layui-btn layui-btn-sm"> 确定
-                </button>
-                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"> 取消
-                </button>
-            </div>
-        </div>
         <!-- 商品多规格sku信息 -->
         <div class="goods-sku am-scrollable-horizontal">
             <!-- 分割线 -->
@@ -84,7 +62,7 @@
                 </div>
 
                 <div class="layui-input-inline" style="width: 100px;">
-                    <button type="button" class="btn-specBatchBtn layui-btn">批量设置</button>
+                    <button type="button" class="btn-specBatchBtn layui-btn layui-btn-sm mb-4">批量设置</button>
                 </div>
             </div>
             <!-- sku table -->
@@ -93,40 +71,15 @@
     </div>
 </div>
 
-<!-- 商品规格属性模板 -->
-<script id="tpl_spec_attr" type="text/template">
-    @{{ each spec_attr }}
-    <div class="spec-group-item" data-index="@{{ $index }}" data-group-id="@{{ $value.group_id }}">
-        <div class="spec-group-name">
-            <span>@{{ $value.group_name }}</span>
-            <i class="spec-group-delete fa fa-times-circle" title="点击删除"></i>
-        </div>
-        <div class="spec-list am-cf">
-            @{{ each $value.spec_items item key }}
-            <div class="spec-item float-left" data-item-index="@{{ key }}">
-                <span>@{{ item.spec_value }}</span>
-                <i class="spec-item-delete fa fa-times-circle" title="点击删除"></i>
-            </div>
-            @{{ /each }}
-            <div class="spec-item-add layui-inline">
-                <div class="layui-input-inline">
-                    <input type="text" class="ipt-specItem layui-input" style="height:32px">
-                </div>
-                <div class="layui-input-inline">
-                    <button type="button" class="btn-addSpecItem layui-btn layui-btn-sm">添加</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @{{ /each }}
-</script>
+
+
 
 <!-- 商品规格table模板 -->
 <script id="tpl_spec_table" type="text/template">
     <thead>
         <tr>
             @{{ each spec_attr }}
-            <th>@{{ $value.group_name }}</th>
+            <th>@{{ $value.label }}</th>
             @{{ /each }}
             <th>商家编码（全局唯一，不支持修改）</th>
             <th>销售价</th>
@@ -137,10 +90,10 @@
     </thead>
     <tbody>
     @{{ each spec_list item }}
-    <tr data-index="@{{ $index }}" data-attr-id="@{{ item.spec_id }}">
+    <tr data-index="@{{ $index }}" data-attr-id="@{{ item.id }}">
         @{{ each item.rows td itemKey }}
         <td class="td-spec-value am-text-middle" rowspan="@{{ td.rowspan }}">
-            @{{ td.spec_value }}
+            @{{ td.label }}
         </td>
         @{{ /each }}
         <td>
@@ -162,24 +115,52 @@
     </tr>
     @{{ /each }}
     </tbody>
-    <input type="hidden" name="spec_ids" value="@{{ spec_ids }}" />
 </script>
 <script src="https://cdn.jsdelivr.net/npm/art-template@4.13.2/lib/template-web.js"></script>
+
+@push('script')
 
 <script>
     layui.extend({
         'attr': 'modules/shop/attr'
-    }).use(['attr', 'form', 'element'], function(){
+    }).use(['attr', 'form', 'element','admin'], function(){
         var attr = layui.attr,
             form = layui.form,
+            admin = layui.admin,
             element = layui.element;
 
-        attr.render({
-            container: '.goods-spec-many'
-        },{
-            spec_attr: @json($spec_data['attr'] ?? []),
-            spec_list: @json($spec_data['list'] ?? [])
-        })
+        var spec_ids = '{{ $spu->spec_id ?? '' }}'
+
+        renderSpecTable(spec_ids)
+        function renderSpecTable(spec_id)
+        {
+            if(spec_id) {
+                var index = layer.load();
+                admin.request.get('/interface/shop/sku', {'spec_id': spec_id, 'spu_id': {{ $spu->uid ?? '0'}}}, function(res) {
+                    var data = res.data
+                    attr.render({
+                        container: '.goods-spec-many'
+                    }, {
+                        spec_attr: data['attr'],
+                        spec_list: data['list']
+                    })
+
+                    layer.close(index)
+                })
+            }else{
+                attr.render({
+                    container: '.goods-spec-many'
+                }, {
+                    spec_attr: [],
+                    spec_list: []
+                })
+            }
+        }
+        form.on('select(spec)', function(data){
+            renderSpecTable(data.value)
+        });
     })
 
 </script>
+@endpush
+
