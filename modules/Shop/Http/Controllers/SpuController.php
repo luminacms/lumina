@@ -84,7 +84,7 @@ class SpuController extends BaseController
 
             return !$request->expectsJson()
                     ? redirect()->back()->withInput()
-                    : $this->toResponse([], 'success');
+                    : $this->toResponse([], '创建成功');
         } catch (ValidationException $e) {
             return $this->toException($e);
         }

@@ -21,7 +21,7 @@
         >
     </script>
     <script type="text/html" id="product_thumb">
-        <img src="@{{ d.thumb }}" alt="" height="65" class="block cursor-pointer">
+        <img src="@{{ d.thumb || "/assets/empty.jpg" }}" alt="" height="65" class="block cursor-pointer">
     </script>
     <script>
         layui.use(['table', 'element', 'form'], function(){
@@ -62,7 +62,7 @@
                 var checked = table.checkStatus('data_spu_table');
 
                 if(obj.event == 'create') {
-                    var createModal = admin.openModal('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
+                    var createModal = admin.openTab('{{ route("shop.spu.create", \request()->all()) }}', '新增数据', {
                         area: '1000px',
                         end: function(index, layero){
                             table.reload('data_game_table')

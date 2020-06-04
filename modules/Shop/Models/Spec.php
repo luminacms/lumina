@@ -46,7 +46,7 @@ class Spec extends BaseModel
     public function saveSpecValues($request)
     {
         // try{
-            DB::transaction(function () use($request){
+            $res = DB::transaction(function () use($request){
                 $specs = json_decode($request->get('specs'), true);
                 $model = $this->firstOrCreate(['name' => $request->get('name')]);
 
@@ -64,7 +64,9 @@ class Spec extends BaseModel
                         ]);
                     }
                 }
+                return $model;
             });
+            return $res;
         // }catch(Exception $e) {
         //     abort(500, $e->getMessage());
         // }

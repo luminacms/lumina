@@ -2533,7 +2533,7 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                             _limit = _imgPicker.data('limit')
                             filter = imgWrap.attr('lay-filter');
 
-                            if (_limit == 1) {
+                            if (_limit == 1 && imgs[0]!==undefined && imgs[0].length>0) {
                                 _imgBox.append(imgTpl.replace(new RegExp(/(UPLOADEDFILE)/g), imgs[0]))
                                 _imgVal.val(imgs[0])
                                 _imgPicker.hide()
@@ -2779,13 +2779,13 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                     if(res.errcode == 0) {
                         layer.msg(res.msg);
 
-                        if(res.data.redirect) {
+                        if(res.data.hasOwnProperty('redirect')) {
                             setTimeout(function(){
                                 admin.openTab(res.data.redirect, '列表')
                             }, 1500)
                             return;
                         }
-                        if(parent.layer) {
+                        if(parent.layer && window.name) {
                             setTimeout(function(){
                                 parent.layer.close(parent.layer.getFrameIndex(window.name));
                             }, 1500)

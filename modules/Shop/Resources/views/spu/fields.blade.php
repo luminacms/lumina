@@ -1,12 +1,5 @@
-<?php
-    $_type = $spu->type ?? request('type', \Modules\Shop\Models\Spu::TYPE_SINGLE);
-?>
+
 <div class="layui-tab2 j_attrwrap" lay-filter="spu_attr">
-    <ul class="layui-tab-title">
-        <li {{ $_type=='1'?'class=layui-this':''}} lay-id="single"><a href="{{ route('shop.spu.create', request()->merge(['type' => \Modules\Shop\Models\Spu::TYPE_SINGLE])->all()) }}" class="block">单规格</a></li>
-        <li {{ $_type=='2'?'class=layui-this':''}} lay-id="multiple"><a href="{{ route('shop.spu.create', request()->merge(['type' => \Modules\Shop\Models\Spu::TYPE_MULTIPLE])->all()) }}" class="block">多规格</a></li>
-    </ul>
-    <div class="layui-tab-content pt-12">
 
         <x-formItem label="已选择">
             <?php
@@ -52,34 +45,19 @@
 
         <x-formItem label="规格">
             <div class="layui-tab-item layui-show">
-                @if($_type==\Modules\Shop\Models\Spu::TYPE_SINGLE)
-                    <div class="border border-gray-500">
-                        <x-formItem required inline>
-                            <label class="layui-form-label required mr-4"><span>*</span>SKU：<x-input name="sku[0][uid]" required :value="$spu->sku[0]->uid??''" placeholder="全局唯一"/></label>
-                            <label class="layui-form-label required mr-4"><span>*</span>库存：<x-input type="number" name="sku[0][stock]" required :value="$spu->sku[0]->stock??''" /></label>
-                            <label class="layui-form-label required mr-4"><span>*</span>重量(kg)：<x-input type="number" name="sku[0][weight]" required :value="$spu->sku[0]->weight??''" /></label>
-                        </x-formItem>
-                        <x-formItem :label="__('core::main.price_fee')" inline required>
-                            <x-input type="number" name="sku[0][price_fee]" required :value="$spu->sku[0]->price_fee??''"/>
-                            <label class="layui-form-label required mr-4"><span>*</span>划线价：<x-input type="number" name="sku[0][market_price_fee]" required :value="$spu->sku[0]->price_fee??''"/></label>
-                        </x-formItem>
-                    </div>
-                @else
-                    @include('shop::spu._multiple')
-                @endif
+                @include('shop::spu._multiple')
             </div>
         </x-formItem>
 
         <x-formItem label="内容" required>
             <x-input.editor name="content" required />
         </x-formItem>
-    </div>
+
 </div>
 
 <x-formItem class="layui-layout-admin">
 	<div class="layui-footer z-50 shadow" style="left:0;">
-        <button class="layui-btn J_ajax" lay-submit>提交</button>
-        <input type="hidden" name="type" value="{{ $_type }}">
+        <button class="layui-btn J_ajax" lay-submit lay-filter="*">提交</button>
 		<button type="reset" class="layui-btn layui-btn-primary" lay-submit-cancel>取消</button>
 	</div>
 </x-formItem>

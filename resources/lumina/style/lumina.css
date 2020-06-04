@@ -615,6 +615,8 @@ a.layui-btn{color: #fff !important;}
 .layui-table[lay-skin="row"] td{border-width: 0;border-right-width: 1px;}
 .layui-table[lay-skin="nob"] th,
 .layui-table[lay-skin="nob"] td{border: none;}
+.layui-table img{border-style: none;border:1px solid #ccc}
+
 /* 大表格*/.layui-table[lay-size="lg"] th,
 .layui-table[lay-size="lg"] td{padding-top: 15px;padding-right: 30px;padding-bottom: 15px;padding-left: 30px;}
 .layui-table-view .layui-table[lay-size="lg"] .layui-table-cell{height: 40px;line-height: 40px;}

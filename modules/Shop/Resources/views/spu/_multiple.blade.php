@@ -1,34 +1,7 @@
 
 <style>
     @charset "UTF-8";
-/* 多规格 */
-.goods-spec-many { display: block; /* 添加规格组 */ /* sku容器 */ }
-.goods-spec-many .goods-spec-box { margin-top: 15px; border: 1px solid #e4e4e4; padding: 20px; border-radius: 4px; }
-.goods-spec-many input { font-size: 1.3rem !important; padding-left: 10px !important; border: 1px solid #e3e2e5 !important; }
-.goods-spec-many input.am-field-error { border-color: #dd514c !important; }
-.goods-spec-many .spec-group-item { margin-bottom: 25px; }
-.goods-spec-many .spec-group-item .spec-group-name { margin-bottom: 15px; }
-.goods-spec-many .spec-group-item .spec-group-name span { font-size: 1.5rem; }
-.goods-spec-many .spec-group-item .spec-group-name .fa { display: inline-block; }
-.goods-spec-many .spec-group-item .spec-list .spec-item { position: relative; margin-right: 12px; margin-bottom: 12px; }
-.goods-spec-many .spec-group-item .spec-list .spec-item span { min-width: 50px; display: inline-block; border: 1px solid #ddd; text-align: center; padding: 0 15px; border-radius: 2px; font-size: 1.3rem; line-height: 30px; }
-.goods-spec-many .spec-group-item .spec-list .spec-item:hover .fa { visibility: visible; }
-.goods-spec-many .spec-group-item .spec-list .spec-item .fa { position: absolute; width: 20px; top: -9px; right: -9px; visibility: hidden; }
-.goods-spec-many .spec-group-item .spec-item-add input { width: 110px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
-.goods-spec-many .spec-group-item .spec-item-add button { display: table-cell; height: 32px; font-size: 1.3rem; border-color: #e3e2e5; border-left: none; border-top-right-radius: 4px; border-bottom-right-radius: 4px; outline: none; }
-/* .goods-spec-many .fa { cursor: pointer; text-align: center; color: #ababab; font-size: 1.3rem; } */
-.goods-spec-many .fa:hover { color: #6b6b6b; }
-.goods-spec-many .spec-group-add { display: none; }
-.goods-spec-many .spec-group-add .spec-group-add-item { margin-bottom: 10px; }
-.goods-spec-many .spec-group-add .spec-group-add-item input { width: 160px; border-radius: 4px; display: inline-block; margin-left: 12px; }
-.goods-spec-many .goods-sku { display: none; /* 批量设置sku */ /* 商品sku表格 */ }
-.goods-spec-many .goods-sku .goods-spec-line { border: 1px dashed #e3e2e5; }
-.goods-spec-many .goods-sku .spec-batch { margin-bottom: 2rem; }
-.goods-spec-many .goods-sku .spec-batch .am-form-label { padding-top: 0; }
-.goods-spec-many .goods-sku .spec-batch .am-form-group { margin-left: .6rem; }
-.goods-spec-many .goods-sku .spec-batch .am-form-group input { width: 140px; }
-.goods-spec-many .goods-sku .spec-sku-tabel td.td-spec-value { padding: .7rem 1.3rem !important; }
-.goods-spec-many .goods-sku .spec-sku-tabel input { display: inline-block !important; }
+
 
 /*# sourceMappingURL=goods.css.map */
 
@@ -159,6 +132,10 @@
         form.on('select(spec)', function(data){
             renderSpecTable(data.value)
         });
+
+        form.on('submit(*)', function(){
+            window.location.reload()
+        })
     })
 
 </script>

@@ -1,4 +1,4 @@
-@extends('core::layouts.modal')
+@extends('core::layouts.master')
 
 @push('style')
     <style>
@@ -31,7 +31,6 @@
             <div>
                 <form action="{{ url()->full() }}">
                     <input type="hidden" name="category_id" id="j_category_id" />
-                    <input type="hidden" name="type" value="{{ request('type') }}" />
                     <button type="submit" class="layui-btn layui-btn-success">下一步</button>
                 </form>
             </div>
@@ -42,7 +41,6 @@
                     'cascader': 'extends/cascader/cascader'
                 }).use('cascader', function(){
                     var cascader = layui.cascader;
-
 
                     var data = @json(Modules\Shop\Models\Category::getSimpleTree());
                     var val = @json([]);

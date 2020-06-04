@@ -24,7 +24,6 @@ class SpuRequest extends BaseRequest
                         'name' => 'required',
                         'brand_id' => 'required',
                         'category_id' =>'required',
-                        'type' => 'required',
                         'sku' => 'required'
                     ];
                 }
