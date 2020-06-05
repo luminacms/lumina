@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="layui-input-inline" style="width: 100px;">
-                    <button type="button" class="btn-specBatchBtn layui-btn layui-btn-sm mb-4">批量设置</button>
+                    <button type="button" class="btn-specBatchBtn layui-btn layui-btn-sm mb-4 ml-2">批量设置</button>
                 </div>
             </div>
             <!-- sku table -->

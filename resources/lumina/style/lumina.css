@@ -1375,6 +1375,6 @@ to{-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0)
 .layui-form-item.layui-input-icon label{position: relative;}
 .layui-form-item.layui-input-icon label>i{position: absolute;left: 1px;width: 38px;line-height: 38px;text-align: center;color: #d2d2d2}
 .layui-form-item.layui-input-icon{position: relative}
-.layui-form-item.layui-input-icon input{padding-left: 42px;width: auto !important;}
+.layui-form-item.layui-input-icon input{padding-left: 42px;}
 
 .layui-form-item .j_cancel{position: absolute;right: 12px;line-height: 36px;text-align: center;cursor: pointer;}
