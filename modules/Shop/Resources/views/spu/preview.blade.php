@@ -28,13 +28,13 @@
                     <div>市场价：￥@{{ actived.market_price_fee }}</div>
                     @verbatim
                     <div>
-                        <div class="flex spec mb-4" v-for="item in spec_attr" data-id="item.group_id">
-                            <div>{{ item.group_name }}：</div>
+                        <div class="flex spec mb-4" v-for="item in spec_attr" data-id="@{{item.id}}">
+                            <div>{{ item.label }}：</div>
                             <div class="flex-1">
-                                <div :class="[ checked[item.group_id]==val.item_id?'on':'', 'spec__item relative inline-block  border-2 mx-2 cursor-pointer']"
-                                    v-for="val in item.spec_items" data-id="item.item_id" @click="specChange(item,val)">
-                                    {{ val.spec_value }}
-                                    <i v-if="checked[item.group_id]==val.item_id"></i>
+                                <div :class="[ checked[item.id]==val.id?'on':'', 'spec__item relative inline-block  border-2 mx-2 cursor-pointer']"
+                                    v-for="val in item.children" data-id="item.id" @click="specChange(item,val)">
+                                    {{ val.label }}
+                                    <i v-if="checked[item.id]==val.id"></i>
                                 </div>
                             </div>
                         </div>
@@ -108,6 +108,9 @@
             },
             created: function(){
                 this.resetActived()
+                // 初始化选项
+                var _group = this.spec_attr[0]
+                this.specChange(_group,_group.children[0])
             },
             computed: {
                 pre_total_fee() {
@@ -135,7 +138,7 @@
                         spec_val_ids = '',
                         _val = {};
 
-                    _group[group.group_id] = item.item_id
+                    _group[group.id] = item.id
 
                     // 更新界面信息
                     this.checked = Object.assign({}, this.checked, _group)

@@ -185,7 +185,7 @@ class SpuController extends BaseController
             $request->validate(['uid' => 'required']);
 
             $spu = $this->spu->with('sku')->where('uid', $request->get('uid'))->first();
-            $spec_data = $spu->getSpecData();
+            $spec_data = Spu::getSpecData('', $spu->uid);
 
             return view('shop::spu.preview', compact('spu', 'spec_data'));
         }else{

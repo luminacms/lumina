@@ -181,6 +181,7 @@ class CoreServiceProvider extends ServiceProvider
             \Modules\Core\View\Components\Card::class => 'card',
 
             // Form
+            \Modules\Core\View\Components\Region::class => 'region',
             \Modules\Core\View\Components\Form::class => 'form',
             \Modules\Core\View\Components\FormItem::class => 'formItem',
 

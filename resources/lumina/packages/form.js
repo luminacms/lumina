@@ -2664,6 +2664,71 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         });
                     });
                 },
+
+                // region区域
+                region: function(){
+                    var CLASS_REGION = 'layui-region',
+                        self = this,
+                        methods = {
+                            addItem: function ($ele, data) {
+                                var selectedId = $ele.data('id')
+                                    , isSelected = false;
+                                $.each(data, function (i, item) {
+                                    if (isSelected === false) {
+                                        isSelected === false && (isSelected = selectedId > 0 && selectedId === item.id);
+                                    }
+                                    var optionStr = '<option value="' + item.id + '">' + item.label + '</option>';
+                                    $ele.append(optionStr);
+                                });
+                                // console.log(isSelected);
+                                isSelected && $ele.val(selectedId);
+
+                                $ele.next(".layui-form-select").find("dl>dd:eq(1)").click();
+                                // $ele.click();
+                                that.render('select')
+                            },
+                            clearItem: function ($ele) {
+                                $ele.find('option').remove();
+                            }
+                        };
+
+                    elemForm.find('.' + CLASS_REGION).each(function (i, n) {
+                        var $dom = $(n);
+                        var REGIONS = $.parseJSON($dom.find('input[name=_data]').val());
+                        var $province = $dom.find('[data-province]')
+                            , $city = $dom.find('[data-city]')
+                            , $region = $dom.find('[data-region]');
+
+                        // 选择省联动城市列表
+                        that.on('select(province)', function(res){
+                            var provinceId = Number(res.value);
+                            if (provinceId > 0) {
+                                methods.clearItem($city);
+                                methods.clearItem($region);
+                                $city.data('provinceId', provinceId);
+                                // 遍历城市列表
+                                methods.addItem($city, _.find(REGIONS, {'id': provinceId}).children);
+                            }
+                        })
+                        // 选择市联动地区列表
+                        that.on('select(city)', function(res){
+                            var $this = $(this)
+                                , provinceId = $city.data('provinceId')
+                                , cityId = Number(res.value);
+                            if (cityId > 0) {
+                                methods.clearItem($region);
+                                $region.data('cityId', cityId);
+                                // 遍历地区列表
+                                var _province = _.find(REGIONS, {'id': provinceId}).children
+                                methods.addItem($region, _.find(_province, {'id': cityId}).children);
+                            }
+                        });
+
+                        // 遍历省份列表
+                        methods.addItem($province, REGIONS);
+                    });
+
+                }
             };
         type ? (
             items[type] ? items[type]() : hint.error('不支持的' + type + '表单渲染')
