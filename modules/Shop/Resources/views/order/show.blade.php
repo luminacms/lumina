@@ -39,7 +39,7 @@
                     <tr>
                         <td>
                             <div class="flex">
-                                <div style="width:75px;height:75px;background-size:100% 100%;background-image: url({{ $sku->spu->thumb }});"></div>
+                                <div style="width:75px;height:75px;background-size:100% 100%;background-image: url({{ $sku->spu->thumb ?? '/assets/empty.jpg' }});"></div>
                                 <div class="flex-1 ml-2">
                                     <a href="">{{ $sku->spu->name }}</a>
                                     <div>规格：{{ $sku->specVals->implode('value', '|') }}</div>
@@ -72,7 +72,7 @@
                 <div class="w-1/2">联系方式：{{ Arr::get($order->address, 'contact_phone') }}</div>
             </div>
             <div class="flex">
-                <div class="w-1/2">收货地址：{{ Arr::get($order->address, 'province') }} {{ Arr::get($order->address, 'city') }}{{ Arr::get($order->address, 'district') }}{{ Arr::get($order->address, 'address') }}</div>
+                <div class="w-1/2">收货地址：{{ $order->address->getMergeName(' ') ?? '' }}{{ Arr::get($order->address, 'address') }}</div>
                 <div class="w-1/2">用户留言：{{ Arr::get($order, 'msg') }}</div>
             </div>
         </x-card>
@@ -88,17 +88,17 @@
         <x-card title="物流信息">
             <x-slot name="btns">
                 @can('shipping', $order)
-                <a class="j_shipping cursor-pointer hover:underline">发货</a>
+                    <a class="j_shipping cursor-pointer hover:underline">{{ $order->status === Modules\Shop\Models\Order::STATUS_SHIPPING ? '修改物流' : '发货' }}</a>
                 @endcan
             </x-slot>
 
             <x-card title="发货" id="j_shipping_box" style="display: none">
                 <x-form method="post" :action="route('shop.order.shipping')">
                     <x-formItem label="物流公司" required>
-                        <x-input.select name="express_company" :options="Modules\Core\Utils\KuaiDi::numCode()->pluck('name')->all()" search required />
+                        <x-input.select name="express_company" :options="Modules\Core\Utils\KuaiDi::numCode()->pluck('name')->all()" search required :value="$order->express_company??''" />
                     </x-formItem>
                     <x-formItem label="物流单号" required>
-                        <x-input name="express_no" required />
+                        <x-input name="express_no" required :value="$order->express_no ?? ''" />
                     </x-formItem>
 
                     <x-formItem>
@@ -114,15 +114,19 @@
                     <div>运单号码：{{ $order->express_no }}</div>
                 </div>
                 <ul class="layui-timeline">
-                    @foreach($express['data'] as $_item)
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis fa fa-check-circle @if(!$loop->first)text-gray-600 @endif"></i>
-                        <div class="layui-timeline-content layui-text">
-                            <h4 class="layui-timeline-title mb-2 @if($loop->first)font-bold @endif">{{ $_item['context'] }}</h4>
-                            <small>{{ $_item['time'] }}</small>
-                        </div>
-                    </li>
-                    @endforeach
+                    @if(isset($express['data']))
+                        @foreach($express['data'] as $_item)
+                        <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis fa fa-check-circle @if(!$loop->first)text-gray-600 @endif"></i>
+                            <div class="layui-timeline-content layui-text">
+                                <h4 class="layui-timeline-title mb-2 @if($loop->first)font-bold @endif">{{ $_item['context'] }}</h4>
+                                <small>{{ $_item['time'] }}</small>
+                            </div>
+                        </li>
+                        @endforeach
+                    @else
+                        <div>{{ $express['message'] ?? '未查询到快递信息' }}</div>
+                    @endif
                 </ul>
             @else
                 <div>暂无物流信息</div>

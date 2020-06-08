@@ -34,7 +34,7 @@
                                 </div>
                                 <x-formItem label="子规格选项" inline class="{{ !isset($spec)?'layui-input-icon': '' }}">
                                     <label for="" v-for="(opt, optIdx) in item.children" class="mb-2">
-                                        <input type="text" v-model="opt.label" class="layui-input" lay-verify="required" :readonly="readonly">
+                                        <input type="text" v-model="opt.label" class="layui-input w-auto" lay-verify="required" :readonly="readonly">
                                         <i v-if="!readonly" class="fa fa-trash text-red-600 cursor-pointer" @click="optionDel(idx, optIdx)"></i>
                                     </label>
                                     <label for="" v-if="!readonly">

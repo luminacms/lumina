@@ -26,7 +26,7 @@ return [
             ],
             // 已发货，填物流之后更新状态
             'to_shipping'=> [
-                'from' => Order::STATUS_CONFIRMED,
+                'from' => [Order::STATUS_CONFIRMED, Order::STATUS_SHIPPING],
                 'to' => Order::STATUS_SHIPPING,
             ],
             // 已取消（1.用户未支付并取消订单2.或超时未支付后系统自动取消订单3.或货到付款订单用户拒收）

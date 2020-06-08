@@ -423,8 +423,9 @@ a.layui-btn{color: #fff !important;}
 .layui-input-inline .layui-form-label{width: auto;float: inherit;display: inline-block;}
 .layui-form-text .layui-input-inline{width: auto;}
 .layui-form-item .layui-input-inline .layui-input,
-.layui-form-item .layui-input-inline .layui-form-select{display: inline-block;width: 100%;margin-right: 10px;margin-bottom: 10px;}
+.layui-form-item .layui-input-inline .layui-form-select{display: inline-block;width: auto;margin-right: 10px;margin-bottom: 10px;}
 .layui-input[readonly]{cursor: not-allowed;background-color: #e8e8e8;}
+.layui-input-block>span{line-height: 36px;}
 
 /* 分割块*/.layui-form-mid{position: relative;float: left;display: block;padding: 9px 0 !important;line-height: 20px;margin-right: 10px;}
 /* 警告域*/.layui-form-danger:focus,

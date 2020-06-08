@@ -48,8 +48,8 @@
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
                     {"field":"uid","title":"商品ID","width":150},
-                    {"field":"thumb","title":"thumb","templet":"#product_thumb","width":100},
-                    {"field":"name","title":"name","width":250, "templet": "#tpl_title"},
+                    {"field":"thumb","title":"缩略图","templet":"#product_thumb","width":100},
+                    {"field":"name","title":"名称","width":250, "templet": "#tpl_title"},
                     {"field":"category_id","title":"总库存"},
                     {"field":"category_id","title":"销量"},
                     {"field":"status","title":"状态",templet: "#game_status",width:95},
@@ -93,7 +93,7 @@
             table.on('tool(data_spu_table)', function(obj){
                 parent.layer.open({
                     type: 2,
-                    area: ['375px', '90%'],
+                    area: ['500px', '90%'],
                     content: url.preview + '?uid=' + obj.data.uid
                 })
             });

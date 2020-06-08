@@ -1,5 +1,6 @@
 <?php
 
+use Modules\Shop\Models\Order;
 use Xbhub\ShopDouyin\ShopDouyin;
 
 /*
@@ -24,6 +25,20 @@ Route::group(['prefix' => '/shop', 'as' => 'shop.','middleware' => 'auth:org'], 
     Route::resource('sku', 'SkuController');
     Route::resource('order', 'OrderController');
     Route::resource('delivery', 'DeliveryController');
+});
+
+
+Route::get('/c', function(){
+
+    $order = Order::where('order_id', '292860140468')->first();
+
+    $workflow = app('workflow')->get($order);
+
+    // $workflow->apply($order, 'to_confirm', ['confirm_at' => now()]);
+
+    $r = $workflow->getEnabledTransitions($order);
+
+    dd($r);
 });
 
 Route::get('/a', function(){

@@ -3,27 +3,19 @@
 @section('content')
 
 
-<div class="layui-form">
-    <form action="">
-        <div id="elem"></div>
-    </form>
+<div class="layui-form" style="width: 300px;">
+    <x-region name="province" />
 </div>
 
 
 
 <script>
+    layui.use('form', function(){
 
-layui.extend({
-    'city': 'extends/city'
-}).use(['element', 'city'], function(){
-    var city = layui.city;
-
-    city.render({
-        elem: '#elem'
     })
-
-
-})
 </script>
 
+
 @endsection
+
+

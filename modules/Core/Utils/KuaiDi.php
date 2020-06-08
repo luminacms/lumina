@@ -112,9 +112,10 @@ class KuaiDi
     {
         return collect([
             array('name' => '中通快递','code' => 'zhongtong'),
+            array('name' => '圆通速递','code' => 'yuantong'),
+            array('name' => '申通快递','code' => 'shentong'),
             array('name' => '顺丰速运','code' => 'shunfeng'),
             array('name' => 'EMS','code' => 'ems'),
-            array('name' => '圆通速递','code' => 'yuantong'),
             array('name' => '宅急送','code' => 'zhaijisong'),
             array('name' => '京东物流','code' => 'jd'),
             array('name' => '天天快递','code' => 'tiantian'),
@@ -632,7 +633,6 @@ class KuaiDi
             array('name' => '潇湘晨报','code' => 'xiaoxiangchenbao'),
             array('name' => '巴伦支','code' => 'balunzhi'),
             array('name' => '安能物流','code' => 'annengwuliu'),
-            array('name' => '申通快递','code' => 'shentong'),
             array('name' => '亿领速运','code' => 'yilingsuyun'),
             array('name' => '店通快递','code' => 'diantongkuaidi'),
             array('name' => 'OCA Argentina','code' => 'ocaargen'),

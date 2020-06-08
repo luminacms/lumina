@@ -59,9 +59,7 @@ class CreateOrdersTable extends Migration
 
             $table->string('contact_name')->comment('收货人姓名');
             $table->string('contact_phone')->comment('联系电话');
-            $table->string('province')->comment('省');
-            $table->string('city')->comment('市');
-            $table->string('district')->comment('区');
+            $table->integer('region_id')->comment('区域id');
             $table->string('address')->comment('详细地址');
 
             $table->foreign('order_id')->references('order_id')->on('shop__orders');

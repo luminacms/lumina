@@ -6,6 +6,7 @@ use Modules\Core\Traits\HasOrg;
 use Illuminate\Support\Facades\DB;
 use Modules\Core\Models\BaseModel;
 use Modules\Core\Traits\HasCreateBy;
+use Modules\Core\Traits\HasRegion;
 
 /**
  * Class Order.
@@ -14,6 +15,8 @@ use Modules\Core\Traits\HasCreateBy;
  */
 class OrderAddress extends BaseModel
 {
+    use HasRegion;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,8 +24,7 @@ class OrderAddress extends BaseModel
      */
     public $table = 'shop__order_address';
     protected $fillable = [
-        'order_id', 'status', 'pre_total_fee', 'total_fee', 'expired_at', 'payed_at', 'oid',
-        'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip'
+        'order_id', 'contact_name', 'contact_phone', 'province', 'city', 'region_id', 'address'
     ];
 
 }

@@ -71,7 +71,7 @@ class Order extends BaseModel
         parent::boot();
 
         self::creating(function($model) {
-            $model->order_id = $model->order_id ?? self::getRandomNumber('order_id');
+            $model->order_id = $model->order_id ?? self::getOrder('order_id');
             $model->created_at_ip = \request()->getClientIp();
         });
     }
@@ -89,7 +89,7 @@ class Order extends BaseModel
 
     public function address()
     {
-        return $this->hasOne('Modules\Shop\Models\OrderAddress', 'order_id', 'order_id');
+        return $this->hasOne('Modules\Shop\Models\OrderAddress', 'order_id', 'order_id')->with('region');
     }
 
 
@@ -140,7 +140,7 @@ class Order extends BaseModel
                     "contact_phone" => $address['contact_phone'],
                     "province" => $address['province'],
                     "city" => $address['city'],
-                    "district" => $address['district'],
+                    "region" => $address['region'],
                     "address" => $address['address'],
                 ]);
 

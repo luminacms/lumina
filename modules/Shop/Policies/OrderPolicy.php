@@ -56,7 +56,7 @@ class OrderPolicy extends BasePolicy
     }
 
     /**
-     * 检查订单是否可以发货
+     * 检查订单是否可以发货 // 修改物流信息
      *
      * @param User $user
      * @param Order $order

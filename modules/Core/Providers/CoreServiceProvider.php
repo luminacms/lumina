@@ -221,10 +221,15 @@ class CoreServiceProvider extends ServiceProvider
 
                 $definitionBuilder->addPlaces($wd['places']);
                 foreach($wd['transitions'] as $tname => $t) {
-                    $definitionBuilder->addTransition(new Transition($tname, $t['from'], $t['to']));
+                    if(is_array($t['from'])) {
+                        foreach($t['from'] as $_from) {
+                            $definitionBuilder->addTransition(new Transition($tname, $_from, $t['to']));
+                        }
+                    }else{
+                        $definitionBuilder->addTransition(new Transition($tname, $t['from'], $t['to']));
+                    }
                 }
                 $definition = $definitionBuilder->build();
-
 
                 // $singleState, $property
                 $marking = new MethodMarkingStore(true, $wd['marking_store']['property']);

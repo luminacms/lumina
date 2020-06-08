@@ -22,35 +22,36 @@
     <div style="max-width: 800px;margin:0 auto;display:none;" class="shadow-2xl pb-12 bg-white layui-form">
         <x-form action="{{ url()->full() }}" method="post">
             <x-card>
+
                 <div id="specWrap">
-                    <div>{{ $spu->name }}</div>
-                    <div>销售价：￥@{{ actived.price_fee }}</div>
-                    <div>市场价：￥@{{ actived.market_price_fee }}</div>
-                    @verbatim
-                    <div>
-                        <div class="flex spec mb-4" v-for="item in spec_attr" data-id="@{{item.id}}">
-                            <div>{{ item.label }}：</div>
-                            <div class="flex-1">
-                                <div :class="[ checked[item.id]==val.id?'on':'', 'spec__item relative inline-block  border-2 mx-2 cursor-pointer']"
-                                    v-for="val in item.children" data-id="item.id" @click="specChange(item,val)">
-                                    {{ val.label }}
-                                    <i v-if="checked[item.id]==val.id"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex spec mb-4">
-                            <div>数量：</div>
-                            <div class="flex-1">
-                                <div class="layui-inline">
-                                    <input type="number" name="number" class="layui-input" v-model="actived.number" title="请输入购买量">
-                                </div>
-                                <span>（库存剩余：{{ actived.stock }}件）</span>
+
+                    <x-formItem label="商品名称">
+                        <span>{{ $spu->name }}</span>
+                    </x-formItem>
+
+                    <x-formItem label="售价">
+                        <span class="text-3xl text-red-500">￥@{{ actived.price_fee }}</span>
+                        <span class="line-through">￥@{{ actived.market_price_fee }}</span>
+                    </x-formItem>
+
+                    <div class="layui-form-item" v-for="item in spec_attr" data-id="@{{item.id}}">
+                        <label for="name" class="layui-form-label ">@{{ item.label }}：</label>
+                        <div class="layui-input-block spec">
+                            <div :class="[ checked[item.id]==val.id?'on':'', 'spec__item relative inline-block  border-2 mx-2 cursor-pointer']"
+                                v-for="val in item.children" data-id="item.id" @click="specChange(item,val)">
+                                @{{ val.label }}
+                                <i v-if="checked[item.id]==val.id"></i>
                             </div>
                         </div>
                     </div>
+
+                    <x-formItem label="购买量">
+                        <input type="number" name="number" class="layui-input" v-model="actived.number" title="请输入购买量">
+                        <span>（库存剩余：@{{ actived.stock }}件）</span>
+                    </x-formItem>
+
                     <input type="hidden" v-model="actived.uid" name="sku" />
                     <input type="hidden" v-model="pre_total_fee" name="pre_total_fee">
-                    @endverbatim
                 </div>
 
                 <x-formItem label="姓名">
@@ -60,9 +61,11 @@
                     <x-input name="address[contact_phone]" />
                 </x-formItem>
 
-                <div id="elem"></div>
+                <x-formItem label="地区">
+                    <x-region name="address[province],address[city],address[region]" />
+                </x-formItem>
 
-                <x-formItem label="地址">
+                <x-formItem label="详细地址">
                     <x-input name="address[address]" />
                 </x-formItem>
                 <x-formItem label="留言">

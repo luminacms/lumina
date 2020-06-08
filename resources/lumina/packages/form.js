@@ -2671,19 +2671,19 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
                         self = this,
                         methods = {
                             addItem: function ($ele, data) {
-                                var selectedId = $ele.data('id')
-                                    , isSelected = false;
+                                var selectedId = $ele.data('id'),
+                                    optionMode = $ele.parents("." + CLASS_REGION).data('mode') || 'id',
+                                    isSelected = false;
                                 $.each(data, function (i, item) {
                                     if (isSelected === false) {
                                         isSelected === false && (isSelected = selectedId > 0 && selectedId === item.id);
                                     }
-                                    var optionStr = '<option value="' + item.id + '">' + item.label + '</option>';
+                                    var optionStr = '<option value="' + (optionMode == 'id'?item.id:item.label) + '">' + item.label + '</option>';
                                     $ele.append(optionStr);
                                 });
                                 // console.log(isSelected);
                                 isSelected && $ele.val(selectedId);
 
-                                $ele.next(".layui-form-select").find("dl>dd:eq(1)").click();
                                 // $ele.click();
                                 that.render('select')
                             },
@@ -2701,26 +2701,34 @@ layui.define(['laydate', 'upload', 'admin'], function (exports) {
 
                         // 选择省联动城市列表
                         that.on('select(province)', function(res){
-                            var provinceId = Number(res.value);
+                            var provinceId = Number(res.value),
+                                options = [{'id':'', 'label':''}];
+
                             if (provinceId > 0) {
                                 methods.clearItem($city);
                                 methods.clearItem($region);
                                 $city.data('provinceId', provinceId);
+
+                                options = options.concat(_.find(REGIONS, {'id': provinceId}).children)
                                 // 遍历城市列表
-                                methods.addItem($city, _.find(REGIONS, {'id': provinceId}).children);
+                                methods.addItem($city, options);
+
+                                $city.parent("div").show()
+                                $region.parent("div").hide()
                             }
                         })
                         // 选择市联动地区列表
                         that.on('select(city)', function(res){
-                            var $this = $(this)
-                                , provinceId = $city.data('provinceId')
-                                , cityId = Number(res.value);
+                            var $this = $(this),
+                                provinceId = $city.data('provinceId'),
+                                cityId = Number(res.value);
                             if (cityId > 0) {
                                 methods.clearItem($region);
                                 $region.data('cityId', cityId);
                                 // 遍历地区列表
                                 var _province = _.find(REGIONS, {'id': provinceId}).children
                                 methods.addItem($region, _.find(_province, {'id': cityId}).children);
+                                $region.parent("div").show()
                             }
                         });
 

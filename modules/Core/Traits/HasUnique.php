@@ -47,10 +47,11 @@ trait HasUnique
      * @param $sign //模块标识 v:点播
      * @return string
      */
-    public static function getOrder($key, $sign)
+    public static function getOrder($key, $sign = '', $len = 4)
     {
         do {
-            $no = $sign.auth()->id().mt_rand(10000, 99999);
+            $no = auth()->id().now()->format('Ymd').mt_rand(pow(10, $len-1), pow(10, $len)-1);
+            $no = $sign ? $no.$sign : $no;
         } while (self::query()->where($key, $no)->exists());
         return $no;
     }
