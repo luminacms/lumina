@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
 
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('status_after')->default(0);
+            $table->tinyInteger('origin')->default(0)->comment('订单来源');
 
             $table->decimal('pre_total_fee', 12, 2)->comment('订单金额');
             $table->decimal('total_fee', 12, 2)->comment('实付金额');

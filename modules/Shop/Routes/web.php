@@ -43,17 +43,17 @@ Route::get('/c', function(){
 
 Route::get('/a', function(){
 
-    $detail = ShopDouyin::product()->detail(['product_id' => '3417066667497389265']);
+    // $detail = ShopDouyin::product()->detail(['product_id' => '3417066667497389265']);
 
-    dd($detail);
+    // dd($detail);
 
     // 食品饮料 9 =》 休闲食品 77 =》723
     // $cat = ShopDouyin::product()->detail(77);
     // dd($cat);
 
     // $spec = ShopDouyin::spec()->add("测试规格","颜色|黑色,白色,黄色");
-    $spec = ShopDouyin::spec()->specDetail(42699897);
-    dd($spec);
+    // $spec = ShopDouyin::spec()->specDetail(42699897);
+    // dd($spec);
 
     // cid 10,81,757
     // 测试商品推送
@@ -72,8 +72,42 @@ Route::get('/a', function(){
     //     '品牌:ss^货号:8888^上市年份季节:2018年秋季'
     // );
 
+    function _fetchData($start_at, $end_at, $page = 1)
+    {
+        $users = [];
+        $res = ShopDouyin::order()->list($start_at, $end_at, ['size' => '10', 'page' => $page.'']);
+        if($res['data']['total'] != count($users)) {
+            $users = array_merge($users, _fetchData($start_at, $end_at, $page + 1));
+        }else{
+            $users = $res['data']['list'];
+        }
+        return $users;
+    }
 
-    dd($a);
+    $start_at = now()->subDay()->startOfDay();
+    $end_at = now();
+
+    $res = ShopDouyin::order()->list($start_at, $end_at, ['size' => '10', 'page' => '0']);
+
+    dd($res);
+
+    if($res['err_no'] == 0) {
+        foreach($res['data']['list'] as $_order) {
+            foreach($_order['child'] as $_child){
+                Order::updateOrCreate([
+                    'order_id' => $_child['order_id']
+                ], [
+                    'origin' => Order::ORIGIN_DOUYIN,
+                    'pre_total_fee' => $_child['total_amount']/100
+                ]);
+            }
+
+        }
+    }
+
+
+
+    dd($cat);
 
 });
 

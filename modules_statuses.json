@@ -10,5 +10,6 @@
     "ApiTest": true,
     "Point": true,
     "Payment": true,
-    "Vod": true
+    "Vod": true,
+    "OpenShop": true
 }

@@ -28,6 +28,7 @@ class Order extends BaseModel
     CONST STATUS_CANCEL = 40; //已取消（1.用户未支付并取消订单2.或超时未支付后系统自动取消订单3.或货到付款订单用户拒收）
     CONST STATUS_FINISHED = 50; // 已完成（在线支付订单: 商家发货后, 用户收货、拒收或者15天无物流；货到付款订单: 用户确认收货）
 
+    // 售后状态
     const STATUS_AFTER_REJECTED = 80; // 退货
     const SATTUS_AFTER_REJECTED_CONFIRMED= 81; // 退货中-商家同意退货
     const SATTUS_AFTER_REJECTED_SHIPPING= 82; // 退货中-用户填写完物流
@@ -39,6 +40,9 @@ class Order extends BaseModel
     const STATUS_AFTER_REFUND_CANCEL = 92; // 退款-申请取消
     const STATUS_AFTER_REFUND_DONE = 95; // 退款成功
 
+    // 订单来源
+    const ORIGIN_DOUYIN = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,7 +51,7 @@ class Order extends BaseModel
     public $table = 'shop__orders';
     protected $fillable = [
         'order_id', 'status', 'pre_total_fee', 'total_fee', 'expired_at', 'payed_at', 'oid', 'msg', 'desc',
-        'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip', 'status_after'
+        'express_company', 'express_no', 'delivery_at', 'receipt_at', 'create_by', 'created_at_ip', 'status_after', 'origin'
     ];
 
     /**

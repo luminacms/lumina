@@ -13,6 +13,13 @@
     <script type="text/html" id="tpl_order_show">
         <a lay-event="orderShow">@{{ d.order_id }}</a>
     </script>
+    <script type="text/html" id="tpl_order_origin">
+        @{{# if(d.origin == 1){ }}
+            <span class="layui-badge bg-black">抖音</span>
+        @{{# }else{ }}
+            <span class="layui-badge">自营</span>
+        @{{# } }}
+    </script>
     <script>
         layui.use(['table', 'element'], function(){
             var table = layui.table,
@@ -27,8 +34,9 @@
                 toolbar: [],
                 cols: [[
                     {"type":"checkbox","fixed":"left"},
-                    {"field":"order_id","title":"order_id","templet":"#tpl_order_show"},
+                    {"field":"order_id","title":"order_id","templet":"#tpl_order_show","width":180},
                     {"field":"status","title":"status"},
+                    {"field":"origin","title":"来源","templet":"#tpl_order_origin"},
                     {"field":"pre_total_fee","title":"pre_total_fee"},
                     {"field":"total_fee","title":"total_fee"},
                     {"field":"expired_at","title":"expired_at"},
