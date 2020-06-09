@@ -22,6 +22,10 @@ features:
 footer: MIT Licensed | Copyright © 2019-present Jory Zhou | jorycn@163.com
 ---
 
-<div style="width:120px;margin:0 auto;">
-<img src="http://cdn.xbhub.com/code.jpg" width="120" title="扫码加我微信拉群"/> 
+<div style="width:120px;margin:15px auto;">
+线上预览地址：<a href="http://lumina.xbhub.com">http://lumina.xbhub.com</a><br/>admin@qq.com/123456
+</div>
+
+<div style="width:120px;margin:15px auto;">
+    <img src="http://cdn.xbhub.com/code.jpg" width="120" title="扫码加我微信拉群"/> 
 </div>
