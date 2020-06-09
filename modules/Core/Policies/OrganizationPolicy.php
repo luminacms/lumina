@@ -51,7 +51,7 @@ class OrganizationPolicy extends BasePolicy
      */
     public function update(User $user, Organization $organization)
     {
-        //
+        return false;
     }
 
     /**
@@ -63,6 +63,6 @@ class OrganizationPolicy extends BasePolicy
      */
     public function delete(User $user, Organization $organization)
     {
-        //
+        return false;
     }
 }

@@ -98,8 +98,7 @@ class OrganizationsController extends BaseController
     {
         $organization = $this->model->find($id);
 
-        // $this->authorize('update', $organization);
-
+        $this->authorize('update', $organization);
         return view('core::organizations.edit', compact('organization'));
     }
 
@@ -142,7 +141,7 @@ class OrganizationsController extends BaseController
     public function destroy($id)
     {
         $model = $this->model->find($id)->delete();
-        // $this->authorize('delete', $model);
+        $this->authorize('delete', $model);
 
         return $this->toResponse([], '删除成功');
     }
