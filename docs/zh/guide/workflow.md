@@ -1,4 +1,4 @@
-# Workflow 工作流/状态机
+# 工作流/状态机
 
 > lumina状态机管理使用symfony/workflow组件
 [更多文档](http://www.symfonychina.com/doc/current/components/workflow.html)

@@ -21,3 +21,7 @@ features:
   details: 内置支付引擎，目前已接入微信、支付宝、头条支付。少量配置即可接入交易系统，统一交易号对接支付API，统一回调事件、日志、订单状态处理！
 footer: MIT Licensed | Copyright © 2019-present Jory Zhou | jorycn@163.com
 ---
+
+<div style="width:120px;margin:0 auto;">
+<img src="http://cdn.xbhub.com/code.jpg" width="120" title="扫码加我微信拉群"/> 
+</div>
