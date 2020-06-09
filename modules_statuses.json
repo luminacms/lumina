@@ -5,11 +5,8 @@
     "Game": true,
     "Ticket": true,
     "Coupon": true,
-    "Mall": true,
-    "Shop": true,
     "ApiTest": true,
     "Point": true,
     "Payment": true,
-    "Vod": true,
-    "OpenShop": true
+    "Vod": true
 }
