@@ -177,7 +177,6 @@ return [
         Modules\Core\Providers\JobStatusServiceProvider::class,
 
         \Xbhub\Filter\FilterServiceProvider::class,
-        \Xbhub\ShopDouyin\ShopDouyinServiceProvider::class,
 
     ],
 
