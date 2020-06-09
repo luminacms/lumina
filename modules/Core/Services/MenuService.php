@@ -24,12 +24,12 @@ class MenuService
         ["sort"=>10,"id"=>"user", "parentid"=>"0", "icon"=>"fa-users", "text"=>"用户管理"],
         ["sort"=>10,"id"=>"user_organizations", "parentid"=>"user", "icon"=>"", "text"=>"组织管理", "route"=>"core.organizations.index", "auth"=>["ROLE"=>"SUPER","OID"=>1]],
         ["sort"=>20,"id"=>"user_departments", "parentid"=>"user","icon"=>"", "text"=>"部门管理", "route"=>"core.departments.index"],
-        ["sort"=>30,"id"=>"user_layer", "parentid"=>"user","icon"=>"", "text"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>30,"id"=>"user_layer", "parentid"=>"user","icon"=>"", "text"=>"权限管理", "route"=>"core.permission.index", "auth"=>["ROLE"=>"SUPER|ADMIN"]],
         ["sort"=>40,"id"=>"user_users", "parentid"=>"user","icon"=>"", "text"=>"员工管理", "route"=>"core.users.index"],
         ["sort"=>50,"id"=>"user_users_social", "parentid"=>"user","icon"=>"", "text"=>"粉丝管理", "route"=>"core.user-socialites.index"],
         ["sort"=>60,"id"=>"user_address", "parentid"=>"user", "icon"=>"", "text"=>"地址管理", "route"=>"core.user-addresses.index"],
 
-        ["sort"=>999, "id"=>"tool", "parentid"=>"0", "icon"=>"fa-magic", "text"=>"系统工具", "auth"=>["ROLE"=>"SUPER"]],
+        ["sort"=>999, "id"=>"tool", "parentid"=>"0", "icon"=>"fa-magic", "text"=>"系统工具", "auth"=>["ROLE"=>"SUPER|ADMIN"]],
         ["id"=>"tool_log", "parentid" => "tool", "icon"=>"", "text"=>"日志管理", "route"=>"core.tool.log"],
         ["id"=>"tool_apitest", "parentid" => "tool", "icon"=>"", "text"=>"接口管理", "route"=>"apitest.index"],
     ];
