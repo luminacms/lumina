@@ -2,15 +2,16 @@
 
 namespace Modules\Core\Providers;
 
+use Livewire\Livewire;
 use Illuminate\Support\Facades\DB;
 use Xbhub\XGee\XGeeServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Services\CoreBlueprint;
-use Illuminate\Database\Eloquent\Factory;
-use Illuminate\Database\Schema\Blueprint;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Workflow;
+use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Schema\Blueprint;
 use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\DefinitionBuilder;
 use Symfony\Component\Workflow\MarkingStore\MethodMarkingStore;
@@ -60,7 +61,6 @@ class CoreServiceProvider extends ServiceProvider
             // 开发模式
             // $this->app->register(TelescopeServiceProvider::class);
             $this->app->register(XGeeServiceProvider::class);
-            $this->__logSql();
         }
     }
 
@@ -141,34 +141,6 @@ class CoreServiceProvider extends ServiceProvider
         }
     }
 
-    private function __logSql()
-    {
-        //sql日志记录
-        DB::listen(function ($sql) {
-            foreach ($sql->bindings as $i => $binding) {
-                if ($binding instanceof \DateTime) {
-                    $sql->bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
-                } else {
-                    if (is_string($binding)) {
-                        $sql->bindings[$i] = "'$binding'";
-                    }
-                }
-            }
-
-            // Insert bindings into query
-            $query = str_replace(array('%', '?'), array('%%', '%s'), $sql->sql);
-            $query = vsprintf($query, $sql->bindings);
-
-            // Save the query to file
-            $logFile = fopen(
-                storage_path('logs' . DIRECTORY_SEPARATOR . 'query.log'),
-                'a+'
-            );
-            fwrite($logFile, date('Y-m-d H:i:s') . ': ' . $query . PHP_EOL);
-            fclose($logFile);
-        });
-    }
-
     /**
      * register components
      *
@@ -176,6 +148,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     protected function registerComponents()
     {
+        // laravel components
         Blade::components([
             \Modules\Core\View\Components\SubMenu::class => 'submenu',
             \Modules\Core\View\Components\Card::class => 'card',
@@ -208,6 +181,9 @@ class CoreServiceProvider extends ServiceProvider
             \Modules\Core\View\Components\Calendar::class => 'calendar',
 
         ]);
+
+        // livewriew component
+        Livewire::component('UserCount', \Modules\Core\View\Components\Dashboards\UserCount::class);
     }
 
     private function registerWorkflow()

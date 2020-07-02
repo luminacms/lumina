@@ -1,11 +1,11 @@
 <?php
 
-use RegionTableSeeder;
 use Modules\Core\Models\Role;
 use Modules\Core\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Core\Models\Permission;
+use Illuminate\Support\Facades\Hash;
 use Modules\Core\Models\Organization;
 
 class DatabaseSeeder extends Seeder
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456')
         ]);
         $_user->assignRole(1);
-        $_user->organizations()->attach(1);
+        $_user->organizations()->sync(1);
 
         // 只在开发模式下测试数据用
         if(app()->isLocal() === true) {
@@ -38,13 +38,11 @@ class DatabaseSeeder extends Seeder
 
     protected function genOrgazation()
     {
-        DB::table((new Organization())->getTable())->truncate();
-        DB::table('core_organzation_user')->truncate();
         $departs = [
             ['name' => '默认组织', 'oid' => 1, 'parentid' => 0]
         ];
         foreach ($departs as $_depart) {
-            Organization::create($_depart);
+            Organization::firstOrCreate($_depart);
         }
     }
 

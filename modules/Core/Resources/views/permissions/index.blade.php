@@ -45,7 +45,7 @@
             </dl>
 
             <x-formItem type="submit">
-                <button class="layui-btn" lay-submit lay-filter="component-form-demo1">{{__('main.submit')}}</button>
+                <button class="layui-btn" lay-submit lay-filter="component-form-demo1">{{__('core::main.submit')}}</button>
             </x-formItem>
 
             <input type="hidden" name="role_id" value="{{ $role->id ?? '' }}">

@@ -20,13 +20,13 @@ class Color extends Component
      *
      * @return void
      */
-    public function __construct($name, $type = 'text', $verify = null, $value = null)
+    public function __construct($name, $type = 'text', $verify = '', $value = '')
     {
         $this->name = $name;
         $this->type = $type;
         $this->verify = $verify;
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
 
         $this->iptkey = Str::random(6);
     }

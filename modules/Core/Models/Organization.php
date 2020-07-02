@@ -52,4 +52,9 @@ class Organization extends BaseModel
     {
         return $this->belongsToMany('Modules\Core\Models\User', 'core_organzation_user', 'oid', 'organzation_id', 'userid', 'userid');
     }
+
+    public function department()
+    {
+        return $this->hasMany('Modules\Core\Models\Department','oid','oid');
+    }
 }

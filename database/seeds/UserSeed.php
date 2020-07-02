@@ -50,7 +50,7 @@ class UserSeed extends Seeder
             ['name' => '北京XX信息技术有限公司', 'parentid'=>0]
         ];
         foreach ($departs as $_depart) {
-            Organization::create($_depart);
+            Organization::firstOrCreate($_depart);
         }
     }
 

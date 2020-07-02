@@ -47,7 +47,7 @@ trait HasUnique
      * @param $sign //模块标识 v:点播
      * @return string
      */
-    public static function getOrder($key, $sign = '', $len = 4)
+    public static function getOrder($key, $sign = '', $len = 5)
     {
         do {
             $no = auth()->id().now()->format('Ymd').mt_rand(pow(10, $len-1), pow(10, $len)-1);
@@ -103,23 +103,21 @@ trait HasUnique
      * @param [type] $key
      * @return void
      */
-    public static function getAutoNumber($key)
+    public static function getAutoNumber($key, $len = 4)
     {
         do {
-            $queryCount = self::count();
-            $length = $queryCount > 1000 ? (strlen($queryCount.'') + 1) : 4;
+            $queryCount = strlen(self::count().'');
+            $len = $queryCount >= $len ? $queryCount+1 : $len;
 
             $seed = base_convert(md5(microtime().$_SERVER['DOCUMENT_ROOT']), 16, 10);
             $seed = str_replace('0', '', $seed);
 
             $hash = '';
             $max = strlen($seed) - 1;
-            for($i = 0; $i < $length; $i++) {
+            for($i = 0; $i < $len; $i++) {
                 $hash .= $seed{mt_rand(0, $max)};
             }
         } while (self::query()->where($key, $hash)->exists());
         return intval($hash);
     }
-
-
 }

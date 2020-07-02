@@ -22,7 +22,7 @@ class DateRange extends Component
      *
      * @return void
      */
-    public function __construct($name, $type = 'date', $min = '1900-1-1', $max = '2999-12-31', $verify = null, $value = null)
+    public function __construct($name, $type = 'date', $min = '1900-1-1', $max = '2999-12-31', $verify = '', $value = '')
     {
         $this->name = explode(',', $name);
         $this->type = $type;

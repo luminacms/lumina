@@ -51,11 +51,12 @@ return [
     'used_tag'                  => 'UsedTags',
     'logo_src'                  => 'Logo',
     'show'                      => '展示',
+    'permission'                => '权限',
 
     // 组织
     'organization'              => [
-        'name'                  => 'Org Name',
-        'parentid'              => 'Parent Org'
+        'name'                  => '组织名称',
+        'parentid'              => '父级组织',
     ],
 
 
@@ -121,9 +122,9 @@ return [
     'expired_at'                => 'expiredAt',
 
     'table_list' => '数据列表',
-    'table_select_multiple' => 'place select one!',
+    'table_select_multiple' => '请选择一条数据!',
     'create' => 'Create',
     'table_delete_tip' => 'Are you sure!',
-    'delete_success' => 'Delete Success!',
+    'delete_success' => '删除成功!',
 ];
 

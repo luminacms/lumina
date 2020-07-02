@@ -17,8 +17,8 @@ class DocSeed extends Seeder
         DB::table((new Project())->getTable())->truncate();
         DB::table((new Document())->getTable())->truncate();
 
-        $post = factory(Project::class)->times(5)->create()->each(function($pj){
-            $pj->documents()->saveMany(factory(Document::class)->times(15)->make());
+        $post = factory(Project::class)->times(2)->create()->each(function($pj){
+            $pj->documents()->saveMany(factory(Document::class)->times(5)->make());
         });
 
     }

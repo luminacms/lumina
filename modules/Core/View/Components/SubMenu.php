@@ -34,9 +34,13 @@ class SubMenu extends Component
                         @if(isset($item['right'])&&$item['right'])
                             <li class="pull-right {{ isset($item['on'])&&$item['on']?"layui-this":(isset($item['uri'])&&$item['uri']==URL::current()?'layui-this':'')  }}">
                                 @if(isset($item['uri']))
-                                    <a lay-href="{{ isset($item['uri'])?$item['uri']:'javascript:;' }}" class="layui-btn layui-btn-normal layui-btn-sm">{{ $item['name'] }}</a>
+                                    <a lay-href="{{ isset($item['uri'])?$item['uri']:'javascript:;' }}"
+                                        {{ isset($item['target'])?'lay-target='.$item['target']:'' }}
+                                        class="layui-btn layui-btn-normal layui-btn-sm {{ isset($item['class'])?$item['class']:'' }}">{{ $item['name'] }}</a>
                                 @elseif(isset($item['url']))
-                                    <a href="{{ isset($item['url'])?$item['url']:'javascript:;' }}" class="layui-btn layui-btn-normal layui-btn-sm">{{ $item['name'] }}</a>
+                                    <a href="{{ isset($item['url'])?$item['url']:'javascript:;' }}"
+                                        @if(isset($item['ajax'])&&$item['ajax']) lay-ajax-get @endif
+                                        class="layui-btn layui-btn-normal layui-btn-sm {{ isset($item['class'])?$item['class']:'' }}">{{ $item['name'] }}</a>
                                 @endif
                             </li>
                         @else

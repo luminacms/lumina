@@ -3,8 +3,11 @@
 namespace Modules\Core\Models;
 
 use DateTimeInterface;
+use Illuminate\Http\Request;
 use Xbhub\Filter\Filterable;
 use Modules\Core\Traits\HasUnique;
+use Xbhub\Filter\FiltrationEngine;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as LaravelModel;
 
 /**
@@ -18,9 +21,15 @@ class BaseModel extends LaravelModel
 
 //    protected $connection = 'lumina';
 
+    /**
+     * 格式化时间
+     *
+     * @param DateTimeInterface $date
+     * @return void
+     */
     protected function serializeDate(DateTimeInterface $date)
     {
-        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+        return $date->format('Y-m-d H:i:s');
     }
 
     /**

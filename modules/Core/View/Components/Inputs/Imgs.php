@@ -21,13 +21,13 @@ class Imgs extends Component
      *
      * @return void
      */
-    public function __construct($name, $label = null, $type = 'text', $verify = null, $value = null, $limit = 1)
+    public function __construct($name, $label = '', $type = 'text', $verify = '', $value = '', $limit = 1)
     {
         $this->name = $name;
         $this->type = $type;
         $this->verify = $verify;
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
         $this->limit = $limit;
 
         $this->iptkey = Str::random(6);

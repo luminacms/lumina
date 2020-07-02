@@ -21,13 +21,13 @@ class Text extends Component
      *
      * @return void
      */
-    public function __construct($name, $type = 'text', $verify = null, $value = null, $required = '')
+    public function __construct($name, $type = 'text', $verify = '', $value = '', $required = '')
     {
         $this->name = $name;
         $this->type = $type;
         $this->verify = $required ? implode('|', array_filter(array_merge(explode('|', $verify), ['required']))) : '';
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
 
         $this->iptkey = Str::random(6);
     }

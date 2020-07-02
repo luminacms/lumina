@@ -108,9 +108,10 @@ trait HasPathTree
     }
 
     /**
+     * 带统计的树
      * @param int $level
-     * @param bool $withCount
-     * @param bool $withCascade
+     * @param bool $withCount 是否带统计
+     * @param bool $withCascade 是否级联统计
      * @return array
      */
     public static function getTree($level = 1, $withCount = false, $withCascade = false)
@@ -203,13 +204,13 @@ trait HasPathTree
      * @param [type] $id
      * @return void
      */
-    public static function getParents($id, $withSelf = true)
+    public function getParents($withSelf = true)
     {
         try{
             $_category = self::all();
-            $res = collect((new Tree($_category->toArray()))->get_parents($id))->sortBy('level');
+            $res = collect((new Tree($_category->toArray()))->get_parents($this->id))->sortBy('level');
             if($withSelf) {
-                $me = $_category->firstWhere('id', $id);
+                $me = $_category->firstWhere('id', $this->id)->toArray();
                 $res = $me ? $res->push($me) : $res;
             }
             return $res;

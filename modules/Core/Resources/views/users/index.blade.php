@@ -83,9 +83,9 @@
                         [
                             {"type":"checkbox",width:80,"fixed":"left"},
                             {"field":"userid","title":"员工ID",width:80,"fixed":"left"},
-                            {"field":"name","title":"name",width: 250},
+                            {"field":"name","title":"姓名",width: 250},
                             {"field":"mobile","title":"电话",width: 250},
-                            {"field":"email","title":"email"},
+                            {"field":"email","title":"邮箱"},
                             {"field":"updated_at","title":"更新时间",width:160}
                         ]
                     ]

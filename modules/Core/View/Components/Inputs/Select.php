@@ -29,12 +29,12 @@ class Select extends Component
     public function __construct($name, $options = [], $verify = '', $value = '', $search = '', $optionHtml = '', $required='')
     {
         $this->name = $name;
-        $this->options = [''=>''] + $options;
+        $this->options =  [''=>''] + $options;
 
         $this->verify = $required ? implode('|', array_filter(array_merge(explode('|', $verify), ['required']))) : $verify;
         $this->isSimpleOption = array_values($options) == $options;
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
         $this->search = $search;
         $this->optionHtml = $optionHtml;
 

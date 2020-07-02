@@ -21,13 +21,13 @@ use Modules\Core\Models\User;
 
 class UsersExport extends BaseExport
 {
-    public $ids = [];
-    public function __construct($ids = '', array $map, array $fields, array $with = [])
+    public function __construct(object $request, array $params = [])
     {
-        $this->fields = $fields;
-        $this->with = $with;
-        $this->map = collect($map);
-        $this->ids = $ids!=='all'?explode(',', $ids):'';
+        parent::__construct($request, $params);
+
+        $this->fields = $params['field'] ?? [];
+        $this->with = $params['with'] ?? [];
+        $this->map = collect($params['map'] ?? []);
 
         $_head = [];
         if(count($this->fields)>0) {
@@ -76,7 +76,7 @@ class UsersExport extends BaseExport
 
     public function query()
     {
-        $model = User::query();
+        $model = User::filter($this->request)->org();
         if($this->ids) {
             $model->whereIn('id', $this->ids);
         }

@@ -20,7 +20,7 @@
         var split = layui.split;
         var splitInt = split(['#splitLeft', '#splitRight'], {
             sizes: [15, 85],
-            minSize: [15, 800, 300],
+            minSize: [50, 800, 300],
             gutterSize: 6,
             direction: 'horizontal',
         })

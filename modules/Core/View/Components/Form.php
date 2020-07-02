@@ -9,14 +9,14 @@ class Form extends Component
     public $model;
     public $action;
     public $method;
-    public $method_addon = null;
+    public $method_addon = '';
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action, $model = null, $method = 'GET')
+    public function __construct($action, $model = '', $method = 'GET')
     {
         if($this->model) return;
         $this->model = $model;

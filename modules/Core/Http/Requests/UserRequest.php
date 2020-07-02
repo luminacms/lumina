@@ -18,7 +18,7 @@ class UserRequest extends BaseRequest
                 {
                     return [
                         'email' => 'required|unique:core_users',
-                        'password' => 'required'
+                        'password' => 'required|min:5'
                     ];
                 }
             // UPDATE

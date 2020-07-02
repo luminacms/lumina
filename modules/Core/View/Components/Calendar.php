@@ -9,7 +9,7 @@ class Calendar extends Component
     public $model;
     public $action;
     public $method;
-    public $method_addon = null;
+    public $method_addon = '';
 
     /**
      * Create a new component instance.

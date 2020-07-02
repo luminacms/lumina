@@ -9,12 +9,18 @@ use Modules\Core\Http\Resources\NotificationResource;
 
 class NotificationController extends BaseController
 {
-    public function index()
+
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index(Request $request)
     {
-        if($this->request->expectsJson()){
+        if($request->expectsJson()){
             $page = request('page', 1);
             $limit = request('limit', 2);
-            $type = $this->request->get('type', 'all');
+            $type = $request->get('type', 'all');
 
             $model = $type=='all'?Auth::user()->notifications():Auth::user()->unreadNotifications();
             $paginate = [

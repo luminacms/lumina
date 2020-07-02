@@ -22,13 +22,13 @@ class Checkbox extends Component
      *
      * @return void
      */
-    public function __construct($name, $options, $type = 'text', $verify = null, $value = null, $selected = null)
+    public function __construct($name, $options, $type = 'text', $verify = '', $value = '', $selected = '')
     {
         $this->name = $name;
         $this->type = $type;
         $this->options = $options ?? [];
         $this->verify = $verify;
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
         $this->selected = $selected;
 
         $this->iptkey = Str::random(6);

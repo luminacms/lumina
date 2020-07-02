@@ -6,22 +6,7 @@
             ['name' => '列表管理', 'uri' => route('core.organizations.index')]
        ]" />
 
-    <table class="layui-hide" lay-filter="data_organization_table">
-        <thead>
-        <tr>
-            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'id', width:80, fixed: 'left'}">ID</th>
-            <th lay-data="{field:'name', width:350}">名称</th>
-            <th lay-data="{field:'path'}">路径</th>
-            <th lay-data="{field:'level',width:80}">深度</th>
-            <th lay-data="{field:'order',width:80}">排序</th>
-            <th lay-data="{field:'updated_at'}">更新时间</th>
-        </tr>
-        </thead>
-        <tbody>
-            {!! \Modules\Core\Models\Organization::getTableHtml(\Modules\Core\Models\Organization::where('oid', '<>', '1')->get()) !!}
-        </tbody>
-    </table>
+    <table id="data_organization_table" lay-filter="data_organization_table" class="layui-table"></table>
 @endsection
 
 
@@ -31,12 +16,23 @@
             var table = layui.table,
                 admin = parent.layui == layui?layui.admin:parent.layui.admin,
                 laytpl = layui.laytpl,
+                tableName = 'data_organization_table',
                 element = layui.element;
 
-            //转换静态表格
-            table.init('data_organization_table', {
-                height: 'full-110',
-                limit: 999999
+            table.render({
+                elem: '#' + tableName,
+                url: '{!! URL::full() !!}',
+                treeMode: true,
+                cols: [[
+                    {"type":"checkbox"},
+                    {"field":"id","title":"ID", "width":100},
+                    {"field":"name","title":"name"},
+                    {"field":"path","title":"path"},
+                    {"field":"level","title":"level"},
+                    {"field":"parentid","title":"parentid"},
+                    {"field":"created_at","title":"created_at"},
+                    {"field":"updated_at","title":"updated_at"}
+                ]]
             });
 
             //监听行工具事件

@@ -53,6 +53,6 @@ class UsersController extends BaseController
             'mobile' => '电话',
             'created_at' =>'入职时间'
         ];
-        return $this->toAjaxExport(new UsersExport($request->get('ids'), [], $field));
+        return $this->toAjaxExport(new UsersExport($request, ['field' => $field]));
     }
 }

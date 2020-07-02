@@ -1,9 +1,14 @@
 <?php
+/**
+ * 创建函数阻止全局org过滤
+ * public function openOrgFilter()
+ *   {
+ *       return false;
+ *   }
+ */
 
 namespace Modules\Core\Traits;
 
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -11,18 +16,12 @@ use Illuminate\Database\Eloquent\Builder;
  */
 trait HasOrg
 {
+
     /**
-     * 是否开启oid过滤
+     * 获取oid
      *
-     * @var boolean
+     * @return void
      */
-    public $orgFilter = true;
-
-    public function setOrgFilter(bool $toggle)
-    {
-        $this->orgFilter = $toggle;
-    }
-
     public function getOid()
     {
         return auth()->guest() ? 0 : auth()->guard('org')->oid();
@@ -54,10 +53,15 @@ trait HasOrg
             }
             $model->oid = $model->oid?$model->oid:$_oid;
         });
-        static::addGlobalScope('oid', function (Builder $builder){
-            $_oid = \request('oid', request()->header('oid')) ?? auth()->guard('org')->oid();
-            $builder->where('oid', $_oid ?? '-1'); //option使用默认组织，其他默认不存在
-        });
+
+        // 全局oid过滤
+        $starOrgFilter = method_exists(new self, 'openOrgFilter') ? (new self)->openOrgFilter() : true;
+        if($starOrgFilter) {
+            static::addGlobalScope('oid', function (Builder $builder){
+                $_oid = \request('oid', request()->header('oid')) ?? auth()->guard('org')->oid();
+                $builder->where('oid', $_oid ?? '-1'); //option使用默认组织，其他默认不存在
+            });
+        }
     }
 
 }

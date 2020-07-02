@@ -22,14 +22,14 @@ class Radio extends Component
      *
      * @return void
      */
-    public function __construct($name, $options, $label = null, $type = 'text', $verify = null, $value = null, $search = null)
+    public function __construct($name, $options, $label = '', $type = 'text', $verify = '', $value = '', $search = '')
     {
         $this->name = $name;
         $this->type = $type;
         $this->options = $options ?? [];
         $this->verify = $verify;
 
-        $this->value = $value ?? old($name);
+        $this->value = $value ?: old($name);
         $this->search = $search;
 
         $this->iptkey = Str::random(6);

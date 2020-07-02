@@ -97,8 +97,9 @@ class Tree {
     public function get_parents($myid, $rootid = 1) {
         $items = [];
         $parent = $this->get_parent($myid);
+
+        array_push($items, $parent);
         if(isset($parent['id']) && $parent['id'] !== $rootid) {
-            array_push($items, $parent);
             $items = array_merge($items, $this->get_parents($parent['id'], $rootid));
         }
         return $items;

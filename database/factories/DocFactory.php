@@ -19,7 +19,7 @@ $factory->define(\Modules\Doc\Models\Document::class, function (Faker $faker) {
     $cate = \Modules\Doc\Models\Document::where('project_id', $_project_id)->get();
     return [
         'project_id' => $_project_id,
-        'parentid' => $cate->count()>0?$cate->random(1)->first()->id : 0,
+        'parentid' => 0,
         'title' => $faker->text(35),
         'content' => $faker->realText(500),
         'version' => '1.0',

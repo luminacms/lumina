@@ -32,10 +32,8 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
         $this->params = $params;
     }
 
-    public function headings(): array{}
-
-    public function map($row): array{}
-
+    public function headings(): void{}
+    public function map($row): void{}
     public function query(){}
 
     public static function beforeExport(BeforeExport $event){}
@@ -44,7 +42,7 @@ class BaseExport implements WithEvents, FromQuery, WithHeadings, WithMapping, Sh
     public static function afterSheet(AfterSheet $event){
         Log::channel('exportlog')->info('', [
             'Export:' => get_called_class(),
-            'user' => Auth::user()->userid
+            'user' => Auth::user()->only(['name', 'userid'])
         ]);
     }
 }

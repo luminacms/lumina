@@ -254,6 +254,12 @@ class User extends BaseModel implements
         ];
     }
 
+    /**
+     * 登录记录
+     *
+     * @param string $userid
+     * @return void
+     */
     public static function logLogin($userid = '')
     {
         if($userid || !auth()->guest()) {
@@ -266,5 +272,15 @@ class User extends BaseModel implements
                 ]);
             }
         }
+    }
+
+    /**
+     * 获取当前用户环境下的oid
+     *
+     * @return void
+     */
+    public static function getOid()
+    {
+        return auth()->guard('org')->oid() ?? 0;
     }
 }

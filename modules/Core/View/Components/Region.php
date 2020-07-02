@@ -2,6 +2,7 @@
 
 namespace Modules\Core\View\Components;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Region extends Component
@@ -16,9 +17,9 @@ class Region extends Component
      *
      * @return void
      */
-    public function __construct($name = 'province,city,region', $required = '', $mode = 'id')
+    public function __construct($name = 'region_id', $required = '', $mode = 'id')
     {
-        $this->name = explode(',', $name);
+        $this->name =  Str::contains(',', $name) ? explode(',', $name) : ['_','_',$name];
         $this->required = $required ? 'required' : '';
         $this->mode = $mode;
     }

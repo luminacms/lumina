@@ -2,7 +2,7 @@
 return [
     'name' => 'Core',
     // https://cdn.jsdelivr.net/npm/lumina.js@2.0.0/dist
-    'lumina_js_cdn' => app()->isLocal()?asset('lumina'):'https://cdn.jsdelivr.net/npm/lumina.js@2.2.0/dist',
+    'lumina_js_cdn' => app()->isLocal()?asset('lumina'):'https://cdn.jsdelivr.net/npm/lumina.js@3.0.0/dist',
     'origanization_permission' => 1, //开启组织系统(0关闭，1开启)
     'options' => [
         // ['name' => 'CORE_GLOBAL_TITLE', 'label' => '系统名称', 'default' => 'Lumina'],

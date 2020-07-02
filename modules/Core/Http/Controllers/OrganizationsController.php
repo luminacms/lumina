@@ -34,6 +34,10 @@ class OrganizationsController extends BaseController
      */
     public function index(Request $request)
     {
+        if($request->expectsJson()) {
+            $category = $this->model->filter($request)->get();
+            return $this->toCollection($category, OrganizationResource::class);
+        }
         return view('core::organizations.index');
     }
 
@@ -63,6 +67,7 @@ class OrganizationsController extends BaseController
             if($permission = $request->get('permisson')) {
                 $organization->syncPermissions(array_values($request->get('permisson')));
             }
+            $organization->department()->create(['name' => '默认部门']);
 
             // auth()->org()->switchTo(auth()->org());
 
@@ -98,7 +103,8 @@ class OrganizationsController extends BaseController
     {
         $organization = $this->model->find($id);
 
-        $this->authorize('update', $organization);
+        // $this->authorize('update', $organization);
+
         return view('core::organizations.edit', compact('organization'));
     }
 
@@ -141,7 +147,7 @@ class OrganizationsController extends BaseController
     public function destroy($id)
     {
         $model = $this->model->find($id)->delete();
-        $this->authorize('delete', $model);
+        // $this->authorize('delete', $model);
 
         return $this->toResponse([], '删除成功');
     }
