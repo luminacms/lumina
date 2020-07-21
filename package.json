@@ -52,7 +52,7 @@
     "jquery": "^3.2",
     "laravel-mix": "^4.0.7",
     "laravel-mix-merge-manifest": "^0.1.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "popper.js": "^1.12",
     "purgecss-webpack-plugin": "^1.5.0",
